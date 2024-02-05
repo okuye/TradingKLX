@@ -13,6 +13,7 @@ using namespace std;
 #include <numeric>  // Include for std::accumulate and std::inner_product
 #include <cmath>    // Include for std::sqrt
 #include <algorithm>  // Include for std::max and other algorithm functions
+#include <cmath>  
 
 
 // Helper function to calculate Simple Moving Average (SMA)
@@ -120,38 +121,158 @@ void calculateFibLevels(const std::vector<double>& highs, const std::vector<doub
 
 std::vector<double> calculateATR(const std::vector<double>& highs, const std::vector<double>& lows, const std::vector<double>& closes, int window) {
 	std::vector<double> atr(highs.size());
-	std::deque<double> trQueue; // Queue to hold the true ranges for the moving average calculation
-	double trSum = 0; // Sum of the true ranges in the queue
+	std::deque<double> trQueue;
+	double trSum = 0;
 
 	for (size_t i = 0; i < highs.size(); ++i) {
-		double tr = highs[i] - lows[i]; // Basic true range calculation
+		double tr = highs[i] - lows[i];
 		if (i > 0) {
-			tr = (std::max)(tr, std::abs(highs[i] - closes[i - 1])); // Compare with the previous close using std::max and std::abs
-			tr = (std::max)(tr, std::abs(lows[i] - closes[i - 1]));  // Again, using std::max and std::abs
+			tr = (std::max)(tr, std::abs(highs[i] - closes[i - 1]));
+			tr = (std::max)(tr, std::abs(lows[i] - closes[i - 1]));
 		}
 
 		trQueue.push_back(tr);
 		trSum += tr;
 
 		if (i >= window) {
-			trSum -= trQueue.front(); // Remove the oldest true range from the sum
+			trSum -= trQueue.front();
 			trQueue.pop_front();
-			atr[i] = trSum / window; // Calculate the ATR as the moving average of the true range
+			atr[i] = trSum / window;
 		}
-		else if (i == window - 1) {
-			atr[i] = trSum / window; // First ATR value (simple average of the first 'window' true ranges)
+		else if (i == static_cast<size_t>(window) - 1) {
+			atr[i] = trSum / window; // Cast window to size_t before subtracting 1
 		}
-		// For indices less than 'window - 1', ATR is undefined or could be set to a placeholder value
+		// For indices less than 'window - 1', ATR can be set to a default or calculated value
 	}
 
 	return atr;
 }
+
+//std::vector<double> calculateRSI(const std::vector<double>& closes, int window) {
+//	std::vector<double> rsi(closes.size(), 0); // Initialize RSI values to 0
+//
+//	double gainSum = 0, lossSum = 0;
+//	// Calculate initial average gain and loss
+//	for (int i = 1; i <= window; ++i) {
+//		double delta = closes[i] - closes[i - 1];
+//		if (delta > 0) gainSum += delta; // Gain
+//		else lossSum -= delta; // Loss (as a positive value)
+//	}
+//
+//	double avgGain = gainSum / window;
+//	double avgLoss = lossSum / window;
+//
+//	//// Calculate RSI starting from 'window + 1'
+//	//for (size_t i = static_cast<size_t>(window) + 1; i < closes.size(); ++i) {
+//	//	double delta = closes[i] - closes[i - 1];
+//	//	double gain = delta > 0 ? delta : 0;
+//	//	double loss = delta < 0 ? -delta : 0;
+//
+//	//	// Apply smoothing factor
+//	//	avgGain = (avgGain * (static_cast<size_t>(window) - 1) + gain) / window;
+//	//	avgLoss = (avgLoss * (static_cast<size_t>(window) - 1) + loss) / window;
+//
+//	//	if (avgLoss != 0) { // Avoid division by zero
+//	//		double rs = avgGain / avgLoss;
+//	//		rsi[i] = 100 - (100 / (1 + rs));
+//	//	}
+//	//	else {
+//	//		rsi[i] = 100; // If avgLoss is 0, RSI is considered 100
+//	//	}
+//	//}
+//
+//	//// Calculate RSI starting from 'window + 1'
+//	//for (size_t i = static_cast<size_t>(window) + 1; i < closes.size(); ++i) {
+//	//	// Explicitly cast the subtraction to size_t to address the warning
+//	//	double delta = closes[i] - closes[static_cast<size_t>(i) - 1];
+//	//	double gain = delta > 0 ? delta : 0;
+//	//	double loss = delta < 0 ? -delta : 0;
+//
+//	//	// Apply smoothing factor
+//	//	avgGain = (avgGain * (static_cast<size_t>(window) - 1) + gain) / window;
+//	//	avgLoss = (avgLoss * (static_cast<size_t>(window) - 1) + loss) / window;
+//
+//	//	if (avgLoss != 0) { // Avoid division by zero
+//	//		double rs = avgGain / avgLoss;
+//	//		rsi[i] = 100 - (100 / (1 + rs));
+//	//	}
+//	//	else {
+//	//		rsi[i] = 100; // If avgLoss is 0, RSI is considered 100
+//	//	}
+//	//}
+//
+//	// Calculate RSI starting from 'window + 1'
+//	for (size_t i = static_cast<size_t>(window) + 1; i < closes.size(); ++i) {
+//		size_t prevIndex = i - 1;  // Safe subtraction, given the loop condition
+//		double delta = closes[i] - closes[prevIndex];
+//		double gain = delta > 0 ? delta : 0;
+//		double loss = delta < 0 ? -delta : 0;
+//
+//		// Apply smoothing factor
+//		avgGain = (avgGain * (window - 1) + gain) / window;
+//		avgLoss = (avgLoss * (window - 1) + loss) / window;
+//
+//		if (avgLoss != 0) { // Avoid division by zero
+//			double rs = avgGain / avgLoss;
+//			rsi[i] = 100 - (100 / (1 + rs));
+//		}
+//		else {
+//			rsi[i] = 100; // If avgLoss is 0, RSI is considered 100
+//		}
+//	}
+//
+//
+//
+//	return rsi;
+//}
+
+
+//std::vector<double> calculateRSI(const std::vector<double>& closes, int window) {
+//	std::vector<double> rsi(closes.size(), 0); // Initialize RSI values to 0
+//
+//	double gainSum = 0, lossSum = 0;
+//	// Calculate initial average gain and loss for the first 'window' periods
+//	for (int i = 1; i <= window; ++i) {
+//		double delta = closes[i] - closes[i - 1];
+//		if (delta > 0) gainSum += delta; // Accumulate gain
+//		else lossSum -= delta; // Accumulate loss (as a positive value)
+//	}
+//
+//	double avgGain = gainSum / window;
+//	double avgLoss = lossSum / window;
+//
+//	// Calculate RSI starting from 'window + 1'
+//	for (size_t i = static_cast<size_t>(window) + 1; i < closes.size(); ++i) {
+//		size_t prevIndex = i - 1; // Safe subtraction, given the loop condition
+//		double delta = closes[i] - closes[prevIndex]; // Use prevIndex to avoid underflow
+//		double gain = delta > 0 ? delta : 0; // Positive change is considered as gain
+//		double loss = delta < 0 ? -delta : 0; // Negative change is considered as loss (converted to positive)
+//
+//		// Apply smoothing factor to the average gains and losses
+//		avgGain = (avgGain * (window - 1) + gain) / window;
+//		avgLoss = (avgLoss * (window - 1) + loss) / window;
+//
+//		// Calculate the Relative Strength (RS) and Relative Strength Index (RSI)
+//		if (avgLoss != 0) { // To avoid division by zero
+//			double rs = avgGain / avgLoss;
+//			rsi[i] = 100 - (100 / (1 + rs)); // RSI formula
+//		}
+//		else {
+//			rsi[i] = 100; // If avgLoss is 0, RSI is considered 100 (maxed out)
+//		}
+//	}
+//
+//	return rsi;
+//}
+
+
 std::vector<double> calculateRSI(const std::vector<double>& closes, int window) {
 	std::vector<double> rsi(closes.size(), 0); // Initialize RSI values to 0
 
 	double gainSum = 0, lossSum = 0;
 	// Calculate initial average gain and loss
-	for (int i = 1; i <= window; ++i) {
+	for (size_t i = 1; i <= static_cast<size_t>(window); ++i) {
+		// Explicitly handle the subtraction to avoid underflow
 		double delta = closes[i] - closes[i - 1];
 		if (delta > 0) gainSum += delta; // Gain
 		else lossSum -= delta; // Loss (as a positive value)
@@ -161,14 +282,15 @@ std::vector<double> calculateRSI(const std::vector<double>& closes, int window) 
 	double avgLoss = lossSum / window;
 
 	// Calculate RSI starting from 'window + 1'
-	for (size_t i = window + 1; i < closes.size(); ++i) {
+	for (size_t i = static_cast<size_t>(window) + 1; i < closes.size(); ++i) {
+		// Safely handle the subtraction to avoid underflow
 		double delta = closes[i] - closes[i - 1];
 		double gain = delta > 0 ? delta : 0;
 		double loss = delta < 0 ? -delta : 0;
 
-		// Apply smoothing factor
-		avgGain = (avgGain * (window - 1) + gain) / window;
-		avgLoss = (avgLoss * (window - 1) + loss) / window;
+		// Ensure the entire operation is cast to size_t to avoid overflow
+		avgGain = (avgGain * (static_cast<size_t>(window) - 1) + gain) / window;
+		avgLoss = (avgLoss * (static_cast<size_t>(window) - 1) + loss) / window;
 
 		if (avgLoss != 0) { // Avoid division by zero
 			double rs = avgGain / avgLoss;
@@ -182,25 +304,57 @@ std::vector<double> calculateRSI(const std::vector<double>& closes, int window) 
 	return rsi;
 }
 
+
+//std::vector<double> calculateRollingStd(const std::vector<double>& data, int window) {
+//	std::vector<double> rollingStd;
+//	std::deque<double> windowElements;
+//	for (size_t i = 0; i < data.size(); ++i) {
+//		if (i >= window - 1) {
+//			double sum = accumulate(windowElements.begin(), windowElements.end(), 0.0);
+//			double mean = sum / windowElements.size();
+//			double sq_sum = inner_product(windowElements.begin(), windowElements.end(), windowElements.begin(), 0.0, plus<double>(), [mean](double a, double b) { return (a - mean) * (b - mean); });
+//			double std = sqrt(sq_sum / windowElements.size());
+//			rollingStd.push_back(std);
+//		}
+//		windowElements.push_back(data[i]);
+//		if (windowElements.size() > window) {
+//			windowElements.pop_front();
+//		}
+//	}
+//	return rollingStd;
+//}
+
+
+#include <vector>
+#include <deque>
+#include <numeric> // For std::accumulate and std::inner_product
+#include <cmath>   // For std::sqrt
+
 std::vector<double> calculateRollingStd(const std::vector<double>& data, int window) {
 	std::vector<double> rollingStd;
 	std::deque<double> windowElements;
+
 	for (size_t i = 0; i < data.size(); ++i) {
-		if (i >= window - 1) {
-			double sum = accumulate(windowElements.begin(), windowElements.end(), 0.0);
+		// Cast window to size_t before performing subtraction to avoid warning
+		if (i >= static_cast<size_t>(window) - 1) {
+			double sum = std::accumulate(windowElements.begin(), windowElements.end(), 0.0);
 			double mean = sum / windowElements.size();
-			double sq_sum = inner_product(windowElements.begin(), windowElements.end(), windowElements.begin(), 0.0, plus<double>(), [mean](double a, double b) { return (a - mean) * (b - mean); });
-			double std = sqrt(sq_sum / windowElements.size());
-			rollingStd.push_back(std);
+
+			double sq_sum = std::inner_product(windowElements.begin(), windowElements.end(), windowElements.begin(), 0.0,
+				std::plus<double>(), [mean](double a, double b) { return (a - mean) * (b - mean); });
+
+			double std_dev = std::sqrt(sq_sum / windowElements.size());
+			rollingStd.push_back(std_dev);
 		}
+
 		windowElements.push_back(data[i]);
-		if (windowElements.size() > window) {
+		if (windowElements.size() > static_cast<size_t>(window)) {
 			windowElements.pop_front();
 		}
 	}
+
 	return rollingStd;
 }
-
 
 
 int main() {
