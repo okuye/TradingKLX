@@ -1,12 +1,11 @@
 ﻿// TradingKLX.cpp : Defines the entry point for the application.
 //
+#include <tuple>
 using namespace std;
+#include "AlphaVantageAPI.h"
+#include "JSONParser.h"
 #include "TradingKLX.h"
 #include <curl/curl.h>
-
-
-
-
 #include <iostream>
 #include <vector>
 #include <algorithm> // For std::max_element, std::min_element, std::transform
@@ -79,21 +78,35 @@ std::vector<double> calculateSen(const std::vector<double>& high, const std::vec
 	return sen;
 }
 
+
+
 int main() {
-	// Example data
-	std::vector<double> high = { 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8 };
-	std::vector<double> low = { 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6 };
-	std::vector<double> close = { 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7 };
+	// Your API key and the function and symbol you want to query
+	std::string apiKey = "YOUR_API_KEY"; // Make sure to replace this with your actual API key
+	std::string function = "TIME_SERIES_DAILY";
+	std::string symbol = "IBM"; // Example symbol, replace with your desired symbol
 
-	// Calculate Tenkan-sen (Conversion Line)
-	std::vector<double> tenkan_sen = calculateSen(high, low, 9);
+	// Fetch the JSON data from Alpha Vantage
+	std::string jsonData = fetchDataFromAlphaVantage(apiKey, function, symbol);
 
-	// Calculate Kijun-sen (Base Line)
-	std::vector<double> kijun_sen = calculateSen(high, low, 26);
+	if (jsonData.empty()) {
+		std::cerr << "Failed to fetch data from Alpha Vantage." << std::endl;
+		return 1;
+	}
 
-	// Calculate SMA 50 and SMA 200
-	std::vector<double> sma_50 = calculateSMA(close, 50);
-	std::vector<double> sma_200 = calculateSMA(close, 200);
+	// Assuming parseJsonForClosePrices is modified to also return high and low prices
+	std::vector<double> closePrices, highPrices, lowPrices;
+	std::tie(highPrices, lowPrices, closePrices) = parseJsonForPrices(jsonData); // Modify your JSON parser accordingly
+
+	// Calculate Tenkan-sen (Conversion Line) using high and low prices
+	std::vector<double> tenkan_sen = calculateSen(highPrices, lowPrices, 9);
+
+	// Calculate Kijun-sen (Base Line) using high and low prices
+	std::vector<double> kijun_sen = calculateSen(highPrices, lowPrices, 26);
+
+	// Calculate SMA 50 and SMA 200 using close prices
+	std::vector<double> sma_50 = calculateSMA(closePrices, 50);
+	std::vector<double> sma_200 = calculateSMA(closePrices, 200);
 
 	// Output some results to verify
 	std::cout << "Tenkan-sen: ";
@@ -110,3 +123,35 @@ int main() {
 
 	return 0;
 }
+
+//int main() {
+//	// Example data
+//	std::vector<double> high = { 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8 };
+//	std::vector<double> low = { 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6 };
+//	std::vector<double> close = { 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7 };
+//
+//	// Calculate Tenkan-sen (Conversion Line)
+//	std::vector<double> tenkan_sen = calculateSen(high, low, 9);
+//
+//	// Calculate Kijun-sen (Base Line)
+//	std::vector<double> kijun_sen = calculateSen(high, low, 26);
+//
+//	// Calculate SMA 50 and SMA 200
+//	std::vector<double> sma_50 = calculateSMA(close, 50);
+//	std::vector<double> sma_200 = calculateSMA(close, 200);
+//
+//	// Output some results to verify
+//	std::cout << "Tenkan-sen: ";
+//	for (const auto& value : tenkan_sen) {
+//		std::cout << value << " ";
+//	}
+//	std::cout << "\nKijun-sen: ";
+//	for (const auto& value : kijun_sen) {
+//		std::cout << value << " ";
+//	}
+//	std::cout << std::endl;
+//
+//	// Continue implementing other indicators as needed...
+//
+//	return 0;
+//}

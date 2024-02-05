@@ -17,7 +17,7 @@ include_directories(${CURL_INCLUDE_DIRS})
 
 # Add source to this project's executable.
 # Make sure TradingKLX.cpp and TradingKLX.h are present in your project directory
-add_executable (TradingKLX "TradingKLX.cpp" "TradingKLX.h")
+add_executable (TradingKLX "TradingKLX.cpp" "TradingKLX.h" "AlphaVantageAPI.cpp" "JSONParser.cpp" "AlphaVantageAPI.h" "JSONParser.h")
 
 # Link against libcurl
 target_link_libraries(TradingKLX ${CURL_LIBRARIES})

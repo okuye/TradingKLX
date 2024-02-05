@@ -1,8 +1,16 @@
-﻿// TradingKLX.h : Include file for standard system include files,
-// or project specific include files.
+﻿#ifndef TRADINGKLX_H
+#define TRADINGKLX_H
 
-#pragma once
+#include <vector>
+#include <string>
 
-#include <iostream>
+// Declares a function to calculate the Simple Moving Average
+std::vector<double> calculateSMA(const std::vector<double>& data, int window);
 
-// TODO: Reference additional headers your program requires here.
+// Declares a function to calculate rolling maximum or minimum
+std::vector<double> rollingExtremum(const std::vector<double>& data, int window, bool findMax);
+
+// Declares a utility function for calculating Tenkan-sen or Kijun-sen
+std::vector<double> calculateSen(const std::vector<double>& high, const std::vector<double>& low, int period);
+
+#endif // TRADINGKLX_H
