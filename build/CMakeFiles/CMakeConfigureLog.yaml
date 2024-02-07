@@ -4,401 +4,547 @@ events:
   -
     kind: "message-v1"
     backtrace:
-      - "/usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeDetermineSystem.cmake:233 (message)"
+      - "C:/Program Files/CMake/share/cmake-3.28/Modules/CMakeDetermineSystem.cmake:233 (message)"
       - "CMakeLists.txt:3 (project)"
     message: |
-      The system is: Darwin - 21.6.0 - x86_64
+      The system is: Windows - 10.0.22621 - AMD64
   -
     kind: "message-v1"
     backtrace:
-      - "/usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
-      - "/usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
-      - "/usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
-      - "CMakeLists.txt:3 (project)"
-    message: |
-      Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
-      Compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc 
-      Build flags: 
-      Id flags:  
-      
-      The output was:
-      1
-      ld: library not found for -lSystem
-      clang: error: linker command failed with exit code 1 (use -v to see invocation)
-      
-      
-  -
-    kind: "message-v1"
-    backtrace:
-      - "/usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
-      - "/usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
-      - "/usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "C:/Program Files/CMake/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/CMake/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-3.28/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
       - "CMakeLists.txt:3 (project)"
     message: |
       Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
-      Compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc 
-      Build flags: 
-      Id flags: -c 
-      
-      The output was:
-      0
-      
-      
-      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.o"
-      
-      The C compiler identification is AppleClang, found in:
-        /Users/olakunlekuye/Documents/GitHub/TradingKLX/build/CMakeFiles/3.28.2/CompilerIdC/CMakeCCompilerId.o
-      
-  -
-    kind: "message-v1"
-    backtrace:
-      - "/usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
-      - "/usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
-      - "/usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
-      - "CMakeLists.txt:3 (project)"
-    message: |
-      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
-      Compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ 
+      Compiler: C:/cygwin64/bin/gcc.exe 
       Build flags: 
       Id flags:  
       
       The output was:
-      1
-      ld: library not found for -lc++
-      clang: error: linker command failed with exit code 1 (use -v to see invocation)
+      0
       
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
+      
+      The C compiler identification is GNU, found in:
+        C:/Users/User/source/repos/TradingKLX/build/CMakeFiles/3.28.3/CompilerIdC/a.exe
       
   -
     kind: "message-v1"
     backtrace:
-      - "/usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
-      - "/usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
-      - "/usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "C:/Program Files/CMake/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/CMake/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-3.28/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
       - "CMakeLists.txt:3 (project)"
     message: |
       Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
-      Compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ 
+      Compiler: C:/cygwin64/bin/g++.exe 
       Build flags: 
-      Id flags: -c 
+      Id flags:  
       
       The output was:
       0
       
       
-      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.o"
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.exe"
       
-      The CXX compiler identification is AppleClang, found in:
-        /Users/olakunlekuye/Documents/GitHub/TradingKLX/build/CMakeFiles/3.28.2/CompilerIdCXX/CMakeCXXCompilerId.o
+      The CXX compiler identification is GNU, found in:
+        C:/Users/User/source/repos/TradingKLX/build/CMakeFiles/3.28.3/CompilerIdCXX/a.exe
       
   -
     kind: "try_compile-v1"
     backtrace:
-      - "/usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
-      - "/usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "C:/Program Files/CMake/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.28/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
       - "CMakeLists.txt:3 (project)"
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "/Users/olakunlekuye/Documents/GitHub/TradingKLX/build/CMakeFiles/CMakeScratch/TryCompile-ctUa4Z"
-      binary: "/Users/olakunlekuye/Documents/GitHub/TradingKLX/build/CMakeFiles/CMakeScratch/TryCompile-ctUa4Z"
+      source: "C:/Users/User/source/repos/TradingKLX/build/CMakeFiles/CMakeScratch/TryCompile-cxdsdr"
+      binary: "C:/Users/User/source/repos/TradingKLX/build/CMakeFiles/CMakeScratch/TryCompile-cxdsdr"
     cmakeVariables:
       CMAKE_C_FLAGS: ""
       CMAKE_C_FLAGS_DEBUG: "-g"
       CMAKE_EXE_LINKER_FLAGS: ""
-      CMAKE_OSX_ARCHITECTURES: ""
-      CMAKE_OSX_DEPLOYMENT_TARGET: "12.7"
-      CMAKE_OSX_SYSROOT: "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk"
     buildResult:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: '/Users/olakunlekuye/Documents/GitHub/TradingKLX/build/CMakeFiles/CMakeScratch/TryCompile-ctUa4Z'
+        Change Dir: 'C:/Users/User/source/repos/TradingKLX/build/CMakeFiles/CMakeScratch/TryCompile-cxdsdr'
         
-        Run Build Command(s): /usr/local/Cellar/cmake/3.28.2/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_1107b/fast
-        /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_1107b.dir/build.make CMakeFiles/cmTC_1107b.dir/build
-        Building C object CMakeFiles/cmTC_1107b.dir/CMakeCCompilerABI.c.o
-        /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc   -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -mmacosx-version-min=12.7   -v -Wl,-v -MD -MT CMakeFiles/cmTC_1107b.dir/CMakeCCompilerABI.c.o -MF CMakeFiles/cmTC_1107b.dir/CMakeCCompilerABI.c.o.d -o CMakeFiles/cmTC_1107b.dir/CMakeCCompilerABI.c.o -c /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeCCompilerABI.c
-        Apple clang version 14.0.0 (clang-1400.0.29.202)
-        Target: x86_64-apple-darwin21.6.0
+        Run Build Command(s): C:/Users/User/Documents/Ninja/ninja.exe -v cmTC_537d8
+        [1/2] C:\\cygwin64\\bin\\gcc.exe   -v -o CMakeFiles/cmTC_537d8.dir/CMakeCCompilerABI.c.obj -c "C:/Program Files/CMake/share/cmake-3.28/Modules/CMakeCCompilerABI.c"
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/gcc
+        Target: x86_64-pc-cygwin
+        Configured with: /mnt/share/cygpkgs/gcc/gcc.x86_64/src/gcc-11.4.0/configure --srcdir=/mnt/share/cygpkgs/gcc/gcc.x86_64/src/gcc-11.4.0 --prefix=/usr --exec-prefix=/usr --localstatedir=/var --sysconfdir=/etc --docdir=/usr/share/doc/gcc --htmldir=/usr/share/doc/gcc/html -C --build=x86_64-pc-cygwin --host=x86_64-pc-cygwin --target=x86_64-pc-cygwin --without-libiconv-prefix --without-libintl-prefix --libexecdir=/usr/lib --with-gcc-major-version-only --enable-shared --enable-shared-libgcc --enable-static --enable-version-specific-runtime-libs --enable-bootstrap --enable-__cxa_atexit --with-dwarf2 --with-tune=generic --enable-languages=ada,c,c++,d,fortran,lto,objc,obj-c++,jit --enable-graphite --enable-threads=posix --enable-libatomic --enable-libgomp --enable-libquadmath --enable-libquadmath-support --disable-libssp --enable-libada --disable-symvers --disable-multilib --with-gnu-ld --with-gnu-as --with-cloog-include=/usr/include/cloog-isl --without-libiconv-prefix --without-libintl-prefix --with-system-zlib --enable-linker-build-id --with-default-libstdcxx-abi=gcc4-compatible --enable-libstdcxx-filesystem-ts
         Thread model: posix
-        InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
-        clang: warning: -Wl,-v: 'linker' input unused [-Wunused-command-line-argument]
-         "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang" -cc1 -triple x86_64-apple-macosx12.7.0 -Wundef-prefix=TARGET_OS_ -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -Werror=implicit-function-declaration -emit-obj -mrelax-all --mrelax-relocations -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -mframe-pointer=all -fno-strict-return -fno-rounding-math -funwind-tables=2 -target-sdk-version=13.1 -fvisibility-inlines-hidden-static-local-var -target-cpu penryn -tune-cpu generic -debugger-tuning=lldb -target-linker-version 820.1 -v -resource-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0 -dependency-file CMakeFiles/cmTC_1107b.dir/CMakeCCompilerABI.c.o.d -skip-unused-modulemap-deps -MT CMakeFiles/cmTC_1107b.dir/CMakeCCompilerABI.c.o -sys-header-deps -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -internal-isystem /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/local/include -internal-isystem /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include -internal-externc-isystem /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include -internal-externc-isystem /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -Wno-reorder-init-list -Wno-implicit-int-float-conversion -Wno-c99-designator -Wno-final-dtor-non-final-class -Wno-extra-semi-stmt -Wno-misleading-indentation -Wno-quoted-include-in-framework-header -Wno-implicit-fallthrough -Wno-enum-enum-conversion -Wno-enum-float-conversion -Wno-elaborated-enum-base -Wno-reserved-identifier -Wno-gnu-folding-constant -Wno-cast-function-type -Wno-bitwise-instead-of-logical -fdebug-compilation-dir=/Users/olakunlekuye/Documents/GitHub/TradingKLX/build/CMakeFiles/CMakeScratch/TryCompile-ctUa4Z -ferror-limit 19 -stack-protector 1 -fstack-check -mdarwin-stkchk-strong-link -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fmax-type-align=16 -fcommon -clang-vendor-feature=+messageToSelfInClassMethodIdReturnType -clang-vendor-feature=+disableInferNewAvailabilityFromInit -clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation -fno-odr-hash-protocols -clang-vendor-feature=+enableAggressiveVLAFolding -clang-vendor-feature=+revert09abecef7bbf -clang-vendor-feature=+thisNoAlignAttr -clang-vendor-feature=+thisNoNullAttr -mllvm -disable-aligned-alloc-awareness=1 -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_1107b.dir/CMakeCCompilerABI.c.o -x c /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeCCompilerABI.c
-        clang -cc1 version 14.0.0 (clang-1400.0.29.202) default target x86_64-apple-darwin21.6.0
-        ignoring nonexistent directory "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/local/include"
-        ignoring nonexistent directory "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/Library/Frameworks"
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 11.4.0 (GCC) 
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_537d8.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_537d8.dir/'
+         /usr/lib/gcc/x86_64-pc-cygwin/11/cc1.exe -quiet -v -idirafter /usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/../include/w32api -idirafter /usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib/../lib/../../include/w32api C:/Program Files/CMake/share/cmake-3.28/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_537d8.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -o /tmp/cc4p3NZy.s
+        GNU C17 (GCC) version 11.4.0 (x86_64-pc-cygwin)
+        	compiled by GNU C version 11.4.0, GMP version 6.2.1, MPFR version 4.2.0-p9, MPC version 1.3.1, isl version isl-0.26-GMP
+        
+        warning: GMP header version 6.2.1 differs from library version 6.3.0.
+        warning: MPFR header version 4.2.0-p9 differs from library version 4.2.1.
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring nonexistent directory "/usr/local/include"
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-pc-cygwin/11/include-fixed"
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/include"
+        ignoring duplicate directory "/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib/../lib/../../include/w32api"
         #include "..." search starts here:
         #include <...> search starts here:
-         /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include
-         /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include
-         /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include
-         /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/System/Library/Frameworks (framework directory)
+         /usr/lib/gcc/x86_64-pc-cygwin/11/include
+         /usr/include
+         /usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/../include/w32api
         End of search list.
-        Linking C executable cmTC_1107b
-        /usr/local/Cellar/cmake/3.28.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1107b.dir/link.txt --verbose=1
-        /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -mmacosx-version-min=12.7 -Wl,-search_paths_first -Wl,-headerpad_max_install_names  -v -Wl,-v CMakeFiles/cmTC_1107b.dir/CMakeCCompilerABI.c.o -o cmTC_1107b 
-        Apple clang version 14.0.0 (clang-1400.0.29.202)
-        Target: x86_64-apple-darwin21.6.0
+        GNU C17 (GCC) version 11.4.0 (x86_64-pc-cygwin)
+        	compiled by GNU C version 11.4.0, GMP version 6.2.1, MPFR version 4.2.0-p9, MPC version 1.3.1, isl version isl-0.26-GMP
+        
+        warning: GMP header version 6.2.1 differs from library version 6.3.0.
+        warning: MPFR header version 4.2.0-p9 differs from library version 4.2.1.
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        Compiler executable checksum: 3c4b9bae56e6db1bd8a9e23e9bb66399
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_537d8.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_537d8.dir/'
+         /usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/bin/as.exe -v -o CMakeFiles/cmTC_537d8.dir/CMakeCCompilerABI.c.obj /tmp/cc4p3NZy.s
+        GNU assembler version 2.42 (x86_64-pc-cygwin) using BFD version (GNU Binutils) 2.42
+        COMPILER_PATH=/usr/lib/gcc/x86_64-pc-cygwin/11/:/usr/lib/gcc/x86_64-pc-cygwin/11/:/usr/lib/gcc/x86_64-pc-cygwin/:/usr/lib/gcc/x86_64-pc-cygwin/11/:/usr/lib/gcc/x86_64-pc-cygwin/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/bin/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-cygwin/11/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib/../lib/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_537d8.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_537d8.dir/CMakeCCompilerABI.c.'
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\cygwin64\\bin\\gcc.exe  -v CMakeFiles/cmTC_537d8.dir/CMakeCCompilerABI.c.obj -o cmTC_537d8.exe -Wl,--out-implib,libcmTC_537d8.dll.a -Wl,--major-image-version,0,--minor-image-version,0   && cd ."
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/gcc
+        COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-pc-cygwin/11/lto-wrapper.exe
+        Target: x86_64-pc-cygwin
+        Configured with: /mnt/share/cygpkgs/gcc/gcc.x86_64/src/gcc-11.4.0/configure --srcdir=/mnt/share/cygpkgs/gcc/gcc.x86_64/src/gcc-11.4.0 --prefix=/usr --exec-prefix=/usr --localstatedir=/var --sysconfdir=/etc --docdir=/usr/share/doc/gcc --htmldir=/usr/share/doc/gcc/html -C --build=x86_64-pc-cygwin --host=x86_64-pc-cygwin --target=x86_64-pc-cygwin --without-libiconv-prefix --without-libintl-prefix --libexecdir=/usr/lib --with-gcc-major-version-only --enable-shared --enable-shared-libgcc --enable-static --enable-version-specific-runtime-libs --enable-bootstrap --enable-__cxa_atexit --with-dwarf2 --with-tune=generic --enable-languages=ada,c,c++,d,fortran,lto,objc,obj-c++,jit --enable-graphite --enable-threads=posix --enable-libatomic --enable-libgomp --enable-libquadmath --enable-libquadmath-support --disable-libssp --enable-libada --disable-symvers --disable-multilib --with-gnu-ld --with-gnu-as --with-cloog-include=/usr/include/cloog-isl --without-libiconv-prefix --without-libintl-prefix --with-system-zlib --enable-linker-build-id --with-default-libstdcxx-abi=gcc4-compatible --enable-libstdcxx-filesystem-ts
         Thread model: posix
-        InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
-         "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld" -demangle -lto_library /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib -dynamic -arch x86_64 -platform_version macos 12.7.0 13.1 -syslibroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -o cmTC_1107b -search_paths_first -headerpad_max_install_names -v CMakeFiles/cmTC_1107b.dir/CMakeCCompilerABI.c.o -lSystem /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/lib/darwin/libclang_rt.osx.a
-        @(#)PROGRAM:ld  PROJECT:ld64-820.1
-        BUILD 20:07:01 Nov  7 2022
-        configured to support archs: armv6 armv7 armv7s arm64 arm64e arm64_32 i386 x86_64 x86_64h armv6m armv7k armv7m armv7em
-        Library search paths:
-        	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/lib
-        Framework search paths:
-        	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/System/Library/Frameworks/
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 11.4.0 (GCC) 
+        COMPILER_PATH=/usr/lib/gcc/x86_64-pc-cygwin/11/:/usr/lib/gcc/x86_64-pc-cygwin/11/:/usr/lib/gcc/x86_64-pc-cygwin/:/usr/lib/gcc/x86_64-pc-cygwin/11/:/usr/lib/gcc/x86_64-pc-cygwin/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/bin/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-cygwin/11/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib/../lib/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_537d8.exe' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_537d8.'
+         /usr/lib/gcc/x86_64-pc-cygwin/11/collect2.exe -plugin /usr/lib/gcc/x86_64-pc-cygwin/11/cyglto_plugin.dll -plugin-opt=/usr/lib/gcc/x86_64-pc-cygwin/11/lto-wrapper.exe -plugin-opt=-fresolution=/tmp/ccHcCJfo.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lcygwin -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id -m i386pep --wrap _Znwm --wrap _Znam --wrap _ZdlPv --wrap _ZdaPv --wrap _ZnwmRKSt9nothrow_t --wrap _ZnamRKSt9nothrow_t --wrap _ZdlPvRKSt9nothrow_t --wrap _ZdaPvRKSt9nothrow_t -Bdynamic --dll-search-prefix=cyg --tsaware -o cmTC_537d8.exe /usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/crt0.o /usr/lib/gcc/x86_64-pc-cygwin/11/crtbegin.o -L/usr/lib/gcc/x86_64-pc-cygwin/11 -L/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib/../lib -L/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib -L/usr/lib/gcc/x86_64-pc-cygwin/11/../../.. CMakeFiles/cmTC_537d8.dir/CMakeCCompilerABI.c.obj --out-implib libcmTC_537d8.dll.a --major-image-version 0 --minor-image-version 0 -lgcc_s -lgcc -lcygwin -ladvapi32 -lshell32 -luser32 -lkernel32 -lgcc_s -lgcc /usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/default-manifest.o /usr/lib/gcc/x86_64-pc-cygwin/11/crtend.o
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_537d8.exe' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_537d8.'
         
       exitCode: 0
   -
     kind: "message-v1"
     backtrace:
-      - "/usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:127 (message)"
-      - "/usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "C:/Program Files/CMake/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake:127 (message)"
+      - "C:/Program Files/CMake/share/cmake-3.28/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
       - "CMakeLists.txt:3 (project)"
     message: |
       Parsed C implicit include dir info: rv=done
         found start of include info
         found start of implicit include info
-          add: [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include]
-          add: [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include]
-          add: [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include]
+          add: [/usr/lib/gcc/x86_64-pc-cygwin/11/include]
+          add: [/usr/include]
+          add: [/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/../include/w32api]
         end of search list found
-        collapse include dir [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include] ==> [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include]
-        collapse include dir [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include] ==> [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include]
-        collapse include dir [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include] ==> [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include]
-        implicit include dirs: [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include;/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include;/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include]
+        collapse include dir [/usr/lib/gcc/x86_64-pc-cygwin/11/include] ==> [/usr/lib/gcc/x86_64-pc-cygwin/11/include]
+        collapse include dir [/usr/include] ==> [/usr/include]
+        collapse include dir [/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/../include/w32api] ==> [/usr/include/w32api]
+        implicit include dirs: [/usr/lib/gcc/x86_64-pc-cygwin/11/include;/usr/include;/usr/include/w32api]
       
       
   -
     kind: "message-v1"
     backtrace:
-      - "/usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:159 (message)"
-      - "/usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "C:/Program Files/CMake/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake:159 (message)"
+      - "C:/Program Files/CMake/share/cmake-3.28/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
       - "CMakeLists.txt:3 (project)"
     message: |
       Parsed C implicit link information:
-        link line regex: [^( *|.*[/\\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
-        ignore line: [Change Dir: '/Users/olakunlekuye/Documents/GitHub/TradingKLX/build/CMakeFiles/CMakeScratch/TryCompile-ctUa4Z']
+        link line regex: [^( *|.*[/\\])(ld\\.exe|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        ignore line: [Change Dir: 'C:/Users/User/source/repos/TradingKLX/build/CMakeFiles/CMakeScratch/TryCompile-cxdsdr']
         ignore line: []
-        ignore line: [Run Build Command(s): /usr/local/Cellar/cmake/3.28.2/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_1107b/fast]
-        ignore line: [/Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_1107b.dir/build.make CMakeFiles/cmTC_1107b.dir/build]
-        ignore line: [Building C object CMakeFiles/cmTC_1107b.dir/CMakeCCompilerABI.c.o]
-        ignore line: [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc   -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -mmacosx-version-min=12.7   -v -Wl -v -MD -MT CMakeFiles/cmTC_1107b.dir/CMakeCCompilerABI.c.o -MF CMakeFiles/cmTC_1107b.dir/CMakeCCompilerABI.c.o.d -o CMakeFiles/cmTC_1107b.dir/CMakeCCompilerABI.c.o -c /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeCCompilerABI.c]
-        ignore line: [Apple clang version 14.0.0 (clang-1400.0.29.202)]
-        ignore line: [Target: x86_64-apple-darwin21.6.0]
+        ignore line: [Run Build Command(s): C:/Users/User/Documents/Ninja/ninja.exe -v cmTC_537d8]
+        ignore line: [[1/2] C:\\cygwin64\\bin\\gcc.exe   -v -o CMakeFiles/cmTC_537d8.dir/CMakeCCompilerABI.c.obj -c "C:/Program Files/CMake/share/cmake-3.28/Modules/CMakeCCompilerABI.c"]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/gcc]
+        ignore line: [Target: x86_64-pc-cygwin]
+        ignore line: [Configured with: /mnt/share/cygpkgs/gcc/gcc.x86_64/src/gcc-11.4.0/configure --srcdir=/mnt/share/cygpkgs/gcc/gcc.x86_64/src/gcc-11.4.0 --prefix=/usr --exec-prefix=/usr --localstatedir=/var --sysconfdir=/etc --docdir=/usr/share/doc/gcc --htmldir=/usr/share/doc/gcc/html -C --build=x86_64-pc-cygwin --host=x86_64-pc-cygwin --target=x86_64-pc-cygwin --without-libiconv-prefix --without-libintl-prefix --libexecdir=/usr/lib --with-gcc-major-version-only --enable-shared --enable-shared-libgcc --enable-static --enable-version-specific-runtime-libs --enable-bootstrap --enable-__cxa_atexit --with-dwarf2 --with-tune=generic --enable-languages=ada,c,c++,d,fortran,lto,objc,obj-c++,jit --enable-graphite --enable-threads=posix --enable-libatomic --enable-libgomp --enable-libquadmath --enable-libquadmath-support --disable-libssp --enable-libada --disable-symvers --disable-multilib --with-gnu-ld --with-gnu-as --with-cloog-include=/usr/include/cloog-isl --without-libiconv-prefix --without-libintl-prefix --with-system-zlib --enable-linker-build-id --with-default-libstdcxx-abi=gcc4-compatible --enable-libstdcxx-filesystem-ts]
         ignore line: [Thread model: posix]
-        ignore line: [InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin]
-        ignore line: [clang: warning: -Wl -v: 'linker' input unused [-Wunused-command-line-argument]]
-        ignore line: [ "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang" -cc1 -triple x86_64-apple-macosx12.7.0 -Wundef-prefix=TARGET_OS_ -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -Werror=implicit-function-declaration -emit-obj -mrelax-all --mrelax-relocations -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -mframe-pointer=all -fno-strict-return -fno-rounding-math -funwind-tables=2 -target-sdk-version=13.1 -fvisibility-inlines-hidden-static-local-var -target-cpu penryn -tune-cpu generic -debugger-tuning=lldb -target-linker-version 820.1 -v -resource-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0 -dependency-file CMakeFiles/cmTC_1107b.dir/CMakeCCompilerABI.c.o.d -skip-unused-modulemap-deps -MT CMakeFiles/cmTC_1107b.dir/CMakeCCompilerABI.c.o -sys-header-deps -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -internal-isystem /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/local/include -internal-isystem /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include -internal-externc-isystem /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include -internal-externc-isystem /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -Wno-reorder-init-list -Wno-implicit-int-float-conversion -Wno-c99-designator -Wno-final-dtor-non-final-class -Wno-extra-semi-stmt -Wno-misleading-indentation -Wno-quoted-include-in-framework-header -Wno-implicit-fallthrough -Wno-enum-enum-conversion -Wno-enum-float-conversion -Wno-elaborated-enum-base -Wno-reserved-identifier -Wno-gnu-folding-constant -Wno-cast-function-type -Wno-bitwise-instead-of-logical -fdebug-compilation-dir=/Users/olakunlekuye/Documents/GitHub/TradingKLX/build/CMakeFiles/CMakeScratch/TryCompile-ctUa4Z -ferror-limit 19 -stack-protector 1 -fstack-check -mdarwin-stkchk-strong-link -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fmax-type-align=16 -fcommon -clang-vendor-feature=+messageToSelfInClassMethodIdReturnType -clang-vendor-feature=+disableInferNewAvailabilityFromInit -clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation -fno-odr-hash-protocols -clang-vendor-feature=+enableAggressiveVLAFolding -clang-vendor-feature=+revert09abecef7bbf -clang-vendor-feature=+thisNoAlignAttr -clang-vendor-feature=+thisNoNullAttr -mllvm -disable-aligned-alloc-awareness=1 -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_1107b.dir/CMakeCCompilerABI.c.o -x c /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeCCompilerABI.c]
-        ignore line: [clang -cc1 version 14.0.0 (clang-1400.0.29.202) default target x86_64-apple-darwin21.6.0]
-        ignore line: [ignoring nonexistent directory "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/local/include"]
-        ignore line: [ignoring nonexistent directory "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/Library/Frameworks"]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 11.4.0 (GCC) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_537d8.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_537d8.dir/']
+        ignore line: [ /usr/lib/gcc/x86_64-pc-cygwin/11/cc1.exe -quiet -v -idirafter /usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/../include/w32api -idirafter /usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib/../lib/../../include/w32api C:/Program Files/CMake/share/cmake-3.28/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_537d8.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -o /tmp/cc4p3NZy.s]
+        ignore line: [GNU C17 (GCC) version 11.4.0 (x86_64-pc-cygwin)]
+        ignore line: [	compiled by GNU C version 11.4.0  GMP version 6.2.1  MPFR version 4.2.0-p9  MPC version 1.3.1  isl version isl-0.26-GMP]
+        ignore line: []
+        ignore line: [warning: GMP header version 6.2.1 differs from library version 6.3.0.]
+        ignore line: [warning: MPFR header version 4.2.0-p9 differs from library version 4.2.1.]
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring nonexistent directory "/usr/local/include"]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-pc-cygwin/11/include-fixed"]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/include"]
+        ignore line: [ignoring duplicate directory "/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib/../lib/../../include/w32api"]
         ignore line: [#include "..." search starts here:]
         ignore line: [#include <...> search starts here:]
-        ignore line: [ /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include]
-        ignore line: [ /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include]
-        ignore line: [ /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include]
-        ignore line: [ /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/System/Library/Frameworks (framework directory)]
+        ignore line: [ /usr/lib/gcc/x86_64-pc-cygwin/11/include]
+        ignore line: [ /usr/include]
+        ignore line: [ /usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/../include/w32api]
         ignore line: [End of search list.]
-        ignore line: [Linking C executable cmTC_1107b]
-        ignore line: [/usr/local/Cellar/cmake/3.28.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1107b.dir/link.txt --verbose=1]
-        ignore line: [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -mmacosx-version-min=12.7 -Wl -search_paths_first -Wl -headerpad_max_install_names  -v -Wl -v CMakeFiles/cmTC_1107b.dir/CMakeCCompilerABI.c.o -o cmTC_1107b ]
-        ignore line: [Apple clang version 14.0.0 (clang-1400.0.29.202)]
-        ignore line: [Target: x86_64-apple-darwin21.6.0]
+        ignore line: [GNU C17 (GCC) version 11.4.0 (x86_64-pc-cygwin)]
+        ignore line: [	compiled by GNU C version 11.4.0  GMP version 6.2.1  MPFR version 4.2.0-p9  MPC version 1.3.1  isl version isl-0.26-GMP]
+        ignore line: []
+        ignore line: [warning: GMP header version 6.2.1 differs from library version 6.3.0.]
+        ignore line: [warning: MPFR header version 4.2.0-p9 differs from library version 4.2.1.]
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [Compiler executable checksum: 3c4b9bae56e6db1bd8a9e23e9bb66399]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_537d8.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_537d8.dir/']
+        ignore line: [ /usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/bin/as.exe -v -o CMakeFiles/cmTC_537d8.dir/CMakeCCompilerABI.c.obj /tmp/cc4p3NZy.s]
+        ignore line: [GNU assembler version 2.42 (x86_64-pc-cygwin) using BFD version (GNU Binutils) 2.42]
+        ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-pc-cygwin/11/:/usr/lib/gcc/x86_64-pc-cygwin/11/:/usr/lib/gcc/x86_64-pc-cygwin/:/usr/lib/gcc/x86_64-pc-cygwin/11/:/usr/lib/gcc/x86_64-pc-cygwin/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/bin/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-cygwin/11/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib/../lib/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_537d8.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_537d8.dir/CMakeCCompilerABI.c.']
+        ignore line: [[2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\cygwin64\\bin\\gcc.exe  -v CMakeFiles/cmTC_537d8.dir/CMakeCCompilerABI.c.obj -o cmTC_537d8.exe -Wl --out-implib libcmTC_537d8.dll.a -Wl --major-image-version 0 --minor-image-version 0   && cd ."]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/gcc]
+        ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-pc-cygwin/11/lto-wrapper.exe]
+        ignore line: [Target: x86_64-pc-cygwin]
+        ignore line: [Configured with: /mnt/share/cygpkgs/gcc/gcc.x86_64/src/gcc-11.4.0/configure --srcdir=/mnt/share/cygpkgs/gcc/gcc.x86_64/src/gcc-11.4.0 --prefix=/usr --exec-prefix=/usr --localstatedir=/var --sysconfdir=/etc --docdir=/usr/share/doc/gcc --htmldir=/usr/share/doc/gcc/html -C --build=x86_64-pc-cygwin --host=x86_64-pc-cygwin --target=x86_64-pc-cygwin --without-libiconv-prefix --without-libintl-prefix --libexecdir=/usr/lib --with-gcc-major-version-only --enable-shared --enable-shared-libgcc --enable-static --enable-version-specific-runtime-libs --enable-bootstrap --enable-__cxa_atexit --with-dwarf2 --with-tune=generic --enable-languages=ada,c,c++,d,fortran,lto,objc,obj-c++,jit --enable-graphite --enable-threads=posix --enable-libatomic --enable-libgomp --enable-libquadmath --enable-libquadmath-support --disable-libssp --enable-libada --disable-symvers --disable-multilib --with-gnu-ld --with-gnu-as --with-cloog-include=/usr/include/cloog-isl --without-libiconv-prefix --without-libintl-prefix --with-system-zlib --enable-linker-build-id --with-default-libstdcxx-abi=gcc4-compatible --enable-libstdcxx-filesystem-ts]
         ignore line: [Thread model: posix]
-        ignore line: [InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin]
-        link line: [ "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld" -demangle -lto_library /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib -dynamic -arch x86_64 -platform_version macos 12.7.0 13.1 -syslibroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -o cmTC_1107b -search_paths_first -headerpad_max_install_names -v CMakeFiles/cmTC_1107b.dir/CMakeCCompilerABI.c.o -lSystem /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/lib/darwin/libclang_rt.osx.a]
-          arg [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld] ==> ignore
-          arg [-demangle] ==> ignore
-          arg [-lto_library] ==> ignore, skip following value
-          arg [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib] ==> skip value of -lto_library
-          arg [-dynamic] ==> ignore
-          arg [-arch] ==> ignore
-          arg [x86_64] ==> ignore
-          arg [-platform_version] ==> ignore
-          arg [macos] ==> ignore
-          arg [12.7.0] ==> ignore
-          arg [13.1] ==> ignore
-          arg [-syslibroot] ==> ignore
-          arg [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk] ==> ignore
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 11.4.0 (GCC) ]
+        ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-pc-cygwin/11/:/usr/lib/gcc/x86_64-pc-cygwin/11/:/usr/lib/gcc/x86_64-pc-cygwin/:/usr/lib/gcc/x86_64-pc-cygwin/11/:/usr/lib/gcc/x86_64-pc-cygwin/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/bin/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-cygwin/11/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib/../lib/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_537d8.exe' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_537d8.']
+        link line: [ /usr/lib/gcc/x86_64-pc-cygwin/11/collect2.exe -plugin /usr/lib/gcc/x86_64-pc-cygwin/11/cyglto_plugin.dll -plugin-opt=/usr/lib/gcc/x86_64-pc-cygwin/11/lto-wrapper.exe -plugin-opt=-fresolution=/tmp/ccHcCJfo.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lcygwin -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id -m i386pep --wrap _Znwm --wrap _Znam --wrap _ZdlPv --wrap _ZdaPv --wrap _ZnwmRKSt9nothrow_t --wrap _ZnamRKSt9nothrow_t --wrap _ZdlPvRKSt9nothrow_t --wrap _ZdaPvRKSt9nothrow_t -Bdynamic --dll-search-prefix=cyg --tsaware -o cmTC_537d8.exe /usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/crt0.o /usr/lib/gcc/x86_64-pc-cygwin/11/crtbegin.o -L/usr/lib/gcc/x86_64-pc-cygwin/11 -L/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib/../lib -L/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib -L/usr/lib/gcc/x86_64-pc-cygwin/11/../../.. CMakeFiles/cmTC_537d8.dir/CMakeCCompilerABI.c.obj --out-implib libcmTC_537d8.dll.a --major-image-version 0 --minor-image-version 0 -lgcc_s -lgcc -lcygwin -ladvapi32 -lshell32 -luser32 -lkernel32 -lgcc_s -lgcc /usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/default-manifest.o /usr/lib/gcc/x86_64-pc-cygwin/11/crtend.o]
+          arg [/usr/lib/gcc/x86_64-pc-cygwin/11/collect2.exe] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [/usr/lib/gcc/x86_64-pc-cygwin/11/cyglto_plugin.dll] ==> ignore
+          arg [-plugin-opt=/usr/lib/gcc/x86_64-pc-cygwin/11/lto-wrapper.exe] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/ccHcCJfo.res] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lcygwin] ==> ignore
+          arg [-plugin-opt=-pass-through=-ladvapi32] ==> ignore
+          arg [-plugin-opt=-pass-through=-lshell32] ==> ignore
+          arg [-plugin-opt=-pass-through=-luser32] ==> ignore
+          arg [-plugin-opt=-pass-through=-lkernel32] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [--build-id] ==> ignore
+          arg [-m] ==> ignore
+          arg [i386pep] ==> ignore
+          arg [--wrap] ==> ignore
+          arg [_Znwm] ==> ignore
+          arg [--wrap] ==> ignore
+          arg [_Znam] ==> ignore
+          arg [--wrap] ==> ignore
+          arg [_ZdlPv] ==> ignore
+          arg [--wrap] ==> ignore
+          arg [_ZdaPv] ==> ignore
+          arg [--wrap] ==> ignore
+          arg [_ZnwmRKSt9nothrow_t] ==> ignore
+          arg [--wrap] ==> ignore
+          arg [_ZnamRKSt9nothrow_t] ==> ignore
+          arg [--wrap] ==> ignore
+          arg [_ZdlPvRKSt9nothrow_t] ==> ignore
+          arg [--wrap] ==> ignore
+          arg [_ZdaPvRKSt9nothrow_t] ==> ignore
+          arg [-Bdynamic] ==> search dynamic
+          arg [--dll-search-prefix=cyg] ==> ignore
+          arg [--tsaware] ==> ignore
           arg [-o] ==> ignore
-          arg [cmTC_1107b] ==> ignore
-          arg [-search_paths_first] ==> ignore
-          arg [-headerpad_max_install_names] ==> ignore
-          arg [-v] ==> ignore
-          arg [CMakeFiles/cmTC_1107b.dir/CMakeCCompilerABI.c.o] ==> ignore
-          arg [-lSystem] ==> lib [System]
-          arg [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/lib/darwin/libclang_rt.osx.a] ==> lib [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/lib/darwin/libclang_rt.osx.a]
-        Library search paths: [;/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/lib]
-        Framework search paths: [;/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/System/Library/Frameworks/]
-        remove lib [System]
-        remove lib [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/lib/darwin/libclang_rt.osx.a]
-        collapse library dir [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/lib] ==> [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/lib]
-        collapse framework dir [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/System/Library/Frameworks/] ==> [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/System/Library/Frameworks]
-        implicit libs: []
-        implicit objs: []
-        implicit dirs: [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/lib]
-        implicit fwks: [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/System/Library/Frameworks]
+          arg [cmTC_537d8.exe] ==> ignore
+          arg [/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/crt0.o] ==> obj [/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/crt0.o]
+          arg [/usr/lib/gcc/x86_64-pc-cygwin/11/crtbegin.o] ==> obj [/usr/lib/gcc/x86_64-pc-cygwin/11/crtbegin.o]
+          arg [-L/usr/lib/gcc/x86_64-pc-cygwin/11] ==> dir [/usr/lib/gcc/x86_64-pc-cygwin/11]
+          arg [-L/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib/../lib] ==> dir [/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib/../lib]
+          arg [-L/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib] ==> dir [/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib]
+          arg [-L/lib/../lib] ==> dir [/lib/../lib]
+          arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+          arg [-L/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib] ==> dir [/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib]
+          arg [-L/usr/lib/gcc/x86_64-pc-cygwin/11/../../..] ==> dir [/usr/lib/gcc/x86_64-pc-cygwin/11/../../..]
+          arg [CMakeFiles/cmTC_537d8.dir/CMakeCCompilerABI.c.obj] ==> ignore
+          arg [--out-implib] ==> ignore
+          arg [libcmTC_537d8.dll.a] ==> ignore
+          arg [--major-image-version] ==> ignore
+          arg [0] ==> ignore
+          arg [--minor-image-version] ==> ignore
+          arg [0] ==> ignore
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [-lcygwin] ==> lib [cygwin]
+          arg [-ladvapi32] ==> lib [advapi32]
+          arg [-lshell32] ==> lib [shell32]
+          arg [-luser32] ==> lib [user32]
+          arg [-lkernel32] ==> lib [kernel32]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/default-manifest.o] ==> obj [/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/default-manifest.o]
+          arg [/usr/lib/gcc/x86_64-pc-cygwin/11/crtend.o] ==> obj [/usr/lib/gcc/x86_64-pc-cygwin/11/crtend.o]
+        collapse obj [/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/crt0.o] ==> [/usr/lib/crt0.o]
+        collapse obj [/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/default-manifest.o] ==> [/usr/lib/default-manifest.o]
+        collapse library dir [/usr/lib/gcc/x86_64-pc-cygwin/11] ==> [/usr/lib/gcc/x86_64-pc-cygwin/11]
+        collapse library dir [/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib/../lib] ==> [/usr/x86_64-pc-cygwin/lib]
+        collapse library dir [/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib] ==> [/usr/lib]
+        collapse library dir [/lib/../lib] ==> [/lib]
+        collapse library dir [/usr/lib/../lib] ==> [/usr/lib]
+        collapse library dir [/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib] ==> [/usr/x86_64-pc-cygwin/lib]
+        collapse library dir [/usr/lib/gcc/x86_64-pc-cygwin/11/../../..] ==> [/usr/lib]
+        implicit libs: [gcc_s;gcc;cygwin;advapi32;shell32;user32;kernel32;gcc_s;gcc]
+        implicit objs: [/usr/lib/crt0.o;/usr/lib/gcc/x86_64-pc-cygwin/11/crtbegin.o;/usr/lib/default-manifest.o;/usr/lib/gcc/x86_64-pc-cygwin/11/crtend.o]
+        implicit dirs: [/usr/lib/gcc/x86_64-pc-cygwin/11;/usr/x86_64-pc-cygwin/lib;/usr/lib;/lib]
+        implicit fwks: []
       
       
   -
     kind: "try_compile-v1"
     backtrace:
-      - "/usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
-      - "/usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "C:/Program Files/CMake/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.28/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
       - "CMakeLists.txt:3 (project)"
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "/Users/olakunlekuye/Documents/GitHub/TradingKLX/build/CMakeFiles/CMakeScratch/TryCompile-lDiORk"
-      binary: "/Users/olakunlekuye/Documents/GitHub/TradingKLX/build/CMakeFiles/CMakeScratch/TryCompile-lDiORk"
+      source: "C:/Users/User/source/repos/TradingKLX/build/CMakeFiles/CMakeScratch/TryCompile-ynujme"
+      binary: "C:/Users/User/source/repos/TradingKLX/build/CMakeFiles/CMakeScratch/TryCompile-ynujme"
     cmakeVariables:
       CMAKE_CXX_FLAGS: ""
       CMAKE_CXX_FLAGS_DEBUG: "-g"
       CMAKE_EXE_LINKER_FLAGS: ""
-      CMAKE_OSX_ARCHITECTURES: ""
-      CMAKE_OSX_DEPLOYMENT_TARGET: "12.7"
-      CMAKE_OSX_SYSROOT: "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk"
     buildResult:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: '/Users/olakunlekuye/Documents/GitHub/TradingKLX/build/CMakeFiles/CMakeScratch/TryCompile-lDiORk'
+        Change Dir: 'C:/Users/User/source/repos/TradingKLX/build/CMakeFiles/CMakeScratch/TryCompile-ynujme'
         
-        Run Build Command(s): /usr/local/Cellar/cmake/3.28.2/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_81ad8/fast
-        /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_81ad8.dir/build.make CMakeFiles/cmTC_81ad8.dir/build
-        Building CXX object CMakeFiles/cmTC_81ad8.dir/CMakeCXXCompilerABI.cpp.o
-        /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -mmacosx-version-min=12.7   -v -Wl,-v -MD -MT CMakeFiles/cmTC_81ad8.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_81ad8.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_81ad8.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeCXXCompilerABI.cpp
-        Apple clang version 14.0.0 (clang-1400.0.29.202)
-        Target: x86_64-apple-darwin21.6.0
+        Run Build Command(s): C:/Users/User/Documents/Ninja/ninja.exe -v cmTC_33b84
+        [1/2] C:\\cygwin64\\bin\\g++.exe   -v -o CMakeFiles/cmTC_33b84.dir/CMakeCXXCompilerABI.cpp.obj -c "C:/Program Files/CMake/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp"
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/g++
+        Target: x86_64-pc-cygwin
+        Configured with: /mnt/share/cygpkgs/gcc/gcc.x86_64/src/gcc-11.4.0/configure --srcdir=/mnt/share/cygpkgs/gcc/gcc.x86_64/src/gcc-11.4.0 --prefix=/usr --exec-prefix=/usr --localstatedir=/var --sysconfdir=/etc --docdir=/usr/share/doc/gcc --htmldir=/usr/share/doc/gcc/html -C --build=x86_64-pc-cygwin --host=x86_64-pc-cygwin --target=x86_64-pc-cygwin --without-libiconv-prefix --without-libintl-prefix --libexecdir=/usr/lib --with-gcc-major-version-only --enable-shared --enable-shared-libgcc --enable-static --enable-version-specific-runtime-libs --enable-bootstrap --enable-__cxa_atexit --with-dwarf2 --with-tune=generic --enable-languages=ada,c,c++,d,fortran,lto,objc,obj-c++,jit --enable-graphite --enable-threads=posix --enable-libatomic --enable-libgomp --enable-libquadmath --enable-libquadmath-support --disable-libssp --enable-libada --disable-symvers --disable-multilib --with-gnu-ld --with-gnu-as --with-cloog-include=/usr/include/cloog-isl --without-libiconv-prefix --without-libintl-prefix --with-system-zlib --enable-linker-build-id --with-default-libstdcxx-abi=gcc4-compatible --enable-libstdcxx-filesystem-ts
         Thread model: posix
-        InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
-        clang: warning: -Wl,-v: 'linker' input unused [-Wunused-command-line-argument]
-         "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang" -cc1 -triple x86_64-apple-macosx12.7.0 -Wundef-prefix=TARGET_OS_ -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -Werror=implicit-function-declaration -emit-obj -mrelax-all --mrelax-relocations -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -mframe-pointer=all -fno-strict-return -fno-rounding-math -funwind-tables=2 -target-sdk-version=13.1 -fvisibility-inlines-hidden-static-local-var -target-cpu penryn -tune-cpu generic -debugger-tuning=lldb -target-linker-version 820.1 -v -resource-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0 -dependency-file CMakeFiles/cmTC_81ad8.dir/CMakeCXXCompilerABI.cpp.o.d -skip-unused-modulemap-deps -MT CMakeFiles/cmTC_81ad8.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -stdlib=libc++ -internal-isystem /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include/c++/v1 -internal-isystem /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/local/include -internal-isystem /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include -internal-externc-isystem /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include -internal-externc-isystem /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -Wno-reorder-init-list -Wno-implicit-int-float-conversion -Wno-c99-designator -Wno-final-dtor-non-final-class -Wno-extra-semi-stmt -Wno-misleading-indentation -Wno-quoted-include-in-framework-header -Wno-implicit-fallthrough -Wno-enum-enum-conversion -Wno-enum-float-conversion -Wno-elaborated-enum-base -Wno-reserved-identifier -Wno-gnu-folding-constant -Wno-cast-function-type -Wno-bitwise-instead-of-logical -fdeprecated-macro -fdebug-compilation-dir=/Users/olakunlekuye/Documents/GitHub/TradingKLX/build/CMakeFiles/CMakeScratch/TryCompile-lDiORk -ferror-limit 19 -stack-protector 1 -fstack-check -mdarwin-stkchk-strong-link -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fno-cxx-modules -fcxx-exceptions -fexceptions -fmax-type-align=16 -fcommon -clang-vendor-feature=+messageToSelfInClassMethodIdReturnType -clang-vendor-feature=+disableInferNewAvailabilityFromInit -clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation -fno-odr-hash-protocols -clang-vendor-feature=+enableAggressiveVLAFolding -clang-vendor-feature=+revert09abecef7bbf -clang-vendor-feature=+thisNoAlignAttr -clang-vendor-feature=+thisNoNullAttr -mllvm -disable-aligned-alloc-awareness=1 -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_81ad8.dir/CMakeCXXCompilerABI.cpp.o -x c++ /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeCXXCompilerABI.cpp
-        clang -cc1 version 14.0.0 (clang-1400.0.29.202) default target x86_64-apple-darwin21.6.0
-        ignoring nonexistent directory "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/local/include"
-        ignoring nonexistent directory "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/Library/Frameworks"
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 11.4.0 (GCC) 
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_33b84.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_33b84.dir/'
+         /usr/lib/gcc/x86_64-pc-cygwin/11/cc1plus.exe -quiet -v -idirafter /usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/../include/w32api -idirafter /usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib/../lib/../../include/w32api C:/Program Files/CMake/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_33b84.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -o /tmp/ccMoDwTP.s
+        GNU C++17 (GCC) version 11.4.0 (x86_64-pc-cygwin)
+        	compiled by GNU C version 11.4.0, GMP version 6.2.1, MPFR version 4.2.0-p9, MPC version 1.3.1, isl version isl-0.26-GMP
+        
+        warning: GMP header version 6.2.1 differs from library version 6.3.0.
+        warning: MPFR header version 4.2.0-p9 differs from library version 4.2.1.
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring nonexistent directory "/usr/local/include"
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-pc-cygwin/11/include-fixed"
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/include"
+        ignoring duplicate directory "/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib/../lib/../../include/w32api"
         #include "..." search starts here:
         #include <...> search starts here:
-         /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include/c++/v1
-         /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include
-         /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include
-         /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include
-         /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/System/Library/Frameworks (framework directory)
+         /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++
+         /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/x86_64-pc-cygwin
+         /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/backward
+         /usr/lib/gcc/x86_64-pc-cygwin/11/include
+         /usr/include
+         /usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/../include/w32api
         End of search list.
-        Linking CXX executable cmTC_81ad8
-        /usr/local/Cellar/cmake/3.28.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_81ad8.dir/link.txt --verbose=1
-        /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -mmacosx-version-min=12.7 -Wl,-search_paths_first -Wl,-headerpad_max_install_names  -v -Wl,-v CMakeFiles/cmTC_81ad8.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_81ad8 
-        Apple clang version 14.0.0 (clang-1400.0.29.202)
-        Target: x86_64-apple-darwin21.6.0
+        GNU C++17 (GCC) version 11.4.0 (x86_64-pc-cygwin)
+        	compiled by GNU C version 11.4.0, GMP version 6.2.1, MPFR version 4.2.0-p9, MPC version 1.3.1, isl version isl-0.26-GMP
+        
+        warning: GMP header version 6.2.1 differs from library version 6.3.0.
+        warning: MPFR header version 4.2.0-p9 differs from library version 4.2.1.
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        Compiler executable checksum: 9541cf208b0d7c1554936d7d6d06e10f
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_33b84.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_33b84.dir/'
+         /usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/bin/as.exe -v -o CMakeFiles/cmTC_33b84.dir/CMakeCXXCompilerABI.cpp.obj /tmp/ccMoDwTP.s
+        GNU assembler version 2.42 (x86_64-pc-cygwin) using BFD version (GNU Binutils) 2.42
+        COMPILER_PATH=/usr/lib/gcc/x86_64-pc-cygwin/11/:/usr/lib/gcc/x86_64-pc-cygwin/11/:/usr/lib/gcc/x86_64-pc-cygwin/:/usr/lib/gcc/x86_64-pc-cygwin/11/:/usr/lib/gcc/x86_64-pc-cygwin/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/bin/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-cygwin/11/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib/../lib/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_33b84.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_33b84.dir/CMakeCXXCompilerABI.cpp.'
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\cygwin64\\bin\\g++.exe  -v CMakeFiles/cmTC_33b84.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_33b84.exe -Wl,--out-implib,libcmTC_33b84.dll.a -Wl,--major-image-version,0,--minor-image-version,0   && cd ."
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/g++
+        COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-pc-cygwin/11/lto-wrapper.exe
+        Target: x86_64-pc-cygwin
+        Configured with: /mnt/share/cygpkgs/gcc/gcc.x86_64/src/gcc-11.4.0/configure --srcdir=/mnt/share/cygpkgs/gcc/gcc.x86_64/src/gcc-11.4.0 --prefix=/usr --exec-prefix=/usr --localstatedir=/var --sysconfdir=/etc --docdir=/usr/share/doc/gcc --htmldir=/usr/share/doc/gcc/html -C --build=x86_64-pc-cygwin --host=x86_64-pc-cygwin --target=x86_64-pc-cygwin --without-libiconv-prefix --without-libintl-prefix --libexecdir=/usr/lib --with-gcc-major-version-only --enable-shared --enable-shared-libgcc --enable-static --enable-version-specific-runtime-libs --enable-bootstrap --enable-__cxa_atexit --with-dwarf2 --with-tune=generic --enable-languages=ada,c,c++,d,fortran,lto,objc,obj-c++,jit --enable-graphite --enable-threads=posix --enable-libatomic --enable-libgomp --enable-libquadmath --enable-libquadmath-support --disable-libssp --enable-libada --disable-symvers --disable-multilib --with-gnu-ld --with-gnu-as --with-cloog-include=/usr/include/cloog-isl --without-libiconv-prefix --without-libintl-prefix --with-system-zlib --enable-linker-build-id --with-default-libstdcxx-abi=gcc4-compatible --enable-libstdcxx-filesystem-ts
         Thread model: posix
-        InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
-         "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld" -demangle -lto_library /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib -dynamic -arch x86_64 -platform_version macos 12.7.0 13.1 -syslibroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -o cmTC_81ad8 -search_paths_first -headerpad_max_install_names -v CMakeFiles/cmTC_81ad8.dir/CMakeCXXCompilerABI.cpp.o -lc++ -lSystem /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/lib/darwin/libclang_rt.osx.a
-        @(#)PROGRAM:ld  PROJECT:ld64-820.1
-        BUILD 20:07:01 Nov  7 2022
-        configured to support archs: armv6 armv7 armv7s arm64 arm64e arm64_32 i386 x86_64 x86_64h armv6m armv7k armv7m armv7em
-        Library search paths:
-        	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/lib
-        Framework search paths:
-        	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/System/Library/Frameworks/
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 11.4.0 (GCC) 
+        COMPILER_PATH=/usr/lib/gcc/x86_64-pc-cygwin/11/:/usr/lib/gcc/x86_64-pc-cygwin/11/:/usr/lib/gcc/x86_64-pc-cygwin/:/usr/lib/gcc/x86_64-pc-cygwin/11/:/usr/lib/gcc/x86_64-pc-cygwin/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/bin/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-cygwin/11/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib/../lib/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_33b84.exe' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_33b84.'
+         /usr/lib/gcc/x86_64-pc-cygwin/11/collect2.exe -plugin /usr/lib/gcc/x86_64-pc-cygwin/11/cyglto_plugin.dll -plugin-opt=/usr/lib/gcc/x86_64-pc-cygwin/11/lto-wrapper.exe -plugin-opt=-fresolution=/tmp/ccfZdhYC.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lcygwin -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id -m i386pep --wrap _Znwm --wrap _Znam --wrap _ZdlPv --wrap _ZdaPv --wrap _ZnwmRKSt9nothrow_t --wrap _ZnamRKSt9nothrow_t --wrap _ZdlPvRKSt9nothrow_t --wrap _ZdaPvRKSt9nothrow_t -Bdynamic --dll-search-prefix=cyg --tsaware -o cmTC_33b84.exe /usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/crt0.o /usr/lib/gcc/x86_64-pc-cygwin/11/crtbegin.o -L/usr/lib/gcc/x86_64-pc-cygwin/11 -L/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib/../lib -L/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib -L/usr/lib/gcc/x86_64-pc-cygwin/11/../../.. CMakeFiles/cmTC_33b84.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_33b84.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lgcc_s -lgcc -lcygwin -ladvapi32 -lshell32 -luser32 -lkernel32 -lgcc_s -lgcc /usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/default-manifest.o /usr/lib/gcc/x86_64-pc-cygwin/11/crtend.o
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_33b84.exe' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_33b84.'
         
       exitCode: 0
   -
     kind: "message-v1"
     backtrace:
-      - "/usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:127 (message)"
-      - "/usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "C:/Program Files/CMake/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake:127 (message)"
+      - "C:/Program Files/CMake/share/cmake-3.28/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
       - "CMakeLists.txt:3 (project)"
     message: |
       Parsed CXX implicit include dir info: rv=done
         found start of include info
         found start of implicit include info
-          add: [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include/c++/v1]
-          add: [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include]
-          add: [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include]
-          add: [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include]
+          add: [/usr/lib/gcc/x86_64-pc-cygwin/11/include/c++]
+          add: [/usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/x86_64-pc-cygwin]
+          add: [/usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/backward]
+          add: [/usr/lib/gcc/x86_64-pc-cygwin/11/include]
+          add: [/usr/include]
+          add: [/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/../include/w32api]
         end of search list found
-        collapse include dir [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include/c++/v1] ==> [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include/c++/v1]
-        collapse include dir [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include] ==> [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include]
-        collapse include dir [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include] ==> [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include]
-        collapse include dir [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include] ==> [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include]
-        implicit include dirs: [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include/c++/v1;/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include;/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include;/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include]
+        collapse include dir [/usr/lib/gcc/x86_64-pc-cygwin/11/include/c++] ==> [/usr/lib/gcc/x86_64-pc-cygwin/11/include/c++]
+        collapse include dir [/usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/x86_64-pc-cygwin] ==> [/usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/x86_64-pc-cygwin]
+        collapse include dir [/usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/backward] ==> [/usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/backward]
+        collapse include dir [/usr/lib/gcc/x86_64-pc-cygwin/11/include] ==> [/usr/lib/gcc/x86_64-pc-cygwin/11/include]
+        collapse include dir [/usr/include] ==> [/usr/include]
+        collapse include dir [/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/../include/w32api] ==> [/usr/include/w32api]
+        implicit include dirs: [/usr/lib/gcc/x86_64-pc-cygwin/11/include/c++;/usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/x86_64-pc-cygwin;/usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/backward;/usr/lib/gcc/x86_64-pc-cygwin/11/include;/usr/include;/usr/include/w32api]
       
       
   -
     kind: "message-v1"
     backtrace:
-      - "/usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:159 (message)"
-      - "/usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "C:/Program Files/CMake/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake:159 (message)"
+      - "C:/Program Files/CMake/share/cmake-3.28/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
       - "CMakeLists.txt:3 (project)"
     message: |
       Parsed CXX implicit link information:
-        link line regex: [^( *|.*[/\\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
-        ignore line: [Change Dir: '/Users/olakunlekuye/Documents/GitHub/TradingKLX/build/CMakeFiles/CMakeScratch/TryCompile-lDiORk']
+        link line regex: [^( *|.*[/\\])(ld\\.exe|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        ignore line: [Change Dir: 'C:/Users/User/source/repos/TradingKLX/build/CMakeFiles/CMakeScratch/TryCompile-ynujme']
         ignore line: []
-        ignore line: [Run Build Command(s): /usr/local/Cellar/cmake/3.28.2/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_81ad8/fast]
-        ignore line: [/Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_81ad8.dir/build.make CMakeFiles/cmTC_81ad8.dir/build]
-        ignore line: [Building CXX object CMakeFiles/cmTC_81ad8.dir/CMakeCXXCompilerABI.cpp.o]
-        ignore line: [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -mmacosx-version-min=12.7   -v -Wl -v -MD -MT CMakeFiles/cmTC_81ad8.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_81ad8.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_81ad8.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
-        ignore line: [Apple clang version 14.0.0 (clang-1400.0.29.202)]
-        ignore line: [Target: x86_64-apple-darwin21.6.0]
+        ignore line: [Run Build Command(s): C:/Users/User/Documents/Ninja/ninja.exe -v cmTC_33b84]
+        ignore line: [[1/2] C:\\cygwin64\\bin\\g++.exe   -v -o CMakeFiles/cmTC_33b84.dir/CMakeCXXCompilerABI.cpp.obj -c "C:/Program Files/CMake/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp"]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/g++]
+        ignore line: [Target: x86_64-pc-cygwin]
+        ignore line: [Configured with: /mnt/share/cygpkgs/gcc/gcc.x86_64/src/gcc-11.4.0/configure --srcdir=/mnt/share/cygpkgs/gcc/gcc.x86_64/src/gcc-11.4.0 --prefix=/usr --exec-prefix=/usr --localstatedir=/var --sysconfdir=/etc --docdir=/usr/share/doc/gcc --htmldir=/usr/share/doc/gcc/html -C --build=x86_64-pc-cygwin --host=x86_64-pc-cygwin --target=x86_64-pc-cygwin --without-libiconv-prefix --without-libintl-prefix --libexecdir=/usr/lib --with-gcc-major-version-only --enable-shared --enable-shared-libgcc --enable-static --enable-version-specific-runtime-libs --enable-bootstrap --enable-__cxa_atexit --with-dwarf2 --with-tune=generic --enable-languages=ada,c,c++,d,fortran,lto,objc,obj-c++,jit --enable-graphite --enable-threads=posix --enable-libatomic --enable-libgomp --enable-libquadmath --enable-libquadmath-support --disable-libssp --enable-libada --disable-symvers --disable-multilib --with-gnu-ld --with-gnu-as --with-cloog-include=/usr/include/cloog-isl --without-libiconv-prefix --without-libintl-prefix --with-system-zlib --enable-linker-build-id --with-default-libstdcxx-abi=gcc4-compatible --enable-libstdcxx-filesystem-ts]
         ignore line: [Thread model: posix]
-        ignore line: [InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin]
-        ignore line: [clang: warning: -Wl -v: 'linker' input unused [-Wunused-command-line-argument]]
-        ignore line: [ "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang" -cc1 -triple x86_64-apple-macosx12.7.0 -Wundef-prefix=TARGET_OS_ -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -Werror=implicit-function-declaration -emit-obj -mrelax-all --mrelax-relocations -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -mframe-pointer=all -fno-strict-return -fno-rounding-math -funwind-tables=2 -target-sdk-version=13.1 -fvisibility-inlines-hidden-static-local-var -target-cpu penryn -tune-cpu generic -debugger-tuning=lldb -target-linker-version 820.1 -v -resource-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0 -dependency-file CMakeFiles/cmTC_81ad8.dir/CMakeCXXCompilerABI.cpp.o.d -skip-unused-modulemap-deps -MT CMakeFiles/cmTC_81ad8.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -stdlib=libc++ -internal-isystem /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include/c++/v1 -internal-isystem /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/local/include -internal-isystem /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include -internal-externc-isystem /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include -internal-externc-isystem /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -Wno-reorder-init-list -Wno-implicit-int-float-conversion -Wno-c99-designator -Wno-final-dtor-non-final-class -Wno-extra-semi-stmt -Wno-misleading-indentation -Wno-quoted-include-in-framework-header -Wno-implicit-fallthrough -Wno-enum-enum-conversion -Wno-enum-float-conversion -Wno-elaborated-enum-base -Wno-reserved-identifier -Wno-gnu-folding-constant -Wno-cast-function-type -Wno-bitwise-instead-of-logical -fdeprecated-macro -fdebug-compilation-dir=/Users/olakunlekuye/Documents/GitHub/TradingKLX/build/CMakeFiles/CMakeScratch/TryCompile-lDiORk -ferror-limit 19 -stack-protector 1 -fstack-check -mdarwin-stkchk-strong-link -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fno-cxx-modules -fcxx-exceptions -fexceptions -fmax-type-align=16 -fcommon -clang-vendor-feature=+messageToSelfInClassMethodIdReturnType -clang-vendor-feature=+disableInferNewAvailabilityFromInit -clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation -fno-odr-hash-protocols -clang-vendor-feature=+enableAggressiveVLAFolding -clang-vendor-feature=+revert09abecef7bbf -clang-vendor-feature=+thisNoAlignAttr -clang-vendor-feature=+thisNoNullAttr -mllvm -disable-aligned-alloc-awareness=1 -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_81ad8.dir/CMakeCXXCompilerABI.cpp.o -x c++ /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
-        ignore line: [clang -cc1 version 14.0.0 (clang-1400.0.29.202) default target x86_64-apple-darwin21.6.0]
-        ignore line: [ignoring nonexistent directory "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/local/include"]
-        ignore line: [ignoring nonexistent directory "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/Library/Frameworks"]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 11.4.0 (GCC) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_33b84.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_33b84.dir/']
+        ignore line: [ /usr/lib/gcc/x86_64-pc-cygwin/11/cc1plus.exe -quiet -v -idirafter /usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/../include/w32api -idirafter /usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib/../lib/../../include/w32api C:/Program Files/CMake/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_33b84.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -o /tmp/ccMoDwTP.s]
+        ignore line: [GNU C++17 (GCC) version 11.4.0 (x86_64-pc-cygwin)]
+        ignore line: [	compiled by GNU C version 11.4.0  GMP version 6.2.1  MPFR version 4.2.0-p9  MPC version 1.3.1  isl version isl-0.26-GMP]
+        ignore line: []
+        ignore line: [warning: GMP header version 6.2.1 differs from library version 6.3.0.]
+        ignore line: [warning: MPFR header version 4.2.0-p9 differs from library version 4.2.1.]
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring nonexistent directory "/usr/local/include"]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-pc-cygwin/11/include-fixed"]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/include"]
+        ignore line: [ignoring duplicate directory "/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib/../lib/../../include/w32api"]
         ignore line: [#include "..." search starts here:]
         ignore line: [#include <...> search starts here:]
-        ignore line: [ /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include/c++/v1]
-        ignore line: [ /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include]
-        ignore line: [ /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include]
-        ignore line: [ /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include]
-        ignore line: [ /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/System/Library/Frameworks (framework directory)]
+        ignore line: [ /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++]
+        ignore line: [ /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/x86_64-pc-cygwin]
+        ignore line: [ /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/backward]
+        ignore line: [ /usr/lib/gcc/x86_64-pc-cygwin/11/include]
+        ignore line: [ /usr/include]
+        ignore line: [ /usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/../include/w32api]
         ignore line: [End of search list.]
-        ignore line: [Linking CXX executable cmTC_81ad8]
-        ignore line: [/usr/local/Cellar/cmake/3.28.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_81ad8.dir/link.txt --verbose=1]
-        ignore line: [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -mmacosx-version-min=12.7 -Wl -search_paths_first -Wl -headerpad_max_install_names  -v -Wl -v CMakeFiles/cmTC_81ad8.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_81ad8 ]
-        ignore line: [Apple clang version 14.0.0 (clang-1400.0.29.202)]
-        ignore line: [Target: x86_64-apple-darwin21.6.0]
+        ignore line: [GNU C++17 (GCC) version 11.4.0 (x86_64-pc-cygwin)]
+        ignore line: [	compiled by GNU C version 11.4.0  GMP version 6.2.1  MPFR version 4.2.0-p9  MPC version 1.3.1  isl version isl-0.26-GMP]
+        ignore line: []
+        ignore line: [warning: GMP header version 6.2.1 differs from library version 6.3.0.]
+        ignore line: [warning: MPFR header version 4.2.0-p9 differs from library version 4.2.1.]
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [Compiler executable checksum: 9541cf208b0d7c1554936d7d6d06e10f]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_33b84.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_33b84.dir/']
+        ignore line: [ /usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/bin/as.exe -v -o CMakeFiles/cmTC_33b84.dir/CMakeCXXCompilerABI.cpp.obj /tmp/ccMoDwTP.s]
+        ignore line: [GNU assembler version 2.42 (x86_64-pc-cygwin) using BFD version (GNU Binutils) 2.42]
+        ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-pc-cygwin/11/:/usr/lib/gcc/x86_64-pc-cygwin/11/:/usr/lib/gcc/x86_64-pc-cygwin/:/usr/lib/gcc/x86_64-pc-cygwin/11/:/usr/lib/gcc/x86_64-pc-cygwin/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/bin/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-cygwin/11/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib/../lib/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_33b84.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_33b84.dir/CMakeCXXCompilerABI.cpp.']
+        ignore line: [[2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\cygwin64\\bin\\g++.exe  -v CMakeFiles/cmTC_33b84.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_33b84.exe -Wl --out-implib libcmTC_33b84.dll.a -Wl --major-image-version 0 --minor-image-version 0   && cd ."]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/g++]
+        ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-pc-cygwin/11/lto-wrapper.exe]
+        ignore line: [Target: x86_64-pc-cygwin]
+        ignore line: [Configured with: /mnt/share/cygpkgs/gcc/gcc.x86_64/src/gcc-11.4.0/configure --srcdir=/mnt/share/cygpkgs/gcc/gcc.x86_64/src/gcc-11.4.0 --prefix=/usr --exec-prefix=/usr --localstatedir=/var --sysconfdir=/etc --docdir=/usr/share/doc/gcc --htmldir=/usr/share/doc/gcc/html -C --build=x86_64-pc-cygwin --host=x86_64-pc-cygwin --target=x86_64-pc-cygwin --without-libiconv-prefix --without-libintl-prefix --libexecdir=/usr/lib --with-gcc-major-version-only --enable-shared --enable-shared-libgcc --enable-static --enable-version-specific-runtime-libs --enable-bootstrap --enable-__cxa_atexit --with-dwarf2 --with-tune=generic --enable-languages=ada,c,c++,d,fortran,lto,objc,obj-c++,jit --enable-graphite --enable-threads=posix --enable-libatomic --enable-libgomp --enable-libquadmath --enable-libquadmath-support --disable-libssp --enable-libada --disable-symvers --disable-multilib --with-gnu-ld --with-gnu-as --with-cloog-include=/usr/include/cloog-isl --without-libiconv-prefix --without-libintl-prefix --with-system-zlib --enable-linker-build-id --with-default-libstdcxx-abi=gcc4-compatible --enable-libstdcxx-filesystem-ts]
         ignore line: [Thread model: posix]
-        ignore line: [InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin]
-        link line: [ "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld" -demangle -lto_library /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib -dynamic -arch x86_64 -platform_version macos 12.7.0 13.1 -syslibroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -o cmTC_81ad8 -search_paths_first -headerpad_max_install_names -v CMakeFiles/cmTC_81ad8.dir/CMakeCXXCompilerABI.cpp.o -lc++ -lSystem /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/lib/darwin/libclang_rt.osx.a]
-          arg [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld] ==> ignore
-          arg [-demangle] ==> ignore
-          arg [-lto_library] ==> ignore, skip following value
-          arg [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib] ==> skip value of -lto_library
-          arg [-dynamic] ==> ignore
-          arg [-arch] ==> ignore
-          arg [x86_64] ==> ignore
-          arg [-platform_version] ==> ignore
-          arg [macos] ==> ignore
-          arg [12.7.0] ==> ignore
-          arg [13.1] ==> ignore
-          arg [-syslibroot] ==> ignore
-          arg [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk] ==> ignore
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 11.4.0 (GCC) ]
+        ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-pc-cygwin/11/:/usr/lib/gcc/x86_64-pc-cygwin/11/:/usr/lib/gcc/x86_64-pc-cygwin/:/usr/lib/gcc/x86_64-pc-cygwin/11/:/usr/lib/gcc/x86_64-pc-cygwin/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/bin/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-cygwin/11/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib/../lib/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib/:/usr/lib/gcc/x86_64-pc-cygwin/11/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_33b84.exe' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_33b84.']
+        link line: [ /usr/lib/gcc/x86_64-pc-cygwin/11/collect2.exe -plugin /usr/lib/gcc/x86_64-pc-cygwin/11/cyglto_plugin.dll -plugin-opt=/usr/lib/gcc/x86_64-pc-cygwin/11/lto-wrapper.exe -plugin-opt=-fresolution=/tmp/ccfZdhYC.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lcygwin -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id -m i386pep --wrap _Znwm --wrap _Znam --wrap _ZdlPv --wrap _ZdaPv --wrap _ZnwmRKSt9nothrow_t --wrap _ZnamRKSt9nothrow_t --wrap _ZdlPvRKSt9nothrow_t --wrap _ZdaPvRKSt9nothrow_t -Bdynamic --dll-search-prefix=cyg --tsaware -o cmTC_33b84.exe /usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/crt0.o /usr/lib/gcc/x86_64-pc-cygwin/11/crtbegin.o -L/usr/lib/gcc/x86_64-pc-cygwin/11 -L/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib/../lib -L/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib -L/usr/lib/gcc/x86_64-pc-cygwin/11/../../.. CMakeFiles/cmTC_33b84.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_33b84.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lgcc_s -lgcc -lcygwin -ladvapi32 -lshell32 -luser32 -lkernel32 -lgcc_s -lgcc /usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/default-manifest.o /usr/lib/gcc/x86_64-pc-cygwin/11/crtend.o]
+          arg [/usr/lib/gcc/x86_64-pc-cygwin/11/collect2.exe] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [/usr/lib/gcc/x86_64-pc-cygwin/11/cyglto_plugin.dll] ==> ignore
+          arg [-plugin-opt=/usr/lib/gcc/x86_64-pc-cygwin/11/lto-wrapper.exe] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/ccfZdhYC.res] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lcygwin] ==> ignore
+          arg [-plugin-opt=-pass-through=-ladvapi32] ==> ignore
+          arg [-plugin-opt=-pass-through=-lshell32] ==> ignore
+          arg [-plugin-opt=-pass-through=-luser32] ==> ignore
+          arg [-plugin-opt=-pass-through=-lkernel32] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [--build-id] ==> ignore
+          arg [-m] ==> ignore
+          arg [i386pep] ==> ignore
+          arg [--wrap] ==> ignore
+          arg [_Znwm] ==> ignore
+          arg [--wrap] ==> ignore
+          arg [_Znam] ==> ignore
+          arg [--wrap] ==> ignore
+          arg [_ZdlPv] ==> ignore
+          arg [--wrap] ==> ignore
+          arg [_ZdaPv] ==> ignore
+          arg [--wrap] ==> ignore
+          arg [_ZnwmRKSt9nothrow_t] ==> ignore
+          arg [--wrap] ==> ignore
+          arg [_ZnamRKSt9nothrow_t] ==> ignore
+          arg [--wrap] ==> ignore
+          arg [_ZdlPvRKSt9nothrow_t] ==> ignore
+          arg [--wrap] ==> ignore
+          arg [_ZdaPvRKSt9nothrow_t] ==> ignore
+          arg [-Bdynamic] ==> search dynamic
+          arg [--dll-search-prefix=cyg] ==> ignore
+          arg [--tsaware] ==> ignore
           arg [-o] ==> ignore
-          arg [cmTC_81ad8] ==> ignore
-          arg [-search_paths_first] ==> ignore
-          arg [-headerpad_max_install_names] ==> ignore
-          arg [-v] ==> ignore
-          arg [CMakeFiles/cmTC_81ad8.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
-          arg [-lc++] ==> lib [c++]
-          arg [-lSystem] ==> lib [System]
-          arg [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/lib/darwin/libclang_rt.osx.a] ==> lib [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/lib/darwin/libclang_rt.osx.a]
-        Library search paths: [;/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/lib]
-        Framework search paths: [;/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/System/Library/Frameworks/]
-        remove lib [System]
-        remove lib [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/lib/darwin/libclang_rt.osx.a]
-        collapse library dir [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/lib] ==> [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/lib]
-        collapse framework dir [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/System/Library/Frameworks/] ==> [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/System/Library/Frameworks]
-        implicit libs: [c++]
-        implicit objs: []
-        implicit dirs: [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/lib]
-        implicit fwks: [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/System/Library/Frameworks]
+          arg [cmTC_33b84.exe] ==> ignore
+          arg [/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/crt0.o] ==> obj [/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/crt0.o]
+          arg [/usr/lib/gcc/x86_64-pc-cygwin/11/crtbegin.o] ==> obj [/usr/lib/gcc/x86_64-pc-cygwin/11/crtbegin.o]
+          arg [-L/usr/lib/gcc/x86_64-pc-cygwin/11] ==> dir [/usr/lib/gcc/x86_64-pc-cygwin/11]
+          arg [-L/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib/../lib] ==> dir [/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib/../lib]
+          arg [-L/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib] ==> dir [/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib]
+          arg [-L/lib/../lib] ==> dir [/lib/../lib]
+          arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+          arg [-L/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib] ==> dir [/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib]
+          arg [-L/usr/lib/gcc/x86_64-pc-cygwin/11/../../..] ==> dir [/usr/lib/gcc/x86_64-pc-cygwin/11/../../..]
+          arg [CMakeFiles/cmTC_33b84.dir/CMakeCXXCompilerABI.cpp.obj] ==> ignore
+          arg [--out-implib] ==> ignore
+          arg [libcmTC_33b84.dll.a] ==> ignore
+          arg [--major-image-version] ==> ignore
+          arg [0] ==> ignore
+          arg [--minor-image-version] ==> ignore
+          arg [0] ==> ignore
+          arg [-lstdc++] ==> lib [stdc++]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [-lcygwin] ==> lib [cygwin]
+          arg [-ladvapi32] ==> lib [advapi32]
+          arg [-lshell32] ==> lib [shell32]
+          arg [-luser32] ==> lib [user32]
+          arg [-lkernel32] ==> lib [kernel32]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/default-manifest.o] ==> obj [/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/default-manifest.o]
+          arg [/usr/lib/gcc/x86_64-pc-cygwin/11/crtend.o] ==> obj [/usr/lib/gcc/x86_64-pc-cygwin/11/crtend.o]
+        collapse obj [/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/crt0.o] ==> [/usr/lib/crt0.o]
+        collapse obj [/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib/default-manifest.o] ==> [/usr/lib/default-manifest.o]
+        collapse library dir [/usr/lib/gcc/x86_64-pc-cygwin/11] ==> [/usr/lib/gcc/x86_64-pc-cygwin/11]
+        collapse library dir [/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib/../lib] ==> [/usr/x86_64-pc-cygwin/lib]
+        collapse library dir [/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../lib] ==> [/usr/lib]
+        collapse library dir [/lib/../lib] ==> [/lib]
+        collapse library dir [/usr/lib/../lib] ==> [/usr/lib]
+        collapse library dir [/usr/lib/gcc/x86_64-pc-cygwin/11/../../../../x86_64-pc-cygwin/lib] ==> [/usr/x86_64-pc-cygwin/lib]
+        collapse library dir [/usr/lib/gcc/x86_64-pc-cygwin/11/../../..] ==> [/usr/lib]
+        implicit libs: [stdc++;gcc_s;gcc;cygwin;advapi32;shell32;user32;kernel32;gcc_s;gcc]
+        implicit objs: [/usr/lib/crt0.o;/usr/lib/gcc/x86_64-pc-cygwin/11/crtbegin.o;/usr/lib/default-manifest.o;/usr/lib/gcc/x86_64-pc-cygwin/11/crtend.o]
+        implicit dirs: [/usr/lib/gcc/x86_64-pc-cygwin/11;/usr/x86_64-pc-cygwin/lib;/usr/lib;/lib]
+        implicit fwks: []
       
       
 ...

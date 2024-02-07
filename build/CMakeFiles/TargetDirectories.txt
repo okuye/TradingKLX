@@ -1,3 +1,5 @@
-/Users/olakunlekuye/Documents/GitHub/TradingKLX/build/CMakeFiles/TradingKLX.dir
-/Users/olakunlekuye/Documents/GitHub/TradingKLX/build/CMakeFiles/edit_cache.dir
-/Users/olakunlekuye/Documents/GitHub/TradingKLX/build/CMakeFiles/rebuild_cache.dir
+C:/Users/User/source/repos/TradingKLX/build/CMakeFiles/TradingKLX.dir
+C:/Users/User/source/repos/TradingKLX/build/CMakeFiles/edit_cache.dir
+C:/Users/User/source/repos/TradingKLX/build/CMakeFiles/rebuild_cache.dir
+C:/Users/User/source/repos/TradingKLX/build/_deps/nlohmann_json-build/CMakeFiles/edit_cache.dir
+C:/Users/User/source/repos/TradingKLX/build/_deps/nlohmann_json-build/CMakeFiles/rebuild_cache.dir

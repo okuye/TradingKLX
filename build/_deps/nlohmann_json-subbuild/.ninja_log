@@ -1,0 +1,21 @@
+# ninja log v5
+3	81	7290012713979847	nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-mkdir	3df5e3f692e5e110
+3	81	7290012713979847	C:/Users/User/source/repos/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-mkdir	3df5e3f692e5e110
+82	15174	7290012864925703	nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-download	7edd1f4ff8beb46a
+82	15174	7290012864925703	C:/Users/User/source/repos/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-download	7edd1f4ff8beb46a
+15174	15357	0	nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-update	8c9793935d767fc6
+15174	15357	0	C:/Users/User/source/repos/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-update	8c9793935d767fc6
+15357	15432	7290012867581983	nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-patch	2c1f202888f40158
+15357	15432	7290012867581983	C:/Users/User/source/repos/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-patch	2c1f202888f40158
+15432	15506	7290012868363385	nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-configure	ee81d130079c1ed5
+15432	15506	7290012868363385	C:/Users/User/source/repos/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-configure	ee81d130079c1ed5
+15506	15583	7290012868988200	nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-build	795e39408ab141af
+15506	15583	7290012868988200	C:/Users/User/source/repos/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-build	795e39408ab141af
+15583	15666	7290012869925720	nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-install	418088fbcf6777f
+15583	15666	7290012869925720	C:/Users/User/source/repos/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-install	418088fbcf6777f
+15666	15736	7290012870550790	nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-test	8598f24be2a5867d
+15666	15736	7290012870550790	C:/Users/User/source/repos/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-test	8598f24be2a5867d
+15736	15839	7290012871644455	CMakeFiles/nlohmann_json-populate-complete	15fa6202f1404caf
+15736	15839	7290012871644455	nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-done	15fa6202f1404caf
+15736	15839	7290012871644455	C:/Users/User/source/repos/TradingKLX/build/_deps/nlohmann_json-subbuild/CMakeFiles/nlohmann_json-populate-complete	15fa6202f1404caf
+15736	15839	7290012871644455	C:/Users/User/source/repos/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-done	15fa6202f1404caf
