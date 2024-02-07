@@ -17,6 +17,79 @@ using namespace std;
 #include <algorithm> // For std::max
 #include <numeric> // For std::accumulate
 #include <cmath>   // For std::sqrt
+#include <mongocxx/client.hpp>
+#include <mongocxx/instance.hpp>
+#include <nlohmann/json.hpp> // Include JSON library header
+
+
+
+bool useMongoDB() {
+    // Example of checking an environment variable
+    const char* useMongoEnv = std::getenv("USE_MONGO_DB");
+    return useMongoEnv && std::string(useMongoEnv) == "true";
+}
+
+
+std::string fetchData(const std::string& apiKey, const std::string& function, const std::string& from_symbol, const std::string& to_symbol) {
+    if (useMongoDB()) {
+        // Fetch data from MongoDB
+        return fetchDataFromMongo("databaseName", "collectionName");
+    } else {
+        // Fetch live data from Alpha Vantage
+        return fetchDataFromAlphaVantage(apiKey, function, from_symbol, to_symbol);
+    }
+}
+
+
+void storeDataInMongo(const std::string& jsonData) {
+    // Convert jsonData to BSON and store in MongoDB
+    saveDataToMongo(client, "klx", "fxTrade", jsonData);
+}
+
+// Define a structure to hold the price data for each interval
+struct PriceData {
+    double open;
+    double high;
+    double low;
+    double close;
+    std::string timestamp;
+};
+
+void processData(const std::string& jsonData) {
+    // Parse the JSON data
+    auto j = nlohmann::json::parse(jsonData);
+
+    // Access the "Time Series FX (5min)" part of the JSON
+    const auto& timeSeries = j["Time Series FX (5min)"];
+
+    // Container to hold parsed data
+    std::vector<PriceData> priceData;
+
+    // Iterate through each time interval in the time series
+    for (auto& item : timeSeries.items()) {
+        PriceData data;
+        data.timestamp = item.key(); // The key is the timestamp
+        data.open = std::stod(item.value()["1. open"].get<std::string>());
+        data.high = std::stod(item.value()["2. high"].get<std::string>());
+        data.low = std::stod(item.value()["3. low"].get<std::string>());
+        data.close = std::stod(item.value()["4. close"].get<std::string>());
+
+        // Add the extracted data to the container
+        priceData.push_back(data);
+    }
+
+    // Example: Print out the parsed data
+    for (const auto& data : priceData) {
+        std::cout << "Timestamp: " << data.timestamp
+                  << ", Open: " << data.open
+                  << ", High: " << data.high
+                  << ", Low: " << data.low
+                  << ", Close: " << data.close << std::endl;
+    }
+
+    // Here, you can further process the priceData, such as calculating technical indicators or generating signals
+}
+
 
 
 // Memoization structure for Ichimoku
@@ -473,15 +546,32 @@ void integrateRiskManagement(
 	}
 }
 
-
+	//https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=EUR&to_symbol=USD&outputsize=full&apikey=demo
 int main() {
     // Your API key and the function and symbol you want to query
-    std::string apiKey = "YOUR_API_KEY"; // Replace with your actual API key
-    std::string function = "TIME_SERIES_DAILY";
-    std::string symbol = "IBM"; // Example symbol, replace with your desired symbol
+    std::string apiKey = "42XW1WPYAK910VR7"; // Replace with your actual API key
+    std::string function = "FX_INTRADAY";
+    std::string from_symbol = "EUR"; // Example symbol, replace with your desired symbol
+	std::string to_symbol = "USD"; // Example symbol, replace with your desired symbol
+
+
+    // Initialize MongoDB instance and client if needed
+    mongocxx::instance instance{};
+    mongocxx::client client{mongocxx::uri{"mongodb://localhost:27017"}};
+
+    // Fetch data based on configuration
+    std::string data = fetchData("yourApiKey", "FX_INTRADAY", "EUR", "USD");
+
+    // Process the fetched data
+    processData(data);
+
+    // Optionally, store data in MongoDB for future use
+    if (!useMongoDB()) {  // Check if we fetched live data
+        storeDataInMongo(data);
+    }
 
     // Fetch the JSON data from Alpha Vantage
-    std::string jsonData = fetchDataFromAlphaVantage(apiKey, function, symbol);
+    std::string jsonData = fetchDataFromAlphaVantage(apiKey, function, from_symbol, to_symbol);
     if (jsonData.empty()) {
         std::cerr << "Failed to fetch data from Alpha Vantage." << std::endl;
         return 1;
@@ -527,52 +617,4 @@ int main() {
 
     return 0;
 }
-
-
-// int main() {
-// 	// Your API key and the function and symbol you want to query
-// 	std::string apiKey = "YOUR_API_KEY"; // Replace with your actual API key
-// 	std::string function = "TIME_SERIES_DAILY";
-// 	std::string symbol = "IBM"; // Example symbol, replace with your desired symbol
-
-// 	// Fetch the JSON data from Alpha Vantage
-// 	std::string jsonData = fetchDataFromAlphaVantage(apiKey, function, symbol);
-// 	if (jsonData.empty()) {
-// 		std::cerr << "Failed to fetch data from Alpha Vantage." << std::endl;
-// 		return 1;
-// 	}
-
-// 	// Parse the JSON data to extract high, low, and close prices
-// 	std::vector<double> closePrices, highPrices, lowPrices;
-// 	std::tie(highPrices, lowPrices, closePrices) = parseJsonForPrices(jsonData);
-
-// 	// Calculate necessary indicators and generate trading signals
-// 	// (Your indicator calculations and signal generation logic here)
-
-// 	// Define your trading strategy parameters
-// 	double accountBalance = 10000.0; // Example account balance
-// 	double riskPerTrade = 0.01; // Risk 1% of account balance per trade
-// 	double stopLossMultiplier = 3.0; // Set stop-loss at 3x ATR below the entry price
-
-// 	// Determine entry prices based on your trading signals
-// 	// (You need to define how you determine entryPrices based on your signals)
-// 	std::vector<double> entryPrices; // Populate this based on your buy signals
-
-// 	// Call the risk management function with all required parameters
-// 	integrateRiskManagement(
-// 		highPrices,
-// 		lowPrices,
-// 		closePrices,
-// 		entryPrices,
-// 		accountBalance,
-// 		riskPerTrade,
-// 		stopLossMultiplier
-// 	);
-
-// 	// Based on the output of risk management, make final decisions and execute trades
-// 	// (Your trade execution logic here)
-
-// 	return 0;
-// }
-
 

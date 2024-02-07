@@ -3,11 +3,32 @@
 #include <tuple>
 
 
+// std::tuple<std::vector<double>, std::vector<double>, std::vector<double>> parseJsonForPrices(const std::string& jsonData) {
+//     std::vector<double> highPrices, lowPrices, closePrices;
+
+//     auto j = nlohmann::json::parse(jsonData);
+//     const auto& timeSeries = j["Time Series (Daily)"];
+
+//     for (auto it = timeSeries.begin(); it != timeSeries.end(); ++it) {
+//         highPrices.push_back(std::stod(it.value()["2. high"].get<std::string>()));
+//         lowPrices.push_back(std::stod(it.value()["3. low"].get<std::string>()));
+//         closePrices.push_back(std::stod(it.value()["4. close"].get<std::string>()));
+//     }
+
+//     return std::make_tuple(highPrices, lowPrices, closePrices);
+// }
+
+
+#include "JSONParser.h"
+#include <nlohmann/json.hpp>
+#include <tuple>
+
+// Adapt this function to parse the FX intraday data structure
 std::tuple<std::vector<double>, std::vector<double>, std::vector<double>> parseJsonForPrices(const std::string& jsonData) {
     std::vector<double> highPrices, lowPrices, closePrices;
 
     auto j = nlohmann::json::parse(jsonData);
-    const auto& timeSeries = j["Time Series (Daily)"];
+    const auto& timeSeries = j["Time Series FX (5min)"];
 
     for (auto it = timeSeries.begin(); it != timeSeries.end(); ++it) {
         highPrices.push_back(std::stod(it.value()["2. high"].get<std::string>()));
@@ -17,6 +38,7 @@ std::tuple<std::vector<double>, std::vector<double>, std::vector<double>> parseJ
 
     return std::make_tuple(highPrices, lowPrices, closePrices);
 }
+
 
 
 // Function to parse JSON and extract close prices
