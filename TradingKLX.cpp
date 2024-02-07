@@ -18,6 +18,57 @@ using namespace std;
 #include <numeric> // For std::accumulate
 #include <cmath>   // For std::sqrt
 
+
+// Memoization structure for Ichimoku
+struct IchimokuMemo {
+    std::unordered_map<int, double> tenkanSenMemo;
+    std::unordered_map<int, double> kijunSenMemo;
+    std::unordered_map<int, double> high52Memo;
+    std::unordered_map<int, double> low52Memo;
+};
+
+// Function to calculate Tenkan-sen (considering it's already implemented)
+double calculateTenkanSen(const std::vector<double>& highs, const std::vector<double>& lows, int period, int index, IchimokuMemo& memo) {
+    if (memo.tenkanSenMemo.find(index) == memo.tenkanSenMemo.end()) {
+        // Calculate Tenkan-sen as the average of the highest high and the lowest low over the last 'period' periods
+        auto highIt = std::max_element(highs.begin() + index - period + 1, highs.begin() + index + 1);
+        auto lowIt = std::min_element(lows.begin() + index - period + 1, lows.begin() + index + 1);
+        memo.tenkanSenMemo[index] = (*highIt + *lowIt) / 2.0;
+    }
+    return memo.tenkanSenMemo[index];
+}
+
+// Function to calculate Kijun-sen (considering it's already implemented)
+double calculateKijunSen(const std::vector<double>& highs, const std::vector<double>& lows, int period, int index, IchimokuMemo& memo) {
+    if (memo.kijunSenMemo.find(index) == memo.kijunSenMemo.end()) {
+        // Calculate Kijun-sen as the average of the highest high and the lowest low over the last 'period' periods
+        auto highIt = std::max_element(highs.begin() + index - period + 1, highs.begin() + index + 1);
+        auto lowIt = std::min_element(lows.begin() + index - period + 1, lows.begin() + index + 1);
+        memo.kijunSenMemo[index] = (*highIt + *lowIt) / 2.0;
+    }
+    return memo.kijunSenMemo[index];
+}
+
+// Function to calculate Senkou Span A with memoization
+double calculateSenkouSpanA(int index, IchimokuMemo& memo) {
+    // Senkou Span A is the average of Tenkan-sen and Kijun-sen, plotted 26 periods ahead
+    // Assume that Tenkan-sen and Kijun-sen are already calculated and stored in the memo
+    return (memo.tenkanSenMemo[index] + memo.kijunSenMemo[index]) / 2.0;
+}
+
+// Function to calculate Senkou Span B with memoization
+double calculateSenkouSpanB(const std::vector<double>& highs, const std::vector<double>& lows, int index, IchimokuMemo& memo) {
+    if (memo.high52Memo.find(index) == memo.high52Memo.end() || memo.low52Memo.find(index) == memo.low52Memo.end()) {
+        // Calculate the highest high and the lowest low over the last 52 periods
+        auto highIt = std::max_element(highs.begin() + index - 51, highs.begin() + index + 1); // 52 periods including the current
+        auto lowIt = std::min_element(lows.begin() + index - 51, lows.begin() + index + 1);
+        memo.high52Memo[index] = *highIt;
+        memo.low52Memo[index] = *lowIt;
+    }
+    // Senkou Span B is the average of the highest high and the lowest low over the last 52 periods, plotted 26 periods ahead
+    return (memo.high52Memo[index] + memo.low52Memo[index]) / 2.0;
+}
+
 // Function to calculate SMA; can also be memoized if called frequently with the same parameters
 double calculateSMA(const std::vector<double>& data, int start, int end) {
     double sum = std::accumulate(data.begin() + start, data.begin() + end, 0.0);
@@ -422,50 +473,106 @@ void integrateRiskManagement(
 	}
 }
 
+
 int main() {
-	// Your API key and the function and symbol you want to query
-	std::string apiKey = "YOUR_API_KEY"; // Replace with your actual API key
-	std::string function = "TIME_SERIES_DAILY";
-	std::string symbol = "IBM"; // Example symbol, replace with your desired symbol
+    // Your API key and the function and symbol you want to query
+    std::string apiKey = "YOUR_API_KEY"; // Replace with your actual API key
+    std::string function = "TIME_SERIES_DAILY";
+    std::string symbol = "IBM"; // Example symbol, replace with your desired symbol
 
-	// Fetch the JSON data from Alpha Vantage
-	std::string jsonData = fetchDataFromAlphaVantage(apiKey, function, symbol);
-	if (jsonData.empty()) {
-		std::cerr << "Failed to fetch data from Alpha Vantage." << std::endl;
-		return 1;
-	}
+    // Fetch the JSON data from Alpha Vantage
+    std::string jsonData = fetchDataFromAlphaVantage(apiKey, function, symbol);
+    if (jsonData.empty()) {
+        std::cerr << "Failed to fetch data from Alpha Vantage." << std::endl;
+        return 1;
+    }
 
-	// Parse the JSON data to extract high, low, and close prices
-	std::vector<double> closePrices, highPrices, lowPrices;
-	std::tie(highPrices, lowPrices, closePrices) = parseJsonForPrices(jsonData);
+    // Parse the JSON data to extract high, low, and close prices
+    std::vector<double> closePrices, highPrices, lowPrices;
+    std::tie(highPrices, lowPrices, closePrices) = parseJsonForPrices(jsonData);
 
-	// Calculate necessary indicators and generate trading signals
-	// (Your indicator calculations and signal generation logic here)
+    // Define your trading strategy parameters
+    double accountBalance = 10000.0; // Example account balance
+    double riskPerTrade = 0.01; // Risk 1% of account balance per trade
+    double stopLossMultiplier = 3.0; // Set stop-loss at 3x ATR below the entry price
 
-	// Define your trading strategy parameters
-	double accountBalance = 10000.0; // Example account balance
-	double riskPerTrade = 0.01; // Risk 1% of account balance per trade
-	double stopLossMultiplier = 3.0; // Set stop-loss at 3x ATR below the entry price
+    // Memoization structures
+    std::unordered_map<std::string, double> smaMemo;
+    std::unordered_map<std::string, std::vector<double>> atrMemo;
+    BollingerBandsMemo bbMemo;
+    IchimokuMemo ichimokuMemo;
 
-	// Determine entry prices based on your trading signals
-	// (You need to define how you determine entryPrices based on your signals)
-	std::vector<double> entryPrices; // Populate this based on your buy signals
+    // Calculate necessary indicators with memoization
+    std::vector<double> sma50 = calculateSMAWithMemoization(closePrices, 50, smaMemo);
+    std::vector<double> atr = calculateATRWithMemoization(highPrices, lowPrices, closePrices, 14, atrMemo);
+    std::vector<double> bbUpper, bbMiddle, bbLower;
+    calculateBollingerBandsWithMemoization(closePrices, 20, 2, bbUpper, bbMiddle, bbLower, bbMemo);
 
-	// Call the risk management function with all required parameters
-	integrateRiskManagement(
-		highPrices,
-		lowPrices,
-		closePrices,
-		entryPrices,
-		accountBalance,
-		riskPerTrade,
-		stopLossMultiplier
-	);
+    // Determine entry prices based on your trading signals (implementation depends on your strategy)
+    std::vector<double> entryPrices; // Populate this based on your buy signals
 
-	// Based on the output of risk management, make final decisions and execute trades
-	// (Your trade execution logic here)
+    // Call the risk management function with all required parameters
+    integrateRiskManagement(
+        highPrices,
+        lowPrices,
+        closePrices,
+        entryPrices,
+        accountBalance,
+        riskPerTrade,
+        stopLossMultiplier
+    );
 
-	return 0;
+    // Based on the output of risk management, make final decisions and execute trades
+    // (Your trade execution logic here)
+
+    return 0;
 }
+
+
+// int main() {
+// 	// Your API key and the function and symbol you want to query
+// 	std::string apiKey = "YOUR_API_KEY"; // Replace with your actual API key
+// 	std::string function = "TIME_SERIES_DAILY";
+// 	std::string symbol = "IBM"; // Example symbol, replace with your desired symbol
+
+// 	// Fetch the JSON data from Alpha Vantage
+// 	std::string jsonData = fetchDataFromAlphaVantage(apiKey, function, symbol);
+// 	if (jsonData.empty()) {
+// 		std::cerr << "Failed to fetch data from Alpha Vantage." << std::endl;
+// 		return 1;
+// 	}
+
+// 	// Parse the JSON data to extract high, low, and close prices
+// 	std::vector<double> closePrices, highPrices, lowPrices;
+// 	std::tie(highPrices, lowPrices, closePrices) = parseJsonForPrices(jsonData);
+
+// 	// Calculate necessary indicators and generate trading signals
+// 	// (Your indicator calculations and signal generation logic here)
+
+// 	// Define your trading strategy parameters
+// 	double accountBalance = 10000.0; // Example account balance
+// 	double riskPerTrade = 0.01; // Risk 1% of account balance per trade
+// 	double stopLossMultiplier = 3.0; // Set stop-loss at 3x ATR below the entry price
+
+// 	// Determine entry prices based on your trading signals
+// 	// (You need to define how you determine entryPrices based on your signals)
+// 	std::vector<double> entryPrices; // Populate this based on your buy signals
+
+// 	// Call the risk management function with all required parameters
+// 	integrateRiskManagement(
+// 		highPrices,
+// 		lowPrices,
+// 		closePrices,
+// 		entryPrices,
+// 		accountBalance,
+// 		riskPerTrade,
+// 		stopLossMultiplier
+// 	);
+
+// 	// Based on the output of risk management, make final decisions and execute trades
+// 	// (Your trade execution logic here)
+
+// 	return 0;
+// }
 
 
