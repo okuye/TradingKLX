@@ -27,130 +27,130 @@ ninja_required_version = 1.5
 #############################################
 # Include rules file.
 
-include CMakeFiles\rules.ninja
+include CMakeFiles/rules.ninja
 
 # =============================================================================
 
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = C$:\Users\User\source\repos\TradingKLX\build\_deps\nlohmann_json-subbuild\
+cmake_ninja_workdir = /Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-subbuild/
 
 #############################################
 # Utility command for nlohmann_json-populate
 
-build nlohmann_json-populate: phony CMakeFiles\nlohmann_json-populate CMakeFiles\nlohmann_json-populate-complete nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-done nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-build nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-configure nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-download nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-install nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-mkdir nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-patch nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-test nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-update
+build nlohmann_json-populate: phony CMakeFiles/nlohmann_json-populate CMakeFiles/nlohmann_json-populate-complete nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-done nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-build nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-configure nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-download nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-install nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-mkdir nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-patch nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-test nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-update
 
 
 #############################################
 # Utility command for edit_cache
 
-build CMakeFiles\edit_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\User\source\repos\TradingKLX\build\_deps\nlohmann_json-subbuild && "C:\Program Files\CMake\bin\cmake-gui.exe" -SC:\Users\User\source\repos\TradingKLX\build\_deps\nlohmann_json-subbuild -BC:\Users\User\source\repos\TradingKLX\build\_deps\nlohmann_json-subbuild"
+build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-subbuild && /usr/local/Cellar/cmake/3.28.2/bin/ccmake -S/Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-subbuild -B/Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-subbuild
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
 
-build edit_cache: phony CMakeFiles\edit_cache.util
+build edit_cache: phony CMakeFiles/edit_cache.util
 
 
 #############################################
 # Utility command for rebuild_cache
 
-build CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\User\source\repos\TradingKLX\build\_deps\nlohmann_json-subbuild && "C:\Program Files\CMake\bin\cmake.exe" --regenerate-during-build -SC:\Users\User\source\repos\TradingKLX\build\_deps\nlohmann_json-subbuild -BC:\Users\User\source\repos\TradingKLX\build\_deps\nlohmann_json-subbuild"
+build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-subbuild && /usr/local/Cellar/cmake/3.28.2/bin/cmake --regenerate-during-build -S/Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-subbuild -B/Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-subbuild
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
 
-build rebuild_cache: phony CMakeFiles\rebuild_cache.util
+build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 
 
 #############################################
-# Phony custom command for CMakeFiles\nlohmann_json-populate
+# Phony custom command for CMakeFiles/nlohmann_json-populate
 
-build CMakeFiles\nlohmann_json-populate | ${cmake_ninja_workdir}CMakeFiles\nlohmann_json-populate: phony CMakeFiles\nlohmann_json-populate-complete
+build CMakeFiles/nlohmann_json-populate | ${cmake_ninja_workdir}CMakeFiles/nlohmann_json-populate: phony CMakeFiles/nlohmann_json-populate-complete
 
 
 #############################################
-# Custom command for CMakeFiles\nlohmann_json-populate-complete
+# Custom command for CMakeFiles/nlohmann_json-populate-complete
 
-build CMakeFiles\nlohmann_json-populate-complete nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-done | ${cmake_ninja_workdir}CMakeFiles\nlohmann_json-populate-complete ${cmake_ninja_workdir}nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-done: CUSTOM_COMMAND nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-install nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-mkdir nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-download nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-update nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-patch nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-configure nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-build nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-install nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-test
-  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\User\source\repos\TradingKLX\build\_deps\nlohmann_json-subbuild && "C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/User/source/repos/TradingKLX/build/_deps/nlohmann_json-subbuild/CMakeFiles && "C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/User/source/repos/TradingKLX/build/_deps/nlohmann_json-subbuild/CMakeFiles/nlohmann_json-populate-complete && "C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/User/source/repos/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-done"
+build CMakeFiles/nlohmann_json-populate-complete nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-done | ${cmake_ninja_workdir}CMakeFiles/nlohmann_json-populate-complete ${cmake_ninja_workdir}nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-done: CUSTOM_COMMAND nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-install nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-mkdir nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-download nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-update nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-patch nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-configure nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-build nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-install nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-test
+  COMMAND = cd /Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-subbuild && /usr/local/Cellar/cmake/3.28.2/bin/cmake -E make_directory /Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-subbuild/CMakeFiles && /usr/local/Cellar/cmake/3.28.2/bin/cmake -E touch /Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-subbuild/CMakeFiles/nlohmann_json-populate-complete && /usr/local/Cellar/cmake/3.28.2/bin/cmake -E touch /Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-done
   DESC = Completed 'nlohmann_json-populate'
   restat = 1
 
 
 #############################################
-# Custom command for nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-build
+# Custom command for nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-build
 
-build nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-build | ${cmake_ninja_workdir}nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-build: CUSTOM_COMMAND nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-configure
-  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\User\source\repos\TradingKLX\build\_deps\nlohmann_json-build && "C:\Program Files\CMake\bin\cmake.exe" -E echo_append && "C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/User/source/repos/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-build"
+build nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-build | ${cmake_ninja_workdir}nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-build: CUSTOM_COMMAND nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-configure
+  COMMAND = cd /Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-build && /usr/local/Cellar/cmake/3.28.2/bin/cmake -E echo_append && /usr/local/Cellar/cmake/3.28.2/bin/cmake -E touch /Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-build
   DESC = No build step for 'nlohmann_json-populate'
   restat = 1
 
 
 #############################################
-# Custom command for nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-configure
+# Custom command for nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-configure
 
-build nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-configure | ${cmake_ninja_workdir}nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-configure: CUSTOM_COMMAND nlohmann_json-populate-prefix\tmp\nlohmann_json-populate-cfgcmd.txt nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-patch
-  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\User\source\repos\TradingKLX\build\_deps\nlohmann_json-build && "C:\Program Files\CMake\bin\cmake.exe" -E echo_append && "C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/User/source/repos/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-configure"
+build nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-configure | ${cmake_ninja_workdir}nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-configure: CUSTOM_COMMAND nlohmann_json-populate-prefix/tmp/nlohmann_json-populate-cfgcmd.txt nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-patch
+  COMMAND = cd /Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-build && /usr/local/Cellar/cmake/3.28.2/bin/cmake -E echo_append && /usr/local/Cellar/cmake/3.28.2/bin/cmake -E touch /Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-configure
   DESC = No configure step for 'nlohmann_json-populate'
   restat = 1
 
 
 #############################################
-# Custom command for nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-download
+# Custom command for nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-download
 
-build nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-download | ${cmake_ninja_workdir}nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-download: CUSTOM_COMMAND nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-gitinfo.txt nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-mkdir
-  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\User\source\repos\TradingKLX\build\_deps && "C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/User/source/repos/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/tmp/nlohmann_json-populate-gitclone.cmake && "C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/User/source/repos/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-download"
+build nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-download | ${cmake_ninja_workdir}nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-download: CUSTOM_COMMAND nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-gitinfo.txt nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-mkdir
+  COMMAND = cd /Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps && /usr/local/Cellar/cmake/3.28.2/bin/cmake -P /Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/tmp/nlohmann_json-populate-gitclone.cmake && /usr/local/Cellar/cmake/3.28.2/bin/cmake -E touch /Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-download
   DESC = Performing download step (git clone) for 'nlohmann_json-populate'
   pool = console
   restat = 1
 
 
 #############################################
-# Custom command for nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-install
+# Custom command for nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-install
 
-build nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-install | ${cmake_ninja_workdir}nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-install: CUSTOM_COMMAND nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-build
-  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\User\source\repos\TradingKLX\build\_deps\nlohmann_json-build && "C:\Program Files\CMake\bin\cmake.exe" -E echo_append && "C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/User/source/repos/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-install"
+build nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-install | ${cmake_ninja_workdir}nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-install: CUSTOM_COMMAND nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-build
+  COMMAND = cd /Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-build && /usr/local/Cellar/cmake/3.28.2/bin/cmake -E echo_append && /usr/local/Cellar/cmake/3.28.2/bin/cmake -E touch /Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-install
   DESC = No install step for 'nlohmann_json-populate'
   restat = 1
 
 
 #############################################
-# Custom command for nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-mkdir
+# Custom command for nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-mkdir
 
-build nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-mkdir | ${cmake_ninja_workdir}nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-mkdir: CUSTOM_COMMAND
-  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\User\source\repos\TradingKLX\build\_deps\nlohmann_json-subbuild && "C:\Program Files\CMake\bin\cmake.exe" -Dcfgdir= -P C:/Users/User/source/repos/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/tmp/nlohmann_json-populate-mkdirs.cmake && "C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/User/source/repos/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-mkdir"
+build nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-mkdir | ${cmake_ninja_workdir}nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-mkdir: CUSTOM_COMMAND
+  COMMAND = cd /Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-subbuild && /usr/local/Cellar/cmake/3.28.2/bin/cmake -Dcfgdir= -P /Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/tmp/nlohmann_json-populate-mkdirs.cmake && /usr/local/Cellar/cmake/3.28.2/bin/cmake -E touch /Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-mkdir
   DESC = Creating directories for 'nlohmann_json-populate'
   restat = 1
 
 
 #############################################
-# Custom command for nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-patch
+# Custom command for nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-patch
 
-build nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-patch | ${cmake_ninja_workdir}nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-patch: CUSTOM_COMMAND nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-patch-info.txt nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-update
-  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\User\source\repos\TradingKLX\build\_deps\nlohmann_json-subbuild && "C:\Program Files\CMake\bin\cmake.exe" -E echo_append && "C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/User/source/repos/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-patch"
+build nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-patch | ${cmake_ninja_workdir}nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-patch: CUSTOM_COMMAND nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-patch-info.txt nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-update
+  COMMAND = cd /Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-subbuild && /usr/local/Cellar/cmake/3.28.2/bin/cmake -E echo_append && /usr/local/Cellar/cmake/3.28.2/bin/cmake -E touch /Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-patch
   DESC = No patch step for 'nlohmann_json-populate'
   pool = console
   restat = 1
 
 
 #############################################
-# Custom command for nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-test
+# Custom command for nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-test
 
-build nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-test | ${cmake_ninja_workdir}nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-test: CUSTOM_COMMAND nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-install
-  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\User\source\repos\TradingKLX\build\_deps\nlohmann_json-build && "C:\Program Files\CMake\bin\cmake.exe" -E echo_append && "C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/User/source/repos/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-test"
+build nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-test | ${cmake_ninja_workdir}nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-test: CUSTOM_COMMAND nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-install
+  COMMAND = cd /Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-build && /usr/local/Cellar/cmake/3.28.2/bin/cmake -E echo_append && /usr/local/Cellar/cmake/3.28.2/bin/cmake -E touch /Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-test
   DESC = No test step for 'nlohmann_json-populate'
   restat = 1
 
 
 #############################################
-# Custom command for nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-update
+# Custom command for nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-update
 
-build nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-update | ${cmake_ninja_workdir}nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-update: CUSTOM_COMMAND nlohmann_json-populate-prefix\tmp\nlohmann_json-populate-gitupdate.cmake nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-update-info.txt nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_json-populate-download
-  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\User\source\repos\TradingKLX\build\_deps\nlohmann_json-src && "C:\Program Files\CMake\bin\cmake.exe" -Dcan_fetch=YES -P C:/Users/User/source/repos/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/tmp/nlohmann_json-populate-gitupdate.cmake"
+build nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-update | ${cmake_ninja_workdir}nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-update: CUSTOM_COMMAND nlohmann_json-populate-prefix/tmp/nlohmann_json-populate-gitupdate.cmake nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-update-info.txt nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-download
+  COMMAND = cd /Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-src && /usr/local/Cellar/cmake/3.28.2/bin/cmake -Dcan_fetch=YES -P /Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/tmp/nlohmann_json-populate-gitupdate.cmake
   DESC = Performing update step for 'nlohmann_json-populate'
   pool = console
 
@@ -163,7 +163,7 @@ build nlohmann_json-populate-prefix\src\nlohmann_json-populate-stamp\nlohmann_js
 # =============================================================================
 
 #############################################
-# Folder: C:/Users/User/source/repos/TradingKLX/build/_deps/nlohmann_json-subbuild
+# Folder: /Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-subbuild
 
 build all: phony nlohmann_json-populate
 
@@ -174,14 +174,14 @@ build all: phony nlohmann_json-populate
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | C$:\Program$ Files\CMake\share\cmake-3.28\Modules\CMakeDetermineSystem.cmake C$:\Program$ Files\CMake\share\cmake-3.28\Modules\CMakeGenericSystem.cmake C$:\Program$ Files\CMake\share\cmake-3.28\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files\CMake\share\cmake-3.28\Modules\CMakeSystem.cmake.in C$:\Program$ Files\CMake\share\cmake-3.28\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files\CMake\share\cmake-3.28\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files\CMake\share\cmake-3.28\Modules\ExternalProject.cmake C$:\Program$ Files\CMake\share\cmake-3.28\Modules\ExternalProject\PatchInfo.txt.in C$:\Program$ Files\CMake\share\cmake-3.28\Modules\ExternalProject\RepositoryInfo.txt.in C$:\Program$ Files\CMake\share\cmake-3.28\Modules\ExternalProject\UpdateInfo.txt.in C$:\Program$ Files\CMake\share\cmake-3.28\Modules\ExternalProject\cfgcmd.txt.in C$:\Program$ Files\CMake\share\cmake-3.28\Modules\ExternalProject\gitclone.cmake.in C$:\Program$ Files\CMake\share\cmake-3.28\Modules\ExternalProject\gitupdate.cmake.in C$:\Program$ Files\CMake\share\cmake-3.28\Modules\ExternalProject\mkdirs.cmake.in C$:\Program$ Files\CMake\share\cmake-3.28\Modules\ExternalProject\shared_internal_commands.cmake C$:\Program$ Files\CMake\share\cmake-3.28\Modules\Platform\Windows-Initialize.cmake C$:\Program$ Files\CMake\share\cmake-3.28\Modules\Platform\Windows.cmake C$:\Program$ Files\CMake\share\cmake-3.28\Modules\Platform\WindowsPaths.cmake CMakeCache.txt CMakeFiles\3.28.3\CMakeSystem.cmake CMakeLists.txt nlohmann_json-populate-prefix\tmp\nlohmann_json-populate-mkdirs.cmake
+build build.ninja: RERUN_CMAKE | /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeDetermineSystem.cmake /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeGenericSystem.cmake /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeInitializeConfigs.cmake /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeSystem.cmake.in /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeSystemSpecificInformation.cmake /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/ExternalProject.cmake /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/ExternalProject/PatchInfo.txt.in /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/ExternalProject/RepositoryInfo.txt.in /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/ExternalProject/UpdateInfo.txt.in /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/ExternalProject/cfgcmd.txt.in /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/ExternalProject/gitclone.cmake.in /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/ExternalProject/gitupdate.cmake.in /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/ExternalProject/mkdirs.cmake.in /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/ExternalProject/shared_internal_commands.cmake /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/Platform/Darwin-Initialize.cmake /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/Platform/Darwin.cmake /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.28.2/CMakeSystem.cmake CMakeLists.txt nlohmann_json-populate-prefix/tmp/nlohmann_json-populate-mkdirs.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build C$:\Program$ Files\CMake\share\cmake-3.28\Modules\CMakeDetermineSystem.cmake C$:\Program$ Files\CMake\share\cmake-3.28\Modules\CMakeGenericSystem.cmake C$:\Program$ Files\CMake\share\cmake-3.28\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files\CMake\share\cmake-3.28\Modules\CMakeSystem.cmake.in C$:\Program$ Files\CMake\share\cmake-3.28\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files\CMake\share\cmake-3.28\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files\CMake\share\cmake-3.28\Modules\ExternalProject.cmake C$:\Program$ Files\CMake\share\cmake-3.28\Modules\ExternalProject\PatchInfo.txt.in C$:\Program$ Files\CMake\share\cmake-3.28\Modules\ExternalProject\RepositoryInfo.txt.in C$:\Program$ Files\CMake\share\cmake-3.28\Modules\ExternalProject\UpdateInfo.txt.in C$:\Program$ Files\CMake\share\cmake-3.28\Modules\ExternalProject\cfgcmd.txt.in C$:\Program$ Files\CMake\share\cmake-3.28\Modules\ExternalProject\gitclone.cmake.in C$:\Program$ Files\CMake\share\cmake-3.28\Modules\ExternalProject\gitupdate.cmake.in C$:\Program$ Files\CMake\share\cmake-3.28\Modules\ExternalProject\mkdirs.cmake.in C$:\Program$ Files\CMake\share\cmake-3.28\Modules\ExternalProject\shared_internal_commands.cmake C$:\Program$ Files\CMake\share\cmake-3.28\Modules\Platform\Windows-Initialize.cmake C$:\Program$ Files\CMake\share\cmake-3.28\Modules\Platform\Windows.cmake C$:\Program$ Files\CMake\share\cmake-3.28\Modules\Platform\WindowsPaths.cmake CMakeCache.txt CMakeFiles\3.28.3\CMakeSystem.cmake CMakeLists.txt nlohmann_json-populate-prefix\tmp\nlohmann_json-populate-mkdirs.cmake: phony
+build /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeDetermineSystem.cmake /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeGenericSystem.cmake /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeInitializeConfigs.cmake /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeSystem.cmake.in /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeSystemSpecificInformation.cmake /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/ExternalProject.cmake /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/ExternalProject/PatchInfo.txt.in /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/ExternalProject/RepositoryInfo.txt.in /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/ExternalProject/UpdateInfo.txt.in /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/ExternalProject/cfgcmd.txt.in /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/ExternalProject/gitclone.cmake.in /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/ExternalProject/gitupdate.cmake.in /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/ExternalProject/mkdirs.cmake.in /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/ExternalProject/shared_internal_commands.cmake /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/Platform/Darwin-Initialize.cmake /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/Platform/Darwin.cmake /usr/local/Cellar/cmake/3.28.2/share/cmake/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.28.2/CMakeSystem.cmake CMakeLists.txt nlohmann_json-populate-prefix/tmp/nlohmann_json-populate-mkdirs.cmake: phony
 
 
 #############################################

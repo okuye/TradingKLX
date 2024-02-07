@@ -12,6 +12,136 @@ using namespace std;
 #include <deque>    
 #include <numeric> 
 #include <cmath>  
+#include <unordered_map>
+#include <string>
+#include <algorithm> // For std::max
+#include <numeric> // For std::accumulate
+#include <cmath>   // For std::sqrt
+
+// Function to calculate SMA; can also be memoized if called frequently with the same parameters
+double calculateSMA(const std::vector<double>& data, int start, int end) {
+    double sum = std::accumulate(data.begin() + start, data.begin() + end, 0.0);
+    return sum / (end - start);
+}
+
+// Function to calculate standard deviation
+double calculateStdDev(const std::vector<double>& data, int start, int end, double mean) {
+    double sum = 0.0;
+    for (int i = start; i < end; ++i) {
+        sum += (data[i] - mean) * (data[i] - mean);
+    }
+    return std::sqrt(sum / (end - start));
+}
+
+// Memoization structure for Bollinger Bands
+struct BollingerBandsMemo {
+    std::unordered_map<int, double> smaMemo;
+    std::unordered_map<int, double> stdDevMemo;
+};
+
+// Function to calculate Bollinger Bands with memoization
+void calculateBollingerBandsWithMemoization(const std::vector<double>& data, int window, double numStdDev, std::vector<double>& upperBand, std::vector<double>& middleBand, std::vector<double>& lowerBand, BollingerBandsMemo& memo) {
+    upperBand.resize(data.size());
+    middleBand.resize(data.size());
+    lowerBand.resize(data.size());
+
+    for (size_t i = window - 1; i < data.size(); ++i) {
+        double sma, stdDev;
+
+        // Check if SMA is already calculated for this window
+        if (memo.smaMemo.find(i) == memo.smaMemo.end()) {
+            sma = calculateSMA(data, i - window + 1, i + 1);
+            memo.smaMemo[i] = sma; // Store the calculated SMA
+        } else {
+            sma = memo.smaMemo[i];
+        }
+
+        // Check if standard deviation is already calculated for this window
+        if (memo.stdDevMemo.find(i) == memo.stdDevMemo.end()) {
+            stdDev = calculateStdDev(data, i - window + 1, i + 1, sma);
+            memo.stdDevMemo[i] = stdDev; // Store the calculated standard deviation
+        } else {
+            stdDev = memo.stdDevMemo[i];
+        }
+
+        // Calculate Bollinger Bands
+        middleBand[i] = sma;
+        upperBand[i] = sma + numStdDev * stdDev;
+        lowerBand[i] = sma - numStdDev * stdDev;
+    }
+}
+
+
+// Generate a unique key for the memoization map based on the window size
+std::string generateATRKey(int window) {
+    return "ATR-" + std::to_string(window);
+}
+
+// Function to calculate True Range
+double calculateTrueRange(double high, double low, double previousClose) {
+    return std::max({high - low, std::abs(high - previousClose), std::abs(low - previousClose)});
+}
+
+// Memoized ATR calculation function
+std::vector<double> calculateATRWithMemoization(const std::vector<double>& highs, const std::vector<double>& lows, const std::vector<double>& closes, int window, std::unordered_map<std::string, std::vector<double>>& memo) {
+    std::string key = generateATRKey(window);
+    auto it = memo.find(key);
+    if (it != memo.end()) {
+        // If ATR for this window size is already calculated, use it
+        return it->second;
+    }
+
+    std::vector<double> atr(highs.size(), 0.0);
+    double trSum = 0;
+    for (size_t i = 1; i < highs.size(); ++i) {
+        double tr = calculateTrueRange(highs[i], lows[i], closes[i - 1]);
+        trSum += tr;
+        if (i < window) continue; // Skip until we have enough data
+        if (i == window) {
+            atr[i] = trSum / window; // First ATR value is an average of the first 'window' TR values
+        } else {
+            // Subsequent ATR values are calculated using the previous ATR value
+            atr[i] = (atr[i - 1] * (window - 1) + tr) / window;
+        }
+    }
+
+    // Store the calculated ATR values in the memoization map
+    memo[key] = atr;
+    return atr;
+}
+
+
+// A helper function to generate a unique key for the memoization map
+std::string generateKey(int start, int window) {
+    return std::to_string(start) + "-" + std::to_string(window);
+}
+
+// Modified SMA function with memoization
+std::vector<double> calculateSMAWithMemoization(const std::vector<double>& data, int window, std::unordered_map<std::string, double>& memo) {
+    std::vector<double> sma;
+    if (data.empty() || window <= 0) return sma;
+
+    double sum = 0;
+    for (size_t i = 0; i < data.size(); ++i) {
+        sum += data[i];
+        if (i >= window - 1) {
+            std::string key = generateKey(i - window + 1, window);
+            auto it = memo.find(key);
+            if (it != memo.end()) {
+                // If the SMA for this window is already calculated, use it
+                sma.push_back(it->second);
+            } else {
+                // Otherwise, calculate, store in memo, and then use it
+                double avg = sum / window;
+                memo[key] = avg;
+                sma.push_back(avg);
+            }
+            sum -= data[i - window + 1];
+        }
+    }
+
+    return sma;
+}
 
 // Helper function to calculate Simple Moving Average (SMA)
 std::vector<double> calculateSMA(const std::vector<double>& data, int window) {
