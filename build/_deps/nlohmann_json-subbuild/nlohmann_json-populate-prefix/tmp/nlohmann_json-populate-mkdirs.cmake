@@ -4,19 +4,19 @@
 cmake_minimum_required(VERSION 3.5)
 
 file(MAKE_DIRECTORY
-  "/Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-src"
-  "/Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-build"
-  "/Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix"
-  "/Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/tmp"
-  "/Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp"
-  "/Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src"
-  "/Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp"
+  "C:/Users/User/source/repos/TradingKLX/build/_deps/nlohmann_json-src"
+  "C:/Users/User/source/repos/TradingKLX/build/_deps/nlohmann_json-build"
+  "C:/Users/User/source/repos/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix"
+  "C:/Users/User/source/repos/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/tmp"
+  "C:/Users/User/source/repos/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp"
+  "C:/Users/User/source/repos/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src"
+  "C:/Users/User/source/repos/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp"
 )
 
 set(configSubDirs )
 foreach(subDir IN LISTS configSubDirs)
-    file(MAKE_DIRECTORY "/Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/${subDir}")
+    file(MAKE_DIRECTORY "C:/Users/User/source/repos/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/${subDir}")
 endforeach()
 if(cfgdir)
-  file(MAKE_DIRECTORY "/Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp${cfgdir}") # cfgdir has leading slash
+  file(MAKE_DIRECTORY "C:/Users/User/source/repos/TradingKLX/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp${cfgdir}") # cfgdir has leading slash
 endif()
