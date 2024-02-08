@@ -1,12 +1,6 @@
 #include "AlphaVantageAPI.h"
-#include <string>
-#include <iostream>
 #include <curl/curl.h>
-#include <cstdlib> // For std::getenv
-
-// Suppress the specific warning for this section of code
-#pragma warning(push)
-#pragma warning(disable : 26812)
+#include <iostream>
 
 // Callback function to handle data received by libcurl
 size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* userp) {
@@ -14,28 +8,34 @@ size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* use
     return size * nmemb;
 }
 
-// Function to fetch data from Alpha Vantage
-std::string fetchDataFromAlphaVantage(const std::string& apiKey, const std::string& function, const std::string& from_symbol, const std::string& to_symbol) {
-    CURL* curl;
-    CURLcode res;
-    std::string readBuffer;
+AlphaVantageAPI::AlphaVantageAPI(const std::string& apiKey) : apiKey(apiKey) {}
 
-    curl = curl_easy_init();
+std::string AlphaVantageAPI::fetchData(const std::string& function, const std::string& from_symbol, const std::string& to_symbol, const std::string& interval) {
+    CURL* curl = curl_easy_init();
+    std::string readBuffer;
     if (curl) {
-        std::string url = "https://www.alphavantage.co/query?function=" + function + "&from_symbol=" + from_symbol + "&to_symbol=" + to_symbol + "&interval=5min&apikey=" + apiKey;
-        
+        std::string url = buildURL(function, from_symbol, to_symbol, interval);
         curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+        curl_easy_setopt(curl, CURLOPT_TIMEOUT, 30L); // Timeout for the request in seconds
 
-        res = curl_easy_perform(curl);
+        CURLcode res = curl_easy_perform(curl);
+        long http_code = 0;
+        curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
+        curl_easy_cleanup(curl);
+
         if (res != CURLE_OK) {
             std::cerr << "curl_easy_perform() failed: " << curl_easy_strerror(res) << std::endl;
+            return "";
+        } else if (http_code == 429) { // HTTP Too Many Requests
+            std::cerr << "API rate limit exceeded. Please try again later." << std::endl;
+            return "";
         }
-
-        curl_easy_cleanup(curl);
     }
     return readBuffer;
 }
-// Re-enable the warning after this section
-#pragma warning(pop)
+
+std::string AlphaVantageAPI::buildURL(const std::string& function, const std::string& from_symbol, const std::string& to_symbol, const std::string& interval) {
+    return "https://www.alphavantage.co/query?function=" + function + "&from_symbol=" + from_symbol + "&to_symbol=" + to_symbol + "&interval=" + interval + "&apikey=" + apiKey;
+}

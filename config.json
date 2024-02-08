@@ -1,0 +1,11 @@
+{
+    "useMongoDB": true,
+    "mongoDBUri": "mongodb://localhost:27017",
+    "apiKey": "42XW1WPYAK910VR7",
+    "function": "FX_INTRADAY",
+    "from_symbol": "EUR",
+    "to_symbol": "USD",
+    "dbName": "klx",
+    "collectionName": "fxTrade"
+  }
+  

@@ -4,11 +4,14 @@
 #include <string>
 #include <vector>
 #include <tuple>
+#include <nlohmann/json.hpp>
 
+class JSONParser {
+public:
+    static std::tuple<std::vector<double>, std::vector<double>, std::vector<double>> parseJsonForPrices(const std::string& jsonData, const std::string& timeSeriesKey = "Time Series FX (5min)");
 
-std::tuple<std::vector<double>, std::vector<double>, std::vector<double>> parseJsonForPrices(const std::string& jsonData);
-
-
-std::vector<double> parseJsonForClosePrices(const std::string& jsonData);
+private:
+    static bool validateJson(const nlohmann::json& j, const std::string& timeSeriesKey);
+};
 
 #endif // JSON_PARSER_H
