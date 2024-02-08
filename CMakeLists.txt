@@ -2,6 +2,7 @@
 
 project ("TradingKLX")
 
+
 # Set C++ standard to C++11. Adjust if your project needs a later standard like C++14, C++17, or C++20.
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
