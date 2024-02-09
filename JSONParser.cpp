@@ -1,44 +1,47 @@
 #include "JSONParser.h"
 #include <iostream>
 
-std::tuple<std::vector<double>, std::vector<double>, std::vector<double>> JSONParser::parseJsonForPrices(const std::string& jsonData, const std::string& timeSeriesKey) {
-    std::vector<double> highPrices, lowPrices, closePrices;
-    try {
-        auto j = nlohmann::json::parse(jsonData);
-        if (!validateJson(j, timeSeriesKey)) {
-            std::cerr << "Invalid JSON data or structure." << std::endl;
-            throw std::runtime_error("Invalid JSON data or structure.");
-        }
-
-        const auto& timeSeries = j[timeSeriesKey];
-        for (const auto& [key, value] : timeSeries.items()) {
-            highPrices.push_back(value["2. high"].get<double>());
-            lowPrices.push_back(value["3. low"].get<double>());
-            closePrices.push_back(value["4. close"].get<double>());
-        }
-    } catch (nlohmann::json::parse_error& e) {
-        std::cerr << "JSON parsing error: " << e.what() << std::endl;
-        throw;
-    } catch (nlohmann::json::type_error& e) {
-        std::cerr << "JSON type error: " << e.what() << std::endl;
-        throw;
-    } catch (std::exception& e) {
-        std::cerr << "Error processing JSON data: " << e.what() << std::endl;
-        throw;
-    }
-
-    return std::make_tuple(highPrices, lowPrices, closePrices);
+bool JSONParser::validateJson(const nlohmann::json& j, const std::string& key, const nlohmann::json::value_t expectedType) {
+    return j.contains(key) && j[key].type() == expectedType;
 }
 
-bool JSONParser::validateJson(const nlohmann::json& j, const std::string& timeSeriesKey) {
-    if (!j.contains(timeSeriesKey)) return false;
-    const auto& timeSeries = j[timeSeriesKey];
-    if (!timeSeries.is_object()) return false;
-
-    for (const auto& [key, value] : timeSeries.items()) {
-        if (!value.contains("2. high") || !value["2. high"].is_number()) return false;
-        if (!value.contains("3. low") || !value["3. low"].is_number()) return false;
-        if (!value.contains("4. close") || !value["4. close"].is_number()) return false;
+double JSONParser::extractValue(const nlohmann::json& data, const std::string& key) {
+    try {
+        if (data.contains(key) && data[key].is_number()) {
+            return data[key].get<double>();
+        } else if (data.contains(key) && data[key].is_string()) {
+            return std::stod(data[key].get<std::string>());
+        }
+        throw std::runtime_error("Invalid or missing field: " + key);
+    } catch (const std::exception& e) {
+        std::cerr << "Error extracting field '" << key << "': " << e.what() << std::endl;
+        throw;
     }
-    return true;
+}
+
+std::tuple<std::vector<double>, std::vector<double>, std::vector<double>> JSONParser::parseJsonForPrices(
+    const std::string& jsonData,
+    const std::string& timeSeriesKey,
+    const std::vector<std::string>& fields) {
+    
+    std::vector<double> fieldValues[fields.size()];
+    auto json = nlohmann::json::parse(jsonData);
+
+    if (!validateJson(json, timeSeriesKey, nlohmann::json::value_t::object)) {
+        throw std::runtime_error("Invalid JSON structure for key: " + timeSeriesKey);
+    }
+
+    const auto& timeSeries = json[timeSeriesKey];
+    for (const auto& [_, entry] : timeSeries.items()) {
+        for (size_t i = 0; i < fields.size(); ++i) {
+            try {
+                fieldValues[i].push_back(extractValue(entry, fields[i]));
+            } catch (const std::exception& e) {
+                std::cerr << "Skipping field '" << fields[i] << "' due to error: " << e.what() << std::endl;
+                // Optionally, continue to next field or handle the error as needed
+            }
+        }
+    }
+
+    return std::make_tuple(fieldValues[0], fieldValues[1], fieldValues[2]);
 }
