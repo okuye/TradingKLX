@@ -1,5 +1,4 @@
 ﻿cmake_minimum_required(VERSION 3.8)
-
 project("TradingKLX")
 
 # Set C++ standard
@@ -23,19 +22,22 @@ else()
     message(STATUS "Found CURL library: ${CURL_LIBRARIES}")
 endif()
 
-# Find TA-Lib headers and library
-find_path(TA_INCLUDE_DIR NAMES ta_libc.h PATHS /usr/include /usr/local/include)
-find_library(TA_LIBRARY NAMES ta_lib PATHS /usr/lib /usr/local/lib)
-
-if(NOT TA_INCLUDE_DIR OR NOT TA_LIBRARY)
-    message(FATAL_ERROR "TA-Lib not found")
-endif()
-
 # Add source to this project's executable
 add_executable(TradingKLX "TradingKLX.cpp" "TradingKLX.h" "AlphaVantageAPI.cpp" "JSONParser.cpp" "AlphaVantageAPI.h" "JSONParser.h")
 
 # Include directories for CURL and TA-Lib
-include_directories(${CURL_INCLUDE_DIRS} ${TA_INCLUDE_DIR})
+include_directories(
+    ${CURL_INCLUDE_DIRS}
+    /usr/local/opt/ta-lib/include
+    "/usr/local/include/mongocxx/v_noabi"
+    "/usr/local/include/bsoncxx/v_noabi"
+    "/usr/local/Cellar/mongo-cxx-driver/3.9.0/include/bsoncxx/v_noabi/bsoncxx/third_party/mnmlstc/core"  # Include the mnmlstc/core directory for the MongoDB C++ driver
+)
 
 # Link libraries to the executable
-target_link_libraries(TradingKLX ${CURL_LIBRARIES} nlohmann_json::nlohmann_json ${TA_LIBRARY})
+target_link_libraries(TradingKLX
+    ${CURL_LIBRARIES}
+    nlohmann_json::nlohmann_json
+    /usr/local/opt/ta-lib/lib/libta_lib.dylib  # Directly link against the TA-Lib library using the full path
+    # Add MongoDB C++ driver libraries here if they are not auto-detected
+)
