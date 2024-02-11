@@ -1,6 +1,5 @@
 #ifndef PRICEDATA_H
 #define PRICEDATA_H
-
 #include <string>
 
 struct PriceData {

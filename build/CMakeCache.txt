@@ -24,6 +24,9 @@ CMAKE_AR:FILEPATH=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDef
 // MinSizeRel ...
 CMAKE_BUILD_TYPE:STRING=
 
+//Enable/Disable color output during build.
+CMAKE_COLOR_MAKEFILE:BOOL=ON
+
 //CXX compiler
 CMAKE_CXX_COMPILER:FILEPATH=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++
 
@@ -141,8 +144,8 @@ CMAKE_INSTALL_SYSCONFDIR:PATH=etc
 //Path to a program.
 CMAKE_LINKER:FILEPATH=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld
 
-//Program used to build from build.ninja files.
-CMAKE_MAKE_PROGRAM:FILEPATH=/usr/local/bin/ninja
+//Path to a program.
+CMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/make
 
 //Flags used by the linker during the creation of modules during
 // all build types.
@@ -354,6 +357,15 @@ nlohmann_json_IS_TOP_LEVEL:STATIC=OFF
 nlohmann_json_SOURCE_DIR:STATIC=/Users/olakunlekuye/Documents/GitHub/TradingKLX/build/_deps/nlohmann_json-src
 
 //Path to a library.
+pkgcfg_lib_BSONCXX_bsoncxx:FILEPATH=/usr/local/Cellar/mongo-cxx-driver/3.9.0/lib/libbsoncxx.dylib
+
+//Path to a library.
+pkgcfg_lib_MONGOCXX_bsoncxx:FILEPATH=/usr/local/Cellar/mongo-cxx-driver/3.9.0/lib/libbsoncxx.dylib
+
+//Path to a library.
+pkgcfg_lib_MONGOCXX_mongocxx:FILEPATH=/usr/local/Cellar/mongo-cxx-driver/3.9.0/lib/libmongocxx.dylib
+
+//Path to a library.
 pkgcfg_lib_PC_CURL_curl:FILEPATH=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/lib/libcurl.tbd
 
 
@@ -361,6 +373,41 @@ pkgcfg_lib_PC_CURL_curl:FILEPATH=/Applications/Xcode.app/Contents/Developer/Plat
 # INTERNAL cache entries
 ########################
 
+BSONCXX_CFLAGS:INTERNAL=-I/usr/local/Cellar/mongo-cxx-driver/3.9.0/include/bsoncxx/v_noabi/bsoncxx/third_party/mnmlstc;-I/usr/local/Cellar/mongo-cxx-driver/3.9.0/include/bsoncxx/v_noabi;-I/usr/local/Cellar/mongo-cxx-driver/3.9.0/include
+BSONCXX_CFLAGS_I:INTERNAL=
+BSONCXX_CFLAGS_OTHER:INTERNAL=
+BSONCXX_FOUND:INTERNAL=1
+BSONCXX_INCLUDEDIR:INTERNAL=/usr/local/Cellar/mongo-cxx-driver/3.9.0/include
+BSONCXX_INCLUDE_DIRS:INTERNAL=/usr/local/Cellar/mongo-cxx-driver/3.9.0/include/bsoncxx/v_noabi/bsoncxx/third_party/mnmlstc;/usr/local/Cellar/mongo-cxx-driver/3.9.0/include/bsoncxx/v_noabi;/usr/local/Cellar/mongo-cxx-driver/3.9.0/include
+BSONCXX_LDFLAGS:INTERNAL=-L/usr/local/Cellar/mongo-cxx-driver/3.9.0/lib;-lbsoncxx
+BSONCXX_LDFLAGS_OTHER:INTERNAL=
+BSONCXX_LIBDIR:INTERNAL=/usr/local/Cellar/mongo-cxx-driver/3.9.0/lib
+BSONCXX_LIBRARIES:INTERNAL=bsoncxx
+BSONCXX_LIBRARY_DIRS:INTERNAL=/usr/local/Cellar/mongo-cxx-driver/3.9.0/lib
+BSONCXX_LIBS:INTERNAL=
+BSONCXX_LIBS_L:INTERNAL=
+BSONCXX_LIBS_OTHER:INTERNAL=
+BSONCXX_LIBS_PATHS:INTERNAL=
+BSONCXX_MODULE_NAME:INTERNAL=libbsoncxx
+BSONCXX_PREFIX:INTERNAL=/usr/local/Cellar/mongo-cxx-driver/3.9.0
+BSONCXX_STATIC_CFLAGS:INTERNAL=-I/usr/local/Cellar/mongo-cxx-driver/3.9.0/include/bsoncxx/v_noabi/bsoncxx/third_party/mnmlstc;-I/usr/local/Cellar/mongo-cxx-driver/3.9.0/include/bsoncxx/v_noabi;-I/usr/local/Cellar/mongo-cxx-driver/3.9.0/include
+BSONCXX_STATIC_CFLAGS_I:INTERNAL=
+BSONCXX_STATIC_CFLAGS_OTHER:INTERNAL=
+BSONCXX_STATIC_INCLUDE_DIRS:INTERNAL=/usr/local/Cellar/mongo-cxx-driver/3.9.0/include/bsoncxx/v_noabi/bsoncxx/third_party/mnmlstc;/usr/local/Cellar/mongo-cxx-driver/3.9.0/include/bsoncxx/v_noabi;/usr/local/Cellar/mongo-cxx-driver/3.9.0/include
+BSONCXX_STATIC_LDFLAGS:INTERNAL=-L/usr/local/Cellar/mongo-cxx-driver/3.9.0/lib;-lbsoncxx
+BSONCXX_STATIC_LDFLAGS_OTHER:INTERNAL=
+BSONCXX_STATIC_LIBDIR:INTERNAL=
+BSONCXX_STATIC_LIBRARIES:INTERNAL=bsoncxx
+BSONCXX_STATIC_LIBRARY_DIRS:INTERNAL=/usr/local/Cellar/mongo-cxx-driver/3.9.0/lib
+BSONCXX_STATIC_LIBS:INTERNAL=
+BSONCXX_STATIC_LIBS_L:INTERNAL=
+BSONCXX_STATIC_LIBS_OTHER:INTERNAL=
+BSONCXX_STATIC_LIBS_PATHS:INTERNAL=
+BSONCXX_VERSION:INTERNAL=3.9.0
+BSONCXX_libbsoncxx_INCLUDEDIR:INTERNAL=
+BSONCXX_libbsoncxx_LIBDIR:INTERNAL=
+BSONCXX_libbsoncxx_PREFIX:INTERNAL=
+BSONCXX_libbsoncxx_VERSION:INTERNAL=
 //ADVANCED property for variable: CMAKE_ADDR2LINE
 CMAKE_ADDR2LINE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_AR
@@ -373,6 +420,8 @@ CMAKE_CACHE_MAJOR_VERSION:INTERNAL=3
 CMAKE_CACHE_MINOR_VERSION:INTERNAL=28
 //Patch version of cmake used to create the current loaded cache
 CMAKE_CACHE_PATCH_VERSION:INTERNAL=2
+//ADVANCED property for variable: CMAKE_COLOR_MAKEFILE
+CMAKE_COLOR_MAKEFILE-ADVANCED:INTERNAL=1
 //Path to CMake executable.
 CMAKE_COMMAND:INTERNAL=/usr/local/Cellar/cmake/3.28.2/bin/cmake
 //Path to cpack program executable.
@@ -424,7 +473,7 @@ CMAKE_EXPORT_COMPILE_COMMANDS-ADVANCED:INTERNAL=1
 //Name of external makefile project generator.
 CMAKE_EXTRA_GENERATOR:INTERNAL=
 //Name of generator.
-CMAKE_GENERATOR:INTERNAL=Ninja
+CMAKE_GENERATOR:INTERNAL=Unix Makefiles
 //Generator instance identifier.
 CMAKE_GENERATOR_INSTANCE:INTERNAL=
 //Name of generator platform.
@@ -540,8 +589,45 @@ CURL_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 CURL_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
 //Details about finding CURL
 FIND_PACKAGE_MESSAGE_DETAILS_CURL:INTERNAL=[/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/lib/libcurl.tbd][/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include][c ][v7.85.0()]
+//Details about finding PkgConfig
+FIND_PACKAGE_MESSAGE_DETAILS_PkgConfig:INTERNAL=[/usr/local/bin/pkg-config][v0.29.2()]
 //ADVANCED property for variable: GIT_EXECUTABLE
 GIT_EXECUTABLE-ADVANCED:INTERNAL=1
+MONGOCXX_CFLAGS:INTERNAL=-I/usr/local/Cellar/mongo-cxx-driver/3.9.0/include/mongocxx/v_noabi;-I/usr/local/Cellar/mongo-cxx-driver/3.9.0/include;-I/usr/local/Cellar/mongo-cxx-driver/3.9.0/include/bsoncxx/v_noabi/bsoncxx/third_party/mnmlstc;-I/usr/local/Cellar/mongo-cxx-driver/3.9.0/include/bsoncxx/v_noabi;-I/usr/local/Cellar/mongo-cxx-driver/3.9.0/include
+MONGOCXX_CFLAGS_I:INTERNAL=
+MONGOCXX_CFLAGS_OTHER:INTERNAL=
+MONGOCXX_FOUND:INTERNAL=1
+MONGOCXX_INCLUDEDIR:INTERNAL=/usr/local/Cellar/mongo-cxx-driver/3.9.0/include
+MONGOCXX_INCLUDE_DIRS:INTERNAL=/usr/local/Cellar/mongo-cxx-driver/3.9.0/include/mongocxx/v_noabi;/usr/local/Cellar/mongo-cxx-driver/3.9.0/include;/usr/local/Cellar/mongo-cxx-driver/3.9.0/include/bsoncxx/v_noabi/bsoncxx/third_party/mnmlstc;/usr/local/Cellar/mongo-cxx-driver/3.9.0/include/bsoncxx/v_noabi;/usr/local/Cellar/mongo-cxx-driver/3.9.0/include
+MONGOCXX_LDFLAGS:INTERNAL=-L/usr/local/Cellar/mongo-cxx-driver/3.9.0/lib;-lmongocxx;-lbsoncxx
+MONGOCXX_LDFLAGS_OTHER:INTERNAL=
+MONGOCXX_LIBDIR:INTERNAL=/usr/local/Cellar/mongo-cxx-driver/3.9.0/lib
+MONGOCXX_LIBRARIES:INTERNAL=mongocxx;bsoncxx
+MONGOCXX_LIBRARY_DIRS:INTERNAL=/usr/local/Cellar/mongo-cxx-driver/3.9.0/lib
+MONGOCXX_LIBS:INTERNAL=
+MONGOCXX_LIBS_L:INTERNAL=
+MONGOCXX_LIBS_OTHER:INTERNAL=
+MONGOCXX_LIBS_PATHS:INTERNAL=
+MONGOCXX_MODULE_NAME:INTERNAL=libmongocxx
+MONGOCXX_PREFIX:INTERNAL=/usr/local/Cellar/mongo-cxx-driver/3.9.0
+MONGOCXX_STATIC_CFLAGS:INTERNAL=-I/usr/local/Cellar/mongo-cxx-driver/3.9.0/include/mongocxx/v_noabi;-I/usr/local/Cellar/mongo-cxx-driver/3.9.0/include;-I/usr/local/Cellar/mongo-cxx-driver/3.9.0/include/bsoncxx/v_noabi/bsoncxx/third_party/mnmlstc;-I/usr/local/Cellar/mongo-cxx-driver/3.9.0/include/bsoncxx/v_noabi;-I/usr/local/Cellar/mongo-cxx-driver/3.9.0/include
+MONGOCXX_STATIC_CFLAGS_I:INTERNAL=
+MONGOCXX_STATIC_CFLAGS_OTHER:INTERNAL=
+MONGOCXX_STATIC_INCLUDE_DIRS:INTERNAL=/usr/local/Cellar/mongo-cxx-driver/3.9.0/include/mongocxx/v_noabi;/usr/local/Cellar/mongo-cxx-driver/3.9.0/include;/usr/local/Cellar/mongo-cxx-driver/3.9.0/include/bsoncxx/v_noabi/bsoncxx/third_party/mnmlstc;/usr/local/Cellar/mongo-cxx-driver/3.9.0/include/bsoncxx/v_noabi;/usr/local/Cellar/mongo-cxx-driver/3.9.0/include
+MONGOCXX_STATIC_LDFLAGS:INTERNAL=-L/usr/local/Cellar/mongo-cxx-driver/3.9.0/lib;-lmongocxx;-lbsoncxx
+MONGOCXX_STATIC_LDFLAGS_OTHER:INTERNAL=
+MONGOCXX_STATIC_LIBDIR:INTERNAL=
+MONGOCXX_STATIC_LIBRARIES:INTERNAL=mongocxx;bsoncxx
+MONGOCXX_STATIC_LIBRARY_DIRS:INTERNAL=/usr/local/Cellar/mongo-cxx-driver/3.9.0/lib
+MONGOCXX_STATIC_LIBS:INTERNAL=
+MONGOCXX_STATIC_LIBS_L:INTERNAL=
+MONGOCXX_STATIC_LIBS_OTHER:INTERNAL=
+MONGOCXX_STATIC_LIBS_PATHS:INTERNAL=
+MONGOCXX_VERSION:INTERNAL=3.9.0
+MONGOCXX_libmongocxx_INCLUDEDIR:INTERNAL=
+MONGOCXX_libmongocxx_LIBDIR:INTERNAL=
+MONGOCXX_libmongocxx_PREFIX:INTERNAL=
+MONGOCXX_libmongocxx_VERSION:INTERNAL=
 NLOHMANN_JSON_CONFIG_INSTALL_DIR:INTERNAL=lib/cmake/nlohmann_json
 PC_CURL_CFLAGS:INTERNAL=
 PC_CURL_CFLAGS_I:INTERNAL=
@@ -584,9 +670,19 @@ PKG_CONFIG_ARGN-ADVANCED:INTERNAL=1
 PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
 //CMAKE_INSTALL_PREFIX during last run
 _GNUInstallDirs_LAST_CMAKE_INSTALL_PREFIX:INTERNAL=/usr/local
+__pkg_config_arguments_BSONCXX:INTERNAL=REQUIRED;libbsoncxx
+__pkg_config_arguments_MONGOCXX:INTERNAL=REQUIRED;libmongocxx
 __pkg_config_arguments_PC_CURL:INTERNAL=QUIET;libcurl
+__pkg_config_checked_BSONCXX:INTERNAL=1
+__pkg_config_checked_MONGOCXX:INTERNAL=1
 __pkg_config_checked_PC_CURL:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_BSONCXX_bsoncxx
+pkgcfg_lib_BSONCXX_bsoncxx-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_MONGOCXX_bsoncxx
+pkgcfg_lib_MONGOCXX_bsoncxx-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_MONGOCXX_mongocxx
+pkgcfg_lib_MONGOCXX_mongocxx-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: pkgcfg_lib_PC_CURL_curl
 pkgcfg_lib_PC_CURL_curl-ADVANCED:INTERNAL=1
-prefix_result:INTERNAL=alt-svc;AsynchDNS;GSS-API;HSTS;HTTP2;HTTPS-proxy;IPv6;Kerberos;Largefile;libz;MultiSSL;NTLM;NTLM_WB;SPNEGO;SSL;UnixSockets
+prefix_result:INTERNAL=/usr/local/Cellar/mongo-cxx-driver/3.9.0/lib
 

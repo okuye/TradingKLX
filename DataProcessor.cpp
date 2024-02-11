@@ -1,4 +1,5 @@
 #include "DataProcessor.h"
+#include "PriceData.h" // Ensure this is included
 #include <iostream>
 
 // Helper function to safely extract fields from JSON data

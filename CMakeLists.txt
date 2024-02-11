@@ -1,8 +1,8 @@
 ﻿cmake_minimum_required(VERSION 3.8)
 project("TradingKLX")
 
-# Set C++ standard
-set(CMAKE_CXX_STANDARD 11)
+# Set C++ standard to C++17
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Use FetchContent to make nlohmann_json available
@@ -22,22 +22,41 @@ else()
     message(STATUS "Found CURL library: ${CURL_LIBRARIES}")
 endif()
 
-# Add source to this project's executable
-add_executable(TradingKLX "TradingKLX.cpp" "TradingKLX.h" "AlphaVantageAPI.cpp" "JSONParser.cpp" "AlphaVantageAPI.h" "JSONParser.h")
+# Find and include pkg-config
+find_package(PkgConfig REQUIRED)
 
-# Include directories for CURL and TA-Lib
+# Use pkg-config to get the flags for mongocxx and bsoncxx
+pkg_check_modules(MONGOCXX REQUIRED libmongocxx)
+pkg_check_modules(BSONCXX REQUIRED libbsoncxx)
+
+# Add the include directories for mongocxx and bsoncxx
 include_directories(
     ${CURL_INCLUDE_DIRS}
-    /usr/local/opt/ta-lib/include
-    "/usr/local/include/mongocxx/v_noabi"
-    "/usr/local/include/bsoncxx/v_noabi"
-    "/usr/local/Cellar/mongo-cxx-driver/3.9.0/include/bsoncxx/v_noabi/bsoncxx/third_party/mnmlstc/core"  # Include the mnmlstc/core directory for the MongoDB C++ driver
+    ${MONGOCXX_INCLUDE_DIRS}
+    ${BSONCXX_INCLUDE_DIRS}
+)
+
+# Add the library paths for mongocxx and bsoncxx to the linker's search paths
+link_directories(
+    ${MONGOCXX_LIBRARY_DIRS}
+    ${BSONCXX_LIBRARY_DIRS}
+)
+
+# Add source to this project's executable
+add_executable(TradingKLX 
+               "TradingKLX.cpp" 
+               "AlphaVantageAPI.cpp" 
+               "JSONParser.cpp"
+               "DataProcessor.cpp" 
+               "TechnicalIndicators.cpp"
+               "database_utils.cpp"
+               "ConfigManager.cpp"
 )
 
 # Link libraries to the executable
 target_link_libraries(TradingKLX
     ${CURL_LIBRARIES}
     nlohmann_json::nlohmann_json
-    /usr/local/opt/ta-lib/lib/libta_lib.dylib  # Directly link against the TA-Lib library using the full path
-    # Add MongoDB C++ driver libraries here if they are not auto-detected
+    ${MONGOCXX_LIBRARIES}
+    ${BSONCXX_LIBRARIES}
 )
