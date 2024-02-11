@@ -4,38 +4,73 @@
 #include <stdexcept> // For std::invalid_argument
 #include <numeric>   // For std::accumulate
 
+// double TechnicalIndicators::calculateTenkanSen(const std::vector<double>& highs, const std::vector<double>& lows, int period, int index, IchimokuMemo& memo) {
+//     // Validate input
+//     if (index < period - 1) throw std::invalid_argument("Index out of range for Tenkan-sen calculation");
+//     if (memo.tenkanSenMemo.find(index) == memo.tenkanSenMemo.end() && index >= period - 1) {
+//         auto highIt = std::max_element(highs.begin() + index - period + 1, highs.begin() + index + 1);
+//         auto lowIt = std::min_element(lows.begin() + index - period + 1, lows.begin() + index + 1);
+//         memo.tenkanSenMemo[index] = (*highIt + *lowIt) / 2.0;
+//     }
+//     return memo.tenkanSenMemo[index];
+// }
+
+// Improved calculateTenkanSen with better input validation and memoization
 double TechnicalIndicators::calculateTenkanSen(const std::vector<double>& highs, const std::vector<double>& lows, int period, int index, IchimokuMemo& memo) {
-    // Validate input
-    if (index < period - 1) throw std::invalid_argument("Index out of range for Tenkan-sen calculation");
-    if (memo.tenkanSenMemo.find(index) == memo.tenkanSenMemo.end() && index >= period - 1) {
-        auto highIt = std::max_element(highs.begin() + index - period + 1, highs.begin() + index + 1);
-        auto lowIt = std::min_element(lows.begin() + index - period + 1, lows.begin() + index + 1);
+    // Validate inputs: check that index is within range and period is positive
+    if (highs.size() != lows.size() || index < 0 || index >= highs.size() || period <= 0) {
+        throw std::invalid_argument("Invalid input for Tenkan-sen calculation");
+    }
+
+    // Check if Tenkan-sen is already calculated for this index to avoid redundant calculation
+    if (memo.tenkanSenMemo.find(index) == memo.tenkanSenMemo.end()) {
+        // Calculate Tenkan-sen for this index
+        auto highIt = std::max_element(highs.begin() + std::max(0, index - period + 1), highs.begin() + index + 1);
+        auto lowIt = std::min_element(lows.begin() + std::max(0, index - period + 1), lows.begin() + index + 1);
         memo.tenkanSenMemo[index] = (*highIt + *lowIt) / 2.0;
     }
+
     return memo.tenkanSenMemo[index];
 }
 
+// double TechnicalIndicators::calculateKijunSen(const std::vector<double>& highs, const std::vector<double>& lows, int period, int index, IchimokuMemo& memo) {
+//     // Validate inputs
+//     if (period <= 0) throw std::invalid_argument("Period must be positive for Kijun-sen calculation");
+//     if (index < period - 1 || index >= highs.size() || index >= lows.size())
+//         throw std::invalid_argument("Index out of range for Kijun-sen calculation");
+    
+//     // Check if Kijun-sen is already calculated for this index
+//     auto it = memo.kijunSenMemo.find(index);
+//     if (it != memo.kijunSenMemo.end()) {
+//         // Return memoized value if available
+//         return it->second;
+//     }
+    
+//     // Calculate Kijun-sen
+//     auto highIt = std::max_element(highs.begin() + index - period + 1, highs.begin() + index + 1);
+//     auto lowIt = std::min_element(lows.begin() + index - period + 1, lows.begin() + index + 1);
+//     double kijunSen = (*highIt + *lowIt) / 2.0;
+    
+//     // Memoize and return the result
+//     memo.kijunSenMemo[index] = kijunSen;
+//     return kijunSen;
+// }
+// Improved calculateKijunSen with better input validation and memoization
 double TechnicalIndicators::calculateKijunSen(const std::vector<double>& highs, const std::vector<double>& lows, int period, int index, IchimokuMemo& memo) {
-    // Validate inputs
-    if (period <= 0) throw std::invalid_argument("Period must be positive for Kijun-sen calculation");
-    if (index < period - 1 || index >= highs.size() || index >= lows.size())
-        throw std::invalid_argument("Index out of range for Kijun-sen calculation");
-    
-    // Check if Kijun-sen is already calculated for this index
-    auto it = memo.kijunSenMemo.find(index);
-    if (it != memo.kijunSenMemo.end()) {
-        // Return memoized value if available
-        return it->second;
+    // Validate inputs: check that index is within range and period is positive
+    if (highs.size() != lows.size() || index < 0 || index >= highs.size() || period <= 0) {
+        throw std::invalid_argument("Invalid input for Kijun-sen calculation");
     }
-    
-    // Calculate Kijun-sen
-    auto highIt = std::max_element(highs.begin() + index - period + 1, highs.begin() + index + 1);
-    auto lowIt = std::min_element(lows.begin() + index - period + 1, lows.begin() + index + 1);
-    double kijunSen = (*highIt + *lowIt) / 2.0;
-    
-    // Memoize and return the result
-    memo.kijunSenMemo[index] = kijunSen;
-    return kijunSen;
+
+    // Check if Kijun-sen is already calculated for this index to avoid redundant calculation
+    if (memo.kijunSenMemo.find(index) == memo.kijunSenMemo.end()) {
+        // Calculate Kijun-sen for this index
+        auto highIt = std::max_element(highs.begin() + std::max(0, index - period + 1), highs.begin() + index + 1);
+        auto lowIt = std::min_element(lows.begin() + std::max(0, index - period + 1), lows.begin() + index + 1);
+        memo.kijunSenMemo[index] = (*highIt + *lowIt) / 2.0;
+    }
+
+    return memo.kijunSenMemo[index];
 }
 
 double TechnicalIndicators::calculateSenkouSpanA(int index, IchimokuMemo& memo) {

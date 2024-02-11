@@ -1,17 +1,45 @@
 #include "DataProcessor.h"
 #include "PriceData.h" // Ensure this is included
 #include <iostream>
+#include <stdexcept> // For std::invalid_argument and custom exceptions
 
-// Helper function to safely extract fields from JSON data
+// Define custom exception types for specific JSON structure issues
+class JsonStructureException : public std::invalid_argument {
+public:
+    explicit JsonStructureException(const std::string& message)
+        : std::invalid_argument(message) {}
+};
+
+class FieldExtractionException : public std::invalid_argument {
+public:
+    explicit FieldExtractionException(const std::string& message)
+        : std::invalid_argument(message) {}
+};
+
+// // Helper function to safely extract fields from JSON data
+// double DataProcessor::getFieldValue(const nlohmann::json& data, const std::string& field) {
+//     try {
+//         if (data.contains(field) && data[field].is_string()) {
+//             return std::stod(data[field].get<std::string>());
+//         }
+//         throw std::runtime_error("Missing or invalid field: " + field);
+//     } catch (const std::exception& e) {
+//         std::cerr << "Error extracting field '" << field << "': " << e.what() << std::endl;
+//         throw;
+//     }
+// }
+
+
+// Modified getFieldValue to throw FieldExtractionException
 double DataProcessor::getFieldValue(const nlohmann::json& data, const std::string& field) {
     try {
         if (data.contains(field) && data[field].is_string()) {
             return std::stod(data[field].get<std::string>());
         }
-        throw std::runtime_error("Missing or invalid field: " + field);
+        throw FieldExtractionException("Missing or invalid field: " + field);
     } catch (const std::exception& e) {
         std::cerr << "Error extracting field '" << field << "': " << e.what() << std::endl;
-        throw;
+        throw FieldExtractionException("Failed to extract field '" + field + "': " + e.what());
     }
 }
 

@@ -60,3 +60,8 @@ target_link_libraries(TradingKLX
     ${MONGOCXX_LIBRARIES}
     ${BSONCXX_LIBRARIES}
 )
+
+target_include_directories(TradingKLX
+    PRIVATE "/usr/local/include/mongocxx"
+)
+

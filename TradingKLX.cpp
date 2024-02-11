@@ -22,21 +22,6 @@
 using namespace std;
 using json = nlohmann::json;
 
-// Structure to hold the price data
-// struct PriceData {
-//     double open, high, low, close;
-//     string timestamp;
-// };
-
-// Memoization structures for technical indicators
-// struct IchimokuMemo {
-//     unordered_map<int, double> tenkanSenMemo, kijunSenMemo, senkouSpanAMemo, senkouSpanBMemo;
-// };
-
-// struct BollingerBandsMemo {
-//     unordered_map<int, double> smaMemo, stdDevMemo, upperBandMemo, lowerBandMemo;
-// };
-
 // Utility function declarations
 double calculateTenkanSen(const vector<double>& highs, const vector<double>& lows, int period, int index, IchimokuMemo& memo);
 // double calculateKijunSen(const vector<double>& highs, const vector<double>& lows, int period, int index, IchimokuMemo& memo);
