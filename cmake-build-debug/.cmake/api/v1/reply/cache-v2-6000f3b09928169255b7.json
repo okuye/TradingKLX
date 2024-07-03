@@ -3227,7 +3227,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "alt-svc;AsynchDNS;GSS-API;HSTS;HTTP2;HTTPS-proxy;IPv6;Kerberos;Largefile;libz;MultiSSL;NTLM;NTLM_WB;SPNEGO;SSL;UnixSockets"
+			"value" : "/usr/local/lib"
 		}
 	],
 	"kind" : "cache",
