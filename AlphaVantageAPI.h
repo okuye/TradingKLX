@@ -9,8 +9,8 @@ public:
     std::string fetchData(const std::string& function, const std::string& from_symbol, const std::string& to_symbol, const std::string& interval = "5min");
 
 private:
-    std::string apiKey;
     long timeoutSeconds;
+    std::string apiKey;
     std::string buildURL(const std::string& function, const std::string& from_symbol, const std::string& to_symbol, const std::string& interval);
 
     // Helper function to handle rate-limited requests with exponential backoff

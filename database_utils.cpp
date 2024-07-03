@@ -2,6 +2,7 @@
 #include "database_utils.h"
 #include <mongocxx/client.hpp>
 #include <bsoncxx/json.hpp>
+#include <mongocxx/exception/exception.hpp>
 #include <iostream> // For error logging
 
 std::string fetchDataFromMongo(const mongocxx::client& client, const std::string& dbName, const std::string& collectionName) {
