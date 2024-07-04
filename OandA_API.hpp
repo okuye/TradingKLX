@@ -1,18 +1,21 @@
-#ifndef OANDA_API_HPP
-#define OANDA_API_HPP
-
 #include <string>
 #include <vector>
+#include <nlohmann/json.hpp>
 #include <curl/curl.h>
-#include <nlohmann/json.hpp> // Updated to use nlohmann/json
 
 class OandA_API {
 public:
-    OandA_API(const std::string& api_key);
-    std::vector<double> getPrices(const std::string& instrument);
-private:
-    std::string api_key;
-    static size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp);
-};
+    OandA_API(const std::string& apiKey, const std::string& accountID);
 
-#endif // OANDA_API_HPP
+    nlohmann::json getAccountDetails();
+    nlohmann::json getInstrumentPrices(const std::string& instrument);
+    nlohmann::json getHistoricalData(const std::string& instrument, const std::string& granularity, const std::string& from, const std::string& to);
+
+private:
+    std::string apiKey;
+    std::string accountID;
+    std::string baseURL;
+
+    static size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp);
+    nlohmann::json makeRequest(const std::string& endpoint);
+};

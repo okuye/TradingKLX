@@ -1,5 +1,4 @@
 // TradingKLX.cpp : Defines the entry point for the application.
-// #include <TradingKLX.h>
 #include <iostream>
 #include <vector>
 #include <fstream>
@@ -11,25 +10,14 @@
 #include <mongocxx/client.hpp>
 #include <mongocxx/instance.hpp>
 #include <nlohmann/json.hpp>
-#include "AlphaVantageAPI.h"  
+#include "AlphaVantageAPI.h"
 #include "database_utils.h"  // Include the header for database utilities
 #include "ConfigManager.h"
 #include "DataProcessor.h"
 #include "TechnicalIndicators.h"
 
-
-
 using namespace std;
 using json = nlohmann::json;
-
-// Utility function declarations
-double calculateTenkanSen(const vector<double>& highs, const vector<double>& lows, int period, int index, IchimokuMemo& memo);
-// double calculateKijunSen(const vector<double>& highs, const vector<double>& lows, int period, int index, IchimokuMemo& memo);
-double calculateSenkouSpanA(int index, IchimokuMemo& memo);
-double calculateSenkouSpanB(const vector<double>& highs, const vector<double>& lows, int index, IchimokuMemo& memo);
-void calculateBollingerBandsWithMemoization(const vector<double>& data, int window, double numStdDev, BollingerBandsMemo& memo);
-double calculateSMA(const vector<double>& data, int start, int end);
-double calculateStdDev(const vector<double>& data, int start, int end, double mean);
 
 // Configuration and data processing functions
 json readConfig(const string& configFile);
@@ -42,7 +30,6 @@ int main() {
     // Read configuration
     json config = ConfigManager::readConfig("config.json");
 
-
     // Extract configuration values
     bool useMongoDB = config["useMongoDB"].get<bool>();
     string mongoDBUri = config["mongoDBUri"].get<string>();
@@ -53,9 +40,8 @@ int main() {
     string dbName = config["dbName"].get<string>();
     string collectionName = config["collectionName"].get<string>();
 
-        // Create an instance of AlphaVantageAPI with your API key
+    // Create an instance of AlphaVantageAPI with your API key
     AlphaVantageAPI alphaVantageAPI(apiKey);  // Make sure apiKey is properly defined
-
 
     mongocxx::client client{mongocxx::uri{mongoDBUri}};
 
@@ -74,8 +60,6 @@ int main() {
 
     // Initialize memoization structures and indicators
     TechnicalIndicators indicators;
-
-    // Initialize memoization structures
     IchimokuMemo ichimokuMemo;
     BollingerBandsMemo bbMemo;
 
@@ -86,7 +70,7 @@ int main() {
         vector<double> highs, lows, closes;
         // Populate highs, lows, and closes based on priceData
 
-       double tenkanSen = indicators.calculateTenkanSen(highs, lows, 9, i, ichimokuMemo);
+        double tenkanSen = indicators.calculateTenkanSen(highs, lows, 9, i, ichimokuMemo);
         double kijunSen = indicators.calculateKijunSen(highs, lows, 26, i, ichimokuMemo);
         double senkouSpanA = indicators.calculateSenkouSpanA(i, ichimokuMemo);
         double senkouSpanB = indicators.calculateSenkouSpanB(highs, lows, i, ichimokuMemo);
@@ -100,5 +84,3 @@ int main() {
 
     return 0;
 }
-
-// Definitions for utility functions, JSON configuration reading, data processing, and memoized calculations follow...
