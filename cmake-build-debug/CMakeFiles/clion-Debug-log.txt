@@ -1,4 +1,16 @@
 /Applications/CLion.app/Contents/bin/cmake/mac/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/x64/ninja -G Ninja -S /Users/olakunlekuye/Documents/Dev/KLX/TradingKLX -B /Users/olakunlekuye/Documents/Dev/KLX/TradingKLX/cmake-build-debug
+-- The C compiler identification is AppleClang 14.0.0.14000029
+-- The CXX compiler identification is AppleClang 14.0.0.14000029
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
 CMake Deprecation Warning at cmake-build-debug/_deps/nlohmann_json-src/CMakeLists.txt:1 (cmake_minimum_required):
   Compatibility with CMake < 3.5 will be removed from a future version of
   CMake.
@@ -8,7 +20,13 @@ CMake Deprecation Warning at cmake-build-debug/_deps/nlohmann_json-src/CMakeList
 
 
 -- Using the single-header code from /Users/olakunlekuye/Documents/Dev/KLX/TradingKLX/cmake-build-debug/_deps/nlohmann_json-src/single_include/
+-- Found CURL: /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/lib/libcurl.tbd (found version "7.85.0")  
 -- Found CURL library: /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/lib/libcurl.tbd
--- Configuring done (0.6s)
+-- Found PkgConfig: /usr/local/bin/pkg-config (found version "0.29.2") 
+-- Checking for module 'libmongocxx'
+--   Found libmongocxx, version 3.10.2
+-- Checking for module 'libbsoncxx'
+--   Found libbsoncxx, version 3.10.2
+-- Configuring done (79.6s)
 -- Generating done (0.0s)
 -- Build files have been written to: /Users/olakunlekuye/Documents/Dev/KLX/TradingKLX/cmake-build-debug

@@ -5,6 +5,6 @@
     "accountID": "your_oanda_account_id",
     "from_symbol": "EUR_USD",
     "to_symbol": "USD",
-    "dbName": "your_database_name",
-    "collectionName": "your_collection_name"
+    "dbName": "TradeData",
+    "collectionName": "DataQuotes"
 }

@@ -1,0 +1,41 @@
+{
+  "mongodb": {
+    "server": "mongo",
+    "port": 27017,
+    "ssl": false,
+    "sslValidate": true,
+    "sslCA": [],
+    "sslCert": "",
+    "sslKey": "",
+    "sslPass": "",
+    "auth": [
+      {
+        "database": "admin",
+        "username": "admin",
+        "password": "admin"
+      }
+    ],
+    "admin": true,
+    "adminUsername": "admin",
+    "adminPassword": "admin",
+    "whitelist": [],
+    "blacklist": []
+  },
+  "site": {
+    "baseUrl": "/",
+    "cookieKeyName": "mongo-express",
+    "cookieSecret": "cookiesecret",
+    "host": "0.0.0.0",
+    "port": 8081,
+    "requestSizeLimit": "50mb",
+    "sessionSecret": "sessionsecret",
+    "sslCert": "",
+    "sslEnabled": false,
+    "sslKey": ""
+  },
+  "useBasicAuth": true,
+  "basicAuth": {
+    "username": "admin",
+    "password": "admin"
+  }
+}
