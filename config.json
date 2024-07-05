@@ -1,11 +1,10 @@
 {
-    "useMongoDB": true,
-    "mongoDBUri": "mongodb://localhost:27017",
-    "apiKey": "42XW1WPYAK910VR7",
-    "function": "FX_INTRADAY",
-    "from_symbol": "EUR",
+    "useMongoDB": false,
+    "mongoDBUri": "mongodb://root:example@mongo:27017/",
+    "apiKey": "706299d4dbdd690859b473d34e7783be-37b8faaca33cb3a4799ef0685a1c2a2d",
+    "accountID": "your_oanda_account_id",
+    "from_symbol": "EUR_USD",
     "to_symbol": "USD",
-    "dbName": "klx",
-    "collectionName": "fxTrade"
-  }
-  
+    "dbName": "your_database_name",
+    "collectionName": "your_collection_name"
+}

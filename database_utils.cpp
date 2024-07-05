@@ -1,39 +1,32 @@
-// database_utils.cpp
 #include "database_utils.h"
-#include <mongocxx/client.hpp>
 #include <bsoncxx/json.hpp>
-#include <mongocxx/exception/exception.hpp>
-#include <iostream> // For error logging
+#include <bsoncxx/builder/stream/document.hpp>
+#include <nlohmann/json.hpp>
+#include <iostream>
 
-std::string fetchDataFromMongo(const mongocxx::client& client, const std::string& dbName, const std::string& collectionName) {
-    try {
-        auto collection = client[dbName][collectionName];
-        auto cursor = collection.find({});
-        std::string data;
-        for (auto&& doc : cursor) {
-            data += bsoncxx::to_json(doc);
-        }
-        return data;
-    } catch (const mongocxx::exception& e) {
-        std::cerr << "Error fetching data from MongoDB: " << e.what() << std::endl;
-        // Depending on your application's requirements, you may want to handle this error differently,
-        // for example, by re-throwing, returning an empty string, or attempting a retry.
-        return ""; // Returning empty string to indicate failure
+using json = nlohmann::json;
+
+void storeDataInMongo(mongocxx::client& client, const std::string& dbName, const std::string& collectionName, const std::string& jsonData) {
+    auto db = client[dbName];
+    auto collection = db[collectionName];
+    auto documents = json::parse(jsonData);
+
+    for (const auto& doc : documents) {
+        bsoncxx::builder::stream::document document{};
+        document << "data" << bsoncxx::from_json(doc.dump());
+        collection.insert_one(document.view());
     }
 }
 
-void storeDataInMongo(const mongocxx::client& client, const std::string& dbName, const std::string& collectionName, const std::string& jsonData) {
-    try {
-        auto collection = client[dbName][collectionName];
-        bsoncxx::stdx::optional<bsoncxx::document::value> document = bsoncxx::from_json(jsonData);
-        if(document) {
-            collection.insert_one(document->view());
-        } else {
-            std::cerr << "Failed to convert JSON data to BSON document." << std::endl;
-            // Handle or log the error as needed
-        }
-    } catch (const mongocxx::exception& e) {
-        std::cerr << "Error storing data in MongoDB: " << e.what() << std::endl;
-        // Handle the error appropriately for your application
+std::string fetchDataFromMongo(mongocxx::client& client, const std::string& dbName, const std::string& collectionName) {
+    auto db = client[dbName];
+    auto collection = db[collectionName];
+    mongocxx::cursor cursor = collection.find({});
+
+    json result = json::array();
+    for (auto&& doc : cursor) {
+        result.push_back(json::parse(bsoncxx::to_json(doc)));
     }
+
+    return result.dump();
 }

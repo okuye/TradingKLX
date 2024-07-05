@@ -1,4 +1,3 @@
-// TradingKLX.cpp : Defines the entry point for the application.
 #include <iostream>
 #include <vector>
 #include <fstream>
@@ -10,7 +9,7 @@
 #include <mongocxx/client.hpp>
 #include <mongocxx/instance.hpp>
 #include <nlohmann/json.hpp>
-#include "AlphaVantageAPI.h"
+#include "OandA_API.hpp"
 #include "database_utils.h"  // Include the header for database utilities
 #include "ConfigManager.h"
 #include "DataProcessor.h"
@@ -34,14 +33,14 @@ int main() {
     bool useMongoDB = config["useMongoDB"].get<bool>();
     string mongoDBUri = config["mongoDBUri"].get<string>();
     string apiKey = config["apiKey"].get<string>();
-    string function = config["function"].get<string>();
+    string accountID = config["accountID"].get<string>();
     string from_symbol = config["from_symbol"].get<string>();
     string to_symbol = config["to_symbol"].get<string>();
     string dbName = config["dbName"].get<string>();
     string collectionName = config["collectionName"].get<string>();
 
-    // Create an instance of AlphaVantageAPI with your API key
-    AlphaVantageAPI alphaVantageAPI(apiKey);  // Make sure apiKey is properly defined
+    // Create an instance of OandA_API with your API key and account ID
+    OandA_API oandA_API(apiKey, accountID);
 
     mongocxx::client client{mongocxx::uri{mongoDBUri}};
 
@@ -49,7 +48,11 @@ int main() {
     if (useMongoDB) {
         jsonData = fetchDataFromMongo(client, dbName, collectionName);
     } else {
-        jsonData = alphaVantageAPI.fetchData(function, from_symbol, to_symbol, "5min");  // Adjust interval as needed
+        // Fetch historical data from OANDA API
+        string granularity = "M5"; // 5-minute granularity
+        string from = "2023-01-01T00:00:00Z"; // Example start date
+        string to = "2023-01-02T00:00:00Z"; // Example end date
+        jsonData = oandA_API.getHistoricalData(from_symbol, granularity, from, to).dump();
         storeDataInMongo(client, dbName, collectionName, jsonData);
     }
 

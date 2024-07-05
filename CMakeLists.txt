@@ -52,6 +52,7 @@ add_executable(TradingKLX
         "database_utils.cpp"
         "ConfigManager.cpp"
         "OandA_API.cpp"
+        server_error_code.h
 )
 
 # Link libraries to the executable
