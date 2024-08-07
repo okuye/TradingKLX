@@ -1,8 +1,6 @@
 {
-    "useMongoDB": false,
-    "mongoDBUri": "mongodb://root:example@mongo:27017/",
-    "apiKey": "706299d4dbdd690859b473d34e7783be-37b8faaca33cb3a4799ef0685a1c2a2d",
-    "accountID": "your_oanda_account_id",
+    "apiKey": "3299849c3e7eb52b3437970f9bbe39ba-2569e273a33c4f8038603c3cd158f654",
+    "accountID": "101-004-29431369-001",
     "from_symbol": "EUR_USD",
     "to_symbol": "USD",
     "dbName": "TradeData",

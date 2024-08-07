@@ -1,7 +1,7 @@
 #include "database_utils.h"
 #include <bsoncxx/json.hpp>
 #include <bsoncxx/builder/stream/document.hpp>
-#include <nlohmann/json.hpp>
+#include "third_party/nlohmann_json/json.hpp"
 #include <iostream>
 
 using json = nlohmann::json;

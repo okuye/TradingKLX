@@ -1,6 +1,6 @@
 #include <string>
 #include <vector>
-#include <nlohmann/json.hpp>
+#include "third_party/nlohmann_json/json.hpp"
 #include <curl/curl.h>
 
 class OandA_API {

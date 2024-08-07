@@ -4,7 +4,7 @@
 #include "PriceData.h" // Include the PriceData header
 #include <string>
 #include <vector>
-#include <nlohmann/json.hpp> // Include this header for JSON parsing
+#include "third_party/nlohmann_json/json.hpp"
 
 // DataProcessor class declaration
 class DataProcessor {
