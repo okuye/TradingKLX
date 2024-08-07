@@ -1,8 +1,8 @@
 #include "TradingStrategy.h"
 #include <iostream> // For debug output
 
-TradingStrategy::TradingStrategy(double initialBalance, double riskPerTrade, double stopLossMultiplier) 
-    : accountBalance(initialBalance), riskPerTrade(riskPerTrade), stopLossMultiplier(stopLossMultiplier) {
+TradingStrategy::TradingStrategy(double initialBalance, double riskPerTrade, double stopLossMultiplier)
+        : accountBalance(initialBalance), riskPerTrade(riskPerTrade), stopLossMultiplier(stopLossMultiplier) {
     // Initialize indicator parameters
     smaPeriod = 50;
     bollingerBandsPeriod = 20;
@@ -20,13 +20,23 @@ void TradingStrategy::loadConfiguration(const std::string& configFile) {
 
 std::vector<TradingSignal> TradingStrategy::evaluateSignals(const std::vector<PriceData>& priceData) {
     std::vector<TradingSignal> signals;
-    
+
+    std::vector<double> closes, highs, lows;
+    for (const auto& data : priceData) {
+        closes.push_back(data.close);
+        highs.push_back(data.high);
+        lows.push_back(data.low);
+    }
+
     for (size_t i = 1; i < priceData.size(); ++i) {
         TradingSignal signal = {false, false, i, 0.0, 0.0};  // Initialize signal
 
-        double currentSMA = indicators.calculateSMA(priceData, i, smaPeriod);
-        double previousSMA = indicators.calculateSMA(priceData, i - 1, smaPeriod);
-        double atr = indicators.calculateATR(priceData, 14, i);  // Assuming ATR is calculated by the indicators object
+        // Calculate current and previous SMA using close prices
+        double currentSMA = indicators.calculateSMA(closes, i, smaPeriod);
+        double previousSMA = indicators.calculateSMA(closes, i - 1, smaPeriod);
+
+        // Calculate ATR using highs, lows, and closes
+        double atr = indicators.calculateATR(highs, lows, closes, 14, i);  // Assuming ATR is calculated by the indicators object
         double positionSize = (accountBalance * riskPerTrade) / atr;  // Calculate position size based on risk and ATR
         double stopLossLevel = priceData[i].close - (atr * stopLossMultiplier);  // Calculate stop-loss level
 

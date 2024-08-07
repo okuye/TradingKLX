@@ -189,3 +189,18 @@ double TechnicalIndicators::calculateStdDev(const std::vector<double>& data, int
     // Return the square root of variance (Standard Deviation)
     return std::sqrt(variance);
 }
+
+double TechnicalIndicators::calculateATR(const std::vector<double>& highs, const std::vector<double>& lows, const std::vector<double>& closes, int period, int index) {
+    // Validate inputs
+    if (highs.size() != lows.size() || lows.size() != closes.size() || index < period || index >= highs.size()) {
+        throw std::invalid_argument("Invalid input for ATR calculation");
+    }
+
+    double atr = 0.0;
+    for (int i = index - period + 1; i <= index; ++i) {
+        double trueRange = std::max({highs[i] - lows[i], std::abs(highs[i] - closes[i - 1]), std::abs(lows[i] - closes[i - 1])});
+        atr += trueRange;
+    }
+
+    return atr / period;
+}

@@ -13,7 +13,6 @@
 
 // Include your custom headers
 #include "OandA_API.hpp"
-#include "database_utils.h"
 #include "ConfigManager.h"
 #include "DataProcessor.h"
 #include "TechnicalIndicators.h"
@@ -36,6 +35,12 @@ Json::Value readConfig(const string& configFile) {
     }
 
     return config;
+}
+
+// Function to convert Json::Value to string
+string jsonToString(const Json::Value& jsonValue) {
+    Json::StreamWriterBuilder writer;
+    return Json::writeString(writer, jsonValue);
 }
 
 int main() {
@@ -95,10 +100,15 @@ int main() {
     string granularity = "M5"; // 5-minute granularity
     string from = "2023-01-01T00:00:00Z"; // Example start date
     string to = "2023-01-02T00:00:00Z"; // Example end date
-    string jsonData = oandA_API.getHistoricalData(from_symbol, granularity, from, to).dump();
+
+    // Get the historical data in JSON format
+    Json::Value jsonData = oandA_API.getHistoricalData(from_symbol, granularity, from, to);
+
+    // Convert Json::Value to string for processing
+    string jsonDataString = jsonToString(jsonData);
 
     // Process the fetched price data
-    auto priceData = DataProcessor::processData(jsonData, "TimeSeriesKey");
+    auto priceData = DataProcessor::processData(jsonDataString, "TimeSeriesKey");
 
     // Initialize trading parameters
     double accountBalance = 10000.0; // Example starting balance

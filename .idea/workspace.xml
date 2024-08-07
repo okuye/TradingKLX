@@ -29,109 +29,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e18f0a1e-f62e-499a-9bd6-dce39a999206" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/jsoncpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ConfigManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ConfigManager.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ConfigManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/ConfigManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataProcessor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/DataProcessor.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataProcessor.h" beforeDir="false" afterPath="$PROJECT_DIR$/DataProcessor.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JSONParser.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/JSONParser.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JSONParser.h" beforeDir="false" afterPath="$PROJECT_DIR$/JSONParser.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OandA_API.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/OandA_API.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OandA_API.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/OandA_API.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechnicalIndicators.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TechnicalIndicators.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechnicalIndicators.h" beforeDir="false" afterPath="$PROJECT_DIR$/TechnicalIndicators.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TradingKLX.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TradingKLX.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/query/cache-v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/query/cmakeFiles-v1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/query/codemodel-v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/query/toolchains-v1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-e5d2abc91d280206c771.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/directory-.-Debug-f5ebdc15457944623624.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/directory-_deps.nlohmann_json-build-Debug-c2199c334631578a77c0.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-TradingKLX-Debug-c6499fb0b9a46e00afde.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/toolchains-v1-4834263c3e51cf73261e.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.28.1/CMakeCCompiler.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.28.1/CMakeCXXCompiler.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.28.1/CMakeDetermineCompilerABI_C.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.28.1/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.28.1/CMakeSystem.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.28.1/CompilerIdC/CMakeCCompilerId.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.28.1/CompilerIdC/CMakeCCompilerId.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.28.1/CompilerIdCXX/CMakeCXXCompilerId.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.28.1/CompilerIdCXX/CMakeCXXCompilerId.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeConfigureLog.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-environment.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/cmake.check_cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/rules.ninja" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/_deps/nlohmann_json-build/cmake_install.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/_deps/nlohmann_json-build/nlohmann_json.pc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/_deps/nlohmann_json-build/nlohmann_jsonConfig.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/_deps/nlohmann_json-build/nlohmann_jsonConfigVersion.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/_deps/nlohmann_json-src" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/_deps/nlohmann_json-subbuild/.ninja_log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/_deps/nlohmann_json-subbuild/CMakeCache.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/_deps/nlohmann_json-subbuild/CMakeFiles/3.28.1/CMakeSystem.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/_deps/nlohmann_json-subbuild/CMakeFiles/CMakeConfigureLog.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/_deps/nlohmann_json-subbuild/CMakeFiles/TargetDirectories.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/_deps/nlohmann_json-subbuild/CMakeFiles/cmake.check_cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/_deps/nlohmann_json-subbuild/CMakeFiles/nlohmann_json-populate-complete" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/_deps/nlohmann_json-subbuild/CMakeFiles/nlohmann_json-populate.dir/Labels.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/_deps/nlohmann_json-subbuild/CMakeFiles/nlohmann_json-populate.dir/Labels.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/_deps/nlohmann_json-subbuild/CMakeFiles/rules.ninja" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/_deps/nlohmann_json-subbuild/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/_deps/nlohmann_json-subbuild/build.ninja" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/_deps/nlohmann_json-subbuild/cmake_install.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-build" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-configure" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-done" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-gitclone-lastrun.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-gitinfo.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-install" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-mkdir" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-patch-info.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-test" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-update-info.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/tmp/nlohmann_json-populate-cfgcmd.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/tmp/nlohmann_json-populate-gitclone.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/tmp/nlohmann_json-populate-gitupdate.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/tmp/nlohmann_json-populate-mkdirs.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/build.ninja" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.mongodb/mongosh/66886e9907887face2149f47_log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.mongodb/mongosh/66886e996f7dcda7bd149f47_log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.mongodb/mongosh/config" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.mongodb/mongosh/mongosh_repl_history" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.mongodb/mongosh/snippets/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/WiredTiger" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/WiredTiger.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/WiredTiger.turtle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/WiredTiger.wt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/WiredTigerHS.wt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/_mdb_catalog.wt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/collection-0--1708318778727684202.wt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/collection-2--1708318778727684202.wt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/collection-4--1708318778727684202.wt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/collection-7--1708318778727684202.wt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/diagnostic.data/metrics.2024-07-05T22-07-22Z-00000" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/diagnostic.data/metrics.2024-07-05T22-07-42Z-00000" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/index-1--1708318778727684202.wt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/index-3--1708318778727684202.wt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/index-5--1708318778727684202.wt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/index-6--1708318778727684202.wt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/index-8--1708318778727684202.wt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/index-9--1708318778727684202.wt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/journal/WiredTigerLog.0000000002" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/journal/WiredTigerPreplog.0000000001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/journal/WiredTigerPreplog.0000000002" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/mongod.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/sizeStorer.wt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/storage.bson" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database_utils.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/database_utils.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database_utils.h" beforeDir="false" afterPath="$PROJECT_DIR$/database_utils.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mongo-cxx-driver" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TradingStrategy.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TradingStrategy.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database_utils.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database_utils.h" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,26 +75,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;C/C++ File.TradingKLX.cpp.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/olakunlekuye/Documents/Dev/KLX/demo/TradingKLX/third_party/nlohmann_json&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;CMakeSettings&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "C/C++ File.TradingKLX.cpp.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "/Users/olakunlekuye/Documents/Dev/KLX/demo/TradingKLX/third_party/nlohmann_json",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "CMakeSettings",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/third_party/nlohmann_json" />
@@ -189,6 +102,11 @@
     </key>
   </component>
   <component name="RunManager" selected="C/C++ File.TradingKLX.cpp">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TradingKLX" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="TradingKLX" TARGET_NAME="TradingKLX" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="TradingKLX" RUN_TARGET_NAME="TradingKLX">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -247,7 +165,7 @@
       <workItem from="1723056037655" duration="3023000" />
       <workItem from="1723059069723" duration="1848000" />
       <workItem from="1723060923602" duration="41000" />
-      <workItem from="1723060992995" duration="418000" />
+      <workItem from="1723060992995" duration="3470000" />
     </task>
     <servers />
   </component>

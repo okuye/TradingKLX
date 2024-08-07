@@ -22,6 +22,7 @@ public:
     void calculateBollingerBandsWithMemoization(const std::vector<double>& data, int window, double numStdDev, BollingerBandsMemo& memo);
     double calculateSMA(const std::vector<double>& data, int start, int end);
     double calculateStdDev(const std::vector<double>& data, int start, int end, double mean);
+    double calculateATR(const std::vector<double>& highs, const std::vector<double>& lows, const std::vector<double>& closes, int period, int index);
 };
 
 #endif // TECHNICALINDICATORS_H

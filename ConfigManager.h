@@ -1,8 +1,9 @@
 #pragma once
-#include "third_party/nlohmann_json/json.hpp"
+
+#include <json/json.h>
 #include <string>
 
 class ConfigManager {
 public:
-    static nlohmann::json readConfig(const std::string& configFile);
+    static Json::Value readConfig(const std::string& configFile);
 };

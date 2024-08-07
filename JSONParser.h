@@ -4,12 +4,14 @@
 #include <vector>
 #include <tuple>
 #include <optional>
-#include <nlohmann/json.hpp>
+#include <json/json.h> // Include jsoncpp header
 #include <string>
 
 class JSONParser {
 public:
-    static std::optional<double> extractValue(const nlohmann::json& data, const std::string& key);
+    // Extracts a numeric value from a JSON object for a given key
+    static std::optional<double> extractValue(const Json::Value& data, const std::string& key);
+
     // Function to parse JSON data for prices; made more generic to handle different structures
     static std::tuple<std::vector<double>, std::vector<double>, std::vector<double>> parseJsonForPrices(
             const std::string& jsonData,
@@ -19,7 +21,7 @@ public:
 
 private:
     // Helper method to validate the presence and type of keys in JSON
-    static bool validateJson(const nlohmann::json& j, const std::string& key, const nlohmann::json::value_t expectedType);
+    static bool validateJson(const Json::Value& j, const std::string& key, Json::ValueType expectedType);
 };
 
 #endif // JSON_PARSER_H
