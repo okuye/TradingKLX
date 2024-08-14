@@ -29,22 +29,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e18f0a1e-f62e-499a-9bd6-dce39a999206" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/JsonStructureException.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Utilities.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Utilities.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/exceptions.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/external_libs_build.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/external_libs_common.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/external_libs_get.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataProcessor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/DataProcessor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataProcessor.h" beforeDir="false" afterPath="$PROJECT_DIR$/DataProcessor.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JSONParser.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/JSONParser.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JSONParser.h" beforeDir="false" afterPath="$PROJECT_DIR$/JSONParser.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OandA_API.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/OandA_API.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OandA_API.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/OandA_API.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PriceData.h" beforeDir="false" afterPath="$PROJECT_DIR$/PriceData.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TradingKLX.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TradingKLX.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -179,7 +166,7 @@
       <workItem from="1723654055547" duration="281000" />
       <workItem from="1723654343887" duration="123000" />
       <workItem from="1723671008411" duration="277000" />
-      <workItem from="1723671293078" duration="2399000" />
+      <workItem from="1723671293078" duration="2791000" />
     </task>
     <servers />
   </component>

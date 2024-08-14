@@ -13,7 +13,7 @@
 #include "ConfigManager.h"
 #include "DataProcessor.h"
 #include "TechnicalIndicators.h"
-#include "Utilities.h" // Include for jsonToString
+#include "Utilities.h"
 
 Json::Value readConfig(const std::string& configFile) {
     std::ifstream configFileStream(configFile, std::ifstream::binary);
@@ -31,11 +31,6 @@ Json::Value readConfig(const std::string& configFile) {
 
     return config;
 }
-
-//std::string jsonToString(const Json::Value& jsonValue) {
-//    Json::StreamWriterBuilder writer;
-//    return Json::writeString(writer, jsonValue);
-//}
 
 int main() {
     std::cout << "Current working directory: " << std::filesystem::current_path() << std::endl;
@@ -90,18 +85,6 @@ int main() {
     std::string granularity = "S5";
     Json::Value jsonData = oandA_API.getHistoricalData("EUR_USD", granularity, 6);
 
-//    try {
-//        // Add debug information to log the entire JSON response
-//        std::cout << "Full JSON Response: " << jsonToString(jsonData) << std::endl;
-//
-//        if (!jsonData.isMember("candles") || !jsonData["candles"].isArray()) {
-//            std::cerr << "Invalid JSON structure: missing or incorrect 'candles' key" << std::endl;
-//            throw std::runtime_error("JSON structure is not as expected");
-//        }
-//    } catch (const std::exception& e) {
-//        std::cerr << "Exception caught: " << e.what() << std::endl;
-//        return 1;
-//    }
     try {
         // Log the full JSON response for debugging
         std::cout << "Full JSON Response: " << jsonToString(jsonData) << std::endl;
@@ -151,9 +134,15 @@ int main() {
         double tenkanSen = indicators.calculateTenkanSen(highs, lows, 9, i, ichimokuMemo);
         double kijunSen = indicators.calculateKijunSen(highs, lows, 26, i, ichimokuMemo);
         double senkouSpanA = indicators.calculateSenkouSpanA(i, ichimokuMemo);
-        double senkouSpanB = indicators.calculateSenkouSpanB(highs, lows, i, ichimokuMemo);
 
-        indicators.calculateBollingerBandsWithMemoization(closes, 20, 2, bbMemo);
+        if (i >= 51) {  // Ensure enough data points exist for Senkou Span B calculation
+            double senkouSpanB = indicators.calculateSenkouSpanB(highs, lows, i, ichimokuMemo);
+        }
+
+        // Ensure enough data points exist for Bollinger Bands calculation
+        if (closes.size() >= 20) {
+            indicators.calculateBollingerBandsWithMemoization(closes, 20, 2, bbMemo);
+        }
     }
     return 0;
 }
