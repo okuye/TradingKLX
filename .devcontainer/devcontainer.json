@@ -1,0 +1,16 @@
+{
+    "name": "Ubuntu Dev Container",
+    "dockerFile": "Dockerfile",
+    "context": "..",
+    "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash"
+    },
+    "extensions": [
+        "ms-vscode.cpptools",
+        "ms-vscode.cmake-tools",
+        "ms-vscode-remote.remote-containers"
+    ],
+    "postCreateCommand": "cmake . && make",
+    "forwardPorts": [8081, 27017],
+    "remoteUser": "root"
+}

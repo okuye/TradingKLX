@@ -1,11 +1,12 @@
 #include "OandA_API.hpp"
+#include "JsonStructureException.hpp"
 #include <stdexcept>
 #include <iostream>
-#include <json/json.h>  // Include JsonCpp header
-#include <curl/curl.h>  // Include CURL header
+#include <json/json.h>
+#include <curl/curl.h>
 
 OandA_API::OandA_API(const std::string& apiKey, const std::string& accountID)
-        : apiKey(apiKey), accountID(accountID), baseURL("https://api-fxtrade.oanda.com/v3/") {}
+        : apiKey(apiKey), accountID(accountID), baseURL("https://api-fxpractice.oanda.com/v3/") {}
 
 size_t OandA_API::WriteCallback(void* contents, size_t size, size_t nmemb, void* userp) {
     ((std::string*)userp)->append((char*)contents, size * nmemb);
@@ -26,6 +27,10 @@ Json::Value OandA_API::makeRequest(const std::string& endpoint) {
         curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+
+        std::cout << "Request URL: " << url << std::endl;
+        std::cout << "Authorization Header: " << "Bearer " + apiKey << std::endl;
+
         res = curl_easy_perform(curl);
         curl_easy_cleanup(curl);
 
@@ -38,7 +43,6 @@ Json::Value OandA_API::makeRequest(const std::string& endpoint) {
     Json::Value jsonData;
     std::string errs;
 
-    // Parse the JSON data
     std::unique_ptr<Json::CharReader> reader(readerBuilder.newCharReader());
     if (!reader->parse(readBuffer.c_str(), readBuffer.c_str() + readBuffer.size(), &jsonData, &errs)) {
         throw std::runtime_error("Failed to parse JSON: " + errs);
@@ -55,7 +59,20 @@ Json::Value OandA_API::getInstrumentPrices(const std::string& instrument) {
     return makeRequest("instruments/" + instrument + "/pricing");
 }
 
-Json::Value OandA_API::getHistoricalData(const std::string& instrument, const std::string& granularity, const std::string& from, const std::string& to) {
-    std::string endpoint = "instruments/" + instrument + "/candles?granularity=" + granularity + "&from=" + from + "&to=" + to;
-    return makeRequest(endpoint);
+Json::Value OandA_API::getHistoricalData(const std::string& instrument, const std::string& granularity, int count) {
+    std::string endpoint = "instruments/" + instrument + "/candles?granularity=" + granularity + "&count=" + std::to_string(count) + "&price=M";
+
+    Json::Value jsonData = makeRequest(endpoint);
+
+    if (jsonData.isMember("errorMessage")) {
+        std::cerr << "API Error: " << jsonData["errorMessage"].asString() << std::endl;
+        throw std::runtime_error("API Error: " + jsonData["errorMessage"].asString());
+    }
+
+    if (!jsonData.isMember("candles") || !jsonData["candles"].isArray()) {
+        std::cerr << "Invalid JSON structure: missing or incorrect 'candles' key" << std::endl;
+        throw JsonStructureException("Invalid JSON structure");
+    }
+
+    return jsonData;
 }

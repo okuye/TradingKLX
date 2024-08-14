@@ -3,6 +3,7 @@
 #include <vector>
 #include <json/json.h> // Include the jsoncpp header
 #include "PriceData.h"
+#include "Utilities.h"
 
 class DataProcessor {
 public:

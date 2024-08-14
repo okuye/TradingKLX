@@ -2,6 +2,14 @@
 #include <iostream>  // For debugging purposes
 #include <sstream>   // For std::istringstream
 
+// Include the correct header for jsonToString
+#include "Utilities.h"
+
+//std::string jsonToString(const Json::Value& jsonValue) {
+//    Json::StreamWriterBuilder writer;
+//    return Json::writeString(writer, jsonValue);
+//}
+
 // Extracts a numeric value from the given JSON data for a specified key
 std::optional<double> JSONParser::extractValue(const Json::Value& data, const std::string& key) {
     if (data.isMember(key) && data[key].isNumeric()) {

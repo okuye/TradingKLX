@@ -7,6 +7,8 @@
 #include <json/json.h> // Include jsoncpp header
 #include <string>
 
+std::string jsonToString(const Json::Value& jsonValue);
+
 class JSONParser {
 public:
     // Extracts a numeric value from a JSON object for a given key

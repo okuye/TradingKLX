@@ -4,6 +4,7 @@
 
 struct PriceData {
     double open, high, low, close;
+    int volume;  // Add this field to store the volume information
     std::string timestamp;
 };
 
