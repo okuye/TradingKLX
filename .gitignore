@@ -366,6 +366,8 @@ FodyWeavers.xsd
 
 cmake-build-debug/
 
+cmake-build-debug
+
 data/
 
 .idea
