@@ -80,6 +80,7 @@ add_executable(TradingKLX
         JsonStructureException.hpp
         Utilities.h
         Utilities.cpp
+        matplotlibcpp.h
 )
 
 # Link libraries

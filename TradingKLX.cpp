@@ -82,8 +82,9 @@ int main() {
     }
 
     OandA_API oandA_API(apiKey, accountID);
+//    std::string granularity = "D";
     std::string granularity = "S5";
-    Json::Value jsonData = oandA_API.getHistoricalData("EUR_USD", granularity, 6);
+    Json::Value jsonData = oandA_API.getHistoricalData("EUR_USD", granularity, 60);
 
     try {
         // Log the full JSON response for debugging
