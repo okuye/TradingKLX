@@ -9,6 +9,7 @@ jsoncpp
 *.user
 *.userosscache
 *.sln.docstates
+Chats/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
