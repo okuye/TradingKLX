@@ -242,7 +242,6 @@ void OandA_API::saveInstruments() {
     }
 }
 
-
 std::string get_his_data_filename(const std::string& pair, const std::string& granularity) {
     return pair + "_" + granularity + "_data.csv";
 }
@@ -278,23 +277,56 @@ void plotCandlestick(const std::string& pair, const std::string& granularity) {
     std::vector<double> plotLow(low.end() - dataSize, low.end());
     std::vector<double> plotClose(close.end() - dataSize, close.end());
 
+    // Calculate MA_8
+    std::vector<double> MA_8(plotClose.size());
+    for (size_t i = 7; i < plotClose.size(); ++i) {
+        MA_8[i] = std::accumulate(plotClose.begin() + i - 7, plotClose.begin() + i + 1, 0.0) / 8.0;
+    }
+
     // Create candlestick plot manually
-    plt::figure_size(1200, 800);
+    plt::figure_size(1000, 300);
     plt::title(pair + " - " + granularity);
 
-    for (size_t i = 0; i < plotTime.size(); ++i) {
-        // Draw the wick
-        plt::plot({static_cast<double>(i), static_cast<double>(i)}, {plotLow[i], plotHigh[i]}, "b-");
+    // Set plot limits
+    double x_min = -1, x_max = plotTime.size();
+    double y_min = *std::min_element(plotLow.begin(), plotLow.end());
+    double y_max = *std::max_element(plotHigh.begin(), plotHigh.end());
+    plt::xlim(x_min, x_max);
+    plt::ylim(y_min, y_max);
 
-        // Draw the body
-        std::string color = plotClose[i] > plotOpen[i] ? "g" : "r";
-        plt::plot({i-0.4, i-0.4, i+0.4, i+0.4, i-0.4},
-                  {plotOpen[i], plotClose[i], plotClose[i], plotOpen[i], plotOpen[i]},
-                  color);
+    // Create background rectangle
+    plt::plot(std::vector<double>{x_min, x_max, x_max, x_min, x_min},
+              std::vector<double>{y_min, y_min, y_max, y_max, y_min},
+              "#1e1e1e");
+
+    // Draw grid
+    plt::grid(true);
+
+    // Draw candlesticks
+    for (size_t i = 0; i < plotTime.size(); ++i) {
+        std::vector<double> x{static_cast<double>(i), static_cast<double>(i)};
+        std::vector<double> prices{plotLow[i], plotHigh[i]};
+
+        if (plotClose[i] > plotOpen[i]) {
+            plt::plot(x, prices, "#2EC886");
+            plt::plot(std::vector<double>{i-0.4, i-0.4, i+0.4, i+0.4},
+                      std::vector<double>{plotOpen[i], plotClose[i], plotClose[i], plotOpen[i]},
+                      "#24A06B");
+        } else {
+            plt::plot(x, prices, "#FF3A4C");
+            plt::plot(std::vector<double>{i-0.4, i-0.4, i+0.4, i+0.4},
+                      std::vector<double>{plotOpen[i], plotClose[i], plotClose[i], plotOpen[i]},
+                      "#CC2E3C");
+        }
     }
+
+    // Add MA_8 line
+    std::vector<double> x_ma(plotTime.size());
+    std::iota(x_ma.begin(), x_ma.end(), 0);
+    plt::plot(x_ma, MA_8, "#027FC3");
 
     plt::xlabel("Time");
     plt::ylabel("Price");
+    plt::tight_layout();
     plt::show();
 }
-

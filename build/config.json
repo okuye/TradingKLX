@@ -1,8 +1,0 @@
-{
-    "apiKey": "3299849c3e7eb52b3437970f9bbe39ba-2569e273a33c4f8038603c3cd158f654",
-    "accountID": "101-004-29431369-001",
-    "from_symbol": "EUR_USD",
-    "to_symbol": "USD",
-    "dbName": "TradeData",
-    "collectionName": "DataQuotes"
-}
