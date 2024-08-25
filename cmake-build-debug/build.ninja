@@ -52,63 +52,63 @@ build cmake_object_order_depends_target_TradingKLX: phony || CMakeFiles/TradingK
 build CMakeFiles/TradingKLX.dir/TradingKLX.cpp.o: CXX_COMPILER__TradingKLX_unscanned_Debug /Users/olakunlekuye/Documents/Dev/KLX/demo/TradingKLX/TradingKLX.cpp || cmake_object_order_depends_target_TradingKLX
   DEP_FILE = CMakeFiles/TradingKLX.dir/TradingKLX.cpp.o.d
   FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -fcolor-diagnostics
-  INCLUDES = -I/usr/local/include -isystem /usr/local/opt/python@3.12/Frameworks/Python.framework/Versions/3.12/include/python3.12
+  INCLUDES = -I/Users/olakunlekuye/Documents/Dev/KLX/demo/TradingKLX/tradingklx_venv/lib/python3.9/site-packages/numpy/core/include -I/usr/local/include -isystem /Users/olakunlekuye/.pyenv/versions/3.9.1/include/python3.9
   OBJECT_DIR = CMakeFiles/TradingKLX.dir
   OBJECT_FILE_DIR = CMakeFiles/TradingKLX.dir
 
 build CMakeFiles/TradingKLX.dir/OandA_API.cpp.o: CXX_COMPILER__TradingKLX_unscanned_Debug /Users/olakunlekuye/Documents/Dev/KLX/demo/TradingKLX/OandA_API.cpp || cmake_object_order_depends_target_TradingKLX
   DEP_FILE = CMakeFiles/TradingKLX.dir/OandA_API.cpp.o.d
   FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -fcolor-diagnostics
-  INCLUDES = -I/usr/local/include -isystem /usr/local/opt/python@3.12/Frameworks/Python.framework/Versions/3.12/include/python3.12
+  INCLUDES = -I/Users/olakunlekuye/Documents/Dev/KLX/demo/TradingKLX/tradingklx_venv/lib/python3.9/site-packages/numpy/core/include -I/usr/local/include -isystem /Users/olakunlekuye/.pyenv/versions/3.9.1/include/python3.9
   OBJECT_DIR = CMakeFiles/TradingKLX.dir
   OBJECT_FILE_DIR = CMakeFiles/TradingKLX.dir
 
 build CMakeFiles/TradingKLX.dir/ConfigManager.cpp.o: CXX_COMPILER__TradingKLX_unscanned_Debug /Users/olakunlekuye/Documents/Dev/KLX/demo/TradingKLX/ConfigManager.cpp || cmake_object_order_depends_target_TradingKLX
   DEP_FILE = CMakeFiles/TradingKLX.dir/ConfigManager.cpp.o.d
   FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -fcolor-diagnostics
-  INCLUDES = -I/usr/local/include -isystem /usr/local/opt/python@3.12/Frameworks/Python.framework/Versions/3.12/include/python3.12
+  INCLUDES = -I/Users/olakunlekuye/Documents/Dev/KLX/demo/TradingKLX/tradingklx_venv/lib/python3.9/site-packages/numpy/core/include -I/usr/local/include -isystem /Users/olakunlekuye/.pyenv/versions/3.9.1/include/python3.9
   OBJECT_DIR = CMakeFiles/TradingKLX.dir
   OBJECT_FILE_DIR = CMakeFiles/TradingKLX.dir
 
 build CMakeFiles/TradingKLX.dir/DataProcessor.cpp.o: CXX_COMPILER__TradingKLX_unscanned_Debug /Users/olakunlekuye/Documents/Dev/KLX/demo/TradingKLX/DataProcessor.cpp || cmake_object_order_depends_target_TradingKLX
   DEP_FILE = CMakeFiles/TradingKLX.dir/DataProcessor.cpp.o.d
   FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -fcolor-diagnostics
-  INCLUDES = -I/usr/local/include -isystem /usr/local/opt/python@3.12/Frameworks/Python.framework/Versions/3.12/include/python3.12
+  INCLUDES = -I/Users/olakunlekuye/Documents/Dev/KLX/demo/TradingKLX/tradingklx_venv/lib/python3.9/site-packages/numpy/core/include -I/usr/local/include -isystem /Users/olakunlekuye/.pyenv/versions/3.9.1/include/python3.9
   OBJECT_DIR = CMakeFiles/TradingKLX.dir
   OBJECT_FILE_DIR = CMakeFiles/TradingKLX.dir
 
 build CMakeFiles/TradingKLX.dir/TechnicalIndicators.cpp.o: CXX_COMPILER__TradingKLX_unscanned_Debug /Users/olakunlekuye/Documents/Dev/KLX/demo/TradingKLX/TechnicalIndicators.cpp || cmake_object_order_depends_target_TradingKLX
   DEP_FILE = CMakeFiles/TradingKLX.dir/TechnicalIndicators.cpp.o.d
   FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -fcolor-diagnostics
-  INCLUDES = -I/usr/local/include -isystem /usr/local/opt/python@3.12/Frameworks/Python.framework/Versions/3.12/include/python3.12
+  INCLUDES = -I/Users/olakunlekuye/Documents/Dev/KLX/demo/TradingKLX/tradingklx_venv/lib/python3.9/site-packages/numpy/core/include -I/usr/local/include -isystem /Users/olakunlekuye/.pyenv/versions/3.9.1/include/python3.9
   OBJECT_DIR = CMakeFiles/TradingKLX.dir
   OBJECT_FILE_DIR = CMakeFiles/TradingKLX.dir
 
 build CMakeFiles/TradingKLX.dir/AlphaVantageAPI.cpp.o: CXX_COMPILER__TradingKLX_unscanned_Debug /Users/olakunlekuye/Documents/Dev/KLX/demo/TradingKLX/AlphaVantageAPI.cpp || cmake_object_order_depends_target_TradingKLX
   DEP_FILE = CMakeFiles/TradingKLX.dir/AlphaVantageAPI.cpp.o.d
   FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -fcolor-diagnostics
-  INCLUDES = -I/usr/local/include -isystem /usr/local/opt/python@3.12/Frameworks/Python.framework/Versions/3.12/include/python3.12
+  INCLUDES = -I/Users/olakunlekuye/Documents/Dev/KLX/demo/TradingKLX/tradingklx_venv/lib/python3.9/site-packages/numpy/core/include -I/usr/local/include -isystem /Users/olakunlekuye/.pyenv/versions/3.9.1/include/python3.9
   OBJECT_DIR = CMakeFiles/TradingKLX.dir
   OBJECT_FILE_DIR = CMakeFiles/TradingKLX.dir
 
 build CMakeFiles/TradingKLX.dir/TradingStrategy.cpp.o: CXX_COMPILER__TradingKLX_unscanned_Debug /Users/olakunlekuye/Documents/Dev/KLX/demo/TradingKLX/TradingStrategy.cpp || cmake_object_order_depends_target_TradingKLX
   DEP_FILE = CMakeFiles/TradingKLX.dir/TradingStrategy.cpp.o.d
   FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -fcolor-diagnostics
-  INCLUDES = -I/usr/local/include -isystem /usr/local/opt/python@3.12/Frameworks/Python.framework/Versions/3.12/include/python3.12
+  INCLUDES = -I/Users/olakunlekuye/Documents/Dev/KLX/demo/TradingKLX/tradingklx_venv/lib/python3.9/site-packages/numpy/core/include -I/usr/local/include -isystem /Users/olakunlekuye/.pyenv/versions/3.9.1/include/python3.9
   OBJECT_DIR = CMakeFiles/TradingKLX.dir
   OBJECT_FILE_DIR = CMakeFiles/TradingKLX.dir
 
 build CMakeFiles/TradingKLX.dir/JSONParser.cpp.o: CXX_COMPILER__TradingKLX_unscanned_Debug /Users/olakunlekuye/Documents/Dev/KLX/demo/TradingKLX/JSONParser.cpp || cmake_object_order_depends_target_TradingKLX
   DEP_FILE = CMakeFiles/TradingKLX.dir/JSONParser.cpp.o.d
   FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -fcolor-diagnostics
-  INCLUDES = -I/usr/local/include -isystem /usr/local/opt/python@3.12/Frameworks/Python.framework/Versions/3.12/include/python3.12
+  INCLUDES = -I/Users/olakunlekuye/Documents/Dev/KLX/demo/TradingKLX/tradingklx_venv/lib/python3.9/site-packages/numpy/core/include -I/usr/local/include -isystem /Users/olakunlekuye/.pyenv/versions/3.9.1/include/python3.9
   OBJECT_DIR = CMakeFiles/TradingKLX.dir
   OBJECT_FILE_DIR = CMakeFiles/TradingKLX.dir
 
 build CMakeFiles/TradingKLX.dir/Utilities.cpp.o: CXX_COMPILER__TradingKLX_unscanned_Debug /Users/olakunlekuye/Documents/Dev/KLX/demo/TradingKLX/Utilities.cpp || cmake_object_order_depends_target_TradingKLX
   DEP_FILE = CMakeFiles/TradingKLX.dir/Utilities.cpp.o.d
   FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -fcolor-diagnostics
-  INCLUDES = -I/usr/local/include -isystem /usr/local/opt/python@3.12/Frameworks/Python.framework/Versions/3.12/include/python3.12
+  INCLUDES = -I/Users/olakunlekuye/Documents/Dev/KLX/demo/TradingKLX/tradingklx_venv/lib/python3.9/site-packages/numpy/core/include -I/usr/local/include -isystem /Users/olakunlekuye/.pyenv/versions/3.9.1/include/python3.9
   OBJECT_DIR = CMakeFiles/TradingKLX.dir
   OBJECT_FILE_DIR = CMakeFiles/TradingKLX.dir
 
@@ -120,11 +120,11 @@ build CMakeFiles/TradingKLX.dir/Utilities.cpp.o: CXX_COMPILER__TradingKLX_unscan
 #############################################
 # Link the executable TradingKLX
 
-build TradingKLX: CXX_EXECUTABLE_LINKER__TradingKLX_Debug CMakeFiles/TradingKLX.dir/TradingKLX.cpp.o CMakeFiles/TradingKLX.dir/OandA_API.cpp.o CMakeFiles/TradingKLX.dir/ConfigManager.cpp.o CMakeFiles/TradingKLX.dir/DataProcessor.cpp.o CMakeFiles/TradingKLX.dir/TechnicalIndicators.cpp.o CMakeFiles/TradingKLX.dir/AlphaVantageAPI.cpp.o CMakeFiles/TradingKLX.dir/TradingStrategy.cpp.o CMakeFiles/TradingKLX.dir/JSONParser.cpp.o CMakeFiles/TradingKLX.dir/Utilities.cpp.o | /usr/local/opt/python@3.12/Frameworks/Python.framework/Versions/3.12/lib/libpython3.12.dylib
+build TradingKLX: CXX_EXECUTABLE_LINKER__TradingKLX_Debug CMakeFiles/TradingKLX.dir/TradingKLX.cpp.o CMakeFiles/TradingKLX.dir/OandA_API.cpp.o CMakeFiles/TradingKLX.dir/ConfigManager.cpp.o CMakeFiles/TradingKLX.dir/DataProcessor.cpp.o CMakeFiles/TradingKLX.dir/TechnicalIndicators.cpp.o CMakeFiles/TradingKLX.dir/AlphaVantageAPI.cpp.o CMakeFiles/TradingKLX.dir/TradingStrategy.cpp.o CMakeFiles/TradingKLX.dir/JSONParser.cpp.o CMakeFiles/TradingKLX.dir/Utilities.cpp.o | /Users/olakunlekuye/.pyenv/versions/3.9.1/lib/libpython3.9.dylib
   FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk
   LINK_FLAGS = -L/opt/homebrew/opt/curl/lib
-  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib -Wl,-rpath,/usr/local/opt/python@3.12/Frameworks/Python.framework/Versions/3.12/lib  -ljsoncpp  -lcurl  /usr/local/opt/python@3.12/Frameworks/Python.framework/Versions/3.12/lib/libpython3.12.dylib
-  LINK_PATH = -L/usr/local/lib   -L/usr/local/opt/python@3.12/Frameworks/Python.framework/Versions/3.12/lib
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib -Wl,-rpath,/Users/olakunlekuye/.pyenv/versions/3.9.1/lib  -ljsoncpp  -lcurl  /Users/olakunlekuye/.pyenv/versions/3.9.1/lib/libpython3.9.dylib
+  LINK_PATH = -L/usr/local/lib   -L/Users/olakunlekuye/.pyenv/versions/3.9.1/lib
   OBJECT_DIR = CMakeFiles/TradingKLX.dir
   POST_BUILD = :
   PRE_LINK = :

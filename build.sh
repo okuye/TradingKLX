@@ -1,55 +1,45 @@
 #!/bin/bash
 
-# Check if the build directory exists
-if [ -d "build" ]; then
-    echo "Build directory exists. Cleaning..."
-    # Add a prompt for confirmation to avoid accidental deletion
-    read -p "Are you sure you want to remove the existing build directory? (y/N): " confirm
-    if [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]]; then
-        rm -rf build
-    else
-        echo "Exiting without cleaning build directory."
-        exit
-    fi
+# Set up Python virtual environment
+VENV_DIR="tradingklx_venv"
+PYTHON_VERSION="python3"
+
+# Remove the existing virtual environment if it exists
+if [ -d "$VENV_DIR" ]; then
+    echo "Removing existing virtual environment..."
+    rm -rf $VENV_DIR
 fi
 
-# Create the build directory
-mkdir build
-cd build
-
-# Check if Ninja is installed
-if command -v ninja &> /dev/null; then
-    GENERATOR="Ninja"
-else
-    GENERATOR="Unix Makefiles"
-fi
-
-# Run CMake based on the platform
-if [[ "$OSTYPE" == "cygwin" || "$OSTYPE" == "msys" || "$OSTYPE" == "win32" ]]; then
-    # Adjust the paths to your compilers if necessary
-    cmake .. -G "$GENERATOR" -DCMAKE_C_COMPILER=C:/cygwin64/bin/gcc.exe -DCMAKE_CXX_COMPILER=C:/cygwin64/bin/g++.exe
-else
-    cmake .. -G "$GENERATOR"
-fi
-
-# Set up Python virtual environment and install numpy
+# Create a new virtual environment
 echo "Setting up Python virtual environment..."
-if [ ! -d "tradingklx_venv" ]; then
-    python3 -m venv tradingklx_venv
-    source tradingklx_venv/bin/activate
-    pip install numpy
-else
-    echo "Python virtual environment already exists."
-    source tradingklx_venv/bin/activate
+$PYTHON_VERSION -m venv $VENV_DIR
+
+# Activate the virtual environment
+source $VENV_DIR/bin/activate
+
+# Upgrade pip to the latest version
+pip install --upgrade pip
+
+# Install the required packages
+pip install numpy==1.24.0 cmake
+
+# Check if numpy headers are installed
+NUMPY_HEADERS=$(find $VENV_DIR/lib/python3.9/site-packages/numpy/ -name "arrayobject.h")
+if [ -z "$NUMPY_HEADERS" ]; then
+    echo "Error: numpy headers not found. Installation failed."
+    exit 1
 fi
 
-# Display the Python path and numpy include directory
-echo "Python executable: $(which python)"
-echo "Numpy include directory: $(python -c 'import numpy; print(numpy.get_include())')"
+# Export the Python path for CMake to use
+export PYTHON_EXECUTABLE=$VENV_DIR/bin/python
 
-# Build the project
-cmake --build .
+# Proceed with the build
+mkdir -p build
+cd build
+cmake -DPYTHON_EXECUTABLE=$PYTHON_EXECUTABLE -DPython3_NumPy_INCLUDE_DIRS=$VENV_DIR/lib/python3.9/site-packages/numpy/core/include/numpy ..
+make -j$(nproc)
 
-# Install the project (optional)
-# Uncomment the following line if you want to install the project after building
-# cmake --build . --target install
+# Deactivate the virtual environment
+deactivate
+
+echo "Build completed successfully."

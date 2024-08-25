@@ -3,6 +3,23 @@ project(TradingKLX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(Python3_EXECUTABLE "/Users/olakunlekuye/Documents/Dev/KLX/demo/TradingKLX/tradingklx_venv/bin/python")
+find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
+
+execute_process(
+        COMMAND ${Python3_EXECUTABLE} -c "import numpy; print(numpy.get_include())"
+        OUTPUT_VARIABLE NUMPY_INCLUDE_DIR
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+
+message(STATUS "Python3_EXECUTABLE: ${Python3_EXECUTABLE}")
+message(STATUS "NumPy Include Directory: ${NUMPY_INCLUDE_DIR}")
+
+if(NOT NUMPY_INCLUDE_DIR)
+    message(FATAL_ERROR "NumPy not found. Please ensure NumPy is installed in the Python environment.")
+endif()
+
+include_directories(${NUMPY_INCLUDE_DIR})
 
 if(APPLE)
     message("Configuring for macOS")
@@ -27,28 +44,37 @@ else()
     message(FATAL_ERROR "std::filesystem is not available")
 endif()
 
-find_package(PkgConfig REQUIRED)
-pkg_check_modules(JSONCPP REQUIRED jsoncpp)
-find_package(CURL REQUIRED)
+# Automatically find the correct Python executable and NumPy
 find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
 
-# Get the numpy include directory
 execute_process(
         COMMAND ${Python3_EXECUTABLE} -c "import numpy; print(numpy.get_include())"
         OUTPUT_VARIABLE NUMPY_INCLUDE_DIR
         OUTPUT_STRIP_TRAILING_WHITESPACE
 )
 
-# Set paths correctly
+if(NOT NUMPY_INCLUDE_DIR)
+    message(FATAL_ERROR "NumPy not found. Please ensure NumPy is installed in the Python environment.")
+else()
+    message(STATUS "NumPy found at: ${NUMPY_INCLUDE_DIR}")
+    include_directories(${NUMPY_INCLUDE_DIR})
+endif()
+
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(JSONCPP REQUIRED jsoncpp)
+find_package(CURL REQUIRED)
+
+# Include directories
 include_directories(${JSONCPP_INCLUDE_DIRS})
 include_directories(${CURL_INCLUDE_DIRS})
 include_directories(${Python3_INCLUDE_DIRS})
-include_directories(${NUMPY_INCLUDE_DIR})
 
+# Link directories
 link_directories(${JSONCPP_LIBRARY_DIRS})
 link_directories(${CURL_LIBRARY_DIRS})
 link_directories(${Python3_LIBRARY_DIRS})
 
+# Source files
 set(SOURCE_FILES
         TradingKLX.cpp
         OandA_API.cpp
@@ -61,19 +87,23 @@ set(SOURCE_FILES
         Utilities.cpp
 )
 
+# Create the executable
 add_executable(TradingKLX ${SOURCE_FILES})
 
+# Include directories in the target
 target_include_directories(TradingKLX PRIVATE
         ${JSONCPP_INCLUDE_DIRS}
         ${CURL_INCLUDE_DIRS}
         ${Python3_INCLUDE_DIRS}
-        ${NUMPY_INCLUDE_DIR}
+        ${NUMPY_INCLUDE_DIR}  # Add NumPy include directory if found manually
 )
 
+# Link libraries
 target_link_libraries(TradingKLX PRIVATE
         jsoncpp
         curl
         Python3::Python
 )
 
+# Copy configuration file to the build directory
 configure_file(${CMAKE_SOURCE_DIR}/config.json ${CMAKE_BINARY_DIR}/config.json COPYONLY)
