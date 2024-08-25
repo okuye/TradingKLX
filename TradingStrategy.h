@@ -1,34 +1,38 @@
-#ifndef TRADINGSTRATEGY_H
-#define TRADINGSTRATEGY_H
+#ifndef TRADING_STRATEGY_H
+#define TRADING_STRATEGY_H
 
 #include <vector>
-#include "TechnicalIndicators.h" // Include the TechnicalIndicators class
-#include "PriceData.h" // Assume a PriceData struct is defined elsewhere
-
-// Structure to hold trading signals
-struct TradingSignal {
-    bool buy;
-    bool sell;
-    size_t index; // Position in the dataset
-    double positionSize;
-    double stopLossLevel;
-};
+#include "PriceData.h"
+#include "TechnicalIndicators.h"
+#include "TradingSignal.h"
 
 class TradingStrategy {
 public:
     TradingStrategy(double initialBalance, double riskPerTrade, double stopLossMultiplier);
-    std::vector<TradingSignal> evaluateSignals(const std::vector<PriceData>& priceData);
+
+    std::vector<TradingSignal> evaluateSignals(const std::vector<PriceData>& priceData,
+                                               const std::vector<double>& closes,
+                                               const std::vector<double>& highs,
+                                               const std::vector<double>& lows,
+                                               const std::vector<double>& tenkanS,
+                                               const std::vector<double>& kijunS,
+                                               const std::vector<double>& senkouA,
+                                               const std::vector<double>& senkouB,
+                                               const std::vector<double>& lowerBB,
+                                               const std::vector<double>& upperBB);
 
 private:
-    TechnicalIndicators indicators;
     double accountBalance;
     double riskPerTrade;
     double stopLossMultiplier;
+
     int smaPeriod;
     int bollingerBandsPeriod;
-    double bollingerBandsMultiplier;
+    int bollingerBandsMultiplier;
+
+    TechnicalIndicators indicators;
 
     void loadConfiguration(const std::string& configFile);
 };
 
-#endif // TRADINGSTRATEGY_H
+#endif

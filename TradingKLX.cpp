@@ -14,6 +14,7 @@
 #include "TechnicalIndicators.h"
 #include "TradingStrategy.h"
 #include "Utilities.h"
+#include "JSONParser.h"
 
 Json::Value readConfig(const std::string& configFile) {
     std::ifstream configFileStream(configFile, std::ifstream::binary);
@@ -32,8 +33,11 @@ Json::Value readConfig(const std::string& configFile) {
     return config;
 }
 
+
+
 int main() {
-    Json::Value config;
+
+        Json::Value config;
 
     try {
         config = readConfig("config.json");
@@ -83,28 +87,7 @@ int main() {
     std::string granularity = "S5";
     Json::Value jsonData = oandA_API.getHistoricalData("EUR_USD", granularity, 60);
 
-    try {
-        std::cout << "Full JSON Response: " << jsonToString(jsonData) << std::endl;
 
-        if (jsonData.isMember("errorMessage")) {
-            std::cerr << "API Error: " << jsonData["errorMessage"].asString() << std::endl;
-            return 1;
-        }
-
-        if (!jsonData.isMember("candles") || !jsonData["candles"].isArray()) {
-            std::cerr << "Invalid JSON structure: missing or incorrect 'candles' key" << std::endl;
-            std::cout << "JSON Response contains 'candles': " << jsonData.isMember("candles") << std::endl;
-            std::cout << "JSON 'candles' is array: " << jsonData["candles"].isArray() << std::endl;
-            throw std::runtime_error("JSON structure is not as expected");
-        }
-
-        std::cout << "Number of elements in 'candles': " << jsonData["candles"].size() << std::endl;
-        std::cout << "First element in 'candles': " << jsonToString(jsonData["candles"][0]) << std::endl;
-
-    } catch (const std::exception& e) {
-        std::cerr << "Exception caught: " << e.what() << std::endl;
-        return 1;
-    }
 
     std::string jsonDataString = jsonToString(jsonData);
     auto priceData = DataProcessor::processData(jsonDataString, "candles");
@@ -118,7 +101,7 @@ int main() {
     IchimokuMemo ichimokuMemo;
     BollingerBandsMemo bbMemo;
 
-    std::vector<double> highs, lows, closes;
+    std::vector<double> highs, lows, closes, tenkanS, kijunS, senkouA, senkouB, lowerBB, upperBB;
     for (const auto& data : priceData) {
         highs.push_back(data.high);
         lows.push_back(data.low);
@@ -127,31 +110,39 @@ int main() {
 
     for (size_t i = 0; i < priceData.size(); ++i) {
         double tenkanSen = indicators.calculateTenkanSen(highs, lows, 9, i, ichimokuMemo);
+        tenkanS.push_back(tenkanSen);
+
         double kijunSen = indicators.calculateKijunSen(highs, lows, 26, i, ichimokuMemo);
+        kijunS.push_back(kijunSen);
+
         double senkouSpanA = indicators.calculateSenkouSpanA(i, ichimokuMemo);
+        senkouA.push_back(senkouSpanA);
 
         if (i >= 51) {
             double senkouSpanB = indicators.calculateSenkouSpanB(highs, lows, i, ichimokuMemo);
+            senkouB.push_back(senkouSpanB);
         }
 
         if (closes.size() >= 20) {
-            indicators.calculateBollingerBandsWithMemoization(closes, 20, 2, bbMemo);
+            auto [lowerBand, upperBand] = indicators.calculateBollingerBandsWithMemoization(closes, 20, 2, bbMemo);
+            lowerBB.push_back(lowerBand);
+            upperBB.push_back(upperBand);
+        } else {
+            lowerBB.push_back(0.0);  // Placeholder for indices where we don't have enough data
+            upperBB.push_back(0.0);  // Placeholder for indices where we don't have enough data
         }
     }
 
-    std::vector<TradingSignal> signals = strategy.evaluateSignals(priceData);
+    std::vector<TradingSignal> signals = strategy.evaluateSignals(priceData, closes, highs, lows, tenkanS, kijunS, senkouA, senkouB, lowerBB, upperBB);
 
+    // Output signals for debugging purposes
     for (const auto& signal : signals) {
         if (signal.buy) {
-            std::cout << "Buy signal at index " << signal.index
-                      << ", Position size: " << signal.positionSize
-                      << ", Stop loss: " << signal.stopLossLevel << std::endl;
+            std::cout << "Buy signal at index: " << signal.index << ", Position Size: " << signal.positionSize << ", Stop Loss: " << signal.stopLossLevel << std::endl;
         } else if (signal.sell) {
-            std::cout << "Sell signal at index " << signal.index << std::endl;
+            std::cout << "Sell signal at index: " << signal.index << std::endl;
         }
     }
-
-    oandA_API.plotCandlestick("EUR_USD", granularity);
 
     return 0;
 }

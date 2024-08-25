@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <unordered_map>
+#include <utility> // Include this for std::pair
 #include "PriceData.h"
 
 struct IchimokuMemo {
@@ -19,7 +20,10 @@ public:
     double calculateKijunSen(const std::vector<double>& highs, const std::vector<double>& lows, int period, int index, IchimokuMemo& memo);
     double calculateSenkouSpanA(int index, IchimokuMemo& memo);
     double calculateSenkouSpanB(const std::vector<double>& highs, const std::vector<double>& lows, int index, IchimokuMemo& memo);
-    void calculateBollingerBandsWithMemoization(const std::vector<double>& data, int window, double numStdDev, BollingerBandsMemo& memo);
+
+    // Update this function declaration to return a std::pair<double, double>
+    std::pair<double, double> calculateBollingerBandsWithMemoization(const std::vector<double>& data, int window, double numStdDev, BollingerBandsMemo& memo);
+
     double calculateSMA(const std::vector<double>& data, int start, int end);
     double calculateStdDev(const std::vector<double>& data, int start, int end, double mean);
     double calculateATR(const std::vector<double>& highs, const std::vector<double>& lows, const std::vector<double>& closes, int period, int index);

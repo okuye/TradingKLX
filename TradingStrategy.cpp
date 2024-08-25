@@ -18,15 +18,17 @@ void TradingStrategy::loadConfiguration(const std::string& configFile) {
     std::cout << "Configuration loaded from " << configFile << std::endl;
 }
 
-std::vector<TradingSignal> TradingStrategy::evaluateSignals(const std::vector<PriceData>& priceData) {
+std::vector<TradingSignal> TradingStrategy::evaluateSignals(const std::vector<PriceData>& priceData,
+                                                            const std::vector<double>& closes,
+                                                            const std::vector<double>& highs,
+                                                            const std::vector<double>& lows,
+                                                            const std::vector<double>& tenkanS,
+                                                            const std::vector<double>& kijunS,
+                                                            const std::vector<double>& senkouA,
+                                                            const std::vector<double>& senkouB,
+                                                            const std::vector<double>& lowerBB,
+                                                            const std::vector<double>& upperBB) {
     std::vector<TradingSignal> signals;
-
-    std::vector<double> closes, highs, lows;
-    for (const auto& data : priceData) {
-        closes.push_back(data.close);
-        highs.push_back(data.high);
-        lows.push_back(data.low);
-    }
 
     for (size_t i = 1; i < priceData.size(); ++i) {
         TradingSignal signal = {false, false, i, 0.0, 0.0};  // Initialize signal
@@ -40,15 +42,23 @@ std::vector<TradingSignal> TradingStrategy::evaluateSignals(const std::vector<Pr
         double positionSize = (accountBalance * riskPerTrade) / atr;  // Calculate position size based on risk and ATR
         double stopLossLevel = priceData[i].close - (atr * stopLossMultiplier);  // Calculate stop-loss level
 
-        // Buy signal condition: price crosses above the moving average
-        if (priceData[i].close > currentSMA && priceData[i - 1].close <= previousSMA) {
+        // Use Ichimoku indicators for signal confirmation
+        bool ichimokuBullish = tenkanS[i] > kijunS[i] && priceData[i].close > senkouA[i] && priceData[i].close > senkouB[i];
+        bool ichimokuBearish = tenkanS[i] < kijunS[i] && priceData[i].close < senkouA[i] && priceData[i].close < senkouB[i];
+
+        // Use Bollinger Bands for signal confirmation
+        bool bollingerBullish = priceData[i].close < lowerBB[i];
+        bool bollingerBearish = priceData[i].close > upperBB[i];
+
+        // Buy signal condition: price crosses above the moving average and confirmed by Ichimoku or Bollinger Bands
+        if (priceData[i].close > currentSMA && priceData[i - 1].close <= previousSMA && (ichimokuBullish || bollingerBullish)) {
             signal.buy = true;
             signal.positionSize = positionSize;
             signal.stopLossLevel = stopLossLevel;
         }
 
-        // Sell signal condition: price crosses below the moving average
-        if (priceData[i].close < currentSMA && priceData[i - 1].close >= previousSMA) {
+        // Sell signal condition: price crosses below the moving average and confirmed by Ichimoku or Bollinger Bands
+        if (priceData[i].close < currentSMA && priceData[i - 1].close >= previousSMA && (ichimokuBearish || bollingerBearish)) {
             signal.sell = true;
             // Adjust positionSize and stopLossLevel as needed for sell signals
         }
