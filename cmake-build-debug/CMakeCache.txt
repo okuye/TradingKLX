@@ -241,16 +241,16 @@ TradingKLX_IS_TOP_LEVEL:STATIC=ON
 TradingKLX_SOURCE_DIR:STATIC=/Users/olakunlekuye/Documents/Dev/KLX/demo/TradingKLX
 
 //Path to a library.
-pkgcfg_lib_BSONCXX_bsoncxx:FILEPATH=/usr/local/lib/libbsoncxx.dylib
-
-//Path to a library.
 pkgcfg_lib_JSONCPP_jsoncpp:FILEPATH=/usr/local/lib/libjsoncpp.dylib
 
 //Path to a library.
-pkgcfg_lib_MONGOCXX_bsoncxx:FILEPATH=/usr/local/lib/libbsoncxx.dylib
+pkgcfg_lib_LIBBSONCXX_bsoncxx:FILEPATH=/usr/local/lib/libbsoncxx.dylib
 
 //Path to a library.
-pkgcfg_lib_MONGOCXX_mongocxx:FILEPATH=/usr/local/lib/libmongocxx.dylib
+pkgcfg_lib_LIBMONGOCXX_bsoncxx:FILEPATH=/usr/local/lib/libbsoncxx.dylib
+
+//Path to a library.
+pkgcfg_lib_LIBMONGOCXX_mongocxx:FILEPATH=/usr/local/lib/libmongocxx.dylib
 
 //Path to a library.
 pkgcfg_lib_PC_CURL_curl:FILEPATH=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk/usr/lib/libcurl.tbd
@@ -260,41 +260,6 @@ pkgcfg_lib_PC_CURL_curl:FILEPATH=/Applications/Xcode.app/Contents/Developer/Plat
 # INTERNAL cache entries
 ########################
 
-BSONCXX_CFLAGS:INTERNAL=-I/usr/local/include/bsoncxx/v_noabi/bsoncxx/third_party/mnmlstc;-I/usr/local/include/bsoncxx/v_noabi;-I/usr/local/include
-BSONCXX_CFLAGS_I:INTERNAL=
-BSONCXX_CFLAGS_OTHER:INTERNAL=
-BSONCXX_FOUND:INTERNAL=1
-BSONCXX_INCLUDEDIR:INTERNAL=/usr/local/include
-BSONCXX_INCLUDE_DIRS:INTERNAL=/usr/local/include/bsoncxx/v_noabi/bsoncxx/third_party/mnmlstc;/usr/local/include/bsoncxx/v_noabi;/usr/local/include
-BSONCXX_LDFLAGS:INTERNAL=-L/usr/local/lib;-lbsoncxx
-BSONCXX_LDFLAGS_OTHER:INTERNAL=
-BSONCXX_LIBDIR:INTERNAL=/usr/local/lib
-BSONCXX_LIBRARIES:INTERNAL=bsoncxx
-BSONCXX_LIBRARY_DIRS:INTERNAL=/usr/local/lib
-BSONCXX_LIBS:INTERNAL=
-BSONCXX_LIBS_L:INTERNAL=
-BSONCXX_LIBS_OTHER:INTERNAL=
-BSONCXX_LIBS_PATHS:INTERNAL=
-BSONCXX_MODULE_NAME:INTERNAL=libbsoncxx
-BSONCXX_PREFIX:INTERNAL=/usr/local
-BSONCXX_STATIC_CFLAGS:INTERNAL=-I/usr/local/include/bsoncxx/v_noabi/bsoncxx/third_party/mnmlstc;-I/usr/local/include/bsoncxx/v_noabi;-I/usr/local/include
-BSONCXX_STATIC_CFLAGS_I:INTERNAL=
-BSONCXX_STATIC_CFLAGS_OTHER:INTERNAL=
-BSONCXX_STATIC_INCLUDE_DIRS:INTERNAL=/usr/local/include/bsoncxx/v_noabi/bsoncxx/third_party/mnmlstc;/usr/local/include/bsoncxx/v_noabi;/usr/local/include
-BSONCXX_STATIC_LDFLAGS:INTERNAL=-L/usr/local/lib;-lbsoncxx
-BSONCXX_STATIC_LDFLAGS_OTHER:INTERNAL=
-BSONCXX_STATIC_LIBDIR:INTERNAL=
-BSONCXX_STATIC_LIBRARIES:INTERNAL=bsoncxx
-BSONCXX_STATIC_LIBRARY_DIRS:INTERNAL=/usr/local/lib
-BSONCXX_STATIC_LIBS:INTERNAL=
-BSONCXX_STATIC_LIBS_L:INTERNAL=
-BSONCXX_STATIC_LIBS_OTHER:INTERNAL=
-BSONCXX_STATIC_LIBS_PATHS:INTERNAL=
-BSONCXX_VERSION:INTERNAL=3.10.2
-BSONCXX_libbsoncxx_INCLUDEDIR:INTERNAL=
-BSONCXX_libbsoncxx_LIBDIR:INTERNAL=
-BSONCXX_libbsoncxx_PREFIX:INTERNAL=
-BSONCXX_libbsoncxx_VERSION:INTERNAL=
 //ADVANCED property for variable: CMAKE_ADDR2LINE
 CMAKE_ADDR2LINE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_AR
@@ -440,6 +405,8 @@ CURL_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
 FIND_PACKAGE_MESSAGE_DETAILS_CURL:INTERNAL=[/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk/usr/lib/libcurl.tbd][/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk/usr/include][c ][v8.6.0()]
 //Details about finding PkgConfig
 FIND_PACKAGE_MESSAGE_DETAILS_PkgConfig:INTERNAL=[/opt/homebrew/bin/pkg-config][v0.29.2()]
+//Details about finding Python3
+FIND_PACKAGE_MESSAGE_DETAILS_Python3:INTERNAL=[/usr/local/Frameworks/Python.framework/Versions/3.12/bin/python3.12][/usr/local/opt/python@3.12/Frameworks/Python.framework/Versions/3.12/include/python3.12][/usr/local/opt/python@3.12/Frameworks/Python.framework/Versions/3.12/lib/libpython3.12.dylib][cfound components: Interpreter Development Development.Module Development.Embed ][v3.12.4()]
 //Test HAVE_FILESYSTEM
 HAVE_FILESYSTEM:INTERNAL=1
 JSONCPP_CFLAGS:INTERNAL=-I/usr/local/include
@@ -477,41 +444,76 @@ JSONCPP_jsoncpp_INCLUDEDIR:INTERNAL=
 JSONCPP_jsoncpp_LIBDIR:INTERNAL=
 JSONCPP_jsoncpp_PREFIX:INTERNAL=
 JSONCPP_jsoncpp_VERSION:INTERNAL=
-MONGOCXX_CFLAGS:INTERNAL=-I/usr/local/include/mongocxx/v_noabi;-I/usr/local/include;-I/usr/local/include/bsoncxx/v_noabi/bsoncxx/third_party/mnmlstc;-I/usr/local/include/bsoncxx/v_noabi;-I/usr/local/include
-MONGOCXX_CFLAGS_I:INTERNAL=
-MONGOCXX_CFLAGS_OTHER:INTERNAL=
-MONGOCXX_FOUND:INTERNAL=1
-MONGOCXX_INCLUDEDIR:INTERNAL=/usr/local/include
-MONGOCXX_INCLUDE_DIRS:INTERNAL=/usr/local/include/mongocxx/v_noabi;/usr/local/include;/usr/local/include/bsoncxx/v_noabi/bsoncxx/third_party/mnmlstc;/usr/local/include/bsoncxx/v_noabi;/usr/local/include
-MONGOCXX_LDFLAGS:INTERNAL=-L/usr/local/lib;-lmongocxx;-lbsoncxx
-MONGOCXX_LDFLAGS_OTHER:INTERNAL=
-MONGOCXX_LIBDIR:INTERNAL=/usr/local/lib
-MONGOCXX_LIBRARIES:INTERNAL=mongocxx;bsoncxx
-MONGOCXX_LIBRARY_DIRS:INTERNAL=/usr/local/lib
-MONGOCXX_LIBS:INTERNAL=
-MONGOCXX_LIBS_L:INTERNAL=
-MONGOCXX_LIBS_OTHER:INTERNAL=
-MONGOCXX_LIBS_PATHS:INTERNAL=
-MONGOCXX_MODULE_NAME:INTERNAL=libmongocxx
-MONGOCXX_PREFIX:INTERNAL=/usr/local
-MONGOCXX_STATIC_CFLAGS:INTERNAL=-I/usr/local/include/mongocxx/v_noabi;-I/usr/local/include;-I/usr/local/include/bsoncxx/v_noabi/bsoncxx/third_party/mnmlstc;-I/usr/local/include/bsoncxx/v_noabi;-I/usr/local/include
-MONGOCXX_STATIC_CFLAGS_I:INTERNAL=
-MONGOCXX_STATIC_CFLAGS_OTHER:INTERNAL=
-MONGOCXX_STATIC_INCLUDE_DIRS:INTERNAL=/usr/local/include/mongocxx/v_noabi;/usr/local/include;/usr/local/include/bsoncxx/v_noabi/bsoncxx/third_party/mnmlstc;/usr/local/include/bsoncxx/v_noabi;/usr/local/include
-MONGOCXX_STATIC_LDFLAGS:INTERNAL=-L/usr/local/lib;-lmongocxx;-lbsoncxx
-MONGOCXX_STATIC_LDFLAGS_OTHER:INTERNAL=
-MONGOCXX_STATIC_LIBDIR:INTERNAL=
-MONGOCXX_STATIC_LIBRARIES:INTERNAL=mongocxx;bsoncxx
-MONGOCXX_STATIC_LIBRARY_DIRS:INTERNAL=/usr/local/lib
-MONGOCXX_STATIC_LIBS:INTERNAL=
-MONGOCXX_STATIC_LIBS_L:INTERNAL=
-MONGOCXX_STATIC_LIBS_OTHER:INTERNAL=
-MONGOCXX_STATIC_LIBS_PATHS:INTERNAL=
-MONGOCXX_VERSION:INTERNAL=3.10.2
-MONGOCXX_libmongocxx_INCLUDEDIR:INTERNAL=
-MONGOCXX_libmongocxx_LIBDIR:INTERNAL=
-MONGOCXX_libmongocxx_PREFIX:INTERNAL=
-MONGOCXX_libmongocxx_VERSION:INTERNAL=
+LIBBSONCXX_CFLAGS:INTERNAL=-I/usr/local/include/bsoncxx/v_noabi/bsoncxx/third_party/mnmlstc;-I/usr/local/include/bsoncxx/v_noabi;-I/usr/local/include
+LIBBSONCXX_CFLAGS_I:INTERNAL=
+LIBBSONCXX_CFLAGS_OTHER:INTERNAL=
+LIBBSONCXX_FOUND:INTERNAL=1
+LIBBSONCXX_INCLUDEDIR:INTERNAL=/usr/local/include
+LIBBSONCXX_INCLUDE_DIRS:INTERNAL=/usr/local/include/bsoncxx/v_noabi/bsoncxx/third_party/mnmlstc;/usr/local/include/bsoncxx/v_noabi;/usr/local/include
+LIBBSONCXX_LDFLAGS:INTERNAL=-L/usr/local/lib;-lbsoncxx
+LIBBSONCXX_LDFLAGS_OTHER:INTERNAL=
+LIBBSONCXX_LIBDIR:INTERNAL=/usr/local/lib
+LIBBSONCXX_LIBRARIES:INTERNAL=bsoncxx
+LIBBSONCXX_LIBRARY_DIRS:INTERNAL=/usr/local/lib
+LIBBSONCXX_LIBS:INTERNAL=
+LIBBSONCXX_LIBS_L:INTERNAL=
+LIBBSONCXX_LIBS_OTHER:INTERNAL=
+LIBBSONCXX_LIBS_PATHS:INTERNAL=
+LIBBSONCXX_MODULE_NAME:INTERNAL=libbsoncxx
+LIBBSONCXX_PREFIX:INTERNAL=/usr/local
+LIBBSONCXX_STATIC_CFLAGS:INTERNAL=-I/usr/local/include/bsoncxx/v_noabi/bsoncxx/third_party/mnmlstc;-I/usr/local/include/bsoncxx/v_noabi;-I/usr/local/include
+LIBBSONCXX_STATIC_CFLAGS_I:INTERNAL=
+LIBBSONCXX_STATIC_CFLAGS_OTHER:INTERNAL=
+LIBBSONCXX_STATIC_INCLUDE_DIRS:INTERNAL=/usr/local/include/bsoncxx/v_noabi/bsoncxx/third_party/mnmlstc;/usr/local/include/bsoncxx/v_noabi;/usr/local/include
+LIBBSONCXX_STATIC_LDFLAGS:INTERNAL=-L/usr/local/lib;-lbsoncxx
+LIBBSONCXX_STATIC_LDFLAGS_OTHER:INTERNAL=
+LIBBSONCXX_STATIC_LIBDIR:INTERNAL=
+LIBBSONCXX_STATIC_LIBRARIES:INTERNAL=bsoncxx
+LIBBSONCXX_STATIC_LIBRARY_DIRS:INTERNAL=/usr/local/lib
+LIBBSONCXX_STATIC_LIBS:INTERNAL=
+LIBBSONCXX_STATIC_LIBS_L:INTERNAL=
+LIBBSONCXX_STATIC_LIBS_OTHER:INTERNAL=
+LIBBSONCXX_STATIC_LIBS_PATHS:INTERNAL=
+LIBBSONCXX_VERSION:INTERNAL=3.10.2
+LIBBSONCXX_libbsoncxx_INCLUDEDIR:INTERNAL=
+LIBBSONCXX_libbsoncxx_LIBDIR:INTERNAL=
+LIBBSONCXX_libbsoncxx_PREFIX:INTERNAL=
+LIBBSONCXX_libbsoncxx_VERSION:INTERNAL=
+LIBMONGOCXX_CFLAGS:INTERNAL=-I/usr/local/include/mongocxx/v_noabi;-I/usr/local/include;-I/usr/local/include/bsoncxx/v_noabi/bsoncxx/third_party/mnmlstc;-I/usr/local/include/bsoncxx/v_noabi;-I/usr/local/include
+LIBMONGOCXX_CFLAGS_I:INTERNAL=
+LIBMONGOCXX_CFLAGS_OTHER:INTERNAL=
+LIBMONGOCXX_FOUND:INTERNAL=1
+LIBMONGOCXX_INCLUDEDIR:INTERNAL=/usr/local/include
+LIBMONGOCXX_INCLUDE_DIRS:INTERNAL=/usr/local/include/mongocxx/v_noabi;/usr/local/include;/usr/local/include/bsoncxx/v_noabi/bsoncxx/third_party/mnmlstc;/usr/local/include/bsoncxx/v_noabi;/usr/local/include
+LIBMONGOCXX_LDFLAGS:INTERNAL=-L/usr/local/lib;-lmongocxx;-lbsoncxx
+LIBMONGOCXX_LDFLAGS_OTHER:INTERNAL=
+LIBMONGOCXX_LIBDIR:INTERNAL=/usr/local/lib
+LIBMONGOCXX_LIBRARIES:INTERNAL=mongocxx;bsoncxx
+LIBMONGOCXX_LIBRARY_DIRS:INTERNAL=/usr/local/lib
+LIBMONGOCXX_LIBS:INTERNAL=
+LIBMONGOCXX_LIBS_L:INTERNAL=
+LIBMONGOCXX_LIBS_OTHER:INTERNAL=
+LIBMONGOCXX_LIBS_PATHS:INTERNAL=
+LIBMONGOCXX_MODULE_NAME:INTERNAL=libmongocxx
+LIBMONGOCXX_PREFIX:INTERNAL=/usr/local
+LIBMONGOCXX_STATIC_CFLAGS:INTERNAL=-I/usr/local/include/mongocxx/v_noabi;-I/usr/local/include;-I/usr/local/include/bsoncxx/v_noabi/bsoncxx/third_party/mnmlstc;-I/usr/local/include/bsoncxx/v_noabi;-I/usr/local/include
+LIBMONGOCXX_STATIC_CFLAGS_I:INTERNAL=
+LIBMONGOCXX_STATIC_CFLAGS_OTHER:INTERNAL=
+LIBMONGOCXX_STATIC_INCLUDE_DIRS:INTERNAL=/usr/local/include/mongocxx/v_noabi;/usr/local/include;/usr/local/include/bsoncxx/v_noabi/bsoncxx/third_party/mnmlstc;/usr/local/include/bsoncxx/v_noabi;/usr/local/include
+LIBMONGOCXX_STATIC_LDFLAGS:INTERNAL=-L/usr/local/lib;-lmongocxx;-lbsoncxx
+LIBMONGOCXX_STATIC_LDFLAGS_OTHER:INTERNAL=
+LIBMONGOCXX_STATIC_LIBDIR:INTERNAL=
+LIBMONGOCXX_STATIC_LIBRARIES:INTERNAL=mongocxx;bsoncxx
+LIBMONGOCXX_STATIC_LIBRARY_DIRS:INTERNAL=/usr/local/lib
+LIBMONGOCXX_STATIC_LIBS:INTERNAL=
+LIBMONGOCXX_STATIC_LIBS_L:INTERNAL=
+LIBMONGOCXX_STATIC_LIBS_OTHER:INTERNAL=
+LIBMONGOCXX_STATIC_LIBS_PATHS:INTERNAL=
+LIBMONGOCXX_VERSION:INTERNAL=3.10.2
+LIBMONGOCXX_libmongocxx_INCLUDEDIR:INTERNAL=
+LIBMONGOCXX_libmongocxx_LIBDIR:INTERNAL=
+LIBMONGOCXX_libmongocxx_PREFIX:INTERNAL=
+LIBMONGOCXX_libmongocxx_VERSION:INTERNAL=
 PC_CURL_CFLAGS:INTERNAL=
 PC_CURL_CFLAGS_I:INTERNAL=
 PC_CURL_CFLAGS_OTHER:INTERNAL=
@@ -551,22 +553,41 @@ PC_CURL_libcurl_VERSION:INTERNAL=
 PKG_CONFIG_ARGN-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PKG_CONFIG_EXECUTABLE
 PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
-__pkg_config_arguments_BSONCXX:INTERNAL=REQUIRED;libbsoncxx
+//Compiler reason failure
+_Python3_Compiler_REASON_FAILURE:INTERNAL=
+_Python3_DEVELOPMENT_EMBED_SIGNATURE:INTERNAL=87c7029819fcc91d97c132879592eb5d
+_Python3_DEVELOPMENT_MODULE_SIGNATURE:INTERNAL=01d29c82fbd00835c2097924c9dfc083
+//Development reason failure
+_Python3_Development_REASON_FAILURE:INTERNAL=
+//Path to a program.
+_Python3_EXECUTABLE:INTERNAL=/usr/local/Frameworks/Python.framework/Versions/3.12/bin/python3.12
+//Path to a file.
+_Python3_INCLUDE_DIR:INTERNAL=/usr/local/opt/python@3.12/Frameworks/Python.framework/Versions/3.12/include/python3.12
+//Python3 Properties
+_Python3_INTERPRETER_PROPERTIES:INTERNAL=Python;3;12;4;64;;cpython-312-darwin;abi3;/usr/local/opt/python@3.12/Frameworks/Python.framework/Versions/3.12/lib/python3.12;/usr/local/opt/python@3.12/Frameworks/Python.framework/Versions/3.12/lib/python3.12;/usr/local/lib/python3.12/site-packages;/usr/local/lib/python3.12/site-packages
+_Python3_INTERPRETER_SIGNATURE:INTERNAL=c4159777cca8713b33e567b5d8b498fe
+//Interpreter reason failure
+_Python3_Interpreter_REASON_FAILURE:INTERNAL=
+//Path to a library.
+_Python3_LIBRARY_RELEASE:INTERNAL=/usr/local/opt/python@3.12/Frameworks/Python.framework/Versions/3.12/lib/libpython3.12.dylib
+//NumPy reason failure
+_Python3_NumPy_REASON_FAILURE:INTERNAL=
 __pkg_config_arguments_JSONCPP:INTERNAL=REQUIRED;jsoncpp
-__pkg_config_arguments_MONGOCXX:INTERNAL=REQUIRED;libmongocxx
+__pkg_config_arguments_LIBBSONCXX:INTERNAL=REQUIRED;libbsoncxx
+__pkg_config_arguments_LIBMONGOCXX:INTERNAL=REQUIRED;libmongocxx
 __pkg_config_arguments_PC_CURL:INTERNAL=QUIET;libcurl
-__pkg_config_checked_BSONCXX:INTERNAL=1
 __pkg_config_checked_JSONCPP:INTERNAL=1
-__pkg_config_checked_MONGOCXX:INTERNAL=1
+__pkg_config_checked_LIBBSONCXX:INTERNAL=1
+__pkg_config_checked_LIBMONGOCXX:INTERNAL=1
 __pkg_config_checked_PC_CURL:INTERNAL=1
-//ADVANCED property for variable: pkgcfg_lib_BSONCXX_bsoncxx
-pkgcfg_lib_BSONCXX_bsoncxx-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: pkgcfg_lib_JSONCPP_jsoncpp
 pkgcfg_lib_JSONCPP_jsoncpp-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: pkgcfg_lib_MONGOCXX_bsoncxx
-pkgcfg_lib_MONGOCXX_bsoncxx-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: pkgcfg_lib_MONGOCXX_mongocxx
-pkgcfg_lib_MONGOCXX_mongocxx-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_LIBBSONCXX_bsoncxx
+pkgcfg_lib_LIBBSONCXX_bsoncxx-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_LIBMONGOCXX_bsoncxx
+pkgcfg_lib_LIBMONGOCXX_bsoncxx-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_LIBMONGOCXX_mongocxx
+pkgcfg_lib_LIBMONGOCXX_mongocxx-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: pkgcfg_lib_PC_CURL_curl
 pkgcfg_lib_PC_CURL_curl-ADVANCED:INTERNAL=1
 prefix_result:INTERNAL=alt-svc;AsynchDNS;GSS-API;HSTS;HTTP2;HTTPS-proxy;IPv6;Kerberos;Largefile;libz;MultiSSL;NTLM;NTLM_WB;SPNEGO;SSL;threadsafe;UnixSockets

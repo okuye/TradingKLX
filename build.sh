@@ -32,6 +32,21 @@ else
     cmake .. -G "$GENERATOR"
 fi
 
+# Set up Python virtual environment and install numpy
+echo "Setting up Python virtual environment..."
+if [ ! -d "tradingklx_venv" ]; then
+    python3 -m venv tradingklx_venv
+    source tradingklx_venv/bin/activate
+    pip install numpy
+else
+    echo "Python virtual environment already exists."
+    source tradingklx_venv/bin/activate
+fi
+
+# Display the Python path and numpy include directory
+echo "Python executable: $(which python)"
+echo "Numpy include directory: $(python -c 'import numpy; print(numpy.get_include())')"
+
 # Build the project
 cmake --build .
 

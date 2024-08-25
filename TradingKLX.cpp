@@ -7,12 +7,12 @@
 #include <unordered_map>
 #include <string>
 #include <sstream>
-#include <filesystem>
 #include <json/json.h>
 #include "OandA_API.hpp"
 #include "ConfigManager.h"
 #include "DataProcessor.h"
 #include "TechnicalIndicators.h"
+#include "TradingStrategy.h"
 #include "Utilities.h"
 
 Json::Value readConfig(const std::string& configFile) {
@@ -33,8 +33,6 @@ Json::Value readConfig(const std::string& configFile) {
 }
 
 int main() {
-    std::cout << "Current working directory: " << std::filesystem::current_path() << std::endl;
-
     Json::Value config;
 
     try {
@@ -82,21 +80,17 @@ int main() {
     }
 
     OandA_API oandA_API(apiKey, accountID);
-//    std::string granularity = "D";
     std::string granularity = "S5";
     Json::Value jsonData = oandA_API.getHistoricalData("EUR_USD", granularity, 60);
 
     try {
-        // Log the full JSON response for debugging
         std::cout << "Full JSON Response: " << jsonToString(jsonData) << std::endl;
 
-        // Check for an error message in the response
         if (jsonData.isMember("errorMessage")) {
             std::cerr << "API Error: " << jsonData["errorMessage"].asString() << std::endl;
             return 1;
         }
 
-        // Validate the presence of the "candles" key and that it is an array
         if (!jsonData.isMember("candles") || !jsonData["candles"].isArray()) {
             std::cerr << "Invalid JSON structure: missing or incorrect 'candles' key" << std::endl;
             std::cout << "JSON Response contains 'candles': " << jsonData.isMember("candles") << std::endl;
@@ -104,7 +98,6 @@ int main() {
             throw std::runtime_error("JSON structure is not as expected");
         }
 
-        // If the key is present and is an array, output its size
         std::cout << "Number of elements in 'candles': " << jsonData["candles"].size() << std::endl;
         std::cout << "First element in 'candles': " << jsonToString(jsonData["candles"][0]) << std::endl;
 
@@ -121,6 +114,7 @@ int main() {
     double stopLossMultiplier = 3.0;
 
     TechnicalIndicators indicators;
+    TradingStrategy strategy(accountBalance, riskPerTrade, stopLossMultiplier);
     IchimokuMemo ichimokuMemo;
     BollingerBandsMemo bbMemo;
 
@@ -136,14 +130,28 @@ int main() {
         double kijunSen = indicators.calculateKijunSen(highs, lows, 26, i, ichimokuMemo);
         double senkouSpanA = indicators.calculateSenkouSpanA(i, ichimokuMemo);
 
-        if (i >= 51) {  // Ensure enough data points exist for Senkou Span B calculation
+        if (i >= 51) {
             double senkouSpanB = indicators.calculateSenkouSpanB(highs, lows, i, ichimokuMemo);
         }
 
-        // Ensure enough data points exist for Bollinger Bands calculation
         if (closes.size() >= 20) {
             indicators.calculateBollingerBandsWithMemoization(closes, 20, 2, bbMemo);
         }
     }
+
+    std::vector<TradingSignal> signals = strategy.evaluateSignals(priceData);
+
+    for (const auto& signal : signals) {
+        if (signal.buy) {
+            std::cout << "Buy signal at index " << signal.index
+                      << ", Position size: " << signal.positionSize
+                      << ", Stop loss: " << signal.stopLossLevel << std::endl;
+        } else if (signal.sell) {
+            std::cout << "Sell signal at index " << signal.index << std::endl;
+        }
+    }
+
+    oandA_API.plotCandlestick("EUR_USD", granularity);
+
     return 0;
 }

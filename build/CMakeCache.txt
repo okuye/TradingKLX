@@ -238,16 +238,7 @@ TradingKLX_IS_TOP_LEVEL:STATIC=ON
 TradingKLX_SOURCE_DIR:STATIC=/Users/olakunlekuye/Documents/Dev/KLX/demo/TradingKLX
 
 //Path to a library.
-pkgcfg_lib_BSONCXX_bsoncxx:FILEPATH=/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/lib/libbsoncxx.dylib
-
-//Path to a library.
 pkgcfg_lib_JSONCPP_jsoncpp:FILEPATH=/opt/homebrew/Cellar/jsoncpp/1.9.5/lib/libjsoncpp.dylib
-
-//Path to a library.
-pkgcfg_lib_MONGOCXX_bsoncxx:FILEPATH=/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/lib/libbsoncxx.dylib
-
-//Path to a library.
-pkgcfg_lib_MONGOCXX_mongocxx:FILEPATH=/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/lib/libmongocxx.dylib
 
 //Path to a library.
 pkgcfg_lib_PC_CURL_curl:FILEPATH=/opt/homebrew/Cellar/curl/8.9.1/lib/libcurl.dylib
@@ -257,41 +248,6 @@ pkgcfg_lib_PC_CURL_curl:FILEPATH=/opt/homebrew/Cellar/curl/8.9.1/lib/libcurl.dyl
 # INTERNAL cache entries
 ########################
 
-BSONCXX_CFLAGS:INTERNAL=-I/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/include/bsoncxx/v_noabi/bsoncxx/third_party/mnmlstc;-I/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/include/bsoncxx/v_noabi;-I/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/include
-BSONCXX_CFLAGS_I:INTERNAL=
-BSONCXX_CFLAGS_OTHER:INTERNAL=
-BSONCXX_FOUND:INTERNAL=1
-BSONCXX_INCLUDEDIR:INTERNAL=/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/include
-BSONCXX_INCLUDE_DIRS:INTERNAL=/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/include/bsoncxx/v_noabi/bsoncxx/third_party/mnmlstc;/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/include/bsoncxx/v_noabi;/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/include
-BSONCXX_LDFLAGS:INTERNAL=-L/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/lib;-lbsoncxx
-BSONCXX_LDFLAGS_OTHER:INTERNAL=
-BSONCXX_LIBDIR:INTERNAL=/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/lib
-BSONCXX_LIBRARIES:INTERNAL=bsoncxx
-BSONCXX_LIBRARY_DIRS:INTERNAL=/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/lib
-BSONCXX_LIBS:INTERNAL=
-BSONCXX_LIBS_L:INTERNAL=
-BSONCXX_LIBS_OTHER:INTERNAL=
-BSONCXX_LIBS_PATHS:INTERNAL=
-BSONCXX_MODULE_NAME:INTERNAL=libbsoncxx
-BSONCXX_PREFIX:INTERNAL=/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2
-BSONCXX_STATIC_CFLAGS:INTERNAL=-I/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/include/bsoncxx/v_noabi/bsoncxx/third_party/mnmlstc;-I/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/include/bsoncxx/v_noabi;-I/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/include
-BSONCXX_STATIC_CFLAGS_I:INTERNAL=
-BSONCXX_STATIC_CFLAGS_OTHER:INTERNAL=
-BSONCXX_STATIC_INCLUDE_DIRS:INTERNAL=/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/include/bsoncxx/v_noabi/bsoncxx/third_party/mnmlstc;/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/include/bsoncxx/v_noabi;/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/include
-BSONCXX_STATIC_LDFLAGS:INTERNAL=-L/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/lib;-lbsoncxx
-BSONCXX_STATIC_LDFLAGS_OTHER:INTERNAL=
-BSONCXX_STATIC_LIBDIR:INTERNAL=
-BSONCXX_STATIC_LIBRARIES:INTERNAL=bsoncxx
-BSONCXX_STATIC_LIBRARY_DIRS:INTERNAL=/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/lib
-BSONCXX_STATIC_LIBS:INTERNAL=
-BSONCXX_STATIC_LIBS_L:INTERNAL=
-BSONCXX_STATIC_LIBS_OTHER:INTERNAL=
-BSONCXX_STATIC_LIBS_PATHS:INTERNAL=
-BSONCXX_VERSION:INTERNAL=3.10.2
-BSONCXX_libbsoncxx_INCLUDEDIR:INTERNAL=
-BSONCXX_libbsoncxx_LIBDIR:INTERNAL=
-BSONCXX_libbsoncxx_PREFIX:INTERNAL=
-BSONCXX_libbsoncxx_VERSION:INTERNAL=
 //ADVANCED property for variable: CMAKE_ADDR2LINE
 CMAKE_ADDR2LINE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_AR
@@ -441,6 +397,8 @@ CURL_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
 FIND_PACKAGE_MESSAGE_DETAILS_CURL:INTERNAL=[/opt/homebrew/Cellar/curl/8.9.1/lib/libcurl.dylib][/opt/homebrew/Cellar/curl/8.9.1/include][c ][v8.9.1()]
 //Details about finding PkgConfig
 FIND_PACKAGE_MESSAGE_DETAILS_PkgConfig:INTERNAL=[/opt/homebrew/bin/pkg-config][v0.29.2()]
+//Details about finding Python3
+FIND_PACKAGE_MESSAGE_DETAILS_Python3:INTERNAL=[/Users/olakunlekuye/Documents/Dev/KLX/demo/TradingKLX/tradingklx_venv/bin/python3.12][/opt/homebrew/opt/python@3.12/Frameworks/Python.framework/Versions/3.12/include/python3.12][/opt/homebrew/opt/python@3.12/Frameworks/Python.framework/Versions/3.12/lib/libpython3.12.dylib][cfound components: Interpreter Development Development.Module Development.Embed ][v3.12.5()]
 //Test HAVE_FILESYSTEM
 HAVE_FILESYSTEM:INTERNAL=1
 JSONCPP_CFLAGS:INTERNAL=-I/opt/homebrew/Cellar/jsoncpp/1.9.5/include
@@ -478,41 +436,6 @@ JSONCPP_jsoncpp_INCLUDEDIR:INTERNAL=
 JSONCPP_jsoncpp_LIBDIR:INTERNAL=
 JSONCPP_jsoncpp_PREFIX:INTERNAL=
 JSONCPP_jsoncpp_VERSION:INTERNAL=
-MONGOCXX_CFLAGS:INTERNAL=-I/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/include/mongocxx/v_noabi;-I/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/include;-I/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/include/bsoncxx/v_noabi/bsoncxx/third_party/mnmlstc;-I/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/include/bsoncxx/v_noabi;-I/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/include
-MONGOCXX_CFLAGS_I:INTERNAL=
-MONGOCXX_CFLAGS_OTHER:INTERNAL=
-MONGOCXX_FOUND:INTERNAL=1
-MONGOCXX_INCLUDEDIR:INTERNAL=/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/include
-MONGOCXX_INCLUDE_DIRS:INTERNAL=/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/include/mongocxx/v_noabi;/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/include;/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/include/bsoncxx/v_noabi/bsoncxx/third_party/mnmlstc;/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/include/bsoncxx/v_noabi;/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/include
-MONGOCXX_LDFLAGS:INTERNAL=-L/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/lib;-lmongocxx;-lbsoncxx
-MONGOCXX_LDFLAGS_OTHER:INTERNAL=
-MONGOCXX_LIBDIR:INTERNAL=/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/lib
-MONGOCXX_LIBRARIES:INTERNAL=mongocxx;bsoncxx
-MONGOCXX_LIBRARY_DIRS:INTERNAL=/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/lib
-MONGOCXX_LIBS:INTERNAL=
-MONGOCXX_LIBS_L:INTERNAL=
-MONGOCXX_LIBS_OTHER:INTERNAL=
-MONGOCXX_LIBS_PATHS:INTERNAL=
-MONGOCXX_MODULE_NAME:INTERNAL=libmongocxx
-MONGOCXX_PREFIX:INTERNAL=/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2
-MONGOCXX_STATIC_CFLAGS:INTERNAL=-I/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/include/mongocxx/v_noabi;-I/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/include;-I/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/include/bsoncxx/v_noabi/bsoncxx/third_party/mnmlstc;-I/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/include/bsoncxx/v_noabi;-I/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/include
-MONGOCXX_STATIC_CFLAGS_I:INTERNAL=
-MONGOCXX_STATIC_CFLAGS_OTHER:INTERNAL=
-MONGOCXX_STATIC_INCLUDE_DIRS:INTERNAL=/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/include/mongocxx/v_noabi;/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/include;/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/include/bsoncxx/v_noabi/bsoncxx/third_party/mnmlstc;/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/include/bsoncxx/v_noabi;/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/include
-MONGOCXX_STATIC_LDFLAGS:INTERNAL=-L/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/lib;-lmongocxx;-lbsoncxx
-MONGOCXX_STATIC_LDFLAGS_OTHER:INTERNAL=
-MONGOCXX_STATIC_LIBDIR:INTERNAL=
-MONGOCXX_STATIC_LIBRARIES:INTERNAL=mongocxx;bsoncxx
-MONGOCXX_STATIC_LIBRARY_DIRS:INTERNAL=/opt/homebrew/Cellar/mongo-cxx-driver/3.10.2/lib
-MONGOCXX_STATIC_LIBS:INTERNAL=
-MONGOCXX_STATIC_LIBS_L:INTERNAL=
-MONGOCXX_STATIC_LIBS_OTHER:INTERNAL=
-MONGOCXX_STATIC_LIBS_PATHS:INTERNAL=
-MONGOCXX_VERSION:INTERNAL=3.10.2
-MONGOCXX_libmongocxx_INCLUDEDIR:INTERNAL=
-MONGOCXX_libmongocxx_LIBDIR:INTERNAL=
-MONGOCXX_libmongocxx_PREFIX:INTERNAL=
-MONGOCXX_libmongocxx_VERSION:INTERNAL=
 PC_CURL_CFLAGS:INTERNAL=-I/opt/homebrew/Cellar/curl/8.9.1/include;-I/opt/homebrew/Cellar/libidn2/2.3.7/include;-I/opt/homebrew/Cellar/brotli/1.1.0/include;-I/opt/homebrew/opt/zstd/include;-I/opt/homebrew/Cellar/libssh2/1.11.0_1/include;-I/opt/homebrew/Cellar/rtmpdump/2.4-20151223_3/include;-I/opt/homebrew/Cellar/openssl@3/3.3.1/include;-I/opt/homebrew/Cellar/libnghttp2/1.61.0/include
 PC_CURL_CFLAGS_I:INTERNAL=
 PC_CURL_CFLAGS_OTHER:INTERNAL=
@@ -552,22 +475,29 @@ PC_CURL_libcurl_VERSION:INTERNAL=
 PKG_CONFIG_ARGN-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PKG_CONFIG_EXECUTABLE
 PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
-__pkg_config_arguments_BSONCXX:INTERNAL=REQUIRED;libbsoncxx
+//Compiler reason failure
+_Python3_Compiler_REASON_FAILURE:INTERNAL=
+_Python3_DEVELOPMENT_EMBED_SIGNATURE:INTERNAL=af611d85e4c2c16f92386343d0460f9c
+_Python3_DEVELOPMENT_MODULE_SIGNATURE:INTERNAL=fae3ee229ece4e6c82395442d562778d
+//Development reason failure
+_Python3_Development_REASON_FAILURE:INTERNAL=
+//Path to a program.
+_Python3_EXECUTABLE:INTERNAL=/Users/olakunlekuye/Documents/Dev/KLX/demo/TradingKLX/tradingklx_venv/bin/python3.12
+//Path to a file.
+_Python3_INCLUDE_DIR:INTERNAL=/opt/homebrew/opt/python@3.12/Frameworks/Python.framework/Versions/3.12/include/python3.12
+//Python3 Properties
+_Python3_INTERPRETER_PROPERTIES:INTERNAL=Python;3;12;5;64;<none>;cpython-312-darwin;abi3;/opt/homebrew/opt/python@3.12/Frameworks/Python.framework/Versions/3.12/lib/python3.12;/Users/olakunlekuye/Documents/Dev/KLX/demo/TradingKLX/tradingklx_venv/lib/python3.12;/Users/olakunlekuye/Documents/Dev/KLX/demo/TradingKLX/tradingklx_venv/lib/python3.12/site-packages;/Users/olakunlekuye/Documents/Dev/KLX/demo/TradingKLX/tradingklx_venv/lib/python3.12/site-packages
+_Python3_INTERPRETER_SIGNATURE:INTERNAL=587685db23204547767f7a19679a12dd
+//Path to a library.
+_Python3_LIBRARY_RELEASE:INTERNAL=/opt/homebrew/opt/python@3.12/Frameworks/Python.framework/Versions/3.12/lib/libpython3.12.dylib
+//NumPy reason failure
+_Python3_NumPy_REASON_FAILURE:INTERNAL=
 __pkg_config_arguments_JSONCPP:INTERNAL=REQUIRED;jsoncpp
-__pkg_config_arguments_MONGOCXX:INTERNAL=REQUIRED;libmongocxx
 __pkg_config_arguments_PC_CURL:INTERNAL=QUIET;libcurl
-__pkg_config_checked_BSONCXX:INTERNAL=1
 __pkg_config_checked_JSONCPP:INTERNAL=1
-__pkg_config_checked_MONGOCXX:INTERNAL=1
 __pkg_config_checked_PC_CURL:INTERNAL=1
-//ADVANCED property for variable: pkgcfg_lib_BSONCXX_bsoncxx
-pkgcfg_lib_BSONCXX_bsoncxx-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: pkgcfg_lib_JSONCPP_jsoncpp
 pkgcfg_lib_JSONCPP_jsoncpp-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: pkgcfg_lib_MONGOCXX_bsoncxx
-pkgcfg_lib_MONGOCXX_bsoncxx-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: pkgcfg_lib_MONGOCXX_mongocxx
-pkgcfg_lib_MONGOCXX_mongocxx-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: pkgcfg_lib_PC_CURL_curl
 pkgcfg_lib_PC_CURL_curl-ADVANCED:INTERNAL=1
 prefix_result:INTERNAL=alt-svc;AsynchDNS;brotli;GSS-API;HSTS;HTTP2;HTTPS-proxy;IDN;IPv6;Kerberos;Largefile;libz;MultiSSL;NTLM;SPNEGO;SSL;threadsafe;TLS-SRP;UnixSockets;zstd

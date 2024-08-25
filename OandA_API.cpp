@@ -37,7 +37,7 @@ Json::Value OandA_API::makeRequest(const std::string& endpoint) {
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
 
         std::cout << "Request URL: " << url << std::endl;
-        std::cout << "Authorization Header: " << "Bearer " + apiKey << std::endl;
+        std::cout << "Authorization Header: Bearer " + apiKey << std::endl;
 
         res = curl_easy_perform(curl);
         curl_easy_cleanup(curl);
@@ -220,39 +220,38 @@ std::vector<InstrumentData> OandA_API::getInstrumentsData() {
     return result;
 }
 
+
 void OandA_API::saveInstruments() {
     std::vector<InstrumentData> instruments = this->getInstrumentsData();
     if (!instruments.empty()) {
         std::ofstream file("instruments_data.txt");
         if (file.is_open()) {
-            for (const auto& instrument : instruments) {
-                file << instrument.name << ","
-                     << instrument.type << ","
-                     << instrument.displayName << ","
-                     << instrument.pipLocation << ","
-                     << instrument.marginRate << "\n";
+            for (const auto &instrument: instruments) {
+                file << instrument.name << "," << instrument.type << "," << instrument.displayName << ","
+                     << instrument.pipLocation << "," << instrument.marginRate << "\n";
             }
             file.close();
-            std::cout << "Instruments data saved successfully." << std::endl;
+            std::cout << "Instruments data saved to instruments_data.txt" << std::endl;
         } else {
-            std::cerr << "Unable to open file for saving instruments data." << std::endl;
+            std::cerr << "Unable to open file for writing." << std::endl;
         }
     } else {
-        std::cout << "No instruments data to save." << std::endl;
+        std::cerr << "No instruments data available." << std::endl;
     }
 }
 
-std::string get_his_data_filename(const std::string& pair, const std::string& granularity) {
-    return pair + "_" + granularity + "_data.csv";
+std::string OandA_API::get_his_data_filename(const std::string& pair, const std::string& granularity) {
+    return pair + "" + granularity + "_data.csv";
 }
 
-void plotCandlestick(const std::string& pair, const std::string& granularity) {
+
+void OandA_API::plotCandlestick(const std::string& pair, const std::string& granularity) {
     std::string filename = get_his_data_filename(pair, granularity);
 
     std::vector<std::string> time;
     std::vector<double> open, high, low, close;
 
-    // Read data from file
+// Read data from file
     std::ifstream file(filename);
     std::string line;
     std::getline(file, line); // Skip header
@@ -269,7 +268,7 @@ void plotCandlestick(const std::string& pair, const std::string& granularity) {
         close.push_back(c);
     }
 
-    // Get last 100 data points
+// Get last 100 data points
     int dataSize = std::min(100, static_cast<int>(time.size()));
     std::vector<std::string> plotTime(time.end() - dataSize, time.end());
     std::vector<double> plotOpen(open.end() - dataSize, open.end());
@@ -277,50 +276,50 @@ void plotCandlestick(const std::string& pair, const std::string& granularity) {
     std::vector<double> plotLow(low.end() - dataSize, low.end());
     std::vector<double> plotClose(close.end() - dataSize, close.end());
 
-    // Calculate MA_8
+// Calculate MA_8
     std::vector<double> MA_8(plotClose.size());
     for (size_t i = 7; i < plotClose.size(); ++i) {
         MA_8[i] = std::accumulate(plotClose.begin() + i - 7, plotClose.begin() + i + 1, 0.0) / 8.0;
     }
 
-    // Create candlestick plot manually
+// Create candlestick plot manually
     plt::figure_size(1000, 300);
     plt::title(pair + " - " + granularity);
 
-    // Set plot limits
+// Set plot limits
     double x_min = -1, x_max = plotTime.size();
     double y_min = *std::min_element(plotLow.begin(), plotLow.end());
     double y_max = *std::max_element(plotHigh.begin(), plotHigh.end());
     plt::xlim(x_min, x_max);
     plt::ylim(y_min, y_max);
 
-    // Create background rectangle
+// Create background rectangle
     plt::plot(std::vector<double>{x_min, x_max, x_max, x_min, x_min},
               std::vector<double>{y_min, y_min, y_max, y_max, y_min},
               "#1e1e1e");
 
-    // Draw grid
+// Draw grid
     plt::grid(true);
 
-    // Draw candlesticks
+// Draw candlesticks
     for (size_t i = 0; i < plotTime.size(); ++i) {
         std::vector<double> x{static_cast<double>(i), static_cast<double>(i)};
         std::vector<double> prices{plotLow[i], plotHigh[i]};
 
         if (plotClose[i] > plotOpen[i]) {
             plt::plot(x, prices, "#2EC886");
-            plt::plot(std::vector<double>{i-0.4, i-0.4, i+0.4, i+0.4},
+            plt::plot(std::vector<double>{i - 0.4, i - 0.4, i + 0.4, i + 0.4},
                       std::vector<double>{plotOpen[i], plotClose[i], plotClose[i], plotOpen[i]},
                       "#24A06B");
         } else {
             plt::plot(x, prices, "#FF3A4C");
-            plt::plot(std::vector<double>{i-0.4, i-0.4, i+0.4, i+0.4},
+            plt::plot(std::vector<double>{i - 0.4, i - 0.4, i + 0.4, i + 0.4},
                       std::vector<double>{plotOpen[i], plotClose[i], plotClose[i], plotOpen[i]},
                       "#CC2E3C");
         }
     }
 
-    // Add MA_8 line
+// Add MA_8 line
     std::vector<double> x_ma(plotTime.size());
     std::iota(x_ma.begin(), x_ma.end(), 0);
     plt::plot(x_ma, MA_8, "#027FC3");
@@ -329,4 +328,5 @@ void plotCandlestick(const std::string& pair, const std::string& granularity) {
     plt::ylabel("Price");
     plt::tight_layout();
     plt::show();
+
 }

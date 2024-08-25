@@ -10,7 +10,6 @@ struct InstrumentData {
     double marginRate;
 };
 
-
 class OandA_API {
 public:
     OandA_API(const std::string& apiKey, const std::string& accountID);
@@ -25,6 +24,8 @@ public:
     std::pair<int, Json::Value> fetchCandles(const std::string& pair_name, int count, const std::string& granularity);
     std::vector<InstrumentData> getInstrumentsData();
     void saveInstruments();
+    void plotCandlestick(const std::string& pair, const std::string& granularity);
+    std::string get_his_data_filename(const std::string& pair, const std::string& granularity); // Add this line
 
 private:
     std::string apiKey;
