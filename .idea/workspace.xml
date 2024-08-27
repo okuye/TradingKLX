@@ -29,14 +29,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e18f0a1e-f62e-499a-9bd6-dce39a999206" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/TradingSignal.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/cody_history.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cody_history.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TradingKLX.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TradingKLX.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TradingStrategy.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TradingStrategy.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TradingStrategy.h" beforeDir="false" afterPath="$PROJECT_DIR$/TradingStrategy.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/3.30.2/CMakeDetermineCompilerABI_C.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/3.30.2/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/3.30.2/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/3.30.2/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/CMakeConfigureLog.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/CMakeConfigureLog.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ConfigManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ConfigManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataProcessor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/DataProcessor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataProcessor.h" beforeDir="false" afterPath="$PROJECT_DIR$/DataProcessor.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TradingKLX.h" beforeDir="false" afterPath="$PROJECT_DIR$/TradingKLX.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,6 +90,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "CMakeSettings",
+    "structure.view.defaults.are.configured": "true",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -192,7 +191,7 @@
       <workItem from="1724611322110" duration="2889000" />
       <workItem from="1724615261154" duration="5090000" />
       <workItem from="1724620364459" duration="2233000" />
-      <workItem from="1724622605324" duration="2529000" />
+      <workItem from="1724622605324" duration="9243000" />
     </task>
     <servers />
   </component>

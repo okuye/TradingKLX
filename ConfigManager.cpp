@@ -3,9 +3,13 @@
 #include <iostream>
 #include <json/json.h>
 
+
+//#include <spdlog/spdlog.h>
+
 Json::Value ConfigManager::readConfig(const std::string& configFile) {
     std::ifstream file(configFile, std::ifstream::binary);
     if (!file.is_open()) {
+        std::cerr << "Unable to open config file: " << configFile << std::endl;
         throw std::runtime_error("Unable to open config file: " + configFile);
     }
 
@@ -14,6 +18,7 @@ Json::Value ConfigManager::readConfig(const std::string& configFile) {
     std::string errs;
 
     if (!Json::parseFromStream(readerBuilder, file, &configJson, &errs)) {
+        std::cerr << "Error parsing config file: " << errs << std::endl;
         throw std::runtime_error("Error parsing config file: " + errs);
     }
 
@@ -30,8 +35,11 @@ Json::Value ConfigManager::readConfig(const std::string& configFile) {
             mergedConfig[it.key().asString()] = *it;
         }
 
+        std::cout << "Config loaded for environment: " << environment << std::endl;
         return mergedConfig;
     }
+
+    std::cout << "Config loaded with no specific environment." << std::endl;
 
     return configJson;
 }
