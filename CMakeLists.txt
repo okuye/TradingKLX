@@ -1,34 +1,19 @@
 ﻿cmake_minimum_required(VERSION 3.10)
 project(TradingKLX)
 
+# Set C++ standard to C++17 and ensure it's required
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Python setup
 set(Python3_EXECUTABLE "/Users/olakunlekuye/Documents/Dev/KLX/demo/TradingKLX/tradingklx_venv/bin/python")
 find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
 
-execute_process(
-        COMMAND ${Python3_EXECUTABLE} -c "import numpy; print(numpy.get_include())"
-        OUTPUT_VARIABLE NUMPY_INCLUDE_DIR
-        OUTPUT_STRIP_TRAILING_WHITESPACE
-)
+# Boost setup
+find_package(Boost REQUIRED COMPONENTS filesystem)
+include_directories(${Boost_INCLUDE_DIRS})
 
-message(STATUS "Python3_EXECUTABLE: ${Python3_EXECUTABLE}")
-message(STATUS "NumPy Include Directory: ${NUMPY_INCLUDE_DIR}")
-
-if(NOT NUMPY_INCLUDE_DIR)
-    message(FATAL_ERROR "NumPy not found. Please ensure NumPy is installed in the Python environment.")
-endif()
-
-include_directories(${NUMPY_INCLUDE_DIR})
-
-if(APPLE)
-    message("Configuring for macOS")
-elseif(UNIX AND NOT APPLE)
-    message("Configuring for Linux")
-else()
-    message(FATAL_ERROR "Unsupported operating system")
-endif()
-
+# Check for std::filesystem support
 include(CheckCXXSourceCompiles)
 check_cxx_source_compiles("
     #include <filesystem>
@@ -38,15 +23,14 @@ check_cxx_source_compiles("
     }"
         HAVE_FILESYSTEM
 )
+
 if(HAVE_FILESYSTEM)
     message("std::filesystem is available")
 else()
-    message(FATAL_ERROR "std::filesystem is not available")
+    message(FATAL_ERROR "std::filesystem is not available. Falling back to Boost.Filesystem")
 endif()
 
-# Automatically find the correct Python executable and NumPy
-find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
-
+# Get NumPy include directory
 execute_process(
         COMMAND ${Python3_EXECUTABLE} -c "import numpy; print(numpy.get_include())"
         OUTPUT_VARIABLE NUMPY_INCLUDE_DIR
@@ -60,6 +44,16 @@ else()
     include_directories(${NUMPY_INCLUDE_DIR})
 endif()
 
+# Platform-specific configuration
+if(APPLE)
+    message("Configuring for macOS")
+elseif(UNIX AND NOT APPLE)
+    message("Configuring for Linux")
+else()
+    message(FATAL_ERROR "Unsupported operating system")
+endif()
+
+# Package configuration
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(JSONCPP REQUIRED jsoncpp)
 find_package(CURL REQUIRED)
@@ -96,6 +90,7 @@ target_include_directories(TradingKLX PRIVATE
         ${CURL_INCLUDE_DIRS}
         ${Python3_INCLUDE_DIRS}
         ${NUMPY_INCLUDE_DIR}  # Add NumPy include directory if found manually
+        ${Boost_INCLUDE_DIRS}  # Add Boost include directories
 )
 
 # Link libraries
@@ -103,6 +98,7 @@ target_link_libraries(TradingKLX PRIVATE
         jsoncpp
         curl
         Python3::Python
+        ${Boost_LIBRARIES}  # Link against Boost libraries
 )
 
 # Copy configuration file to the build directory

@@ -3,9 +3,6 @@
 #include <iostream>
 #include <json/json.h>
 
-
-//#include <spdlog/spdlog.h>
-
 Json::Value ConfigManager::readConfig(const std::string& configFile) {
     std::ifstream file(configFile, std::ifstream::binary);
     if (!file.is_open()) {

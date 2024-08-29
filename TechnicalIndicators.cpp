@@ -66,19 +66,19 @@ double TechnicalIndicators::calculateSenkouSpanB(const std::vector<double>& high
     // Validate inputs
     if (index < period - 1 || index >= highs.size() || index >= lows.size())
         throw std::invalid_argument("Index out of range for Senkou Span B calculation");
-    
+
     // Check if Senkou Span B is already calculated for this index
     auto it = memo.senkouSpanBMemo.find(index);
     if (it != memo.senkouSpanBMemo.end()) {
         // Return memoized value if available
         return it->second;
     }
-    
+
     // Calculate Senkou Span B
     auto highIt = std::max_element(highs.begin() + index - period + 1, highs.begin() + index + 1);
     auto lowIt = std::min_element(lows.begin() + index - period + 1, lows.begin() + index + 1);
     double senkouSpanB = (*highIt + *lowIt) / 2.0;
-    
+
     // Memoize and return the result
     memo.senkouSpanBMemo[index] = senkouSpanB;
     return senkouSpanB;
@@ -137,7 +137,7 @@ double TechnicalIndicators::calculateStdDev(const std::vector<double>& data, int
     }
 
     // Calculate variance
-    double variance = std::accumulate(data.begin() + start, data.begin() + end, 0.0, 
+    double variance = std::accumulate(data.begin() + start, data.begin() + end, 0.0,
                                       [mean](double acc, double val) {
                                           return acc + std::pow(val - mean, 2);
                                       }) / (end - start);
