@@ -1,16 +1,16 @@
 #include "TechnicalIndicators.h"
-#include <algorithm> // For std::max_element and std::min_element
-#include <cmath>     // For std::pow and std::sqrt
-#include <stdexcept> // For std::invalid_argument
-#include <numeric>   // For std::accumulate
+#include <algorithm>
+#include <cmath>
+#include <stdexcept>
+#include <numeric>
+#include <iostream>
 
-
-// Optimized calculateTenkanSen with memoization and input validation
+// Optimized Tenkan-sen
 double TechnicalIndicators::calculateTenkanSen(const std::vector<double>& highs, const std::vector<double>& lows, int period, int index, IchimokuMemo& memo) {
     if (highs.size() != lows.size() || index < 0 || index >= highs.size() || period <= 0) {
         throw std::invalid_argument("Invalid input for Tenkan-sen calculation.");
     }
-
+    
     if (memo.tenkanSenMemo.find(index) == memo.tenkanSenMemo.end()) {
         auto highIt = std::max_element(highs.begin() + std::max(0, index - period + 1), highs.begin() + index + 1);
         auto lowIt = std::min_element(lows.begin() + std::max(0, index - period + 1), lows.begin() + index + 1);
@@ -20,7 +20,7 @@ double TechnicalIndicators::calculateTenkanSen(const std::vector<double>& highs,
     return memo.tenkanSenMemo[index];
 }
 
-// Optimized calculateKijunSen with memoization and input validation
+// Optimized Kijun-sen
 double TechnicalIndicators::calculateKijunSen(const std::vector<double>& highs, const std::vector<double>& lows, int period, int index, IchimokuMemo& memo) {
     if (highs.size() != lows.size() || index < 0 || index >= highs.size() || period <= 0) {
         throw std::invalid_argument("Invalid input for Kijun-sen calculation.");
@@ -35,7 +35,7 @@ double TechnicalIndicators::calculateKijunSen(const std::vector<double>& highs, 
     return memo.kijunSenMemo[index];
 }
 
-// Optimized Senkou Span A calculation with memoization
+// Optimized Senkou Span A
 double TechnicalIndicators::calculateSenkouSpanA(int index, IchimokuMemo& memo) {
     if (index < 0 || memo.tenkanSenMemo.find(index) == memo.tenkanSenMemo.end() || memo.kijunSenMemo.find(index) == memo.kijunSenMemo.end()) {
         throw std::invalid_argument("Invalid input or missing data for Senkou Span A.");
@@ -51,7 +51,7 @@ double TechnicalIndicators::calculateSenkouSpanA(int index, IchimokuMemo& memo) 
     return senkouSpanA;
 }
 
-// Optimized Senkou Span B calculation with memoization
+// Optimized Senkou Span B
 double TechnicalIndicators::calculateSenkouSpanB(const std::vector<double>& highs, const std::vector<double>& lows, int index, IchimokuMemo& memo) {
     const int period = 52;
     if (index < period - 1 || index >= highs.size() || index >= lows.size()) {
@@ -70,7 +70,7 @@ double TechnicalIndicators::calculateSenkouSpanB(const std::vector<double>& high
     return senkouSpanB;
 }
 
-// Optimized Bollinger Bands calculation with memoization
+// Optimized Bollinger Bands
 std::pair<double, double> TechnicalIndicators::calculateBollingerBandsWithMemoization(const std::vector<double>& data, int window, double numStdDev, BollingerBandsMemo& memo) {
     if (data.size() < window || window < 1) {
         throw std::invalid_argument("Invalid data size or window for Bollinger Bands.");
@@ -95,7 +95,7 @@ std::pair<double, double> TechnicalIndicators::calculateBollingerBandsWithMemoiz
     return {memo.lowerBandMemo[lastIndex], memo.upperBandMemo[lastIndex]};
 }
 
-// Optimized calculateSMA with rolling window technique
+// Optimized SMA calculation
 double TechnicalIndicators::calculateSMA(const std::vector<double>& data, int currentIndex, int period) {
     if (currentIndex < period - 1) {
         throw std::invalid_argument("Not enough data points for SMA.");
@@ -111,7 +111,7 @@ double TechnicalIndicators::calculateSMA(const std::vector<double>& data, int cu
     return sum / period;
 }
 
-// Helper function to calculate standard deviation
+// Calculate Standard Deviation
 double TechnicalIndicators::calculateStdDev(const std::vector<double>& data, int start, int end, double mean) {
     if (start < 0 || end > static_cast<int>(data.size()) || start >= end) {
         throw std::invalid_argument("Invalid range for standard deviation calculation.");
@@ -125,57 +125,79 @@ double TechnicalIndicators::calculateStdDev(const std::vector<double>& data, int
     return std::sqrt(variance);
 }
 
-// Implementation of calculateIchimokuIndicators
-void calculateIchimokuIndicators(const std::vector<double>& highs, const std::vector<double>& lows, 
-                                 std::vector<double>& tenkanS, std::vector<double>& kijunS, 
-                                 std::vector<double>& senkouA, std::vector<double>& senkouB, 
-                                 TechnicalIndicators& indicators, IchimokuMemo& ichimokuMemo) {
-    for (size_t i = 0; i < highs.size(); ++i) {
-        tenkanS.push_back(indicators.calculateTenkanSen(highs, lows, 9, i, ichimokuMemo));
-        kijunS.push_back(indicators.calculateKijunSen(highs, lows, 26, i, ichimokuMemo));
-        senkouA.push_back(indicators.calculateSenkouSpanA(i, ichimokuMemo));
-
-        if (i >= 51) {
-            senkouB.push_back(indicators.calculateSenkouSpanB(highs, lows, i, ichimokuMemo));
-        }
-    }
-}
-
-// Implementation of calculateBollingerBands
-void calculateBollingerBands(const std::vector<double>& closes, std::vector<double>& lowerBB, 
-                             std::vector<double>& upperBB, TechnicalIndicators& indicators, 
-                             BollingerBandsMemo& bbMemo) {
-    for (size_t i = 0; i < closes.size(); ++i) {
-        if (i >= 20) {
-            auto bands = indicators.calculateBollingerBandsWithMemoization(closes, 20, 2, bbMemo);
-            lowerBB.push_back(bands.first);
-            upperBB.push_back(bands.second);
-        } else {
-            lowerBB.push_back(0.0);
-            upperBB.push_back(0.0);
-        }
-    }
-}
-
-// Add this function to TechnicalIndicators.cpp
-
+// Calculate ATR
 double TechnicalIndicators::calculateATR(const std::vector<double>& highs, 
                                          const std::vector<double>& lows, 
                                          const std::vector<double>& closes, 
                                          int period, int currentIndex) {
-    if (currentIndex < period - 1) {
+    if (currentIndex < period) {
         throw std::invalid_argument("Not enough data points to calculate ATR.");
     }
 
-    double atr = 0.0;
+    std::vector<double> trueRanges;
     for (int i = currentIndex - period + 1; i <= currentIndex; ++i) {
         double highLowRange = highs[i] - lows[i];
         double highClosePrevRange = std::abs(highs[i] - closes[i - 1]);
         double lowClosePrevRange = std::abs(lows[i] - closes[i - 1]);
 
         double trueRange = std::max({highLowRange, highClosePrevRange, lowClosePrevRange});
-        atr += trueRange;
+        trueRanges.push_back(trueRange);
+
+        // Log each true range for debugging
+        std::cout << "Index " << i << " - High: " << highs[i] << ", Low: " << lows[i] 
+                  << ", ClosePrev: " << closes[i - 1] << ", TrueRange: " << trueRange << std::endl;
     }
 
-    return atr / period;  // Average True Range over the period
+    double atr = std::accumulate(trueRanges.begin(), trueRanges.end(), 0.0) / period;
+
+    // Log the final ATR value
+    std::cout << "Calculated ATR for index " << currentIndex << ": " << atr << std::endl;
+
+    return atr;
 }
+
+// Grid search for optimal Tenkan-sen and Kijun-sen periods
+std::pair<int, int> TechnicalIndicators::gridSearchIchimokuOptimization(const std::vector<double>& highs, const std::vector<double>& lows) {
+    int bestTenkan = 9, bestKijun = 26;
+    double bestProfit = -INFINITY;
+
+    for (int tenkanPeriod = 7; tenkanPeriod <= 12; ++tenkanPeriod) {
+        for (int kijunPeriod = 22; kijunPeriod <= 30; ++kijunPeriod) {
+            IchimokuMemo memo;
+            std::vector<double> tenkanS, kijunS;
+
+            for (size_t i = 0; i < highs.size(); ++i) {
+                tenkanS.push_back(calculateTenkanSen(highs, lows, tenkanPeriod, i, memo));
+                kijunS.push_back(calculateKijunSen(highs, lows, kijunPeriod, i, memo));
+            }
+
+            double profit = runStrategyWithParams(tenkanS, kijunS);  // Implement `runStrategyWithParams` for your strategy
+
+            if (profit > bestProfit) {
+                bestProfit = profit;
+                bestTenkan = tenkanPeriod;
+                bestKijun = kijunPeriod;
+            }
+        }
+    }
+
+    return {bestTenkan, bestKijun};
+}
+
+double TechnicalIndicators::runStrategyWithParams(const std::vector<double>& tenkanS, const std::vector<double>& kijunS) {
+    // Example logic: Calculate a profit based on Tenkan-sen and Kijun-sen values
+    // In practice, this should run your strategy logic and return a profit value
+
+    double profit = 0.0;
+    // TODO: Implement your trading logic here to calculate profit
+    // This is just a placeholder logic
+    for (size_t i = 0; i < tenkanS.size(); ++i) {
+        if (tenkanS[i] > kijunS[i]) {
+            profit += 10;  // Example: Gain $10 if Tenkan-sen > Kijun-sen
+        } else {
+            profit -= 5;   // Example: Lose $5 if Tenkan-sen <= Kijun-sen
+        }
+    }
+    return profit;
+}
+

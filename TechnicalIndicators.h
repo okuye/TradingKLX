@@ -3,14 +3,21 @@
 
 #include <vector>
 #include <unordered_map>
-#include <utility> // For std::pair
+#include <utility>
+#include <iostream>
 
 struct IchimokuMemo {
-    std::unordered_map<int, double> tenkanSenMemo, kijunSenMemo, senkouSpanAMemo, senkouSpanBMemo;
+    std::unordered_map<int, double> tenkanSenMemo;
+    std::unordered_map<int, double> kijunSenMemo;
+    std::unordered_map<int, double> senkouSpanAMemo;
+    std::unordered_map<int, double> senkouSpanBMemo;
 };
 
 struct BollingerBandsMemo {
-    std::unordered_map<int, double> smaMemo, stdDevMemo, upperBandMemo, lowerBandMemo;
+    std::unordered_map<int, double> upperBandMemo;
+    std::unordered_map<int, double> lowerBandMemo;
+    std::unordered_map<int, double> smaMemo;
+    std::unordered_map<int, double> stdDevMemo;
 };
 
 class TechnicalIndicators {
@@ -19,21 +26,15 @@ public:
     double calculateKijunSen(const std::vector<double>& highs, const std::vector<double>& lows, int period, int index, IchimokuMemo& memo);
     double calculateSenkouSpanA(int index, IchimokuMemo& memo);
     double calculateSenkouSpanB(const std::vector<double>& highs, const std::vector<double>& lows, int index, IchimokuMemo& memo);
+    
     std::pair<double, double> calculateBollingerBandsWithMemoization(const std::vector<double>& data, int window, double numStdDev, BollingerBandsMemo& memo);
-
-    double calculateSMA(const std::vector<double>& data, int start, int end);
+    
+    double calculateATR(const std::vector<double>& highs, const std::vector<double>& lows, const std::vector<double>& closes, int period, int currentIndex);
+    double calculateSMA(const std::vector<double>& data, int currentIndex, int period);
     double calculateStdDev(const std::vector<double>& data, int start, int end, double mean);
-    double calculateATR(const std::vector<double>& highs, const std::vector<double>& lows, const std::vector<double>& closes, int period, int index);
+    
+    std::pair<int, int> gridSearchIchimokuOptimization(const std::vector<double>& highs, const std::vector<double>& lows);
+    double runStrategyWithParams(const std::vector<double>& tenkanS, const std::vector<double>& kijunS);
 };
 
-// Declarations for Ichimoku and Bollinger Bands
-void calculateIchimokuIndicators(const std::vector<double>& highs, const std::vector<double>& lows, 
-                                 std::vector<double>& tenkanS, std::vector<double>& kijunS, 
-                                 std::vector<double>& senkouA, std::vector<double>& senkouB, 
-                                 TechnicalIndicators& indicators, IchimokuMemo& ichimokuMemo);
-
-void calculateBollingerBands(const std::vector<double>& closes, std::vector<double>& lowerBB, 
-                             std::vector<double>& upperBB, TechnicalIndicators& indicators, 
-                             BollingerBandsMemo& bbMemo);
-
-#endif // TECHNICALINDICATORS_H
+#endif

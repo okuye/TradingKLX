@@ -2,9 +2,8 @@
 #define TRADING_STRATEGY_H
 
 #include <vector>
-#include "PriceData.h"
-#include "TechnicalIndicators.h"
 #include "TradingSignal.h"
+#include "PriceData.h"
 
 class TradingStrategy {
 public:
@@ -21,21 +20,20 @@ public:
                                                const std::vector<double>& lowerBB,
                                                const std::vector<double>& upperBB);
 
-    // Getter method for account balance
     double getAccountBalance() const;
+
+    // Add this method to retrieve the signals
+    const std::vector<TradingSignal>& getSignals() const;
 
 private:
     double accountBalance;
     double riskPerTrade;
     double stopLossMultiplier;
-
     int smaPeriod;
     int bollingerBandsPeriod;
-    int bollingerBandsMultiplier;
+    double bollingerBandsMultiplier;
 
-    TechnicalIndicators indicators;
-
-    void loadConfiguration(const std::string& configFile);
+    std::vector<TradingSignal> signals; // Add this to store generated signals
 };
 
 #endif

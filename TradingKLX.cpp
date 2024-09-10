@@ -1,72 +1,14 @@
 #include <iostream>
 #include <vector>
-#include <thread>
 #include <fstream>
-#include "OandA_API.hpp"
-#include "ConfigManager.h"
-#include "DataProcessor.h"
 #include "TechnicalIndicators.h"
 #include "TradingStrategy.h"
-#include "Utilities.h"
-#include "JSONParser.h"
-#include "PerformanceAssessor.h"
 #include "PriceData.h"
+#include "PerformanceAssessor.h"
+#include <sstream>
+#include <algorithm> // For std::min
 
-// Function to load configuration from a file
-Json::Value loadConfiguration(const std::string& configFile) {
-    std::ifstream configFileStream(configFile, std::ifstream::binary);
-    if (!configFileStream.is_open()) {
-        throw std::runtime_error("Could not open config file: " + configFile);
-    }
-
-    Json::CharReaderBuilder readerBuilder;
-    Json::Value config;
-    std::string errs;
-
-    if (!Json::parseFromStream(readerBuilder, configFileStream, &config, &errs)) {
-        throw std::runtime_error("Error parsing config file: " + errs);
-    }
-
-    return config;
-}
-
-// Function to extract and validate configuration values
-void extractConfigValues(const Json::Value& config, std::string& apiKey, std::string& accountID, 
-                         std::string& from_symbol, std::string& to_symbol, 
-                         std::string& dbName, std::string& collectionName) {
-    if (config.isMember("apiKey") && config["apiKey"].isString()) {
-        apiKey = config["apiKey"].asString();
-    } else {
-        throw std::runtime_error("Missing or invalid apiKey");
-    }
-    if (config.isMember("accountID") && config["accountID"].isString()) {
-        accountID = config["accountID"].asString();
-    } else {
-        throw std::runtime_error("Missing or invalid accountID");
-    }
-    if (config.isMember("from_symbol") && config["from_symbol"].isString()) {
-        from_symbol = config["from_symbol"].asString();
-    } else {
-        throw std::runtime_error("Missing or invalid from_symbol");
-    }
-    if (config.isMember("to_symbol") && config["to_symbol"].isString()) {
-        to_symbol = config["to_symbol"].asString();
-    } else {
-        throw std::runtime_error("Missing or invalid to_symbol");
-    }
-    if (config.isMember("dbName") && config["dbName"].isString()) {
-        dbName = config["dbName"].asString();
-    } else {
-        throw std::runtime_error("Missing or invalid dbName");
-    }
-    if (config.isMember("collectionName") && config["collectionName"].isString()) {
-        collectionName = config["collectionName"].asString();
-    } else {
-        throw std::runtime_error("Missing or invalid collectionName");
-    }
-}
-
-// Function to load data from Ask and Bid CSV files
+// Function to load historical data
 std::vector<PriceData> loadHistoricalData(const std::string& askFile, const std::string& bidFile) {
     std::vector<PriceData> priceData;
     std::ifstream askFileStream(askFile);
@@ -83,14 +25,26 @@ std::vector<PriceData> loadHistoricalData(const std::string& askFile, const std:
     std::getline(askFileStream, lineAsk);  // Skip header
     std::getline(bidFileStream, lineBid);  // Skip header
 
-    while (std::getline(askFileStream, lineAsk) && std::getline(bidFileStream, lineBid)) {
+    bool askHasNext = (bool)std::getline(askFileStream, lineAsk);
+    bool bidHasNext = (bool)std::getline(bidFileStream, lineBid);
+
+    while (askHasNext && bidHasNext) {
         std::stringstream ssAsk(lineAsk);
         std::stringstream ssBid(lineBid);
         std::string tempAsk, tempBid, timestampAsk, timestampBid;
 
+        std::getline(ssAsk, timestampAsk, ',');
+        std::getline(ssBid, timestampBid, ',');
+
+        if (timestampAsk < timestampBid) {
+            askHasNext = (bool)std::getline(askFileStream, lineAsk);
+            continue;
+        } else if (timestampAsk > timestampBid) {
+            bidHasNext = (bool)std::getline(bidFileStream, lineBid);
+            continue;
+        }
+
         try {
-            // Process ASK data
-            std::getline(ssAsk, timestampAsk, ',');
             std::getline(ssAsk, tempAsk, ',');
             double askOpen = std::stod(tempAsk);
             std::getline(ssAsk, tempAsk, ',');
@@ -102,8 +56,6 @@ std::vector<PriceData> loadHistoricalData(const std::string& askFile, const std:
             std::getline(ssAsk, tempAsk, ',');
             double askVolume = std::stod(tempAsk);
 
-            // Process BID data
-            std::getline(ssBid, timestampBid, ',');
             std::getline(ssBid, tempBid, ',');
             double bidOpen = std::stod(tempBid);
             std::getline(ssBid, tempBid, ',');
@@ -115,17 +67,15 @@ std::vector<PriceData> loadHistoricalData(const std::string& askFile, const std:
             std::getline(ssBid, tempBid, ',');
             double bidVolume = std::stod(tempBid);
 
-            // Ensure timestamps match between Ask and Bid data
-            if (timestampAsk == timestampBid) {
-                priceData.emplace_back(timestampAsk, askOpen, askHigh, askLow, askClose, askVolume, 
-                                       bidOpen, bidHigh, bidLow, bidClose, bidVolume);
-            } else {
-                std::cerr << "Mismatched timestamps: " << timestampAsk << " != " << timestampBid << std::endl;
-            }
+            priceData.emplace_back(timestampAsk, askOpen, askHigh, askLow, askClose, askVolume,
+                                   bidOpen, bidHigh, bidLow, bidClose, bidVolume);
 
         } catch (const std::invalid_argument& e) {
             std::cerr << "Invalid data at row (Ask or Bid): " << lineAsk << " or " << lineBid << "\nError: " << e.what() << std::endl;
         }
+
+        askHasNext = (bool)std::getline(askFileStream, lineAsk);
+        bidHasNext = (bool)std::getline(bidFileStream, lineBid);
     }
 
     askFileStream.close();
@@ -134,14 +84,14 @@ std::vector<PriceData> loadHistoricalData(const std::string& askFile, const std:
 }
 
 // Function to process market data and extract highs, lows, and closes
-void processMarketData(const std::vector<PriceData>& priceData, 
-                       std::vector<double>& askHighs, 
-                       std::vector<double>& askLows, 
-                       std::vector<double>& askCloses, 
-                       std::vector<double>& bidHighs, 
-                       std::vector<double>& bidLows, 
-                       std::vector<double>& bidCloses) {
-    for (const auto& data : priceData) {
+void processMarketData(const std::vector<PriceData> &priceData,
+                       std::vector<double> &askHighs,
+                       std::vector<double> &askLows,
+                       std::vector<double> &askCloses,
+                       std::vector<double> &bidHighs,
+                       std::vector<double> &bidLows,
+                       std::vector<double> &bidCloses) {
+    for (const auto &data : priceData) {
         askHighs.push_back(data.askHigh);
         askLows.push_back(data.askLow);
         askCloses.push_back(data.askClose);
@@ -153,68 +103,108 @@ void processMarketData(const std::vector<PriceData>& priceData,
 }
 
 // Function to log signals
-void logSignals(const std::vector<TradingSignal>& signals) {
-    for (const auto& signal : signals) {
+void logSignals(const std::vector<TradingSignal> &signals) {
+    for (const auto &signal : signals) {
         if (signal.buy) {
-            std::cout << "Buy signal at index: " << signal.index << ", Position Size: " << signal.positionSize << ", Stop Loss: " << signal.stopLossLevel << std::endl;
+            std::cout << "Buy signal at index: " << signal.index << ", Position Size: " << signal.positionSize
+                      << ", Stop Loss: " << signal.stopLossLevel << std::endl;
         } else if (signal.sell) {
             std::cout << "Sell signal at index: " << signal.index << ", Profit: " << signal.profit << std::endl;
         }
     }
 }
 
+// Function to calculate Ichimoku indicators
+void calculateIchimokuIndicators(const std::vector<double>& highs, const std::vector<double>& lows,
+                                 std::vector<double>& tenkanS, std::vector<double>& kijunS,
+                                 std::vector<double>& senkouA, std::vector<double>& senkouB,
+                                 TechnicalIndicators& indicators, IchimokuMemo& ichimokuMemo) {
+    for (size_t i = 0; i < highs.size(); ++i) {
+        tenkanS.push_back(indicators.calculateTenkanSen(highs, lows, 9, i, ichimokuMemo));
+        kijunS.push_back(indicators.calculateKijunSen(highs, lows, 26, i, ichimokuMemo));
+        senkouA.push_back(indicators.calculateSenkouSpanA(i, ichimokuMemo));
+
+        if (i >= 51) {
+            senkouB.push_back(indicators.calculateSenkouSpanB(highs, lows, i, ichimokuMemo));
+        }
+    }
+}
+
+// Function to calculate Bollinger Bands
+void calculateBollingerBands(const std::vector<double>& closes, std::vector<double>& lowerBB,
+                             std::vector<double>& upperBB, TechnicalIndicators& indicators,
+                             BollingerBandsMemo& bbMemo) {
+    for (size_t i = 0; i < closes.size(); ++i) {
+        if (i >= 20) {
+            auto bands = indicators.calculateBollingerBandsWithMemoization(closes, 20, 2, bbMemo);
+            lowerBB.push_back(bands.first);
+            upperBB.push_back(bands.second);
+        } else {
+            lowerBB.push_back(0.0);
+            upperBB.push_back(0.0);
+        }
+    }
+}
+
+// Walk-forward optimization function
+void walkForwardOptimization(TradingStrategy& strategy, const std::vector<PriceData>& priceData, size_t walkForwardPeriod) {
+    for (size_t start = 0; start < priceData.size(); start += walkForwardPeriod) {
+        size_t end = std::min(start + walkForwardPeriod, priceData.size());
+        std::vector<PriceData> walkForwardData(priceData.begin() + start, priceData.begin() + end);
+
+        std::vector<double> askHighs, askLows, askCloses, bidHighs, bidLows, bidCloses;
+        processMarketData(walkForwardData, askHighs, askLows, askCloses, bidHighs, bidLows, bidCloses);
+
+        IchimokuMemo ichimokuMemo;
+        BollingerBandsMemo bbMemo;
+
+        std::vector<double> tenkanS, kijunS, senkouA, senkouB, lowerBB, upperBB;
+
+        TechnicalIndicators indicators;
+        calculateIchimokuIndicators(askHighs, askLows, tenkanS, kijunS, senkouA, senkouB, indicators, ichimokuMemo);
+        calculateBollingerBands(bidCloses, lowerBB, upperBB, indicators, bbMemo);
+
+        std::vector<TradingSignal> signals = strategy.evaluateSignals(walkForwardData, askCloses, askHighs, askLows,
+                                                                      tenkanS, kijunS, senkouA, senkouB, lowerBB, upperBB);
+
+        logSignals(signals);
+    }
+}
+
 int main() {
-    // Load historical data from Ask and Bid CSV files
-    std::vector<PriceData> priceData = loadHistoricalData("/path/to/EURUSD_Candlestick_1_Hour_ASK.csv",
-                                                          "/path/to/EURUSD_Candlestick_1_Hour_BID.csv");
+    std::vector<PriceData> priceData = loadHistoricalData("/Users/olakunlekuye/Documents/Dev/KLX/demo/TradingKLX/EURUSD_Candlestick_1_Hour_ASK_01.09.2023-07.09.2024.csv",
+                                                          "/Users/olakunlekuye/Documents/Dev/KLX/demo/TradingKLX/EURUSD_Candlestick_1_Hour_BID_01.01.2023-07.09.2024.csv");
 
-    // Initialize strategy and indicators
-    TradingStrategy strategy(10000.0, 0.0015, 1.25);  // $10,000 starting balance, 0.15% risk, stop-loss multiplier 1.25
-    TechnicalIndicators indicators;
+    TradingStrategy strategy(10000.0, 0.0015, 1.25); // $10,000 starting balance, 0.15% risk, stop-loss multiplier 1.25
 
-    std::vector<double> askHighs, askLows, askCloses, bidHighs, bidLows, bidCloses;
-    processMarketData(priceData, askHighs, askLows, askCloses, bidHighs, bidLows, bidCloses);
+    size_t walkForwardPeriod = 1000;  // Define the walk-forward optimization period
+    walkForwardOptimization(strategy, priceData, walkForwardPeriod);
 
-    // Declare memoization objects for Ichimoku and Bollinger Bands
-    IchimokuMemo ichimokuMemo;
-    BollingerBandsMemo bbMemo;
-
-    std::vector<double> tenkanS, kijunS, senkouA, senkouB, lowerBB, upperBB;
-
-    // Calculate Ichimoku indicators (using Ask prices for calculations)
-    calculateIchimokuIndicators(askHighs, askLows, tenkanS, kijunS, senkouA, senkouB, indicators, ichimokuMemo);
-
-    // Calculate Bollinger Bands (using Bid closes for calculations)
-    calculateBollingerBands(bidCloses, lowerBB, upperBB, indicators, bbMemo);
-
-    // Evaluate buy/sell signals (you can use both Ask and Bid data here)
-    std::vector<TradingSignal> signals = strategy.evaluateSignals(priceData, askCloses, askHighs, askLows, 
-                                                                  tenkanS, kijunS, senkouA, senkouB, lowerBB, upperBB);
-
-    // Log trading signals
-    logSignals(signals);
-
-    // Track portfolio values for performance assessment
     std::vector<double> portfolioValues;
     double currentBalance = strategy.getAccountBalance();
     portfolioValues.push_back(currentBalance);
 
-    for (const auto& signal : signals) {
-        currentBalance = strategy.getAccountBalance();
-        portfolioValues.push_back(currentBalance);
+     // Performance assessment calculations
+    double totalReturn = PerformanceAssessor::calculateTotalReturn(portfolioValues, 10000.0);
+    double maxDrawdown = PerformanceAssessor::calculateMaxDrawdown(portfolioValues);
+    double winLossRatio = PerformanceAssessor::calculateWinLossRatio(strategy.getSignals());
+    double avgProfit = PerformanceAssessor::calculateAverageProfit(strategy.getSignals());
+
+    // Generate portfolio returns for Sharpe Ratio calculation
+    std::vector<double> portfolioReturns;
+    for (size_t i = 1; i < portfolioValues.size(); ++i) {
+        double returnRate = (portfolioValues[i] - portfolioValues[i - 1]) / portfolioValues[i - 1];
+        portfolioReturns.push_back(returnRate);
     }
 
-    // Use PerformanceAssessor to evaluate backtest results
-    double totalReturn = PerformanceAssessor::calculateTotalReturn(portfolioValues, 10000.0);  // Initial balance of $10,000
-    double maxDrawdown = PerformanceAssessor::calculateMaxDrawdown(portfolioValues);
-    double winLossRatio = PerformanceAssessor::calculateWinLossRatio(signals);
-    double avgProfit = PerformanceAssessor::calculateAverageProfit(signals);
+    double sharpeRatio = PerformanceAssessor::calculateSharpeRatio(portfolioReturns);
 
-    // Output the performance metrics
+    // Output the performance results
     std::cout << "Total Return: " << totalReturn << "%\n";
     std::cout << "Max Drawdown: " << maxDrawdown << "%\n";
     std::cout << "Win/Loss Ratio: " << winLossRatio << "\n";
     std::cout << "Average Profit per Trade: " << avgProfit << "\n";
+    std::cout << "Sharpe Ratio: " << sharpeRatio << "\n";
 
     return 0;
 }

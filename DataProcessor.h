@@ -9,4 +9,5 @@ class DataProcessor {
 public:
     static double getFieldValue(const Json::Value& data, const std::string& field);
     static std::vector<PriceData> processData(const std::string& jsonData, const std::string& timeSeriesKey);
+    static std::string jsonToString(const Json::Value& jsonValue);
 };
