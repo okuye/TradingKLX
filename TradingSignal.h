@@ -9,6 +9,7 @@ struct TradingSignal {
     std::size_t index; // The index in the data where this signal is generated
     double positionSize;  // The size of the position to take on this signal
     double stopLossLevel; // The stop-loss level for this signal
+    double profit; 
 };
 
 #endif

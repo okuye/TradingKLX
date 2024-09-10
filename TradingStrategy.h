@@ -21,6 +21,9 @@ public:
                                                const std::vector<double>& lowerBB,
                                                const std::vector<double>& upperBB);
 
+    // Getter method for account balance
+    double getAccountBalance() const;
+
 private:
     double accountBalance;
     double riskPerTrade;

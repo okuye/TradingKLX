@@ -3,7 +3,6 @@
 #include <iostream>
 #include <stdexcept> // For std::invalid_argument and custom exceptions
 #include <json/json.h> // Include the jsoncpp header
-
 class JsonStructureException : public std::invalid_argument {
 public:
     explicit JsonStructureException(const std::string& message)
@@ -53,35 +52,24 @@ std::vector<PriceData> DataProcessor::processData(const std::string& jsonDataStr
         std::cout << "Processing item: " << jsonToString(item) << std::endl;
 
         // Check for required keys within each candle item
-        if (!item.isMember("ask") || !item["ask"].isObject()) {
-            std::cerr << "Invalid JSON structure: 'ask' key is missing or incorrect" << std::endl;
-            throw std::runtime_error("Invalid JSON structure: 'ask' key is missing or incorrect");
-        }
-        if (!item.isMember("bid") || !item["bid"].isObject()) {
-            std::cerr << "Invalid JSON structure: 'bid' key is missing or incorrect" << std::endl;
-            throw std::runtime_error("Invalid JSON structure: 'bid' key is missing or incorrect");
+        if (!item.isMember("mid") || !item["mid"].isObject()) {
+            std::cerr << "Invalid JSON structure: 'mid' key is missing or incorrect" << std::endl;
+            throw std::runtime_error("Invalid JSON structure: 'mid' key is missing or incorrect");
         }
 
-        // Extracting fields from Ask data
-        std::string timestamp = item["time"].asString();
-        double askOpen = std::stod(item["ask"]["o"].asString());
-        double askHigh = std::stod(item["ask"]["h"].asString());
-        double askLow = std::stod(item["ask"]["l"].asString());
-        double askClose = std::stod(item["ask"]["c"].asString());
-        double askVolume = item["ask"]["volume"].asDouble();
+        if (!item["mid"].isMember("c") || !item["mid"]["c"].isString()) {
+            std::cerr << "Invalid JSON structure: 'c' key is missing or not a string" << std::endl;
+            throw std::runtime_error("Invalid JSON structure: 'c' key is missing or not a string");
+        }
 
-        // Extracting fields from Bid data
-        double bidOpen = std::stod(item["bid"]["o"].asString());
-        double bidHigh = std::stod(item["bid"]["h"].asString());
-        double bidLow = std::stod(item["bid"]["l"].asString());
-        double bidClose = std::stod(item["bid"]["c"].asString());
-        double bidVolume = item["bid"]["volume"].asDouble();
+        // Assuming PriceData is a structure that holds the parsed data
+        PriceData priceData;
+        priceData.close = std::stod(item["mid"]["c"].asString());
+        priceData.high = std::stod(item["mid"]["h"].asString());
+        priceData.low = std::stod(item["mid"]["l"].asString());
+        priceData.open = std::stod(item["mid"]["o"].asString());
+        priceData.volume = item["volume"].asInt();
 
-        // Create a new PriceData object with all fields (timestamp, ask and bid data)
-        PriceData priceData(timestamp, askOpen, askHigh, askLow, askClose, askVolume,
-                            bidOpen, bidHigh, bidLow, bidClose, bidVolume);
-
-        // Add the constructed PriceData object to the list
         dataList.push_back(priceData);
     }
 

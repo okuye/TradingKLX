@@ -31,9 +31,7 @@ Json::Value loadConfiguration(const std::string& configFile) {
 }
 
 // Function to extract and validate configuration values
-void extractConfigValues(const Json::Value& config, std::string& apiKey, std::string& accountID, 
-                         std::string& from_symbol, std::string& to_symbol, 
-                         std::string& dbName, std::string& collectionName) {
+void extractConfigValues(const Json::Value& config, std::string& apiKey, std::string& accountID, std::string& from_symbol, std::string& to_symbol, std::string& dbName, std::string& collectionName) {
     if (config.isMember("apiKey") && config["apiKey"].isString()) {
         apiKey = config["apiKey"].asString();
     } else {
@@ -66,7 +64,7 @@ void extractConfigValues(const Json::Value& config, std::string& apiKey, std::st
     }
 }
 
-// Function to load data from Ask and Bid CSV files
+// Function to load data from the Ask and Bid CSV files
 std::vector<PriceData> loadHistoricalData(const std::string& askFile, const std::string& bidFile) {
     std::vector<PriceData> priceData;
     std::ifstream askFileStream(askFile);
@@ -86,41 +84,42 @@ std::vector<PriceData> loadHistoricalData(const std::string& askFile, const std:
     while (std::getline(askFileStream, lineAsk) && std::getline(bidFileStream, lineBid)) {
         std::stringstream ssAsk(lineAsk);
         std::stringstream ssBid(lineBid);
-        std::string tempAsk, tempBid, timestampAsk, timestampBid;
+        PriceData dataAsk, dataBid;
+        std::string tempAsk, tempBid;
 
         try {
             // Process ASK data
-            std::getline(ssAsk, timestampAsk, ',');
+            std::getline(ssAsk, dataAsk.timestamp, ',');
             std::getline(ssAsk, tempAsk, ',');
-            double askOpen = std::stod(tempAsk);
+            dataAsk.open = std::stod(tempAsk);
             std::getline(ssAsk, tempAsk, ',');
-            double askHigh = std::stod(tempAsk);
+            dataAsk.high = std::stod(tempAsk);
             std::getline(ssAsk, tempAsk, ',');
-            double askLow = std::stod(tempAsk);
+            dataAsk.low = std::stod(tempAsk);
             std::getline(ssAsk, tempAsk, ',');
-            double askClose = std::stod(tempAsk);
+            dataAsk.close = std::stod(tempAsk);
             std::getline(ssAsk, tempAsk, ',');
-            double askVolume = std::stod(tempAsk);
+            dataAsk.volume = std::stod(tempAsk);
 
             // Process BID data
-            std::getline(ssBid, timestampBid, ',');
+            std::getline(ssBid, dataBid.timestamp, ',');
             std::getline(ssBid, tempBid, ',');
-            double bidOpen = std::stod(tempBid);
+            dataBid.open = std::stod(tempBid);
             std::getline(ssBid, tempBid, ',');
-            double bidHigh = std::stod(tempBid);
+            dataBid.high = std::stod(tempBid);
             std::getline(ssBid, tempBid, ',');
-            double bidLow = std::stod(tempBid);
+            dataBid.low = std::stod(tempBid);
             std::getline(ssBid, tempBid, ',');
-            double bidClose = std::stod(tempBid);
+            dataBid.close = std::stod(tempBid);
             std::getline(ssBid, tempBid, ',');
-            double bidVolume = std::stod(tempBid);
+            dataBid.volume = std::stod(tempBid);
 
             // Ensure timestamps match between Ask and Bid data
-            if (timestampAsk == timestampBid) {
-                priceData.emplace_back(timestampAsk, askOpen, askHigh, askLow, askClose, askVolume, 
-                                       bidOpen, bidHigh, bidLow, bidClose, bidVolume);
+            if (dataAsk.timestamp == dataBid.timestamp) {
+                priceData.push_back({dataAsk.timestamp, dataAsk.open, dataAsk.high, dataAsk.low, dataAsk.close, dataAsk.volume, 
+                                     dataBid.open, dataBid.high, dataBid.low, dataBid.close, dataBid.volume});
             } else {
-                std::cerr << "Mismatched timestamps: " << timestampAsk << " != " << timestampBid << std::endl;
+                std::cerr << "Mismatched timestamps: " << dataAsk.timestamp << " != " << dataBid.timestamp << std::endl;
             }
 
         } catch (const std::invalid_argument& e) {
@@ -134,17 +133,13 @@ std::vector<PriceData> loadHistoricalData(const std::string& askFile, const std:
 }
 
 // Function to process market data and extract highs, lows, and closes
-void processMarketData(const std::vector<PriceData>& priceData, 
-                       std::vector<double>& askHighs, 
-                       std::vector<double>& askLows, 
-                       std::vector<double>& askCloses, 
-                       std::vector<double>& bidHighs, 
-                       std::vector<double>& bidLows, 
-                       std::vector<double>& bidCloses) {
+void processMarketData(const std::vector<PriceData>& priceData, std::vector<double>& askHighs, 
+                       std::vector<double>& askLows, std::vector<double>& askCloses, 
+                       std::vector<double>& bidHighs, std::vector<double>& bidLows, std::vector<double>& bidCloses) {
     for (const auto& data : priceData) {
-        askHighs.push_back(data.askHigh);
-        askLows.push_back(data.askLow);
-        askCloses.push_back(data.askClose);
+        askHighs.push_back(data.high);
+        askLows.push_back(data.low);
+        askCloses.push_back(data.close);
 
         bidHighs.push_back(data.bidHigh);
         bidLows.push_back(data.bidLow);
@@ -152,21 +147,10 @@ void processMarketData(const std::vector<PriceData>& priceData,
     }
 }
 
-// Function to log signals
-void logSignals(const std::vector<TradingSignal>& signals) {
-    for (const auto& signal : signals) {
-        if (signal.buy) {
-            std::cout << "Buy signal at index: " << signal.index << ", Position Size: " << signal.positionSize << ", Stop Loss: " << signal.stopLossLevel << std::endl;
-        } else if (signal.sell) {
-            std::cout << "Sell signal at index: " << signal.index << ", Profit: " << signal.profit << std::endl;
-        }
-    }
-}
-
 int main() {
     // Load historical data from Ask and Bid CSV files
-    std::vector<PriceData> priceData = loadHistoricalData("/path/to/EURUSD_Candlestick_1_Hour_ASK.csv",
-                                                          "/path/to/EURUSD_Candlestick_1_Hour_BID.csv");
+    std::vector<PriceData> priceData = loadHistoricalData("EURUSD_Candlestick_1_Hour_ASK_01.09.2023-07.09.2024.csv",
+                                                          "EURUSD_Candlestick_1_Hour_BID_01.01.2023-07.09.2024.csv");
 
     // Initialize strategy and indicators
     TradingStrategy strategy(10000.0, 0.0015, 1.25);  // $10,000 starting balance, 0.15% risk, stop-loss multiplier 1.25
@@ -188,8 +172,7 @@ int main() {
     calculateBollingerBands(bidCloses, lowerBB, upperBB, indicators, bbMemo);
 
     // Evaluate buy/sell signals (you can use both Ask and Bid data here)
-    std::vector<TradingSignal> signals = strategy.evaluateSignals(priceData, askCloses, askHighs, askLows, 
-                                                                  tenkanS, kijunS, senkouA, senkouB, lowerBB, upperBB);
+    std::vector<TradingSignal> signals = strategy.evaluateSignals(priceData, askCloses, askHighs, askLows, tenkanS, kijunS, senkouA, senkouB, lowerBB, upperBB);
 
     // Log trading signals
     logSignals(signals);

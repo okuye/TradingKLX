@@ -68,17 +68,19 @@ link_directories(${JSONCPP_LIBRARY_DIRS})
 link_directories(${CURL_LIBRARY_DIRS})
 link_directories(${Python3_LIBRARY_DIRS})
 
+
 # Source files
 set(SOURCE_FILES
-        TradingKLX.cpp
-        OandA_API.cpp
-        ConfigManager.cpp
-        DataProcessor.cpp
-        TechnicalIndicators.cpp
-        AlphaVantageAPI.cpp
-        TradingStrategy.cpp
-        JSONParser.cpp
-        Utilities.cpp
+    TradingKLX.cpp
+    OandA_API.cpp
+    ConfigManager.cpp
+    DataProcessor.cpp
+    TechnicalIndicators.cpp
+    AlphaVantageAPI.cpp
+    TradingStrategy.cpp
+    JSONParser.cpp
+    Utilities.cpp
+    # Remove Logging.cpp reference
 )
 
 # Create the executable
