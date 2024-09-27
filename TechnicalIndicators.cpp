@@ -4,19 +4,20 @@
 #include <stdexcept>
 #include <numeric>
 #include <iostream>
+#include "SlidingWindow.h"
 
 // Optimized Tenkan-sen
-double TechnicalIndicators::calculateTenkanSen(const std::vector<double>& highs, const std::vector<double>& lows, int period, int index, IchimokuMemo& memo) {
-    if (highs.size() != lows.size() || index < 0 || index >= highs.size() || period <= 0) {
-        throw std::invalid_argument("Invalid input for Tenkan-sen calculation.");
+double TechnicalIndicators::calculateTenkanSen(const std::vector<double>& highs, const std::vector<double>& lows,
+                                               int period, int index, IchimokuMemo& memo) {
+    if (highs.size() < period || lows.size() < period || index < 0 || index >= highs.size()) {
+        throw std::invalid_argument("Invalid data size or index for Tenkan-sen calculation.");
     }
-    
+
     if (memo.tenkanSenMemo.find(index) == memo.tenkanSenMemo.end()) {
         auto highIt = std::max_element(highs.begin() + std::max(0, index - period + 1), highs.begin() + index + 1);
         auto lowIt = std::min_element(lows.begin() + std::max(0, index - period + 1), lows.begin() + index + 1);
         memo.tenkanSenMemo[index] = (*highIt + *lowIt) / 2.0;
     }
-
     return memo.tenkanSenMemo[index];
 }
 
@@ -35,42 +36,41 @@ double TechnicalIndicators::calculateKijunSen(const std::vector<double>& highs, 
     return memo.kijunSenMemo[index];
 }
 
-// Optimized Senkou Span A
-double TechnicalIndicators::calculateSenkouSpanA(int index, IchimokuMemo& memo) {
-    if (index < 0 || memo.tenkanSenMemo.find(index) == memo.tenkanSenMemo.end() || memo.kijunSenMemo.find(index) == memo.kijunSenMemo.end()) {
-        throw std::invalid_argument("Invalid input or missing data for Senkou Span A.");
+// Optimized Senkou Span A with error handling for missing data
+double TechnicalIndicators::calculateSenkouSpanA(const SlidingWindow& tenkanWindow, const SlidingWindow& kijunWindow, IchimokuMemo& memo) {
+    // Ensure we have enough data in both Tenkan-sen and Kijun-sen windows
+    if (tenkanWindow.size() < 9 || kijunWindow.size() < 26) {
+        std::cerr << "Insufficient data for Senkou Span A calculation." << std::endl;
+        return 0.0;
     }
 
-    if (memo.senkouSpanAMemo.find(index) != memo.senkouSpanAMemo.end()) {
-        return memo.senkouSpanAMemo[index];
-    }
+    // Calculate Senkou Span A
+    double tenkan = tenkanWindow.getData().back();
+    double kijun = kijunWindow.getData().back();
 
-    double senkouSpanA = (memo.tenkanSenMemo[index] + memo.kijunSenMemo[index]) / 2.0;
-    memo.senkouSpanAMemo[index] = senkouSpanA;
-
+    double senkouSpanA = (tenkan + kijun) / 2.0;
+    memo.senkouSpanAMemo[tenkanWindow.size()] = senkouSpanA;
     return senkouSpanA;
 }
 
-// Optimized Senkou Span B
-double TechnicalIndicators::calculateSenkouSpanB(const std::vector<double>& highs, const std::vector<double>& lows, int index, IchimokuMemo& memo) {
+double TechnicalIndicators::calculateSenkouSpanB(const SlidingWindow& highsWindow, const SlidingWindow& lowsWindow, IchimokuMemo& memo) {
     const int period = 52;
-    if (index < period - 1 || index >= highs.size() || index >= lows.size()) {
-        throw std::invalid_argument("Index out of range for Senkou Span B.");
+
+    // Ensure we have enough data in the window for Senkou Span B
+    if (highsWindow.size() < period || lowsWindow.size() < period) {
+        std::cerr << "Insufficient data for Senkou Span B calculation." << std::endl;
+        return 0.0;
     }
 
-    if (memo.senkouSpanBMemo.find(index) != memo.senkouSpanBMemo.end()) {
-        return memo.senkouSpanBMemo[index];
-    }
+    double high52 = *std::max_element(highsWindow.getData().begin(), highsWindow.getData().end());
+    double low52 = *std::min_element(lowsWindow.getData().begin(), lowsWindow.getData().end());
 
-    auto highIt = std::max_element(highs.begin() + index - period + 1, highs.begin() + index + 1);
-    auto lowIt = std::min_element(lows.begin() + index - period + 1, lows.begin() + index + 1);
-    double senkouSpanB = (*highIt + *lowIt) / 2.0;
-
-    memo.senkouSpanBMemo[index] = senkouSpanB;
+    double senkouSpanB = (high52 + low52) / 2.0;
+    memo.senkouSpanBMemo[highsWindow.size()] = senkouSpanB;
     return senkouSpanB;
 }
 
-// Optimized Bollinger Bands
+// Updated Bollinger Bands Calculation with Memoization
 std::pair<double, double> TechnicalIndicators::calculateBollingerBandsWithMemoization(const std::vector<double>& data, int window, double numStdDev, BollingerBandsMemo& memo) {
     if (data.size() < window || window < 1) {
         throw std::invalid_argument("Invalid data size or window for Bollinger Bands.");
@@ -79,10 +79,10 @@ std::pair<double, double> TechnicalIndicators::calculateBollingerBandsWithMemoiz
     size_t lastIndex = data.size() - 1;
 
     if (memo.upperBandMemo.find(lastIndex) == memo.upperBandMemo.end() || memo.lowerBandMemo.find(lastIndex) == memo.lowerBandMemo.end()) {
-        double sma = calculateSMA(data, lastIndex, window);
+        double sma = calculateSMA(data, lastIndex, window);  // Corrected
         memo.smaMemo[lastIndex] = sma;
 
-        double stdDev = calculateStdDev(data, lastIndex - window + 1, lastIndex + 1, sma);
+        double stdDev = calculateStdDev(data, lastIndex - window + 1, lastIndex + 1, sma);  // Corrected
         memo.stdDevMemo[lastIndex] = stdDev;
 
         double upperBand = sma + numStdDev * stdDev;
@@ -101,7 +101,7 @@ double TechnicalIndicators::calculateSMA(const std::vector<double>& data, int cu
         throw std::invalid_argument("Not enough data points for SMA.");
     }
 
-    static double sum = 0.0;
+    double sum = 0.0;  // Removed static
     if (currentIndex == period - 1) {
         sum = std::accumulate(data.begin(), data.begin() + period, 0.0);
     } else {
@@ -126,35 +126,50 @@ double TechnicalIndicators::calculateStdDev(const std::vector<double>& data, int
 }
 
 // Calculate ATR
-double TechnicalIndicators::calculateATR(const std::vector<double>& highs, 
-                                         const std::vector<double>& lows, 
-                                         const std::vector<double>& closes, 
-                                         int period, int currentIndex) {
+double TechnicalIndicators::calculateATR(const std::vector<double>& highs,
+                                         const std::vector<double>& lows,
+                                         const std::vector<double>& closes,
+                                         int period, int currentIndex,
+                                         double volatilityThreshold) {
     if (currentIndex < period) {
         throw std::invalid_argument("Not enough data points to calculate ATR.");
     }
 
     std::vector<double> trueRanges;
+    bool inFlatSequence = false;
+    int flatSequenceStart = -1;
+
     for (int i = currentIndex - period + 1; i <= currentIndex; ++i) {
         double highLowRange = highs[i] - lows[i];
         double highClosePrevRange = std::abs(highs[i] - closes[i - 1]);
         double lowClosePrevRange = std::abs(lows[i] - closes[i - 1]);
 
         double trueRange = std::max({highLowRange, highClosePrevRange, lowClosePrevRange});
-        trueRanges.push_back(trueRange);
 
-        // Log each true range for debugging
-        std::cout << "Index " << i << " - High: " << highs[i] << ", Low: " << lows[i] 
-                  << ", ClosePrev: " << closes[i - 1] << ", TrueRange: " << trueRange << std::endl;
+        if (trueRange < volatilityThreshold) {
+            if (!inFlatSequence) {
+                flatSequenceStart = i;
+                inFlatSequence = true;
+            }
+        } else {
+            if (inFlatSequence) {
+                std::cout << "Flat price data detected from index " << flatSequenceStart
+                          << " to " << i - 1 << std::endl;
+                inFlatSequence = false;
+            }
+        }
+
+        trueRanges.push_back(trueRange);
     }
 
-    double atr = std::accumulate(trueRanges.begin(), trueRanges.end(), 0.0) / period;
+    if (inFlatSequence) {
+        std::cout << "Flat price data detected from index " << flatSequenceStart
+                  << " to " << currentIndex << std::endl;
+    }
 
-    // Log the final ATR value
-    std::cout << "Calculated ATR for index " << currentIndex << ": " << atr << std::endl;
-
-    return atr;
+    return std::accumulate(trueRanges.begin(), trueRanges.end(), 0.0) / period;
 }
+
 
 // Grid search for optimal Tenkan-sen and Kijun-sen periods
 std::pair<int, int> TechnicalIndicators::gridSearchIchimokuOptimization(const std::vector<double>& highs, const std::vector<double>& lows) {
@@ -171,7 +186,8 @@ std::pair<int, int> TechnicalIndicators::gridSearchIchimokuOptimization(const st
                 kijunS.push_back(calculateKijunSen(highs, lows, kijunPeriod, i, memo));
             }
 
-            double profit = runStrategyWithParams(tenkanS, kijunS);  // Implement `runStrategyWithParams` for your strategy
+            // Assuming runStrategyWithParams() returns a profit value
+            double profit = runStrategyWithParams(tenkanS, kijunS);
 
             if (profit > bestProfit) {
                 bestProfit = profit;
@@ -200,4 +216,3 @@ double TechnicalIndicators::runStrategyWithParams(const std::vector<double>& ten
     }
     return profit;
 }
-

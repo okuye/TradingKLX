@@ -1,20 +1,21 @@
-#ifndef ALPHA_VANTAGE_API_H
-#define ALPHA_VANTAGE_API_H
+#ifndef ALPHAVANTAGEAPI_H
+#define ALPHAVANTAGEAPI_H
 
 #include <string>
 
 class AlphaVantageAPI {
 public:
     AlphaVantageAPI(const std::string& apiKey, long timeoutSeconds = 30);
-    std::string fetchData(const std::string& function, const std::string& from_symbol, const std::string& to_symbol, const std::string& interval = "5min");
+    std::string fetchData(const std::string& function, const std::string& from_symbol, const std::string& to_symbol);
 
 private:
-    long timeoutSeconds;
-    std::string apiKey;
-    std::string buildURL(const std::string& function, const std::string& from_symbol, const std::string& to_symbol, const std::string& interval);
+    std::string buildURL(const std::string& function, const std::string& from_symbol, const std::string& to_symbol);
+    void saveDataLocally(const std::string& data);
+    std::string loadLocalData();
+    std::string fetchWithRetry(const std::string& url, int attempts);
 
-    // Helper function to handle rate-limited requests with exponential backoff
-    std::string fetchWithRetry(const std::string& url, int attempts = 5);
+    std::string apiKey;
+    long timeoutSeconds;
 };
 
-#endif // ALPHA_VANTAGE_API_H
+#endif

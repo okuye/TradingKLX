@@ -29,8 +29,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e18f0a1e-f62e-499a-9bd6-dce39a999206" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TradingKLX_Backup.cpp" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.vscode/c_cpp_properties.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SlidingWindow.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TradingKLX" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TradingKLX.dSYM/Contents/Info.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TradingKLX.dSYM/Contents/Resources/DWARF/TradingKLX" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TradingKLX.dSYM/Contents/Resources/Relocations/aarch64/TradingKLX.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/advantage-full-json-data.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/cody_history.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cody_history.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AlphaVantageAPI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/AlphaVantageAPI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AlphaVantageAPI.h" beforeDir="false" afterPath="$PROJECT_DIR$/AlphaVantageAPI.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataProcessor copy.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EURUSD_Candlestick_1_Hour_BID_01.01.2023-07.09.2024.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JSONParser.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/JSONParser.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PerformanceAssessor.h" beforeDir="false" afterPath="$PROJECT_DIR$/PerformanceAssessor.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechnicalIndicators.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TechnicalIndicators.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechnicalIndicators.h" beforeDir="false" afterPath="$PROJECT_DIR$/TechnicalIndicators.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TradingKLX copy 2.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TradingKLX copy 3.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TradingKLX copy.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TradingKLX.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TradingKLX.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TradingKLX_updated.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TradingStrategy.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TradingStrategy.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TradingStrategy.h" beforeDir="false" afterPath="$PROJECT_DIR$/TradingStrategy.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.sh" beforeDir="false" afterPath="$PROJECT_DIR$/build.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,10 +94,14 @@
     "C/C++ File.TradingKLX.cpp.executor": "Debug",
     "CMake Application.TradingKLX.executor": "Run",
     "RunOnceActivity.CodyAccountHistoryMigration": "true",
+    "RunOnceActivity.CodyAccountsIdsRefresh": "true",
+    "RunOnceActivity.CodyAssignOrphanedChatsToActiveAccount": "true",
     "RunOnceActivity.CodyConvertUrlToCodebaseName": "true",
     "RunOnceActivity.CodyHistoryLlmMigration": "true",
+    "RunOnceActivity.CodyMigrateChatHistory-v2": "true",
     "RunOnceActivity.CodyProjectSettingsMigration": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.ToggleCodyToolWindowAfterMigration": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "cf.first.check.clang-format": "false",
@@ -192,6 +220,10 @@
       <workItem from="1724793077452" duration="4594000" />
       <workItem from="1724873790225" duration="2377000" />
       <workItem from="1724876227950" duration="3312000" />
+      <workItem from="1726927989185" duration="334000" />
+      <workItem from="1726928418220" duration="24000" />
+      <workItem from="1726928448671" duration="53317000" />
+      <workItem from="1727390286757" duration="4041000" />
     </task>
     <servers />
   </component>

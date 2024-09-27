@@ -8,6 +8,7 @@ std::optional<double> JSONParser::extractValue(const Json::Value& data, const st
     if (data.isMember(key) && data[key].isNumeric()) {
         return data[key].asDouble();
     } else {
+        std::cerr << "Missing or invalid key: " << key << std::endl;
         return std::nullopt;
     }
 }
