@@ -15,7 +15,7 @@ void processMarketData(const std::vector<PriceData>& priceData, TradingStrategy&
     for (size_t i = 0; i < priceData.size(); ++i) {
         const auto& data = priceData[i];
         // Log every data point
-        std::cout << "Processing data point " << i << ": High=" << data.askHigh << ", Low=" << data.askLow << ", Close=" << data.askClose << std::endl;
+//        std::cout << "Processing data point " << i << ": High=" << data.askHigh << ", Low=" << data.askLow << ", Close=" << data.askClose << std::endl;
 
         // Update strategy with new market data
         strategy.onNewData(data.askHigh, data.askLow, data.askClose);
@@ -81,10 +81,14 @@ void calculateBollingerBands(const std::vector<double>& closes, std::vector<doub
 void logSignals(const std::vector<TradingSignal>& signals) {
     for (const auto& signal : signals) {
         if (signal.buy) {
-            std::cout << "Buy signal at index: " << signal.index << ", Position Size: " << signal.positionSize
-                      << ", Stop Loss: " << signal.stopLossLevel << std::endl;
+            std::cout << "Buy signal at index: " << signal.index << "\n"
+                      << "Position Size: " << signal.positionSize << "\n"
+                      << "Stop Loss: " << signal.stopLossLevel << "\n"
+                      << "Entry Price: " << signal.entryPrice << "\n" << std::endl;
         } else if (signal.sell) {
-            std::cout << "Sell signal at index: " << signal.index << ", Profit: " << signal.profit << std::endl;
+            std::cout << "Sell signal at index: " << signal.index << "\n"
+                      << "Profit: " << signal.profit << "\n"
+                      << "Exit Price: " << signal.exitPrice << "\n" << std::endl;
         }
     }
 }

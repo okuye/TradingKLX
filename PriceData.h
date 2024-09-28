@@ -3,18 +3,20 @@
 #include <string>
 
 struct PriceData {
-    double askOpen, askHigh, askLow, askClose;
-    double askVolume;  
-
-    double bidOpen, bidHigh, bidLow, bidClose;
-    double bidVolume;  
-
     std::string timestamp;
+    double askOpen, askHigh, askLow, askClose, askVolume;
+    double bidOpen, bidHigh, bidLow, bidClose, bidVolume;
 
-    PriceData(std::string ts, double aO, double aH, double aL, double aC, double aV, 
+    // Default constructor
+    PriceData()
+            : askOpen(0), askHigh(0), askLow(0), askClose(0), askVolume(0),
+              bidOpen(0), bidHigh(0), bidLow(0), bidClose(0), bidVolume(0) {}
+
+    // Constructor with parameters
+    PriceData(std::string ts, double aO, double aH, double aL, double aC, double aV,
               double bO, double bH, double bL, double bC, double bV)
-        : timestamp(ts), askOpen(aO), askHigh(aH), askLow(aL), askClose(aC), askVolume(aV), 
-          bidOpen(bO), bidHigh(bH), bidLow(bL), bidClose(bC), bidVolume(bV) {}
+            : timestamp(ts), askOpen(aO), askHigh(aH), askLow(aL), askClose(aC), askVolume(aV),
+              bidOpen(bO), bidHigh(bH), bidLow(bL), bidClose(bC), bidVolume(bV) {}
 };
 
 #endif // PRICEDATA_H

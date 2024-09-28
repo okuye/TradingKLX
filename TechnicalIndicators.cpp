@@ -6,6 +6,8 @@
 #include <iostream>
 #include "SlidingWindow.h"
 
+
+
 // Optimized Tenkan-sen
 double TechnicalIndicators::calculateTenkanSen(const std::vector<double>& highs, const std::vector<double>& lows,
                                                int period, int index, IchimokuMemo& memo) {

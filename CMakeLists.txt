@@ -35,9 +35,9 @@ endif()
 
 # Get NumPy include directory
 execute_process(
-    COMMAND ${Python3_EXECUTABLE} -c "import numpy; print(numpy.get_include())"
-    OUTPUT_VARIABLE NUMPY_INCLUDE_DIR
-    OUTPUT_STRIP_TRAILING_WHITESPACE
+        COMMAND ${Python3_EXECUTABLE} -c "import numpy; print(numpy.get_include())"
+        OUTPUT_VARIABLE NUMPY_INCLUDE_DIR
+        OUTPUT_STRIP_TRAILING_WHITESPACE
 )
 
 if(NOT NUMPY_INCLUDE_DIR)
@@ -71,39 +71,59 @@ link_directories(${JSONCPP_LIBRARY_DIRS})
 link_directories(${CURL_LIBRARY_DIRS})
 link_directories(${Python3_LIBRARY_DIRS})
 
-# Source files
+# Source files for the main executable
 set(SOURCE_FILES
-    TradingKLX.cpp
-    OandA_API.cpp
-    ConfigManager.cpp
-    DataProcessor.cpp
-    TechnicalIndicators.cpp
-    AlphaVantageAPI.cpp
-    TradingStrategy.cpp
-    JSONParser.cpp
-    Utilities.cpp
+        TradingKLX.cpp
+        OandA_API.cpp
+        ConfigManager.cpp
+        DataProcessor.cpp
+        TechnicalIndicators.cpp
+        AlphaVantageAPI.cpp
+        TradingStrategy.cpp
+        JSONParser.cpp
+        Utilities.cpp
         SlidingWindow.h
 )
 
-# Create the executable
+# Create the main executable
 add_executable(TradingKLX ${SOURCE_FILES})
 
 # Include directories in the target
 target_include_directories(TradingKLX PRIVATE
-    ${JSONCPP_INCLUDE_DIRS}
-    ${CURL_INCLUDE_DIRS}
-    ${Python3_INCLUDE_DIRS}
-    ${NUMPY_INCLUDE_DIR}
-    ${Boost_INCLUDE_DIRS}
+        ${JSONCPP_INCLUDE_DIRS}
+        ${CURL_INCLUDE_DIRS}
+        ${Python3_INCLUDE_DIRS}
+        ${NUMPY_INCLUDE_DIR}
+        ${Boost_INCLUDE_DIRS}
 )
 
 # Link libraries
 target_link_libraries(TradingKLX PRIVATE
-    curl
-    jsoncpp
-    Python3::Python
-    ${Boost_LIBRARIES}
+        curl
+        jsoncpp
+        Python3::Python
+        ${Boost_LIBRARIES}
 )
+
+# GoogleTest setup (using precompiled GoogleTest)
+find_package(GTest REQUIRED)
+include_directories(${GTest_INCLUDE_DIRS})
+
+# Enable testing
+enable_testing()
+
+# Test executable for GoogleTest
+add_executable(TradingKLX_Test
+        TradingStrategyTest.cpp
+        TradingStrategy.cpp
+        TechnicalIndicators.cpp
+)
+
+# Link GoogleTest libraries to the test executable
+target_link_libraries(TradingKLX_Test PRIVATE GTest::gtest GTest::gtest_main pthread)
+
+# Add test case for CTest
+add_test(NAME TradingKLX_Test COMMAND TradingKLX_Test)
 
 # Copy configuration file to the build directory
 configure_file(${CMAKE_SOURCE_DIR}/config.json ${CMAKE_BINARY_DIR}/config.json COPYONLY)
