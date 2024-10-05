@@ -1,3 +1,10 @@
+#ifdef USE_BOOST_FILESYSTEM
+    #include <boost/filesystem.hpp>
+    namespace fs = boost::filesystem;
+#else
+    #include <filesystem>
+    namespace fs = std::filesystem;
+#endif
 #pragma once
 
 // Python headers must be included before any system headers, since

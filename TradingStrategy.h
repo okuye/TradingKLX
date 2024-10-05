@@ -2,41 +2,63 @@
 #define TRADING_STRATEGY_H
 
 #include <vector>
+#include <deque>
 #include "PriceData.h"
 #include "TechnicalIndicators.h"
-#include "SlidingWindow.h"
 #include "TradingSignal.h"
+#include "SlidingWindow.h"
+#include <memory>  // For shared_ptr
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/basic_file_sink.h>
+
+struct Trade; // Forward declaration
 
 class TradingStrategy {
 private:
     double accountBalance;
     double riskPerTrade;
     double stopLossMultiplier;
+
     int smaPeriod;
     int bollingerBandsPeriod;
     double bollingerBandsMultiplier;
+
+    bool hasLoggedInsufficientData;
+    bool inPosition;
+
+    SlidingWindow highsWindow;
+    SlidingWindow lowsWindow;
+    SlidingWindow tenkanWindow;
+    SlidingWindow kijunWindow;
+    SlidingWindow closes;  // Change closes from std::vector to SlidingWindow
+
+    std::vector<double> tenkanS;
+    std::vector<double> kijunS;
+    std::vector<double> senkouA;
+    std::vector<double> senkouB;
+    std::vector<double> lowerBB;
+    std::vector<double> upperBB;
+
     std::vector<TradingSignal> signals;
+    std::vector<double> portfolioBalanceHistory;
+
     IchimokuMemo memo;
     BollingerBandsMemo bbMemo;
-    bool hasLoggedInsufficientData;
+    TechnicalIndicators technicalIndicators;
+
+    std::shared_ptr<spdlog::logger> logger;
+
+    void recordPortfolioBalance();
 
 public:
     // Constructor
     TradingStrategy(double initialBalance, double riskPerTrade, double stopLossMultiplier);
 
+    // Core Methods
     void onNewData(double high, double low, double close);
-    std::vector<TradingSignal> evaluateSignals(const std::vector<PriceData>& priceData,
-                                               const std::vector<double>& closes,
-                                               const std::vector<double>& highs,
-                                               const std::vector<double>& lows,
-                                               const std::vector<double>& tenkanS,
-                                               const std::vector<double>& kijunS,
-                                               const std::vector<double>& senkouA,
-                                               const std::vector<double>& senkouB,
-                                               const std::vector<double>& lowerBB,
-                                               const std::vector<double>& upperBB);
+    std::vector<TradingSignal> evaluateSignals();
 
-    // New getters and setters
+    // Getters and Setters
     double getAccountBalance() const;
     void setAccountBalance(double balance);
 
@@ -48,6 +70,10 @@ public:
 
     const std::vector<TradingSignal>& getSignals() const;
     void addSignal(const TradingSignal& signal);
+
+    const std::vector<double>& getPortfolioBalanceHistory() const;
+
+    std::vector<Trade> getTrades() const;
 };
 
-#endif  // TRADING_STRATEGY_H
+#endif // TRADING_STRATEGY_H

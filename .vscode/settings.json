@@ -84,6 +84,9 @@
         "utility": "cpp",
         "format": "cpp",
         "stop_token": "cpp",
-        "thread": "cpp"
+        "thread": "cpp",
+        "csignal": "cpp",
+        "forward_list": "cpp",
+        "print": "cpp"
     }
 }

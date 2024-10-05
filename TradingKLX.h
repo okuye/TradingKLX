@@ -1,4 +1,11 @@
-﻿#ifndef TRADINGKLX_H
+﻿#ifdef USE_BOOST_FILESYSTEM
+    #include <boost/filesystem.hpp>
+    namespace fs = boost::filesystem;
+#else
+    #include <filesystem>
+    namespace fs = std::filesystem;
+#endif
+#ifndef TRADINGKLX_H
 #define TRADINGKLX_H
 
 #include <vector>

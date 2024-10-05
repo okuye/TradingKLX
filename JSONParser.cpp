@@ -1,7 +1,16 @@
+#ifdef USE_BOOST_FILESYSTEM
+    #include <boost/filesystem.hpp>
+    namespace fs = boost::filesystem;
+#else
+    #include <filesystem>
+    namespace fs = std::filesystem;
+#endif
+
 #include "JSONParser.h"
 #include <iostream>  // For debugging purposes
 #include <sstream>   // For std::istringstream
-
+#include <algorithm>  // For std::remove_if
+#include <cctype>     // For std::isspace
 
 // Extracts a numeric value from the given JSON data for a specified key
 std::optional<double> JSONParser::extractValue(const Json::Value& data, const std::string& key) {
@@ -18,7 +27,19 @@ bool JSONParser::validateJson(const Json::Value& j, const std::string& key, Json
     return j.isMember(key) && j[key].type() == expectedType;
 }
 
-// Parses JSON for price data
+// Trim function to remove leading/trailing whitespaces or non-visible characters
+std::string trim(const std::string& str) {
+    std::string result = str;
+    result.erase(result.begin(), std::find_if(result.begin(), result.end(), [](unsigned char ch) {
+        return !std::isspace(ch);
+    }));
+    result.erase(std::find_if(result.rbegin(), result.rend(), [](unsigned char ch) {
+        return !std::isspace(ch);
+    }).base(), result.end());
+    return result;
+}
+
+
 std::tuple<std::vector<double>, std::vector<double>, std::vector<double>> JSONParser::parseJsonForPrices(
         const std::string& jsonData,
         const std::string& timeSeriesKey,
@@ -29,15 +50,24 @@ std::tuple<std::vector<double>, std::vector<double>, std::vector<double>> JSONPa
     std::vector<double> lowPrices;
 
     try {
+        std::cout << "Parsing JSON data..." << std::endl;
         Json::CharReaderBuilder readerBuilder;
         Json::Value json;
         std::istringstream s(jsonData);
         std::string errs;
 
         if (Json::parseFromStream(readerBuilder, s, &json, &errs)) {
-            if (validateJson(json, timeSeriesKey, Json::objectValue)) {
-                const Json::Value& timeSeries = json[timeSeriesKey];
+            std::cout << "JSON parsed successfully." << std::endl;
 
+            // Check for API rate limit response
+            if (json.isMember("Information")) {
+                std::cerr << "API Error: " << json["Information"].asString() << std::endl;
+                return std::make_tuple(openPrices, highPrices, lowPrices);  // Return empty vectors
+            }
+
+            // Check if the key for time series exists
+            if (json.isMember(timeSeriesKey)) {
+                const Json::Value& timeSeries = json[timeSeriesKey];
                 for (const auto& time : timeSeries.getMemberNames()) {
                     const Json::Value& data = timeSeries[time];
                     if (data.isObject()) {
@@ -52,13 +82,22 @@ std::tuple<std::vector<double>, std::vector<double>, std::vector<double>> JSONPa
                         }
                     }
                 }
+            } else {
+                std::cerr << "Key '" << timeSeriesKey << "' not found in JSON." << std::endl;
             }
         } else {
             std::cerr << "Error parsing JSON data: " << errs << std::endl;
         }
     } catch (const std::exception& e) {
-        std::cerr << "Failed to parse JSON: " << e.what() << std::endl;
+        std::cerr << "Exception while parsing JSON: " << e.what() << std::endl;
     }
 
     return std::make_tuple(openPrices, highPrices, lowPrices);
+}
+
+void JSONParser::printJsonKeys(const Json::Value& json) {
+    for (const auto& key : json.getMemberNames()) {
+        std::cout << key << ", ";
+    }
+    std::cout << std::endl;
 }

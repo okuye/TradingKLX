@@ -1,3 +1,11 @@
+#ifdef USE_BOOST_FILESYSTEM
+    #include <boost/filesystem.hpp>
+    namespace fs = boost::filesystem;
+#else
+    #include <filesystem>
+    namespace fs = std::filesystem;
+#endif
+
 #include "AlphaVantageAPI.h"
 #include <iostream>
 #include <curl/curl.h>
@@ -6,6 +14,7 @@
 #include <json/json.h>
 #include <fstream>
 #include <sstream>
+#include <unistd.h> // for getcwd()
 
 // Function to handle received data from CURL
 static size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* s) {
@@ -26,6 +35,9 @@ std::string AlphaVantageAPI::buildURL(const std::string& function, const std::st
            "&outputsize=full&apikey=" + apiKey;
 }
 
+// Save data locally to a JSON file
+#include <iostream>
+#include <fstream>
 #include <unistd.h> // for getcwd()
 
 void AlphaVantageAPI::saveDataLocally(const std::string& data) {
@@ -36,9 +48,10 @@ void AlphaVantageAPI::saveDataLocally(const std::string& data) {
     std::string filename = workingDirectory + "/advantage-full-json-data.json";
     std::ofstream file(filename);
     if (file.is_open()) {
-        file << data;
+        file << data;  // Write the full JSON data to the file
         file.close();
         std::cout << "Data saved to " << filename << std::endl;
+        std::cout << "Saved data snippet: " << data.substr(0, 500) << "..." << std::endl;  // Print snippet of saved data
     } else {
         std::cerr << "Unable to open file: " << filename << std::endl;
     }
@@ -62,7 +75,7 @@ std::string AlphaVantageAPI::loadLocalData() {
     return "";
 }
 
-// Fetch data with retry
+// Fetch data with retry logic
 std::string AlphaVantageAPI::fetchWithRetry(const std::string& url, int attempts) {
     CURL* curl;
     CURLcode res;
@@ -88,6 +101,9 @@ std::string AlphaVantageAPI::fetchWithRetry(const std::string& url, int attempts
 
             if (res == CURLE_OK && http_code == 200) {
                 curl_easy_cleanup(curl);
+
+                // Log response snippet for debugging
+                std::cout << "Fetched response snippet: " << response.substr(0, 500) << "..." << std::endl;
                 return response;  // Successful fetch
             } else {
                 std::cerr << "Attempt " << attempt << " failed: "
@@ -116,8 +132,6 @@ std::string AlphaVantageAPI::fetchData(const std::string& function, const std::s
 
     // If the local data file contains matching data, use it
     if (!localData.empty()) {
-        // Optionally, you could parse the local file and check its metadata
-        // to ensure it's for the correct symbols (EUR/USD, etc.)
         std::cout << "Using local data from advantage-full-json-data.json" << std::endl;
         return localData;
     }

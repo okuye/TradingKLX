@@ -1,4 +1,6 @@
-﻿cmake_minimum_required(VERSION 3.10)
+﻿# CMakeLists.txt
+
+cmake_minimum_required(VERSION 3.16)
 project(TradingKLX)
 
 # Set C++ standard to C++17 and ensure it's required
@@ -8,12 +10,22 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Enable Address Sanitizer for memory debugging
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -g")
 
+# Suppress CMP0167 warning by setting the policy
+if(POLICY CMP0167)
+    cmake_policy(SET CMP0167 NEW)
+endif()
+
 # Python setup
 set(Python3_EXECUTABLE "/Users/olakunlekuye/Documents/Dev/KLX/demo/TradingKLX/tradingklx_venv/bin/python")
 find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
 
+# Find spdlog
+find_package(spdlog REQUIRED)
+
 # Boost setup
 find_package(Boost 1.70 REQUIRED COMPONENTS filesystem)
+
+# Include Boost directories
 include_directories(${Boost_INCLUDE_DIRS})
 
 # Check for std::filesystem support
@@ -28,9 +40,11 @@ check_cxx_source_compiles("
 )
 
 if(HAVE_FILESYSTEM)
-    message("std::filesystem is available")
+    message(STATUS "std::filesystem is available")
 else()
-    message(FATAL_ERROR "std::filesystem is not available. Falling back to Boost.Filesystem")
+    message(WARNING "std::filesystem is not available, falling back to Boost.Filesystem")
+    add_definitions(-DUSE_BOOST_FILESYSTEM)
+    message(STATUS "Using Boost.Filesystem")
 endif()
 
 # Get NumPy include directory
@@ -49,9 +63,9 @@ endif()
 
 # Platform-specific configuration
 if(APPLE)
-    message("Configuring for macOS")
+    message(STATUS "Configuring for macOS")
 elseif(UNIX AND NOT APPLE)
-    message("Configuring for Linux")
+    message(STATUS "Configuring for Linux")
 else()
     message(FATAL_ERROR "Unsupported operating system")
 endif()
@@ -82,7 +96,7 @@ set(SOURCE_FILES
         TradingStrategy.cpp
         JSONParser.cpp
         Utilities.cpp
-        SlidingWindow.h
+        PerformanceAssessor.cpp
 )
 
 # Create the main executable
@@ -95,14 +109,16 @@ target_include_directories(TradingKLX PRIVATE
         ${Python3_INCLUDE_DIRS}
         ${NUMPY_INCLUDE_DIR}
         ${Boost_INCLUDE_DIRS}
+        include  # Ensure the include directory is added
 )
 
-# Link libraries
+# Link libraries (ensure libraries are linked only once)
 target_link_libraries(TradingKLX PRIVATE
         curl
         jsoncpp
         Python3::Python
-        ${Boost_LIBRARIES}
+        Boost::filesystem
+        spdlog::spdlog
 )
 
 # GoogleTest setup (using precompiled GoogleTest)
@@ -120,10 +136,13 @@ add_executable(TradingKLX_Test
 )
 
 # Link GoogleTest libraries to the test executable
-target_link_libraries(TradingKLX_Test PRIVATE GTest::gtest GTest::gtest_main pthread)
+target_link_libraries(TradingKLX_Test PRIVATE GTest::gtest GTest::gtest_main pthread spdlog::spdlog)
 
 # Add test case for CTest
 add_test(NAME TradingKLX_Test COMMAND TradingKLX_Test)
 
 # Copy configuration file to the build directory
 configure_file(${CMAKE_SOURCE_DIR}/config.json ${CMAKE_BINARY_DIR}/config.json COPYONLY)
+
+# Create logs directory if it doesn't exist
+file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/logs)

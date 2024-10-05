@@ -30,18 +30,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e18f0a1e-f62e-499a-9bd6-dce39a999206" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/TradingStrategyTest.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/googletest" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PerformanceAssessor.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AlphaVantageAPI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/AlphaVantageAPI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AlphaVantageAPI.h" beforeDir="false" afterPath="$PROJECT_DIR$/AlphaVantageAPI.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ConfigManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ConfigManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ConfigManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/ConfigManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataProcessor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/DataProcessor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataProcessor.h" beforeDir="false" afterPath="$PROJECT_DIR$/DataProcessor.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EURUSD_Candlestick_1_Hour_ASK_01.09.2023-07.09.2024.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EURUSD_Candlestick_1_Hour_BID_01.09.2023-07.09.2024.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EURUSD_H1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JSONParser.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/JSONParser.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JSONParser.h" beforeDir="false" afterPath="$PROJECT_DIR$/JSONParser.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JsonStructureException.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/JsonStructureException.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PerformanceAssessor.h" beforeDir="false" afterPath="$PROJECT_DIR$/PerformanceAssessor.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PriceData.h" beforeDir="false" afterPath="$PROJECT_DIR$/PriceData.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SlidingWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/SlidingWindow.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TechnicalIndicators.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TechnicalIndicators.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechnicalIndicators.h" beforeDir="false" afterPath="$PROJECT_DIR$/TechnicalIndicators.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TradingKLX.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TradingKLX.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TradingKLX.h" beforeDir="false" afterPath="$PROJECT_DIR$/TradingKLX.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TradingSignal.h" beforeDir="false" afterPath="$PROJECT_DIR$/TradingSignal.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TradingStrategy.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TradingStrategy.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TradingStrategy.h" beforeDir="false" afterPath="$PROJECT_DIR$/TradingStrategy.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/advantage-full-json-data.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TradingStrategyTest.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TradingStrategyTest.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utilities.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Utilities.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utilities.h" beforeDir="false" afterPath="$PROJECT_DIR$/Utilities.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/advantage-config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/matplotlibcpp.h" beforeDir="false" afterPath="$PROJECT_DIR$/matplotlibcpp.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server_error_code.h" beforeDir="false" afterPath="$PROJECT_DIR$/server_error_code.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +114,7 @@
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/olakunlekuye/Documents/Dev/KLX/demo/TradingKLX&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/olakunlekuye/Documents/Dev/KLX/demo/TradingKLX/Data&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -107,6 +127,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Data" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/third_party/nlohmann_json" />
     </key>
@@ -215,6 +236,12 @@
       <workItem from="1727390286757" duration="25076000" />
       <workItem from="1727525942151" duration="68000" />
       <workItem from="1727526019144" duration="964000" />
+      <workItem from="1727637994575" duration="4061000" />
+      <workItem from="1727649715765" duration="405000" />
+      <workItem from="1727729690122" duration="19412000" />
+      <workItem from="1728126870742" duration="3189000" />
+      <workItem from="1728132071625" duration="102000" />
+      <workItem from="1728154817385" duration="9112000" />
     </task>
     <servers />
   </component>

@@ -1,3 +1,10 @@
+#ifdef USE_BOOST_FILESYSTEM
+    #include <boost/filesystem.hpp>
+    namespace fs = boost::filesystem;
+#else
+    #include <filesystem>
+    namespace fs = std::filesystem;
+#endif
 #ifndef JSON_PARSER_H
 #define JSON_PARSER_H
 
@@ -20,6 +27,9 @@ public:
             const std::string& timeSeriesKey,  // Key for the time series data
             const std::vector<std::string>& fields  // Keys for the required fields within each time series entry
     );
+
+    // Prints JSON keys for debugging purposes
+    static void printJsonKeys(const Json::Value& json);
 
 private:
     // Helper method to validate the presence and type of keys in JSON

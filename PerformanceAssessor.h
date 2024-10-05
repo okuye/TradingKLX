@@ -2,109 +2,40 @@
 #define PERFORMANCE_ASSESSOR_H
 
 #include <vector>
-#include <algorithm>
-#include <numeric>
-#include <cmath>
+#include "PriceData.h"  // Ensure this is included for the Trade struct
 #include "TradingSignal.h"
 
 class PerformanceAssessor {
 public:
-    // Calculate total return based on portfolio values
-    static double calculateTotalReturn(const std::vector<double>& portfolioValues, double initialBalance) {
-        double finalBalance = portfolioValues.back();
-        return (finalBalance - initialBalance) / initialBalance * 100;
-    }
+    // Calculate performance metrics for the trades
+    void calculatePerformanceMetrics(const std::vector<Trade>& trades);
 
-    // Calculate maximum drawdown
-    static double calculateMaxDrawdown(const std::vector<double>& portfolioValues) {
-        double maxDrawdown = 0.0;
-        double peak = portfolioValues[0];
+    // Calculate total return as a percentage
+    static double calculateTotalReturn(const std::vector<double>& portfolioValues, double initialBalance);
 
-        for (double value : portfolioValues) {
-            peak = std::max(peak, value);
-            double drawdown = (peak - value) / peak;
-            maxDrawdown = std::max(maxDrawdown, drawdown);
-        }
-        return maxDrawdown * 100;
-    }
+    // Calculate maximum drawdown as a percentage
+    static double calculateMaxDrawdown(const std::vector<double>& portfolioValues);
 
-    // Calculate win/loss ratio
-    static double calculateWinLossRatio(const std::vector<TradingSignal>& signals) {
-        int wins = 0, losses = 0;
+    // Calculate win/loss ratio based on TradingSignals
+    static double calculateWinLossRatio(const std::vector<TradingSignal>& signals);
 
-        for (const auto& signal : signals) {
-            if (signal.sell && signal.profit > 0) {
-                wins++;
-            } else if (signal.sell && signal.profit < 0) {
-                losses++;
-            }
-        }
+    // Calculate average profit per trade based on TradingSignals
+    static double calculateAverageProfit(const std::vector<TradingSignal>& signals);
 
-        return (losses == 0) ? static_cast<double>(wins) : static_cast<double>(wins) / losses;
-    }
+    // Calculate Sharpe Ratio based on returns and risk-free rate
+    static double calculateSharpeRatio(const std::vector<double>& returns, double riskFreeRate = 0.0);
 
-    // Calculate average profit per trade
-    static double calculateAverageProfit(const std::vector<TradingSignal>& signals) {
-        double totalProfit = 0.0;
-        int tradeCount = 0;
+    // Calculate Sortino Ratio based on returns and risk-free rate
+    static double calculateSortinoRatio(const std::vector<double>& returns, double riskFreeRate = 0.0);
 
-        for (const auto& signal : signals) {
-            if (signal.sell) {
-                totalProfit += signal.profit;
-                tradeCount++;
-            }
-        }
+    // Calculate profit factor based on trades
+    static double calculateProfitFactor(const std::vector<Trade>& trades);
 
-        return (tradeCount == 0) ? 0.0 : totalProfit / tradeCount;
-    }
+    // Calculate return on investment (ROI) based on trades and initial capital
+    static double calculateReturnOnInvestment(const std::vector<Trade>& trades, double initialCapital);
 
-    // Calculate Sharpe ratio, with risk-free rate included (default to 0.01)
-    static double calculateSharpeRatio(const std::vector<double>& portfolioReturns, double riskFreeRate = 0.01) {
-        if (portfolioReturns.empty()) return 0.0;
-
-        double meanReturn = std::accumulate(portfolioReturns.begin(), portfolioReturns.end(), 0.0) / portfolioReturns.size();
-        double variance = 0.0;
-
-        for (double ret : portfolioReturns) {
-            variance += std::pow(ret - meanReturn, 2);
-        }
-
-        double stddev = std::sqrt(variance / portfolioReturns.size());
-        return (stddev == 0) ? 0 : (meanReturn - riskFreeRate) / stddev;
-    }
-
-    // Calculate Sortino Ratio (accounts for downside risk only)
-    static double calculateSortinoRatio(const std::vector<double>& portfolioReturns, double riskFreeRate = 0.01) {
-        if (portfolioReturns.empty()) return 0.0;
-
-        double meanReturn = std::accumulate(portfolioReturns.begin(), portfolioReturns.end(), 0.0) / portfolioReturns.size();
-        double downsideVariance = 0.0;
-
-        for (double ret : portfolioReturns) {
-            if (ret < riskFreeRate) {
-                downsideVariance += std::pow(ret - riskFreeRate, 2);
-            }
-        }
-
-        double downsideDeviation = std::sqrt(downsideVariance / portfolioReturns.size());
-        return (downsideDeviation == 0) ? 0 : (meanReturn - riskFreeRate) / downsideDeviation;
-    }
-
-    // Calculate profit factor (total profit / total loss)
-    static double calculateProfitFactor(const std::vector<TradingSignal>& signals) {
-        double totalProfit = 0.0;
-        double totalLoss = 0.0;
-
-        for (const auto& signal : signals) {
-            if (signal.sell && signal.profit > 0) {
-                totalProfit += signal.profit;
-            } else if (signal.sell && signal.profit < 0) {
-                totalLoss += std::abs(signal.profit);
-            }
-        }
-
-        return (totalLoss == 0) ? 0 : totalProfit / totalLoss;
-    }
+    // Calculate win rate based on trades
+    static double calculateWinRate(const std::vector<Trade>& trades);
 };
 
 #endif // PERFORMANCE_ASSESSOR_H
