@@ -1,5 +1,3 @@
-
-#!/bin/bash
 #!/bin/bash
 
 # Get the current directory name
@@ -19,7 +17,8 @@ fi
 # Create a new build directory
 mkdir build
 
-chmod u+w /Users/olakunlekuye/Documents/Dev/KLX/demo/TradingKLX/build
+# No need to set specific permissions on the host path in Docker; this line can be removed.
+# If permission issues occur, it may be related to Docker volume settings
 
 # Navigate to the build directory
 cd build

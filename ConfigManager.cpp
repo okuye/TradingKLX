@@ -1,9 +1,9 @@
 #ifdef USE_BOOST_FILESYSTEM
-    #include <boost/filesystem.hpp>
+#include <boost/filesystem.hpp>
     namespace fs = boost::filesystem;
 #else
-    #include <filesystem>
-    namespace fs = std::filesystem;
+#include <filesystem>
+namespace fs = std::filesystem;
 #endif
 #include "ConfigManager.h"
 #include <fstream>
@@ -26,12 +26,10 @@ Json::Value ConfigManager::readConfig(const std::string& configFile) {
         throw std::runtime_error("Error parsing config file: " + errs);
     }
 
-    // Optionally, adjust the configuration based on the environment
     const char* env = std::getenv("APP_ENVIRONMENT");
     std::string environment = env ? std::string(env) : "development";
 
     if (configJson.isMember(environment) && configJson[environment].isObject()) {
-        // Merge or overwrite global settings with environment-specific settings
         Json::Value mergedConfig = configJson;
         const Json::Value& envConfig = configJson[environment];
 

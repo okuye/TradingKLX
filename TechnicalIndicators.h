@@ -23,13 +23,16 @@ class TechnicalIndicators {
 public:
     double calculateTenkanSen(const std::vector<double>& highs, const std::vector<double>& lows, int period, int index, IchimokuMemo& memo);
     double calculateKijunSen(const std::vector<double>& highs, const std::vector<double>& lows, int period, int index, IchimokuMemo& memo);
-    double calculateSenkouSpanA(const std::vector<double>& highs, const std::vector<double>& lows, int period, int index, IchimokuMemo& memo);
+    double calculateSenkouSpanA(const std::vector<double>& highs, const std::vector<double>& lows, int index, IchimokuMemo& memo);
     double calculateSenkouSpanB(const std::vector<double>& highs, const std::vector<double>& lows, int period, int index, IchimokuMemo& memo);
     std::pair<double, double> calculateBollingerBandsWithMemoization(const std::vector<double>& data, int window, double numStdDev, BollingerBandsMemo& memo);
     double calculateSMA(const std::vector<double>& prices, int period);
-    double calculateEMA(const std::vector<double>& prices, int period);
     double calculateStdDev(const std::vector<double>& data, int start, int end, double mean);
-    double calculateATR(const std::vector<double>& highs, const std::vector<double>& lows, const std::vector<double>& closes, int period, int currentIndex, double volatilityThreshold);
+    double calculateATR(const std::vector<double>& highs, const std::vector<double>& lows, const std::vector<double>& closes, int period, int currentIndex);
+
+    // SIMD functions for NEON and AVX2
+    double neon_stdDev(const std::vector<double>& data, int window, double mean);
+    double avx2_stdDev(const std::vector<double>& data, int window, double mean);
 };
 
 #endif // TRADINGKLX_TECHNICALINDICATORS_H

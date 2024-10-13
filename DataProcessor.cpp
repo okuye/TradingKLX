@@ -1,16 +1,9 @@
-#ifdef USE_BOOST_FILESYSTEM
-    #include <boost/filesystem.hpp>
-    namespace fs = boost::filesystem;
-#else
-    #include <filesystem>
-    namespace fs = std::filesystem;
-#endif
 #include "DataProcessor.h"
 #include "PriceData.h"
 #include <iostream>
-#include <stdexcept>  
-#include <json/json.h>  
-#include <sstream>  
+#include <stdexcept>
+#include <json/json.h>
+#include <sstream>
 
 // Exception for JSON structure issues
 class JsonStructureException : public std::invalid_argument {
@@ -26,83 +19,121 @@ public:
             : std::invalid_argument(message) {}
 };
 
-// Static method to safely extract fields from JSON data using jsoncpp
 double DataProcessor::getFieldValue(const Json::Value& data, const std::string& field) {
     try {
         if (data.isMember(field) && data[field].isString()) {
             return std::stod(data[field].asString());
         }
-        std::cerr << "Missing or invalid field: " << field << std::endl;
-        throw FieldExtractionException("Missing or invalid field: " + field);
+        throw std::invalid_argument("Missing or invalid field: " + field);
     } catch (const std::exception& e) {
-        std::cerr << "Error extracting field '" << field << "': " << e.what() << std::endl;
-        throw FieldExtractionException("Failed to extract field '" + field + "': " + std::string(e.what()));
+        throw std::invalid_argument("Failed to extract field '" + field + "': " + std::string(e.what()));
     }
 }
 
-// Process the JSON data and extract price information
 std::vector<PriceData> DataProcessor::processData(const std::string& jsonDataString, const std::string& key) {
     Json::Value root;
     Json::CharReaderBuilder readerBuilder;
     std::string errs;
 
+    // Parse the JSON data
     std::istringstream stream(jsonDataString);
     if (!Json::parseFromStream(readerBuilder, stream, &root, &errs)) {
         std::cerr << "Error parsing JSON data: " << errs << std::endl;
         throw std::runtime_error("Error parsing JSON data: " + errs);
     }
 
-    std::vector<PriceData> dataList;
-
+    // Now you can access 'root'
     if (!root.isMember(key) || !root[key].isArray()) {
         std::cerr << "Invalid JSON structure: missing or incorrect '" << key << "' key" << std::endl;
         throw JsonStructureException("Invalid JSON structure: missing or incorrect '" + key + "' key");
     }
 
+    // Continue with processing the JSON data as before
+    std::vector<PriceData> dataList;
     const Json::Value& dataArray = root[key];
     for (const auto& item : dataArray) {
-        std::cout << "Processing item: " << jsonToString(item) << std::endl;
+        std::string timestamp = item["time"].asString();
+        double askOpen = std::stod(item["ask"]["o"].asString());
+        double askHigh = std::stod(item["ask"]["h"].asString());
+        double askLow = std::stod(item["ask"]["l"].asString());
+        double askClose = std::stod(item["ask"]["c"].asString());
+        double askVolume = item["ask"]["volume"].asDouble();
 
-        if (!item.isMember("ask") || !item["ask"].isObject()) {
-            std::cerr << "Invalid JSON structure: 'ask' key is missing or incorrect" << std::endl;
-            throw JsonStructureException("Invalid JSON structure: 'ask' key is missing or incorrect");
-        }
-        if (!item.isMember("bid") || !item["bid"].isObject()) {
-            std::cerr << "Invalid JSON structure: 'bid' key is missing or incorrect" << std::endl;
-            throw JsonStructureException("Invalid JSON structure: 'bid' key is missing or incorrect");
-        }
+        double bidOpen = std::stod(item["bid"]["o"].asString());
+        double bidHigh = std::stod(item["bid"]["h"].asString());
+        double bidLow = std::stod(item["bid"]["l"].asString());
+        double bidClose = std::stod(item["bid"]["c"].asString());
+        double bidVolume = item["bid"]["volume"].asDouble();
 
-        try {
-            std::string timestamp = item["time"].asString();
-            double askOpen = std::stod(item["ask"]["o"].asString());
-            double askHigh = std::stod(item["ask"]["h"].asString());
-            double askLow = std::stod(item["ask"]["l"].asString());
-            double askClose = std::stod(item["ask"]["c"].asString());
-            double askVolume = item["ask"]["volume"].asDouble();
-
-            double bidOpen = std::stod(item["bid"]["o"].asString());
-            double bidHigh = std::stod(item["bid"]["h"].asString());
-            double bidLow = std::stod(item["bid"]["l"].asString());
-            double bidClose = std::stod(item["bid"]["c"].asString());
-            double bidVolume = item["bid"]["volume"].asDouble();
-
-            PriceData priceData(timestamp, askOpen, askHigh, askLow, askClose, askVolume,
-                                bidOpen, bidHigh, bidLow, bidClose, bidVolume);
-
-            dataList.push_back(priceData);
-        } catch (const std::exception& e) {
-            std::cerr << "Error processing item in JSON: " << e.what() << std::endl;
-            throw std::runtime_error("Error processing item in JSON: " + std::string(e.what()));
-        }
+        PriceData priceData(timestamp, askOpen, askHigh, askLow, askClose, askVolume,
+                            bidOpen, bidHigh, bidLow, bidClose, bidVolume);
+        dataList.push_back(priceData);
     }
 
-    std::cout << "Successfully processed " << dataList.size() << " items" << std::endl;
     return dataList;
 }
 
 // Helper function to convert a Json::Value to string for logging/debugging
 std::string DataProcessor::jsonToString(const Json::Value& jsonValue) {
     Json::StreamWriterBuilder writer;
-    writer["indentation"] = "";  
+    writer["indentation"] = "";
     return Json::writeString(writer, jsonValue);
+}
+
+// Process data from TradingServer API
+std::vector<TradeData> DataProcessor::processTradingServerData(const Json::Value& data) {
+    std::vector<TradeData> tradeDataList;
+    const Json::Value& rows = data["datatable"]["data"];
+
+    for (const auto& row : rows) {
+        try {
+            TradeData tradeData;
+            tradeData.symbol = row[0].asString();
+            tradeData.date = row[1].asString();
+            tradeData.hour = row[2].isInt() ? row[2].asInt() : -1;
+            tradeData.openBid = row[3].isDouble() ? row[3].asDouble() : 0.0;
+            tradeData.highBid = row[4].isDouble() ? row[4].asDouble() : 0.0;
+            tradeData.lowBid = row[5].isDouble() ? row[5].asDouble() : 0.0;
+            tradeData.closeBid = row[6].isDouble() ? row[6].asDouble() : 0.0;
+            tradeData.openAsk = row[7].isDouble() ? row[7].asDouble() : 0.0;
+            tradeData.highAsk = row[8].isDouble() ? row[8].asDouble() : 0.0;
+            tradeData.lowAsk = row[9].isDouble() ? row[9].asDouble() : 0.0;
+            tradeData.closeAsk = row[10].isDouble() ? row[10].asDouble() : 0.0;
+            tradeData.totalTicks = row[11].isInt() ? row[11].asInt() : 0;
+
+            tradeDataList.push_back(tradeData);
+        } catch (const std::exception& e) {
+            std::cerr << "Error processing trade data row: " << e.what() << std::endl;
+        }
+    }
+
+    return tradeDataList;
+}
+
+std::vector<TradeData> DataProcessor::processOandAData(const Json::Value& data) {
+    std::vector<TradeData> tradeDataList;
+    const Json::Value& candles = data["candles"];
+
+    for (const auto& candle : candles) {
+        try {
+            TradeData tradeData;
+            tradeData.symbol = data["instrument"].asString();
+            tradeData.date = candle["time"].asString();
+            tradeData.openBid = candle["bid"]["o"].isString() ? std::stod(candle["bid"]["o"].asString()) : 0.0;
+            tradeData.highBid = candle["bid"]["h"].isString() ? std::stod(candle["bid"]["h"].asString()) : 0.0;
+            tradeData.lowBid = candle["bid"]["l"].isString() ? std::stod(candle["bid"]["l"].asString()) : 0.0;
+            tradeData.closeBid = candle["bid"]["c"].isString() ? std::stod(candle["bid"]["c"].asString()) : 0.0;
+            tradeData.openAsk = candle["ask"]["o"].isString() ? std::stod(candle["ask"]["o"].asString()) : 0.0;
+            tradeData.highAsk = candle["ask"]["h"].isString() ? std::stod(candle["ask"]["h"].asString()) : 0.0;
+            tradeData.lowAsk = candle["ask"]["l"].isString() ? std::stod(candle["ask"]["l"].asString()) : 0.0;
+            tradeData.closeAsk = candle["ask"]["c"].isString() ? std::stod(candle["ask"]["c"].asString()) : 0.0;
+            tradeData.totalTicks = candle["volume"].isInt() ? candle["volume"].asInt() : 0;
+
+            tradeDataList.push_back(tradeData);
+        } catch (const std::exception& e) {
+            std::cerr << "Error processing OandA data candle: " << e.what() << std::endl;
+        }
+    }
+
+    return tradeDataList;
 }

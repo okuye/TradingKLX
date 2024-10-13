@@ -1,6 +1,6 @@
 #ifndef PERFORMANCE_ASSESSOR_H
 #define PERFORMANCE_ASSESSOR_H
-
+#include "Trade.h"  
 #include <vector>
 #include "PriceData.h"  // Ensure this is included for the Trade struct
 #include "TradingSignal.h"

@@ -1,16 +1,21 @@
 {
-    "name": "Ubuntu Dev Container",
-    "dockerFile": "Dockerfile",
-    "context": "..",
-    "settings": {
-        "terminal.integrated.shell.linux": "/bin/bash"
-    },
-    "extensions": [
-        "ms-vscode.cpptools",
-        "ms-vscode.cmake-tools",
-        "ms-vscode-remote.remote-containers"
-    ],
-    "postCreateCommand": "cmake . && make",
-    "forwardPorts": [8081, 27017],
-    "remoteUser": "root"
+  "name": "TradingKLX Development Container",
+  "dockerFile": "Dockerfile",
+  "context": "..",
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  "extensions": [
+    "ms-vscode.cpptools",
+    "ms-vscode-remote.remote-containers",
+    "ms-python.python"
+  ],
+  "forwardPorts": [3000, 2222],
+  "postCreateCommand": "./build.sh",
+  "mounts": [
+    "source=/Users/olakunlekuye/Documents/Dev/KLX/TradingKLX,target=/workspace,type=bind,consistency=cached"
+  ],
+  "remoteUser": "root",
+  "runArgs": ["--init"]
 }
+

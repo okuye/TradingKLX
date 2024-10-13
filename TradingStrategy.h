@@ -1,20 +1,21 @@
 #ifndef TRADING_STRATEGY_H
 #define TRADING_STRATEGY_H
-
+#include "Trade.h"  
 #include <vector>
 #include <deque>
 #include "PriceData.h"
 #include "TechnicalIndicators.h"
 #include "TradingSignal.h"
 #include "SlidingWindow.h"
-#include <memory>  // For shared_ptr
-#include <spdlog/spdlog.h>
-#include <spdlog/sinks/basic_file_sink.h>
-
-struct Trade; // Forward declaration
+#include <memory>
 
 class TradingStrategy {
 private:
+
+    bool tenkanSenLogged = false;  // Flag to log Tenkan-Sen insufficient data once
+    bool kijunSenLogged = false;   // Flag to log Kijun-Sen insufficient data once
+    bool senkouLogged = false;     // Flag to log Senkou Span insufficient data once
+
     double accountBalance;
     double riskPerTrade;
     double stopLossMultiplier;
@@ -23,55 +24,40 @@ private:
     int bollingerBandsPeriod;
     double bollingerBandsMultiplier;
 
-    bool hasLoggedInsufficientData;
     bool inPosition;
+    bool hasLoggedInsufficientData; // Add this field
 
     SlidingWindow highsWindow;
     SlidingWindow lowsWindow;
-    SlidingWindow tenkanWindow;
-    SlidingWindow kijunWindow;
-    SlidingWindow closes;  // Change closes from std::vector to SlidingWindow
+    SlidingWindow closes;
+
+    SlidingWindow tenkanWindow; // Add this field
+    SlidingWindow kijunWindow;  // Add this field
+
+    std::vector<double> lowerBB;
+    std::vector<double> upperBB;
 
     std::vector<double> tenkanS;
     std::vector<double> kijunS;
     std::vector<double> senkouA;
     std::vector<double> senkouB;
-    std::vector<double> lowerBB;
-    std::vector<double> upperBB;
 
     std::vector<TradingSignal> signals;
     std::vector<double> portfolioBalanceHistory;
 
-    IchimokuMemo memo;
     BollingerBandsMemo bbMemo;
+    IchimokuMemo memo;
     TechnicalIndicators technicalIndicators;
-
-    std::shared_ptr<spdlog::logger> logger;
 
     void recordPortfolioBalance();
 
 public:
-    // Constructor
     TradingStrategy(double initialBalance, double riskPerTrade, double stopLossMultiplier);
 
-    // Core Methods
+    double calculateATR(const std::vector<double>& highs, const std::vector<double>& lows, const std::vector<double>& closes, int period, int index);
+
     void onNewData(double high, double low, double close);
     std::vector<TradingSignal> evaluateSignals();
-
-    // Getters and Setters
-    double getAccountBalance() const;
-    void setAccountBalance(double balance);
-
-    double getRiskPerTrade() const;
-    void setRiskPerTrade(double risk);
-
-    double getStopLossMultiplier() const;
-    void setStopLossMultiplier(double multiplier);
-
-    const std::vector<TradingSignal>& getSignals() const;
-    void addSignal(const TradingSignal& signal);
-
-    const std::vector<double>& getPortfolioBalanceHistory() const;
 
     std::vector<Trade> getTrades() const;
 };

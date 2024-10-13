@@ -1,14 +1,9 @@
-#ifdef USE_BOOST_FILESYSTEM
-    #include <boost/filesystem.hpp>
-    namespace fs = boost::filesystem;
-#else
-    #include <filesystem>
-    namespace fs = std::filesystem;
-#endif
-#pragma once
+#ifndef DATAPROCESSOR_H
+#define DATAPROCESSOR_H
+
 #include <string>
 #include <vector>
-#include <json/json.h> // Include the jsoncpp header
+#include <json/json.h>  // Include the jsoncpp header
 #include "PriceData.h"
 #include "Utilities.h"
 
@@ -18,4 +13,10 @@ public:
     static std::vector<PriceData> processData(const std::string& jsonData, const std::string& timeSeriesKey);
     static std::string jsonToString(const Json::Value& jsonValue);
     std::vector<PriceData> loadPriceData(const std::string& filename);
+    static std::vector<TradeData> processTradingServerData(const Json::Value& data);
+
+    // Add this declaration
+    static std::vector<TradeData> processOandAData(const Json::Value& data);
 };
+
+#endif // DATAPROCESSOR_H

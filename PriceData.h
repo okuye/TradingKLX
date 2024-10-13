@@ -1,6 +1,6 @@
 #ifdef USE_BOOST_FILESYSTEM
 #include <boost/filesystem.hpp>
-    namespace fs = boost::filesystem;
+namespace fs = boost::filesystem;
 #else
 #include <filesystem>
 namespace fs = std::filesystem;
@@ -29,23 +29,14 @@ struct PriceData {
               bidOpen(bO), bidHigh(bH), bidLow(bL), bidClose(bC), bidVolume(bV) {}
 };
 
-// Trade struct to store information about each trade
-struct Trade {
-    double entryPrice;
-    double exitPrice;
-    double profit;
-    bool isBuyTrade; // true if buy trade, false if sell trade
-
-    // Default constructor
-    Trade() : entryPrice(0.0), exitPrice(0.0), profit(0.0), isBuyTrade(true) {}
-
-    // Constructor for initializing trade details
-    Trade(double entry, double exit, bool isBuy)
-            : entryPrice(entry), exitPrice(exit), isBuyTrade(isBuy), profit(exit - entry) {
-        if (!isBuyTrade) {
-            profit = entry - exit; // reverse profit calculation for sell trades
-        }
-    }
+// New TradeData struct for storing TradingServer data
+struct TradeData {
+    std::string symbol;
+    std::string date;
+    int hour;
+    double openBid, highBid, lowBid, closeBid;
+    double openAsk, highAsk, lowAsk, closeAsk;
+    int totalTicks;
 };
 
 #endif // PRICEDATA_H

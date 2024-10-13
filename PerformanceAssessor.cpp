@@ -5,27 +5,18 @@
 #include <iostream>
 #include "PriceData.h"  // Ensure you have this header included for the Trade struct
 
-// Calculate overall performance metrics such as total profit, win rate, and average profit
+// Overall performance metrics calculation, including win rate and profit factor
 void PerformanceAssessor::calculatePerformanceMetrics(const std::vector<Trade>& trades) {
     double totalProfit = 0.0;
     int winCount = 0;
-    int lossCount = 0;
-
     for (const auto& trade : trades) {
-        totalProfit += trade.profit;
-        if (trade.profit > 0) {
+        totalProfit += trade.profit();  // Add parentheses here
+        if (trade.profit() > 0) {  // Add parentheses here
             winCount++;
-        } else {
-            lossCount++;
         }
     }
-
     double winRate = (static_cast<double>(winCount) / trades.size()) * 100;
-    double averageProfit = totalProfit / trades.size();
-
-    std::cout << "Total Profit: " << totalProfit << std::endl;
-    std::cout << "Win Rate: " << winRate << "%" << std::endl;
-    std::cout << "Average Profit per Trade: " << averageProfit << std::endl;
+    std::cout << "Total Profit: " << totalProfit << ", Win Rate: " << winRate << "%" << std::endl;
 }
 
 // Calculate total return as a percentage
@@ -109,7 +100,7 @@ double PerformanceAssessor::calculateWinRate(const std::vector<Trade>& trades) {
     if (trades.empty()) return 0.0;
 
     int wins = std::count_if(trades.begin(), trades.end(), [](const Trade& trade) {
-        return trade.profit > 0;
+        return trade.profit() > 0;  // Add parentheses here
     });
 
     return (static_cast<double>(wins) / trades.size()) * 100.0;
@@ -118,20 +109,20 @@ double PerformanceAssessor::calculateWinRate(const std::vector<Trade>& trades) {
 // Calculate return on investment based on trades and initial capital
 double PerformanceAssessor::calculateReturnOnInvestment(const std::vector<Trade>& trades, double initialCapital) {
     double netProfit = std::accumulate(trades.begin(), trades.end(), 0.0, [](double sum, const Trade& trade) {
-        return sum + trade.profit;
+        return sum + trade.profit();  // Add parentheses here
     });
     return (netProfit / initialCapital) * 100.0;
 }
 
-// Calculate Profit Factor based on trades
+// Profit factor calculation based on trades
 double PerformanceAssessor::calculateProfitFactor(const std::vector<Trade>& trades) {
     double totalProfit = 0.0;
     double totalLoss = 0.0;
     for (const Trade& trade : trades) {
-        if (trade.profit > 0) {
-            totalProfit += trade.profit;
+        if (trade.profit() > 0) {  // Add parentheses here
+            totalProfit += trade.profit();  // Add parentheses here
         } else {
-            totalLoss += trade.profit;
+            totalLoss += trade.profit();  // Add parentheses here
         }
     }
     return totalProfit / -totalLoss;
