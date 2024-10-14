@@ -27,33 +27,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e18f0a1e-f62e-499a-9bd6-dce39a999206" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/BacktestManager.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BacktestManager.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TradingServerAPI.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TradingServerAPI.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/llm-notes.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/merged_output.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sbt-output.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.devcontainer/devcontainer.json" beforeDir="false" afterPath="$PROJECT_DIR$/.devcontainer/devcontainer.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CleanUpDocker.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ConfigManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ConfigManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ConfigManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/ConfigManager.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataProcessor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/DataProcessor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataProcessor.h" beforeDir="false" afterPath="$PROJECT_DIR$/DataProcessor.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PerformanceAssessor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/PerformanceAssessor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PerformanceAssessor.h" beforeDir="false" afterPath="$PROJECT_DIR$/PerformanceAssessor.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PriceData.h" beforeDir="false" afterPath="$PROJECT_DIR$/PriceData.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SlidingWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/SlidingWindow.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TechnicalIndicators.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TechnicalIndicators.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TechnicalIndicators.h" beforeDir="false" afterPath="$PROJECT_DIR$/TechnicalIndicators.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TradingKLX.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TradingKLX.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TradingStrategy.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TradingStrategy.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TradingStrategy.h" beforeDir="false" afterPath="$PROJECT_DIR$/TradingStrategy.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.sh" beforeDir="false" afterPath="$PROJECT_DIR$/build.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/merged_output.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -233,7 +214,7 @@
       <workItem from="1728231602843" duration="321000" />
       <workItem from="1728232016154" duration="1402000" />
       <workItem from="1728667653294" duration="2321000" />
-      <workItem from="1728671546679" duration="18149000" />
+      <workItem from="1728671546679" duration="30560000" />
     </task>
     <servers />
   </component>

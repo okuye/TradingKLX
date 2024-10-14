@@ -11,7 +11,7 @@
 
 class TradingStrategy {
 private:
-
+    bool insufficientDataLogged;
     bool tenkanSenLogged = false;  // Flag to log Tenkan-Sen insufficient data once
     bool kijunSenLogged = false;   // Flag to log Kijun-Sen insufficient data once
     bool senkouLogged = false;     // Flag to log Senkou Span insufficient data once

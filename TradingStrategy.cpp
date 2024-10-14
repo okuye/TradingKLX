@@ -20,7 +20,8 @@ TradingStrategy::TradingStrategy(double initialBalance, double riskPerTrade, dou
           lowsWindow(52),
           closes(52),
           tenkanWindow(9),  // Initialize SlidingWindow with the size of 9
-          kijunWindow(26)   // Initialize SlidingWindow with the size of 26
+          kijunWindow(26),  // Initialize SlidingWindow with the size of 26
+          insufficientDataLogged(false)  // Initialize insufficient data log tracking
 {
     portfolioBalanceHistory.push_back(accountBalance);
 }
@@ -32,18 +33,21 @@ void TradingStrategy::recordPortfolioBalance() {
 
 // ATR Calculation
 double TradingStrategy::calculateATR(const std::vector<double>& highs, const std::vector<double>& lows, const std::vector<double>& closes, int period, int currentIndex) {
+    // Ensure valid index range
     if (currentIndex < period) {
         throw std::invalid_argument("Not enough data points to calculate ATR.");
     }
 
     double sumTrueRange = 0.0;
+
     for (int i = currentIndex - period + 1; i <= currentIndex; ++i) {
         double highLowRange = highs[i] - lows[i];
         double highClosePrevRange = std::abs(highs[i] - closes[i - 1]);
         double lowClosePrevRange = std::abs(lows[i] - closes[i - 1]);
-        double trueRange = std::max(std::max(highLowRange, highClosePrevRange), lowClosePrevRange);
+        double trueRange = std::max({highLowRange, highClosePrevRange, lowClosePrevRange});
         sumTrueRange += trueRange;
     }
+
     return sumTrueRange / period;
 }
 
@@ -56,35 +60,31 @@ std::vector<TradingSignal> TradingStrategy::evaluateSignals() {
 
     std::vector<double> closesVector = closes.toVector();  // Convert to std::vector
 
-    // Check if there's enough data for all indicators
-    if (closes.size() < smaPeriod || highsWindow.size() < smaPeriod || lowsWindow.size() < smaPeriod ||
+    if (closes.size() < 52 || highsWindow.size() < 52 || lowsWindow.size() < 52 ||
         tenkanS.size() < 26 || kijunS.size() < 26 || senkouA.size() < 52 || senkouB.size() < 52 ||
-        lowerBB.size() < bollingerBandsPeriod || upperBB.size() < bollingerBandsPeriod) {
-        if (!hasLoggedInsufficientData) {
-            std::cerr << "Insufficient data to evaluate signals." << std::endl;
-            hasLoggedInsufficientData = true;
-        }
+        lowerBB.size() < 20 || upperBB.size() < 20) {
+        std::cerr << "Insufficient data to evaluate signals." << std::endl;
         return signals;
     }
 
     size_t minSize = std::min({
-                                      closes.size(),
-                                      highsWindow.size(),
-                                      lowsWindow.size(),
-                                      tenkanS.size(),
-                                      kijunS.size(),
-                                      senkouA.size(),
-                                      senkouB.size(),
-                                      lowerBB.size(),
-                                      upperBB.size()
-                              });
+        closes.size(),
+        highsWindow.size(),
+        lowsWindow.size(),
+        tenkanS.size(),
+        kijunS.size(),
+        senkouA.size(),
+        senkouB.size(),
+        lowerBB.size(),
+        upperBB.size()
+    });
 
     size_t startingIndex = std::max({
-                                            static_cast<size_t>(52),
-                                            static_cast<size_t>(26),
-                                            static_cast<size_t>(9),
-                                            static_cast<size_t>(atrPeriod)
-                                    });
+        static_cast<size_t>(52),
+        static_cast<size_t>(26),
+        static_cast<size_t>(9),
+        static_cast<size_t>(atrPeriod)
+    });
 
     if (minSize <= startingIndex) {
         std::cerr << "Insufficient data to evaluate signals. MinSize: " << minSize << ", StartingIndex: " << startingIndex << std::endl;
@@ -141,50 +141,86 @@ std::vector<TradingSignal> TradingStrategy::evaluateSignals() {
     return signals;
 }
 
+// onNewData Implementation with Verifications
 void TradingStrategy::onNewData(double high, double low, double close) {
     highsWindow.addDataPoint(high);
     lowsWindow.addDataPoint(low);
     closes.addDataPoint(close);
 
-    size_t dataSize = closes.size();  // Data size for all calculations
+    size_t dataSize = closes.size();
 
-    // Simplified data checks
-    if (dataSize < smaPeriod) {
-        std::cerr << "Insufficient data for SMA calculation. Available data: " << dataSize << ", Required: " << smaPeriod << std::endl;
-        return;
+    // Ensure sufficient data before calculating any indicator
+    if (dataSize < 52) {
+        if (!insufficientDataLogged) {
+            std::cerr << "Insufficient data for indicators. Available data: " << dataSize << ", Required: 52" << std::endl;
+            insufficientDataLogged = true;  // Log only once
+        }
+        return;  // Exit if there is insufficient data
     }
 
-    if (dataSize < 52) {
-        std::cerr << "Insufficient data for Senkou Span calculation. Available data: " << dataSize << ", Required: 52" << std::endl;
+    // Reset the flag if data becomes sufficient
+    insufficientDataLogged = false;
+
+    bool enoughDataForIchimoku = (highsWindow.size() >= 52 && lowsWindow.size() >= 52 && tenkanS.size() >= 26);
+    bool enoughDataForBollinger = (lowerBB.size() >= 20 && upperBB.size() >= 20);
+
+    if (!enoughDataForIchimoku && !enoughDataForBollinger) {
+        if (!insufficientDataLogged) {
+            std::cerr << "Insufficient data for all indicators. Available data: " << dataSize << ", Required: 52" << std::endl;
+            insufficientDataLogged = true;
+        }
         return;
     }
 
     // Perform SMA calculation
     double sma = technicalIndicators.calculateSMA(closes.toVector(), smaPeriod);
     double stdDev = technicalIndicators.calculateStdDev(closes.toVector(), dataSize - smaPeriod, dataSize, sma);
-    auto [lowerBand, upperBand] = technicalIndicators.calculateBollingerBandsWithMemoization(closes.toVector(), bollingerBandsPeriod, stdDev, bbMemo);
+    auto [lowerBand, upperBand] = technicalIndicators.calculateBollingerBandsWithMemoization(closes.toVector(), bollingerBandsPeriod, bollingerBandsMultiplier, bbMemo);
     lowerBB.push_back(lowerBand);
     upperBB.push_back(upperBand);
 
     // Perform Tenkan-Sen and Kijun-Sen calculations
-    size_t currentIndex = highsWindow.size() - 1;
-    try {
-        double tenkanSen = technicalIndicators.calculateTenkanSen(highsWindow.toVector(), lowsWindow.toVector(), 9, currentIndex, memo);
-        tenkanS.push_back(tenkanSen);
+    size_t tenkanSenPeriod = 9;
+    size_t kijunSenPeriod = 26;
 
-        if (highsWindow.size() >= 26 && lowsWindow.size() >= 26) {
-            double kijunSen = technicalIndicators.calculateKijunSen(highsWindow.toVector(), lowsWindow.toVector(), 26, currentIndex, memo);
-            kijunS.push_back(kijunSen);
+    if (highsWindow.size() < tenkanSenPeriod || lowsWindow.size() < tenkanSenPeriod) {
+        static bool tenkanSenLogged = false;
+        if (!tenkanSenLogged) {
+            std::cerr << "Insufficient data for Tenkan-Sen calculation. Available data: " << highsWindow.size() << ", Required: " << tenkanSenPeriod << std::endl;
+            tenkanSenLogged = true;
         }
+        return;
+    }
 
-        if (highsWindow.size() >= 52 && lowsWindow.size() >= 52) {
+    size_t currentIndex = highsWindow.size() - 1;
+
+    try {
+        double tenkanSen = technicalIndicators.calculateTenkanSen(highsWindow.toVector(), lowsWindow.toVector(), tenkanSenPeriod, currentIndex, memo);
+        tenkanS.push_back(tenkanSen);
+    } catch (const std::out_of_range& e) {
+        std::cerr << "Tenkan-Sen Calculation Error: " << e.what() << std::endl;
+    }
+
+    // Kijun-Sen calculation
+    if (highsWindow.size() >= kijunSenPeriod && lowsWindow.size() >= kijunSenPeriod) {
+        try {
+            double kijunSen = technicalIndicators.calculateKijunSen(highsWindow.toVector(), lowsWindow.toVector(), kijunSenPeriod, currentIndex, memo);
+            kijunS.push_back(kijunSen);
+        } catch (const std::out_of_range& e) {
+            std::cerr << "Kijun-Sen Calculation Error: " << e.what() << std::endl;
+        }
+    }
+
+    // Senkou Span A and B calculation
+    if (highsWindow.size() >= 52 && lowsWindow.size() >= 52) {
+        try {
             double senkouSpanA = technicalIndicators.calculateSenkouSpanA(tenkanS, kijunS, currentIndex, memo);
-            double senkouSpanB = technicalIndicators.calculateSenkouSpanB(highsWindow.toVector(), lowsWindow.toVector(), 26, currentIndex, memo);
+            double senkouSpanB = technicalIndicators.calculateSenkouSpanB(highsWindow.toVector(), lowsWindow.toVector(), kijunSenPeriod, currentIndex, memo);
             senkouA.push_back(senkouSpanA);
             senkouB.push_back(senkouSpanB);
+        } catch (const std::out_of_range& e) {
+            std::cerr << "Senkou Span Calculation Error: " << e.what() << std::endl;
         }
-    } catch (const std::out_of_range& e) {
-        std::cerr << "Indicator Calculation Error: " << e.what() << std::endl;
     }
 }
 

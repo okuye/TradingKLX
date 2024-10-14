@@ -7,6 +7,7 @@
 #include "SlidingWindow.h"
 #include <iostream>
 #include <vector>
+#include <stdexcept>
 
 int main() {
     std::cout << "TradingKLX Application Starting..." << std::endl;
@@ -24,6 +25,7 @@ int main() {
     std::string symbol = config["symbol"].asString();
     std::string api_key = config["api_key"].asString();
 
+    // Initialize Trading Strategy
     TradingStrategy strategy(10000.0, 0.02, 1.5);  // Example initial values
     SlidingWindow closingPricesWindow(14);  // Example window size for closing prices
 
@@ -31,7 +33,8 @@ int main() {
         std::cout << "Fetching historical data from local TradingServerAPI..." << std::endl;
 
         // Construct the API URL with the necessary parameters
-        std::string apiUrl = "http://192.168.1.155:8080/trades?startDate=" + startDate +
+        std::string apiUrl = "http://192.168.1.155:8000/trades?"
+                             "startDate=" + startDate +
                              "&endDate=" + endDate +
                              "&symbol=" + symbol +
                              "&api_key=" + api_key;
@@ -39,8 +42,16 @@ int main() {
         std::cout << "API URL: " << apiUrl << std::endl;
 
         // Instantiate TradingServerAPI with the constructed URL
-        TradingServerAPI serverAPI("http://192.168.1.155:8080/trades");
-        Json::Value historicalData = serverAPI.fetchTrades(startDate, endDate, symbol, api_key);
+        TradingServerAPI serverAPI(apiUrl);
+        Json::Value historicalData;
+
+        try {
+            historicalData = serverAPI.fetchTrades(startDate, endDate, symbol, api_key);
+            std::cout << "Raw response: " << historicalData << std::endl;  // Log raw JSON response
+        } catch (const std::exception &e) {
+            std::cerr << "Failed to parse JSON: " << e.what() << std::endl;
+            return 1;  // Exit the application or handle the error gracefully
+        }
 
         // Process the historical data received
         std::vector<TradeData> trades = DataProcessor::processTradingServerData(historicalData);
@@ -61,8 +72,7 @@ int main() {
                 }
             }
         }
-    }
- else {
+    } else {
         std::cout << "Fetching real-time data from OANDA API..." << std::endl;
 
         // Instantiate OANDA API and fetch real-time data
@@ -97,7 +107,7 @@ int main() {
 
     double winRate = assessor.calculateWinRate(executedTrades);
     double profitFactor = assessor.calculateProfitFactor(executedTrades);
-    double roi = assessor.calculateReturnOnInvestment(executedTrades, 10000.0);
+    double roi = assessor.calculateReturnOnInvestment(executedTrades, 1000.0);
 
     // Output performance metrics
     std::cout << "Win Rate: " << winRate << "%\n";

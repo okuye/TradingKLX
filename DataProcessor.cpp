@@ -88,22 +88,26 @@ std::vector<TradeData> DataProcessor::processTradingServerData(const Json::Value
     for (const auto& row : rows) {
         try {
             TradeData tradeData;
-            tradeData.symbol = row[0].asString();
-            tradeData.date = row[1].asString();
-            tradeData.hour = row[2].isInt() ? row[2].asInt() : -1;
-            tradeData.openBid = row[3].isDouble() ? row[3].asDouble() : 0.0;
-            tradeData.highBid = row[4].isDouble() ? row[4].asDouble() : 0.0;
-            tradeData.lowBid = row[5].isDouble() ? row[5].asDouble() : 0.0;
-            tradeData.closeBid = row[6].isDouble() ? row[6].asDouble() : 0.0;
-            tradeData.openAsk = row[7].isDouble() ? row[7].asDouble() : 0.0;
-            tradeData.highAsk = row[8].isDouble() ? row[8].asDouble() : 0.0;
-            tradeData.lowAsk = row[9].isDouble() ? row[9].asDouble() : 0.0;
-            tradeData.closeAsk = row[10].isDouble() ? row[10].asDouble() : 0.0;
-            tradeData.totalTicks = row[11].isInt() ? row[11].asInt() : 0;
+
+            tradeData.symbol = row["symbol"].isString() ? row["symbol"].asString() : "UNKNOWN_SYMBOL";
+            tradeData.date = row["date"].isString() ? row["date"].asString() : "UNKNOWN_DATE";
+            tradeData.hour = row["hour"].isInt() ? row["hour"].asInt() : -1;
+            tradeData.openBid = row["openbid"].isDouble() ? row["openbid"].asDouble() : 0.0;
+            tradeData.highBid = row["highbid"].isDouble() ? row["highbid"].asDouble() : 0.0;
+            tradeData.lowBid = row["lowbid"].isDouble() ? row["lowbid"].asDouble() : 0.0;
+            tradeData.closeBid = row["closebid"].isDouble() ? row["closebid"].asDouble() : 0.0;
+            tradeData.openAsk = row["openask"].isDouble() ? row["openask"].asDouble() : 0.0;
+            tradeData.highAsk = row["highask"].isDouble() ? row["highask"].asDouble() : 0.0;
+            tradeData.lowAsk = row["lowask"].isDouble() ? row["lowask"].asDouble() : 0.0;
+            tradeData.closeAsk = row["closeask"].isDouble() ? row["closeask"].asDouble() : 0.0;
+            tradeData.totalTicks = row["totalticks"].isInt() ? row["totalticks"].asInt() : 0;
+
 
             tradeDataList.push_back(tradeData);
+
         } catch (const std::exception& e) {
             std::cerr << "Error processing trade data row: " << e.what() << std::endl;
+            std::cerr << "Row data: " << DataProcessor::jsonToString(row) << std::endl;
         }
     }
 
