@@ -1,6 +1,7 @@
 #ifndef TRADING_STRATEGY_H
 #define TRADING_STRATEGY_H
-#include "Trade.h"  
+
+#include "Trade.h"
 #include <vector>
 #include <deque>
 #include "PriceData.h"
@@ -50,9 +51,18 @@ private:
     TechnicalIndicators technicalIndicators;
 
     void recordPortfolioBalance();
-
+    int atrPeriod;  // ATR period, now configurable dynamically
 public:
-    TradingStrategy(double initialBalance, double riskPerTrade, double stopLossMultiplier);
+    // Constructor
+    TradingStrategy(double initialBalance, double riskPerTrade, double stopLossMultiplier, int atrPeriod);
+
+//    TradingStrategy(double initialBalance, double riskPerTrade, double stopLossMultiplier, int atrPeriod);
+
+
+    // Method to set ATR period dynamically
+    void setAtrPeriod(int period) {
+        atrPeriod = period;
+    }
 
     double calculateATR(const std::vector<double>& highs, const std::vector<double>& lows, const std::vector<double>& closes, int period, int index);
 
@@ -61,5 +71,4 @@ public:
 
     std::vector<Trade> getTrades() const;
 };
-
 #endif // TRADING_STRATEGY_H

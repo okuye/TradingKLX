@@ -11,7 +11,8 @@ protected:
         double initialBalance = 10000.0;
         double riskPerTrade = 0.02;
         double stopLossMultiplier = 1.5;
-        strategy = std::make_unique<TradingStrategy>(initialBalance, riskPerTrade, stopLossMultiplier);
+        int atrPeriod = 14;  // Add the atrPeriod parameter
+        strategy = std::make_unique<TradingStrategy>(initialBalance, riskPerTrade, stopLossMultiplier, atrPeriod);
     }
 };
 

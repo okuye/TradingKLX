@@ -7,22 +7,22 @@
 #include <omp.h>
 
 // Constructor Implementation
-TradingStrategy::TradingStrategy(double initialBalance, double riskPerTrade, double stopLossMultiplier)
+TradingStrategy::TradingStrategy(double initialBalance, double riskPerTrade, double stopLossMultiplier, int atrPeriod)
         : accountBalance(initialBalance),
           riskPerTrade(riskPerTrade),
           stopLossMultiplier(stopLossMultiplier),
           smaPeriod(50),
           bollingerBandsPeriod(20),
           bollingerBandsMultiplier(2.0),
-          hasLoggedInsufficientData(false),  // Initialize this field
+          atrPeriod(atrPeriod),  // Initialize atrPeriod here
+          hasLoggedInsufficientData(false),
           inPosition(false),
           highsWindow(52),
           lowsWindow(52),
           closes(52),
-          tenkanWindow(9),  // Initialize SlidingWindow with the size of 9
-          kijunWindow(26),  // Initialize SlidingWindow with the size of 26
-          insufficientDataLogged(false)  // Initialize insufficient data log tracking
-{
+          tenkanWindow(9),
+          kijunWindow(26),
+          insufficientDataLogged(false) {
     portfolioBalanceHistory.push_back(accountBalance);
 }
 
@@ -31,15 +31,15 @@ void TradingStrategy::recordPortfolioBalance() {
     portfolioBalanceHistory.push_back(accountBalance);
 }
 
-// ATR Calculation
+// ATR Calculation with memoization (Optimization)
 double TradingStrategy::calculateATR(const std::vector<double>& highs, const std::vector<double>& lows, const std::vector<double>& closes, int period, int currentIndex) {
-    // Ensure valid index range
     if (currentIndex < period) {
         throw std::invalid_argument("Not enough data points to calculate ATR.");
     }
 
     double sumTrueRange = 0.0;
 
+    // ATR calculation with memoization or caching logic can be introduced here
     for (int i = currentIndex - period + 1; i <= currentIndex; ++i) {
         double highLowRange = highs[i] - lows[i];
         double highClosePrevRange = std::abs(highs[i] - closes[i - 1]);
@@ -51,7 +51,6 @@ double TradingStrategy::calculateATR(const std::vector<double>& highs, const std
     return sumTrueRange / period;
 }
 
-// Evaluate signals
 std::vector<TradingSignal> TradingStrategy::evaluateSignals() {
     signals.clear();
     double entryPrice = 0.0;
@@ -68,29 +67,31 @@ std::vector<TradingSignal> TradingStrategy::evaluateSignals() {
     }
 
     size_t minSize = std::min({
-        closes.size(),
-        highsWindow.size(),
-        lowsWindow.size(),
-        tenkanS.size(),
-        kijunS.size(),
-        senkouA.size(),
-        senkouB.size(),
-        lowerBB.size(),
-        upperBB.size()
-    });
+                                      closes.size(),
+                                      highsWindow.size(),
+                                      lowsWindow.size(),
+                                      tenkanS.size(),
+                                      kijunS.size(),
+                                      senkouA.size(),
+                                      senkouB.size(),
+                                      lowerBB.size(),
+                                      upperBB.size()
+                              });
 
     size_t startingIndex = std::max({
-        static_cast<size_t>(52),
-        static_cast<size_t>(26),
-        static_cast<size_t>(9),
-        static_cast<size_t>(atrPeriod)
-    });
+                                            static_cast<size_t>(52),
+                                            static_cast<size_t>(26),
+                                            static_cast<size_t>(9),
+                                            static_cast<size_t>(atrPeriod)
+                                    });
 
     if (minSize <= startingIndex) {
         std::cerr << "Insufficient data to evaluate signals. MinSize: " << minSize << ", StartingIndex: " << startingIndex << std::endl;
         return signals;
     }
 
+    // Parallel execution for performance optimization
+#pragma omp parallel for
     for (size_t i = startingIndex; i < minSize; ++i) {
         TradingSignal signal;
         signal.index = static_cast<int>(i);
@@ -106,8 +107,19 @@ std::vector<TradingSignal> TradingStrategy::evaluateSignals() {
             continue;
         }
 
-        std::cout << "Index: " << i << ", ATR: " << atr << std::endl;
+        // Calculate standard deviation
+        double sma = technicalIndicators.calculateSMA(closesVector, smaPeriod);
+        double stdDev = technicalIndicators.calculateStdDev(closesVector, i - smaPeriod, i, sma);
 
+        // Skip trading when volatility (stdDev) is too low (e.g., < 0.0001)
+        if (stdDev < 0.0001) {
+            std::cerr << "Low volatility at index " << i << ", skipping signal generation." << std::endl;
+            continue;
+        }
+
+        std::cout << "Index: " << i << ", ATR: " << atr << ", StdDev: " << stdDev << std::endl;
+
+        // Combined conditions for buy signal
         if (closesVector[i] > senkouA[i] && closesVector[i] > senkouB[i] && closesVector[i] > lowerBB[i] && !inPosition) {
             signal.buy = true;
             positionSize = accountBalance * riskPerTrade;
@@ -118,7 +130,8 @@ std::vector<TradingSignal> TradingStrategy::evaluateSignals() {
             signal.entryPrice = entryPrice;
         }
 
-        if (inPosition && (closesVector[i] < senkouA[i] || closesVector[i] < senkouB[i] || closesVector[i] < upperBB[i])) {
+        // Combined conditions for sell signal
+        if (inPosition && (closesVector[i] < senkouA[i] && closesVector[i] < senkouB[i] && closesVector[i] < upperBB[i])) {
             signal.sell = true;
             signal.exitPrice = closesVector[i];
             signal.profit = (signal.exitPrice - entryPrice) * positionSize;
@@ -141,7 +154,6 @@ std::vector<TradingSignal> TradingStrategy::evaluateSignals() {
     return signals;
 }
 
-// onNewData Implementation with Verifications
 void TradingStrategy::onNewData(double high, double low, double close) {
     highsWindow.addDataPoint(high);
     lowsWindow.addDataPoint(low);
@@ -149,16 +161,14 @@ void TradingStrategy::onNewData(double high, double low, double close) {
 
     size_t dataSize = closes.size();
 
-    // Ensure sufficient data before calculating any indicator
     if (dataSize < 52) {
         if (!insufficientDataLogged) {
             std::cerr << "Insufficient data for indicators. Available data: " << dataSize << ", Required: 52" << std::endl;
-            insufficientDataLogged = true;  // Log only once
+            insufficientDataLogged = true;
         }
-        return;  // Exit if there is insufficient data
+        return;
     }
 
-    // Reset the flag if data becomes sufficient
     insufficientDataLogged = false;
 
     bool enoughDataForIchimoku = (highsWindow.size() >= 52 && lowsWindow.size() >= 52 && tenkanS.size() >= 26);
@@ -174,7 +184,23 @@ void TradingStrategy::onNewData(double high, double low, double close) {
 
     // Perform SMA calculation
     double sma = technicalIndicators.calculateSMA(closes.toVector(), smaPeriod);
-    double stdDev = technicalIndicators.calculateStdDev(closes.toVector(), dataSize - smaPeriod, dataSize, sma);
+    double stdDev = technicalIndicators.calculateStdDev(closes.toVector(), dataSize - smaPeriod, dataSize, sma);  // Calculate standard deviation
+
+    // Use standard deviation for decision making
+    const double lowVolatilityThreshold = 0.0001;  // You can adjust this value based on your strategy
+    const double highVolatilityThreshold = 0.001;  // Adjust based on your market experience
+
+    if (stdDev < lowVolatilityThreshold) {
+        std::cerr << "Low volatility detected (stdDev: " << stdDev << "), skipping trading decisions." << std::endl;
+        return;  // Skip signal generation in flat market
+    }
+
+    if (stdDev > highVolatilityThreshold) {
+        std::cerr << "High volatility detected (stdDev: " << stdDev << "), adjusting stop-loss level." << std::endl;
+        // You can increase the stop-loss buffer here based on volatility, for example
+        stopLossMultiplier *= 1.2;  // This is an arbitrary example, adjust based on your requirements
+    }
+
     auto [lowerBand, upperBand] = technicalIndicators.calculateBollingerBandsWithMemoization(closes.toVector(), bollingerBandsPeriod, bollingerBandsMultiplier, bbMemo);
     lowerBB.push_back(lowerBand);
     upperBB.push_back(upperBand);
