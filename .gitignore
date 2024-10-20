@@ -375,3 +375,4 @@ data/
 .idea
 
 data/journal/
+*.json
