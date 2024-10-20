@@ -3,15 +3,9 @@ version: '3.8'
 services:
   tradingklx:
     build: .
-    ports:
-      - "3000:3000"
-      - "2222:22"
+    network_mode: "host"  # Ensure host mode is set
     environment:
       - PYTHONUNBUFFERED=1
     command: bash -c "./build.sh && ./RunTradingKLX.sh"
-    networks:
-      - app_net
-
-networks:
-  app_net:
-    driver: bridge
+    extra_hosts:
+      - "host.docker.internal:host-gateway"  # Ensure host.docker.internal maps to the host's IP

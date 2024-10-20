@@ -17,7 +17,6 @@ find_package(spdlog REQUIRED)
 # Find Boost
 find_package(Boost 1.70 REQUIRED COMPONENTS filesystem)
 
-# Check for Boost and link it to the executable later
 if(Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIRS})
     set(BOOST_LIBS ${Boost_LIBRARIES})
@@ -48,9 +47,9 @@ endif()
 
 # Get NumPy include directory
 execute_process(
-    COMMAND ${Python3_EXECUTABLE} -c "import numpy; print(numpy.get_include())"
-    OUTPUT_VARIABLE NUMPY_INCLUDE_DIR
-    OUTPUT_STRIP_TRAILING_WHITESPACE
+        COMMAND ${Python3_EXECUTABLE} -c "import numpy; print(numpy.get_include())"
+        OUTPUT_VARIABLE NUMPY_INCLUDE_DIR
+        OUTPUT_STRIP_TRAILING_WHITESPACE
 )
 
 if(NOT NUMPY_INCLUDE_DIR)
@@ -60,7 +59,6 @@ else()
     include_directories(${NUMPY_INCLUDE_DIR})
 endif()
 
-# Platform-specific configuration (Linux only)
 if(UNIX AND NOT APPLE)
     message(STATUS "Configuring for Ubuntu Linux")
 else()
@@ -77,7 +75,6 @@ else()
 endif()
 
 # Package configuration
-# Package configuration
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(JSONCPP REQUIRED jsoncpp)
 find_package(CURL REQUIRED)
@@ -92,36 +89,30 @@ link_directories(${Python3_LIBRARY_DIRS})
 
 # Source files for the main executable
 set(SOURCE_FILES
-    TradingKLX.cpp
-    OandA_API.cpp
-    ConfigManager.cpp
-    DataProcessor.cpp
-    TechnicalIndicators.cpp
-    AlphaVantageAPI.cpp
-    TradingStrategy.cpp
-    JSONParser.cpp
-    Utilities.cpp
-    PerformanceAssessor.cpp
+        TradingKLX.cpp
+        OandA_API.cpp
+        ConfigManager.cpp
         DataProcessor.cpp
-        TradingServerAPI.h
-        TradingServerAPI.h
-        TradingServerAPI.cpp
-        BacktestManager.cpp
-        BacktestManager.h
+        TechnicalIndicators.cpp
+        AlphaVantageAPI.cpp
         TradingStrategy.cpp
+        JSONParser.cpp
+        Utilities.cpp
+        PerformanceAssessor.cpp
+        BacktestManager.cpp
+        TradingServerAPI.cpp
         TradingStrategy.cpp
 )
 
-add_executable(TradingKLX ${SOURCE_FILES}
-        TradingStrategy.cpp)
+add_executable(TradingKLX ${SOURCE_FILES})
 
 target_link_libraries(TradingKLX PRIVATE
-    curl
-    jsoncpp
-    Python3::Python
-    ${BOOST_LIBS}
-    spdlog::spdlog
-    OpenMP::OpenMP_CXX
+        curl
+        jsoncpp
+        Python3::Python
+        ${BOOST_LIBS}
+        spdlog::spdlog
+        OpenMP::OpenMP_CXX
 )
 
 # GoogleTest setup
@@ -131,17 +122,15 @@ include_directories(${GTest_INCLUDE_DIRS})
 enable_testing()
 
 add_executable(TradingKLX_Test
-    TradingStrategyTest.cpp
-    TradingStrategy.cpp
-    TechnicalIndicators.cpp
+        TradingStrategyTest.cpp
+        TradingStrategy.cpp
+        TechnicalIndicators.cpp
 )
 
 target_link_libraries(TradingKLX_Test PRIVATE GTest::gtest GTest::gtest_main pthread spdlog::spdlog)
 
 add_test(NAME TradingKLX_Test COMMAND TradingKLX_Test)
 
-# Copy configuration file to the build directory
 configure_file(${CMAKE_SOURCE_DIR}/config.json ${CMAKE_BINARY_DIR}/config.json COPYONLY)
 
-# Create logs directory if it doesn't exist
 file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/logs)

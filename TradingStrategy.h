@@ -13,9 +13,9 @@
 class TradingStrategy {
 private:
     bool insufficientDataLogged;
-    bool tenkanSenLogged = false;  // Flag to log Tenkan-Sen insufficient data once
-    bool kijunSenLogged = false;   // Flag to log Kijun-Sen insufficient data once
-    bool senkouLogged = false;     // Flag to log Senkou Span insufficient data once
+    bool tenkanSenLogged = false;
+    bool kijunSenLogged = false;
+    bool senkouLogged = false;
 
     double accountBalance;
     double riskPerTrade;
@@ -26,14 +26,14 @@ private:
     double bollingerBandsMultiplier;
 
     bool inPosition;
-    bool hasLoggedInsufficientData; // Add this field
+    bool hasLoggedInsufficientData;
 
     SlidingWindow highsWindow;
     SlidingWindow lowsWindow;
     SlidingWindow closes;
 
-    SlidingWindow tenkanWindow; // Add this field
-    SlidingWindow kijunWindow;  // Add this field
+    SlidingWindow tenkanWindow;
+    SlidingWindow kijunWindow;
 
     std::vector<double> lowerBB;
     std::vector<double> upperBB;
@@ -51,15 +51,12 @@ private:
     TechnicalIndicators technicalIndicators;
 
     void recordPortfolioBalance();
-    int atrPeriod;  // ATR period, now configurable dynamically
+    int atrPeriod;
+    double positionSize;
+
 public:
-    // Constructor
     TradingStrategy(double initialBalance, double riskPerTrade, double stopLossMultiplier, int atrPeriod);
 
-//    TradingStrategy(double initialBalance, double riskPerTrade, double stopLossMultiplier, int atrPeriod);
-
-
-    // Method to set ATR period dynamically
     void setAtrPeriod(int period) {
         atrPeriod = period;
     }
@@ -70,5 +67,12 @@ public:
     std::vector<TradingSignal> evaluateSignals();
 
     std::vector<Trade> getTrades() const;
+
+    // Add these new function declarations
+    double calculatePositionSize();
+    double calculateExitPrice(size_t index);
+    double calculateStandardDeviation(const SlidingWindow& data, size_t index, size_t period);
+    void updateIndicatorVector(std::vector<double>& vec, double newValue, size_t maxSize = 100);
 };
+
 #endif // TRADING_STRATEGY_H

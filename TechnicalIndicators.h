@@ -2,22 +2,19 @@
 #define TRADINGKLX_TECHNICALINDICATORS_H
 
 #include <vector>
-#include <map>
+#include <unordered_map>
+#include "SlidingWindow.h"
 
-// Memoization classes for Ichimoku and Bollinger Bands
+// Memoization classes for Ichimoku indicators
 struct IchimokuMemo {
-    std::map<int, double> tenkanSenMemo;
-    std::map<int, double> kijunSenMemo;
-    std::map<int, double> senkouSpanAMemo;
-    std::map<int, double> senkouSpanBMemo;
+    std::unordered_map<int, double> tenkanSenMemo;
+    std::unordered_map<int, double> kijunSenMemo;
+    std::unordered_map<int, double> senkouSpanAMemo;
+    std::unordered_map<int, double> senkouSpanBMemo;
 };
 
-struct BollingerBandsMemo {
-    std::map<int, double> upperBandMemo;
-    std::map<int, double> lowerBandMemo;
-    std::map<int, double> smaMemo;
-    std::map<int, double> stdDevMemo;
-};
+// Memoization for Bollinger Bands: window size mapped to lower/upper bands
+using BollingerBandsMemo = std::unordered_map<int, std::pair<double, double>>;
 
 class TechnicalIndicators {
 public:
@@ -33,6 +30,8 @@ public:
     // SIMD functions for NEON and AVX2
     double neon_stdDev(const std::vector<double>& data, int window, double mean);
     double avx2_stdDev(const std::vector<double>& data, int window, double mean);
+
+    double calculateStandardDeviation(const SlidingWindow& data, size_t index, size_t period);
 };
 
 #endif // TRADINGKLX_TECHNICALINDICATORS_H

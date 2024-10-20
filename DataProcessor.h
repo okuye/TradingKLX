@@ -3,7 +3,7 @@
 
 #include <string>
 #include <vector>
-#include <json/json.h>  // Include the jsoncpp header
+#include <json/json.h>
 #include "PriceData.h"
 #include "Utilities.h"
 
@@ -15,7 +15,6 @@ public:
     std::vector<PriceData> loadPriceData(const std::string& filename);
     static std::vector<TradeData> processTradingServerData(const Json::Value& data);
 
-    // Add this declaration
     static std::vector<TradeData> processOandAData(const Json::Value& data);
 };
 

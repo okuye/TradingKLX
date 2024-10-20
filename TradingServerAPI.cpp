@@ -17,7 +17,7 @@ Json::Value TradingServerAPI::fetchTrades(const std::string& startDate, const st
 
 
 
-    std::cout << "Fetching URL: " << url << std::endl;  // Log the correct URL for debugging
+//    std::cout << "Fetching URL: " << url << std::endl;  // Log the correct URL for debugging
 
     curl = curl_easy_init();
     if (curl) {
@@ -40,7 +40,7 @@ Json::Value TradingServerAPI::fetchTrades(const std::string& startDate, const st
     }
 
     // Log the raw response for debugging
-    std::cout << "Raw response: " << readBuffer << std::endl;
+//    std::cout << "Raw response: " << readBuffer << std::endl;
 
     if (readBuffer.empty()) {
         throw std::runtime_error("Received empty response from TradingServerAPI");
