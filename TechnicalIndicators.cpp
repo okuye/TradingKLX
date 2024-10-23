@@ -45,7 +45,7 @@ double TechnicalIndicators::calculateSenkouSpanA(const std::vector<double>& high
 }
 
 // Standard Deviation calculation
-double TechnicalIndicators::calculateStdDev(const std::vector<double>& data, int start, int end, double mean) {
+double TechnicalIndicators::calculateStdDev(const std::vector<double>& data, int start, int end, double mean) const {
     double variance = 0.0;
     for (int i = start; i < end; ++i) {
         variance += (data[i] - mean) * (data[i] - mean);
@@ -54,8 +54,8 @@ double TechnicalIndicators::calculateStdDev(const std::vector<double>& data, int
 }
 
 // SMA calculation
-double TechnicalIndicators::calculateSMA(const std::vector<double>& prices, int period) {
-    if (prices.size() < period) throw std::invalid_argument("Not enough data for SMA");
+double TechnicalIndicators::calculateSMA(const std::vector<double>& prices, int period) const {
+    if (prices.size() < static_cast<size_t>(period)) throw std::invalid_argument("Not enough data for SMA");
 
     double sum = std::accumulate(prices.end() - period, prices.end(), 0.0);
     return sum / period;
@@ -63,7 +63,7 @@ double TechnicalIndicators::calculateSMA(const std::vector<double>& prices, int 
 
 // Tenkan-sen calculation with memoization
 double TechnicalIndicators::calculateTenkanSen(const std::vector<double>& highs, const std::vector<double>& lows, int period, int index, IchimokuMemo& memo) {
-    if (index - period + 1 < 0 || index >= highs.size() || index >= lows.size()) {
+    if (index - period + 1 < 0 || index >= static_cast<int>(highs.size()) || index >= static_cast<int>(lows.size())) {
         spdlog::error("Invalid range for calculating Tenkan-Sen: index = {}, period = {}", index, period);
         throw std::out_of_range("Invalid range for Tenkan-Sen.");
     }
@@ -85,7 +85,7 @@ double TechnicalIndicators::calculateTenkanSen(const std::vector<double>& highs,
 
 // Kijun-sen calculation with memoization
 double TechnicalIndicators::calculateKijunSen(const std::vector<double>& highs, const std::vector<double>& lows, int period, int index, IchimokuMemo& memo) {
-    if (index - period + 1 < 0 || index >= highs.size() || index >= lows.size()) {
+    if (index - period + 1 < 0 || index >= static_cast<int>(highs.size()) || index >= static_cast<int>(lows.size())) {
         spdlog::error("Invalid range for calculating Kijun-Sen: index = {}, period = {}", index, period);
         throw std::out_of_range("Invalid range for Kijun-Sen.");
     }
@@ -106,26 +106,30 @@ double TechnicalIndicators::calculateKijunSen(const std::vector<double>& highs, 
 }
 
 std::pair<double, double> TechnicalIndicators::calculateBollingerBandsWithMemoization(
-        const std::vector<double>& data, int window, double numStdDev, BollingerBandsMemo& memo) {
+        const std::vector<double>& data, int window, double numStdDev, BollingerBandsMemo& memo, int index) {
 
-    // Validate window size
-    if (data.size() < window) {
-        spdlog::error("Insufficient data for Bollinger Bands. Data size: {}, Required window: {}", data.size(), window);
-        return {0.0, 0.0};  // Return dummy values if not enough data
+    // Validate window size and index
+    if (data.size() < static_cast<size_t>(window) || index < window - 1) {
+        spdlog::error("Insufficient data for Bollinger Bands. Data size: {}, Required window: {}, Index: {}", data.size(), window, index);
+        throw std::invalid_argument("Insufficient data for Bollinger Bands.");
     }
 
+    // Create a composite key
+    BollingerBandsKey key{window, index};
+
     // Use memoization to avoid recalculating if already done
-    auto it = memo.find(window);
+    auto it = memo.find(key);
     if (it != memo.end()) {
         return it->second;  // Return the cached result if available
     }
 
     // Calculate the mean of the last `window` entries
-    double mean = std::accumulate(data.end() - window, data.end(), 0.0) / window;
+    double sum = std::accumulate(data.begin() + index - window + 1, data.begin() + index + 1, 0.0);
+    double mean = sum / window;
 
-    // Calculate the standard deviation
+    // Calculate the standard deviation using calculateStdDev
     double variance = 0.0;
-    for (size_t i = data.size() - window; i < data.size(); ++i) {
+    for (int i = index - window + 1; i <= index; ++i) {
         variance += std::pow(data[i] - mean, 2);
     }
     double stdDev = std::sqrt(variance / window);
@@ -135,16 +139,15 @@ std::pair<double, double> TechnicalIndicators::calculateBollingerBandsWithMemoiz
     double upperBand = mean + numStdDev * stdDev;
 
     // Store the result in the memoization map
-    memo[window] = std::make_pair(lowerBand, upperBand);
+    memo[key] = std::make_pair(lowerBand, upperBand);
 
-    spdlog::info("Bollinger Bands calculated. LowerBB: {}, UpperBB: {}", lowerBand, upperBand);
+    spdlog::info("Bollinger Bands calculated at index {}. LowerBB: {}, UpperBB: {}", index, lowerBand, upperBand);
 
-    return {lowerBand, upperBand};
+    return std::make_pair(lowerBand, upperBand);
 }
 
-
 // ATR calculation
-double TechnicalIndicators::calculateATR(const std::vector<double>& highs, const std::vector<double>& lows, const std::vector<double>& closes, int period, int currentIndex) {
+double TechnicalIndicators::calculateATR(const std::vector<double>& highs, const std::vector<double>& lows, const std::vector<double>& closes, int period, int currentIndex) const {
     if (currentIndex < period) {
         spdlog::error("Not enough data points to calculate ATR. Current index: {}, period: {}", currentIndex, period);
         throw std::invalid_argument("Not enough data points to calculate ATR.");
@@ -165,7 +168,8 @@ double TechnicalIndicators::calculateATR(const std::vector<double>& highs, const
 }
 
 // SIMD-optimized standard deviation for NEON (ARM)
-double TechnicalIndicators::neon_stdDev(const std::vector<double>& data, int window, double mean) {
+double TechnicalIndicators::neon_stdDev(const std::vector<double>& data, int window, double mean) const {
+#ifdef __ARM_NEON
     int vectorizable_length = window - (window % 2);
     float64x2_t variance_vec = vdupq_n_f64(0.0);
 
@@ -181,11 +185,15 @@ double TechnicalIndicators::neon_stdDev(const std::vector<double>& data, int win
     }
 
     return std::sqrt(variance);
+#else
+    // Fallback if NEON is not available
+    return calculateStdDev(data, 0, window, mean);
+#endif
 }
 
 // SIMD-optimized standard deviation for AVX2 (x86-64)
+double TechnicalIndicators::avx2_stdDev(const std::vector<double>& data, int window, double mean) const {
 #ifdef __AVX2__
-double TechnicalIndicators::avx2_stdDev(const std::vector<double>& data, int window, double mean) {
     int vectorizable_length = window - (window % 4);
     __m256d variance_vec = _mm256_setzero_pd();
 
@@ -209,5 +217,28 @@ double TechnicalIndicators::avx2_stdDev(const std::vector<double>& data, int win
     }
 
     return std::sqrt(variance);
-}
+#else
+    // Fallback if AVX2 is not available
+    return calculateStdDev(data, 0, window, mean);
 #endif
+}
+
+double TechnicalIndicators::calculateStandardDeviation(const SlidingWindow& data, size_t index, size_t period) const {
+    if (index < period - 1 || data.size() < period) {
+        throw std::runtime_error("Insufficient data for standard deviation calculation");
+    }
+
+    double sum = 0.0;
+    double sumSquared = 0.0;
+
+    for (size_t i = index - period + 1; i <= index; ++i) {
+        double value = data.getData()[i];
+        sum += value;
+        sumSquared += value * value;
+    }
+
+    double mean = sum / period;
+    double variance = (sumSquared / period) - (mean * mean);
+
+    return std::sqrt(variance);
+}

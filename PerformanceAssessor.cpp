@@ -26,7 +26,7 @@ void PerformanceAssessor::calculatePerformanceMetrics(const std::vector<Trade>& 
         } else if (tradeProfit < 0) {
             grossLoss += std::abs(tradeProfit);
         }
-        totalInvestedCapital += trade.entryPrice;
+        totalInvestedCapital += trade.entryPrice; // Ensure this correctly represents invested capital
         netProfit += tradeProfit;
     }
 
@@ -68,6 +68,8 @@ double PerformanceAssessor::calculateTotalReturn(const std::vector<double>& port
 }
 
 double PerformanceAssessor::calculateMaxDrawdown(const std::vector<double>& portfolioValues) {
+    if (portfolioValues.empty()) throw std::invalid_argument("Portfolio values cannot be empty.");
+
     double peak = portfolioValues[0];
     double maxDrawdown = 0.0;
 
@@ -83,7 +85,7 @@ double PerformanceAssessor::calculateWinLossRatio(const std::vector<TradingSigna
     if (signals.empty()) return 0.0;
     int wins = 0, losses = 0;
     for (const auto& signal : signals) {
-        if (signal.sell) {
+        if (signal.sell || signal.buy) { // Consider both sell and buy signals
             signal.profit > 0 ? wins++ : losses++;
         }
     }
@@ -95,7 +97,7 @@ double PerformanceAssessor::calculateAverageProfit(const std::vector<TradingSign
     double totalProfit = 0.0;
     int count = 0;
     for (const auto& signal : signals) {
-        if (signal.sell) {
+        if (signal.sell || signal.buy) { // Consider both sell and buy signals
             totalProfit += signal.profit;
             count++;
         }
@@ -114,6 +116,8 @@ double PerformanceAssessor::calculateSharpeRatio(const std::vector<double>& retu
                                                   return acc + std::pow(ret - meanReturn, 2);
                                               }) / returns.size());
 
+    if (stdDev == 0.0) return 0.0; // Prevent division by zero
+
     return excessReturn / stdDev;
 }
 
@@ -127,6 +131,8 @@ double PerformanceAssessor::calculateSortinoRatio(const std::vector<double>& ret
                                                          [riskFreeRate](double acc, double ret) {
                                                              return acc + (ret < riskFreeRate ? std::pow(ret - riskFreeRate, 2) : 0);
                                                          }) / returns.size());
+
+    if (downsideDeviation == 0.0) return 0.0; // Prevent division by zero
 
     return excessReturn / downsideDeviation;
 }
@@ -142,6 +148,8 @@ double PerformanceAssessor::calculateWinRate(const std::vector<Trade>& trades) {
 }
 
 double PerformanceAssessor::calculateReturnOnInvestment(const std::vector<Trade>& trades, double initialCapital) {
+    if (initialCapital == 0.0) throw std::invalid_argument("Initial capital cannot be zero.");
+
     double netProfit = std::accumulate(trades.begin(), trades.end(), 0.0, [](double sum, const Trade& trade) {
         return sum + trade.profit();
     });
@@ -157,6 +165,9 @@ double PerformanceAssessor::calculateProfitFactor(const std::vector<Trade>& trad
         } else {
             totalLoss += trade.profit();
         }
+    }
+    if (totalLoss == 0.0) {
+        return totalProfit > 0.0 ? INFINITY : 0.0; // Avoid division by zero
     }
     return totalProfit / -totalLoss;
 }

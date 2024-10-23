@@ -29,14 +29,4 @@ struct PriceData {
               bidOpen(bO), bidHigh(bH), bidLow(bL), bidClose(bC), bidVolume(bV) {}
 };
 
-// New TradeData struct for storing TradingServer data
-struct TradeData {
-    std::string symbol;
-    std::string date;
-    int hour;
-    double openBid, highBid, lowBid, closeBid;
-    double openAsk, highAsk, lowAsk, closeAsk;
-    int totalTicks;
-};
-
 #endif // PRICEDATA_H

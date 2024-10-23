@@ -102,6 +102,7 @@ set(SOURCE_FILES
         BacktestManager.cpp
         TradingServerAPI.cpp
         TradingStrategy.cpp
+        TradeData.h
 )
 
 add_executable(TradingKLX ${SOURCE_FILES})

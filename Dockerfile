@@ -42,7 +42,10 @@ RUN chmod +x /workspace/build.sh
 
 # Expose ports
 EXPOSE 3000 
-EXPOSE 22   
+EXPOSE 22
+
+# Add this line to install spdlog
+RUN apt-get update && apt-get install -y libspdlog-dev
 
 # Install and configure OpenSSH
 RUN apt-get install -y openssh-server

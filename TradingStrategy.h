@@ -61,7 +61,7 @@ public:
         atrPeriod = period;
     }
 
-    double calculateATR(const std::vector<double>& highs, const std::vector<double>& lows, const std::vector<double>& closes, int period, int index);
+    // Removed redundant calculateATR declaration
 
     void onNewData(double high, double low, double close);
     std::vector<TradingSignal> evaluateSignals();
@@ -69,9 +69,9 @@ public:
     std::vector<Trade> getTrades() const;
 
     // Add these new function declarations
-    double calculatePositionSize();
+    double calculatePositionSize() const;
     double calculateExitPrice(size_t index);
-    double calculateStandardDeviation(const SlidingWindow& data, size_t index, size_t period);
+    double calculateStandardDeviation(const SlidingWindow& data, size_t index, size_t period) const;
     void updateIndicatorVector(std::vector<double>& vec, double newValue, size_t maxSize = 100);
 };
 

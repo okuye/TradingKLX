@@ -1,4 +1,4 @@
-Trade.h:
+can you spot and fix any issues in these files showing the complete code with the changes applied : Trade.h:
 #ifndef TRADE_H
 #define TRADE_H
 
@@ -232,7 +232,7 @@ void PerformanceAssessor::calculatePerformanceMetrics(const std::vector<Trade>& 
         } else if (tradeProfit < 0) {
             grossLoss += std::abs(tradeProfit);
         }
-        totalInvestedCapital += trade.entryPrice;
+        totalInvestedCapital += trade.entryPrice; // Ensure this correctly represents invested capital
         netProfit += tradeProfit;
     }
 
@@ -274,6 +274,8 @@ double PerformanceAssessor::calculateTotalReturn(const std::vector<double>& port
 }
 
 double PerformanceAssessor::calculateMaxDrawdown(const std::vector<double>& portfolioValues) {
+    if (portfolioValues.empty()) throw std::invalid_argument("Portfolio values cannot be empty.");
+
     double peak = portfolioValues[0];
     double maxDrawdown = 0.0;
 
@@ -289,7 +291,7 @@ double PerformanceAssessor::calculateWinLossRatio(const std::vector<TradingSigna
     if (signals.empty()) return 0.0;
     int wins = 0, losses = 0;
     for (const auto& signal : signals) {
-        if (signal.sell) {
+        if (signal.sell || signal.buy) { // Consider both sell and buy signals
             signal.profit > 0 ? wins++ : losses++;
         }
     }
@@ -301,7 +303,7 @@ double PerformanceAssessor::calculateAverageProfit(const std::vector<TradingSign
     double totalProfit = 0.0;
     int count = 0;
     for (const auto& signal : signals) {
-        if (signal.sell) {
+        if (signal.sell || signal.buy) { // Consider both sell and buy signals
             totalProfit += signal.profit;
             count++;
         }
@@ -320,6 +322,8 @@ double PerformanceAssessor::calculateSharpeRatio(const std::vector<double>& retu
                                                   return acc + std::pow(ret - meanReturn, 2);
                                               }) / returns.size());
 
+    if (stdDev == 0.0) return 0.0; // Prevent division by zero
+
     return excessReturn / stdDev;
 }
 
@@ -333,6 +337,8 @@ double PerformanceAssessor::calculateSortinoRatio(const std::vector<double>& ret
                                                          [riskFreeRate](double acc, double ret) {
                                                              return acc + (ret < riskFreeRate ? std::pow(ret - riskFreeRate, 2) : 0);
                                                          }) / returns.size());
+
+    if (downsideDeviation == 0.0) return 0.0; // Prevent division by zero
 
     return excessReturn / downsideDeviation;
 }
@@ -348,6 +354,8 @@ double PerformanceAssessor::calculateWinRate(const std::vector<Trade>& trades) {
 }
 
 double PerformanceAssessor::calculateReturnOnInvestment(const std::vector<Trade>& trades, double initialCapital) {
+    if (initialCapital == 0.0) throw std::invalid_argument("Initial capital cannot be zero.");
+
     double netProfit = std::accumulate(trades.begin(), trades.end(), 0.0, [](double sum, const Trade& trade) {
         return sum + trade.profit();
     });
@@ -364,9 +372,11 @@ double PerformanceAssessor::calculateProfitFactor(const std::vector<Trade>& trad
             totalLoss += trade.profit();
         }
     }
+    if (totalLoss == 0.0) {
+        return totalProfit > 0.0 ? INFINITY : 0.0; // Avoid division by zero
+    }
     return totalProfit / -totalLoss;
 }
-
 
 PerformanceAssessor.h:
 #ifndef PERFORMANCE_ASSESSOR_H
@@ -393,7 +403,6 @@ public:
 };
 
 #endif // PERFORMANCE_ASSESSOR_H
-
 
 PriceData.h:
 #ifdef USE_BOOST_FILESYSTEM
@@ -555,7 +564,7 @@ double TechnicalIndicators::calculateSenkouSpanA(const std::vector<double>& high
 }
 
 // Standard Deviation calculation
-double TechnicalIndicators::calculateStdDev(const std::vector<double>& data, int start, int end, double mean) {
+double TechnicalIndicators::calculateStdDev(const std::vector<double>& data, int start, int end, double mean) const {
     double variance = 0.0;
     for (int i = start; i < end; ++i) {
         variance += (data[i] - mean) * (data[i] - mean);
@@ -564,8 +573,8 @@ double TechnicalIndicators::calculateStdDev(const std::vector<double>& data, int
 }
 
 // SMA calculation
-double TechnicalIndicators::calculateSMA(const std::vector<double>& prices, int period) {
-    if (prices.size() < period) throw std::invalid_argument("Not enough data for SMA");
+double TechnicalIndicators::calculateSMA(const std::vector<double>& prices, int period) const {
+    if (prices.size() < static_cast<size_t>(period)) throw std::invalid_argument("Not enough data for SMA");
 
     double sum = std::accumulate(prices.end() - period, prices.end(), 0.0);
     return sum / period;
@@ -573,7 +582,7 @@ double TechnicalIndicators::calculateSMA(const std::vector<double>& prices, int 
 
 // Tenkan-sen calculation with memoization
 double TechnicalIndicators::calculateTenkanSen(const std::vector<double>& highs, const std::vector<double>& lows, int period, int index, IchimokuMemo& memo) {
-    if (index - period + 1 < 0 || index >= highs.size() || index >= lows.size()) {
+    if (index - period + 1 < 0 || index >= static_cast<int>(highs.size()) || index >= static_cast<int>(lows.size())) {
         spdlog::error("Invalid range for calculating Tenkan-Sen: index = {}, period = {}", index, period);
         throw std::out_of_range("Invalid range for Tenkan-Sen.");
     }
@@ -595,7 +604,7 @@ double TechnicalIndicators::calculateTenkanSen(const std::vector<double>& highs,
 
 // Kijun-sen calculation with memoization
 double TechnicalIndicators::calculateKijunSen(const std::vector<double>& highs, const std::vector<double>& lows, int period, int index, IchimokuMemo& memo) {
-    if (index - period + 1 < 0 || index >= highs.size() || index >= lows.size()) {
+    if (index - period + 1 < 0 || index >= static_cast<int>(highs.size()) || index >= static_cast<int>(lows.size())) {
         spdlog::error("Invalid range for calculating Kijun-Sen: index = {}, period = {}", index, period);
         throw std::out_of_range("Invalid range for Kijun-Sen.");
     }
@@ -616,26 +625,30 @@ double TechnicalIndicators::calculateKijunSen(const std::vector<double>& highs, 
 }
 
 std::pair<double, double> TechnicalIndicators::calculateBollingerBandsWithMemoization(
-        const std::vector<double>& data, int window, double numStdDev, BollingerBandsMemo& memo) {
+        const std::vector<double>& data, int window, double numStdDev, BollingerBandsMemo& memo, int index) {
 
-    // Validate window size
-    if (data.size() < window) {
-        spdlog::error("Insufficient data for Bollinger Bands. Data size: {}, Required window: {}", data.size(), window);
-        return {0.0, 0.0};  // Return dummy values if not enough data
+    // Validate window size and index
+    if (data.size() < static_cast<size_t>(window) || index < window - 1) {
+        spdlog::error("Insufficient data for Bollinger Bands. Data size: {}, Required window: {}, Index: {}", data.size(), window, index);
+        throw std::invalid_argument("Insufficient data for Bollinger Bands.");
     }
 
+    // Create a composite key
+    BollingerBandsKey key{window, index};
+
     // Use memoization to avoid recalculating if already done
-    auto it = memo.find(window);
+    auto it = memo.find(key);
     if (it != memo.end()) {
         return it->second;  // Return the cached result if available
     }
 
     // Calculate the mean of the last `window` entries
-    double mean = std::accumulate(data.end() - window, data.end(), 0.0) / window;
+    double sum = std::accumulate(data.begin() + index - window + 1, data.begin() + index + 1, 0.0);
+    double mean = sum / window;
 
-    // Calculate the standard deviation
+    // Calculate the standard deviation using calculateStdDev
     double variance = 0.0;
-    for (size_t i = data.size() - window; i < data.size(); ++i) {
+    for (int i = index - window + 1; i <= index; ++i) {
         variance += std::pow(data[i] - mean, 2);
     }
     double stdDev = std::sqrt(variance / window);
@@ -645,16 +658,15 @@ std::pair<double, double> TechnicalIndicators::calculateBollingerBandsWithMemoiz
     double upperBand = mean + numStdDev * stdDev;
 
     // Store the result in the memoization map
-    memo[window] = std::make_pair(lowerBand, upperBand);
+    memo[key] = std::make_pair(lowerBand, upperBand);
 
-    spdlog::info("Bollinger Bands calculated. LowerBB: {}, UpperBB: {}", lowerBand, upperBand);
+    spdlog::info("Bollinger Bands calculated at index {}. LowerBB: {}, UpperBB: {}", index, lowerBand, upperBand);
 
     return {lowerBand, upperBand};
 }
 
-
 // ATR calculation
-double TechnicalIndicators::calculateATR(const std::vector<double>& highs, const std::vector<double>& lows, const std::vector<double>& closes, int period, int currentIndex) {
+double TechnicalIndicators::calculateATR(const std::vector<double>& highs, const std::vector<double>& lows, const std::vector<double>& closes, int period, int currentIndex) const {
     if (currentIndex < period) {
         spdlog::error("Not enough data points to calculate ATR. Current index: {}, period: {}", currentIndex, period);
         throw std::invalid_argument("Not enough data points to calculate ATR.");
@@ -675,7 +687,8 @@ double TechnicalIndicators::calculateATR(const std::vector<double>& highs, const
 }
 
 // SIMD-optimized standard deviation for NEON (ARM)
-double TechnicalIndicators::neon_stdDev(const std::vector<double>& data, int window, double mean) {
+double TechnicalIndicators::neon_stdDev(const std::vector<double>& data, int window, double mean) const {
+#ifdef __ARM_NEON
     int vectorizable_length = window - (window % 2);
     float64x2_t variance_vec = vdupq_n_f64(0.0);
 
@@ -691,11 +704,15 @@ double TechnicalIndicators::neon_stdDev(const std::vector<double>& data, int win
     }
 
     return std::sqrt(variance);
+#else
+    // Fallback if NEON is not available
+    return calculateStdDev(data, 0, window, mean);
+#endif
 }
 
 // SIMD-optimized standard deviation for AVX2 (x86-64)
+double TechnicalIndicators::avx2_stdDev(const std::vector<double>& data, int window, double mean) const {
 #ifdef __AVX2__
-double TechnicalIndicators::avx2_stdDev(const std::vector<double>& data, int window, double mean) {
     int vectorizable_length = window - (window % 4);
     __m256d variance_vec = _mm256_setzero_pd();
 
@@ -719,9 +736,31 @@ double TechnicalIndicators::avx2_stdDev(const std::vector<double>& data, int win
     }
 
     return std::sqrt(variance);
-}
+#else
+    // Fallback if AVX2 is not available
+    return calculateStdDev(data, 0, window, mean);
 #endif
+}
 
+double TechnicalIndicators::calculateStandardDeviation(const SlidingWindow& data, size_t index, size_t period) const {
+    if (index < period - 1 || data.size() < period) {
+        throw std::runtime_error("Insufficient data for standard deviation calculation");
+    }
+
+    double sum = 0.0;
+    double sumSquared = 0.0;
+
+    for (size_t i = index - period + 1; i <= index; ++i) {
+        double value = data.getData()[i];
+        sum += value;
+        sumSquared += value * value;
+    }
+
+    double mean = sum / period;
+    double variance = (sumSquared / period) - (mean * mean);
+
+    return std::sqrt(variance);
+}
 
 TechnicalIndicators.h:
 #ifndef TRADINGKLX_TECHNICALINDICATORS_H
@@ -739,8 +778,25 @@ struct IchimokuMemo {
     std::unordered_map<int, double> senkouSpanBMemo;
 };
 
-// Memoization for Bollinger Bands: window size mapped to lower/upper bands
-using BollingerBandsMemo = std::unordered_map<int, std::pair<double, double>>;
+// Composite key for Bollinger Bands memoization
+struct BollingerBandsKey {
+    int window;
+    int index;
+
+    bool operator==(const BollingerBandsKey& other) const {
+        return window == other.window && index == other.index;
+    }
+};
+
+// Hash function for BollingerBandsKey
+struct BollingerBandsKeyHash {
+    std::size_t operator()(const BollingerBandsKey& key) const {
+        return std::hash<int>()(key.window) ^ (std::hash<int>()(key.index) << 1);
+    }
+};
+
+// Memoization for Bollinger Bands: composite key mapped to lower/upper bands
+using BollingerBandsMemo = std::unordered_map<BollingerBandsKey, std::pair<double, double>, BollingerBandsKeyHash>;
 
 class TechnicalIndicators {
 public:
@@ -748,20 +804,19 @@ public:
     double calculateKijunSen(const std::vector<double>& highs, const std::vector<double>& lows, int period, int index, IchimokuMemo& memo);
     double calculateSenkouSpanA(const std::vector<double>& highs, const std::vector<double>& lows, int index, IchimokuMemo& memo);
     double calculateSenkouSpanB(const std::vector<double>& highs, const std::vector<double>& lows, int period, int index, IchimokuMemo& memo);
-    std::pair<double, double> calculateBollingerBandsWithMemoization(const std::vector<double>& data, int window, double numStdDev, BollingerBandsMemo& memo);
-    double calculateSMA(const std::vector<double>& prices, int period);
-    double calculateStdDev(const std::vector<double>& data, int start, int end, double mean);
-    double calculateATR(const std::vector<double>& highs, const std::vector<double>& lows, const std::vector<double>& closes, int period, int currentIndex);
+    std::pair<double, double> calculateBollingerBandsWithMemoization(const std::vector<double>& data, int window, double numStdDev, BollingerBandsMemo& memo, int index);
+    double calculateSMA(const std::vector<double>& prices, int period) const;
+    double calculateStdDev(const std::vector<double>& data, int start, int end, double mean) const;
+    double calculateATR(const std::vector<double>& highs, const std::vector<double>& lows, const std::vector<double>& closes, int period, int currentIndex) const;
 
     // SIMD functions for NEON and AVX2
-    double neon_stdDev(const std::vector<double>& data, int window, double mean);
-    double avx2_stdDev(const std::vector<double>& data, int window, double mean);
+    double neon_stdDev(const std::vector<double>& data, int window, double mean) const;
+    double avx2_stdDev(const std::vector<double>& data, int window, double mean) const;
 
-    double calculateStandardDeviation(const SlidingWindow& data, size_t index, size_t period);
+    double calculateStandardDeviation(const SlidingWindow& data, size_t index, size_t period) const;
 };
 
 #endif // TRADINGKLX_TECHNICALINDICATORS_H
-
 
 TradingKLX.cpp:
 #include "ConfigManager.h"
@@ -1029,13 +1084,14 @@ TradingStrategy.cpp:
 #include <omp.h>
 #include <mutex>
 #include <spdlog/spdlog.h>
-#include <iostream>
+#include <stdexcept>
 
 // Define constants
-const double HIGH_VOLATILITY_THRESHOLD = 0.05;  // Example value
-const double STOP_LOSS_MULTIPLIER = 2.0;        // Example multiplier for stop loss
-const double TAKE_PROFIT_MULTIPLIER = 3.0;      // Example multiplier for take profit
-const double DEFAULT_POSITION_SIZE = 1000.0;    // Default position size
+const double HIGH_VOLATILITY_THRESHOLD = 0.05;    // Example value
+const double STOP_LOSS_MULTIPLIER_ADJUST = 1.2;  // Adjustment multiplier for high volatility
+const double STOP_LOSS_MULTIPLIER_DEFAULT = 2.0;// Default multiplier for stop loss
+const double TAKE_PROFIT_MULTIPLIER = 3.0;       // Example multiplier for take profit
+const double DEFAULT_POSITION_SIZE = 1000.0;     // Default position size
 
 // Constructor Implementation
 TradingStrategy::TradingStrategy(double initialBalance, double riskPerTrade, double stopLossMultiplier, int atrPeriod)
@@ -1063,50 +1119,64 @@ void TradingStrategy::recordPortfolioBalance() {
     portfolioBalanceHistory.push_back(accountBalance);
 }
 
-// ATR Calculation
-double TradingStrategy::calculateATR(const std::vector<double>& highs, const std::vector<double>& lows, const std::vector<double>& closes, int period, int currentIndex) {
-    if (currentIndex < period) {
-        throw std::invalid_argument("Not enough data points to calculate ATR.");
+// Function to calculate exit price using TechnicalIndicators' ATR
+double TradingStrategy::calculateExitPrice(size_t index) {
+    // Ensure the index is within the range of the sliding windows
+    if (index >= closes.size()) {
+        spdlog::error("Index out of range in calculateExitPrice: {}", index);
+        throw std::out_of_range("Index out of range in calculateExitPrice");
     }
 
-    double sumTrueRange = 0.0;
+    // Retrieve data from sliding windows
+    std::vector<double> highs = highsWindow.toVector();
+    std::vector<double> lows = lowsWindow.toVector();
+    std::vector<double> closesVec = closes.toVector();
 
-    for (int i = currentIndex - period + 1; i <= currentIndex; ++i) {
-        double highLowRange = highs[i] - lows[i];
-        double highClosePrevRange = std::abs(highs[i] - closes[i - 1]);
-        double lowClosePrevRange = std::abs(lows[i] - closes[i - 1]);
-        double trueRange = std::max({highLowRange, highClosePrevRange, lowClosePrevRange});
-        sumTrueRange += trueRange;
-    }
+    // Calculate ATR using TechnicalIndicators
+    double atr = technicalIndicators.calculateATR(highs, lows, closesVec, atrPeriod, static_cast<int>(index));
 
-    return sumTrueRange / period;
+    double currentPrice = closesVec.at(index);
+
+    // Example logic: Exit price is current price plus ATR
+    double exitPrice = currentPrice + atr;
+
+    spdlog::info("Calculated exit price at index {}: {}", index, exitPrice);
+    return exitPrice;
 }
 
-#include <vector>
-#include <algorithm>
-#include <stdexcept>
-#include <iostream>
+// Function to calculate position size
+double TradingStrategy::calculatePositionSize() const {
+    // Your logic for position size calculation
+    // For now, it returns a default value
+    return DEFAULT_POSITION_SIZE;
+}
 
 std::vector<TradingSignal> TradingStrategy::evaluateSignals() {
-    std::vector<TradingSignal> signals;
+    std::vector<TradingSignal> generatedSignals;
 
-    std::cout << "closes.size(): " << closes.size() << std::endl;
-    std::cout << "highsWindow.size(): " << highsWindow.size() << std::endl;
-    std::cout << "lowsWindow.size(): " << lowsWindow.size() << std::endl;
+    spdlog::debug("closes.size(): {}", closes.size());
+    spdlog::debug("highsWindow.size(): {}", highsWindow.size());
+    spdlog::debug("lowsWindow.size(): {}", lowsWindow.size());
 
     // Check if there's enough data to evaluate signals
     if (closes.size() < 52 || highsWindow.size() < 52 || lowsWindow.size() < 52) {
-        std::cerr << "Insufficient data to evaluate signals. Skipping evaluation." << std::endl;
-        return signals;  // Return empty signals vector
+        if (!insufficientDataLogged) {
+            spdlog::warn("Insufficient data to evaluate signals. Skipping evaluation.");
+            insufficientDataLogged = true;
+        }
+        return generatedSignals;  // Return empty signals vector
     }
 
     // Additional checks for Bollinger Bands (typically a 20-period window)
-    if (lowerBB.size() < 20 || upperBB.size() < 20) {
-        std::cerr << "Insufficient data for Bollinger Bands evaluation. Skipping evaluation." << std::endl;
-        return signals;  // Return empty signals vector
+    if (lowerBB.size() < static_cast<size_t>(bollingerBandsPeriod) || upperBB.size() < static_cast<size_t>(bollingerBandsPeriod)) {
+        if (!insufficientDataLogged) {
+            spdlog::warn("Insufficient data for Bollinger Bands evaluation. Skipping evaluation.");
+            insufficientDataLogged = true;
+        }
+        return generatedSignals;  // Return empty signals vector
     }
 
-    std::cout << "Data sufficient, proceeding with signal evaluation." << std::endl;
+    spdlog::info("Data sufficient, proceeding with signal evaluation.");
 
     // Generate signal for the latest data point only
     size_t latestIndex = closes.size() - 1;
@@ -1115,14 +1185,18 @@ std::vector<TradingSignal> TradingStrategy::evaluateSignals() {
     try {
         // Entry price based on the latest close
         signal.entryPrice = closes.at(latestIndex);
-        std::cout << "Entry price set at index " << latestIndex << ": " << signal.entryPrice << std::endl;
+        spdlog::info("Entry price set at index {}: {}", latestIndex, signal.entryPrice);
 
         // Adjust stop-loss based on volatility (e.g., last 20 periods)
-        double volatility = calculateStandardDeviation(closes, latestIndex, std::min(20ul, closes.size()));
+        size_t volatilityPeriod = std::min(static_cast<size_t>(20), closes.size());
+        double volatility = technicalIndicators.calculateStandardDeviation(closes, latestIndex, volatilityPeriod);
         if (volatility > HIGH_VOLATILITY_THRESHOLD) {
-            std::cerr << "High volatility detected (stdDev: " << volatility << "), adjusting stop-loss level." << std::endl;
+            spdlog::warn("High volatility detected (stdDev: {}), adjusting stop-loss level.", volatility);
             // Adjust stop-loss
-            signal.stopLossLevel = signal.entryPrice - (volatility * STOP_LOSS_MULTIPLIER);
+            signal.stopLossLevel = signal.entryPrice - (volatility * STOP_LOSS_MULTIPLIER_ADJUST * STOP_LOSS_MULTIPLIER_DEFAULT);
+        } else {
+            // Default stop-loss
+            signal.stopLossLevel = signal.entryPrice - (volatility * STOP_LOSS_MULTIPLIER_DEFAULT);
         }
 
         // Calculate exit price
@@ -1137,45 +1211,14 @@ std::vector<TradingSignal> TradingStrategy::evaluateSignals() {
             signal.sell = true;
         }
 
-        signals.push_back(signal);
-        std::cout << "Signal generated: entryPrice=" << signal.entryPrice << ", exitPrice=" << signal.exitPrice
-                  << ", profit=" << signal.profit << ", buy=" << signal.buy << ", sell=" << signal.sell << std::endl;
+        generatedSignals.push_back(signal);
+        spdlog::info("Signal generated: entryPrice={}, exitPrice={}, profit={}, buy={}, sell={}",
+                     signal.entryPrice, signal.exitPrice, signal.profit, signal.buy, signal.sell);
     } catch (const std::exception& e) {
-        std::cerr << "Error generating signal: " << e.what() << std::endl;
+        spdlog::error("Error generating signal: {}", e.what());
     }
 
-    return signals;
-}
-
-double TradingStrategy::calculateExitPrice(size_t index) {
-    // Ensure the index is within the range of the sliding windows
-    if (index >= closes.size()) {
-        spdlog::error("Index out of range in calculateExitPrice: {}", index);
-        throw std::out_of_range("Index out of range in calculateExitPrice");
-    }
-
-    // Retrieve data from sliding windows
-    std::vector<double> highs = highsWindow.toVector();
-    std::vector<double> lows = lowsWindow.toVector();
-    std::vector<double> closesVec = closes.toVector();
-
-    // Calculate ATR using the retrieved data
-    double atr = calculateATR(highs, lows, closesVec, atrPeriod, index);
-
-    double currentPrice = closesVec.at(index);
-
-    // Example logic: Exit price is current price plus ATR
-    double exitPrice = currentPrice + atr;
-
-    spdlog::info("Calculated exit price at index {}: {}", index, exitPrice);
-    return exitPrice;
-}
-
-// Function to calculate position size
-double TradingStrategy::calculatePositionSize() {
-    // Your logic for position size calculation
-    // For now, it returns a default value
-    return DEFAULT_POSITION_SIZE;
+    return generatedSignals;
 }
 
 void TradingStrategy::onNewData(double high, double low, double close) {
@@ -1198,7 +1241,7 @@ void TradingStrategy::onNewData(double high, double low, double close) {
     // Calculate Bollinger Bands when new data arrives
     try {
         auto [lowerBand, upperBand] = technicalIndicators.calculateBollingerBandsWithMemoization(
-                closes.toVector(), bollingerBandsPeriod, bollingerBandsMultiplier, bbMemo
+                closes.toVector(), bollingerBandsPeriod, bollingerBandsMultiplier, bbMemo, static_cast<int>(dataSize - 1)
         );
         lowerBB.push_back(lowerBand);
         upperBB.push_back(upperBand);
@@ -1209,7 +1252,7 @@ void TradingStrategy::onNewData(double high, double low, double close) {
     }
 
     bool enoughDataForIchimoku = (highsWindow.size() >= 52 && lowsWindow.size() >= 52 && tenkanS.size() >= 26);
-    bool enoughDataForBollinger = (lowerBB.size() >= 20 && upperBB.size() >= 20);
+    bool enoughDataForBollinger = (lowerBB.size() >= static_cast<size_t>(bollingerBandsPeriod) && upperBB.size() >= static_cast<size_t>(bollingerBandsPeriod));
 
     if (!(enoughDataForIchimoku || enoughDataForBollinger)) {
         spdlog::warn("Insufficient data for any indicator. Available data: {}, Required: 52", dataSize);
@@ -1218,19 +1261,16 @@ void TradingStrategy::onNewData(double high, double low, double close) {
 
     // Perform SMA calculation and Standard Deviation
     double sma = technicalIndicators.calculateSMA(closes.toVector(), smaPeriod);
-    double stdDev = technicalIndicators.calculateStdDev(closes.toVector(), dataSize - smaPeriod, dataSize, sma);
+    double stdDev = technicalIndicators.calculateStdDev(closes.toVector(), static_cast<int>(dataSize - smaPeriod), static_cast<int>(dataSize), sma);
 
-    const double lowVolatilityThreshold = 0.0001;
-    const double highVolatilityThreshold = 0.001;
-
-    if (stdDev < lowVolatilityThreshold) {
+    if (stdDev < 0.0001) {
         spdlog::warn("Low volatility detected (stdDev: {}), skipping trading decisions.", stdDev);
         return;
     }
 
-    if (stdDev > highVolatilityThreshold) {
+    if (stdDev > 0.001) {
         spdlog::warn("High volatility detected (stdDev: {}), adjusting stop-loss level.", stdDev);
-        stopLossMultiplier *= 1.2;
+        stopLossMultiplier *= STOP_LOSS_MULTIPLIER_ADJUST;
     }
 
     // Ichimoku Indicator Calculation
@@ -1269,6 +1309,7 @@ void TradingStrategy::onNewData(double high, double low, double close) {
     // Record portfolio balance
     recordPortfolioBalance();
 }
+
 // Helper function to update indicator vectors
 void TradingStrategy::updateIndicatorVector(std::vector<double>& vec, double newValue, size_t maxSize) {
     vec.push_back(newValue);
@@ -1288,104 +1329,27 @@ std::vector<Trade> TradingStrategy::getTrades() const {
     return trades;
 }
 
-double TradingStrategy::calculateStandardDeviation(const SlidingWindow& data, size_t index, size_t period) {
-    if (index < period - 1 || data.size() < period) {
-        throw std::runtime_error("Insufficient data for standard deviation calculation");
-    }
-
-    double sum = 0.0;
-    double sumSquared = 0.0;
-
-    for (size_t i = index - period + 1; i <= index; ++i) {
-        double value = data.getData()[i];
-        sum += value;
-        sumSquared += value * value;
-    }
-
-    double mean = sum / period;
-    double variance = (sumSquared / period) - (mean * mean);
-
-    return std::sqrt(variance);
+double TradingStrategy::calculateStandardDeviation(const SlidingWindow& data, size_t index, size_t period) const {
+    return technicalIndicators.calculateStandardDeviation(data, index, period);
 }
 
+Utilities.h:
+//
+// Created by olakunle kuye on 14/08/2024.
+//
+#ifdef USE_BOOST_FILESYSTEM
+    #include <boost/filesystem.hpp>
+    namespace fs = boost::filesystem;
+#else
+    #include <filesystem>
+    namespace fs = std::filesystem;
+#endif
+#ifndef TRADINGKLX_UTILITIES_H
+#define TRADINGKLX_UTILITIES_H
+#include <json/json.h>
+#include <string>
 
-TradingStrategy.h:
-#ifndef TRADING_STRATEGY_H
-#define TRADING_STRATEGY_H
+std::string jsonToString(const Json::Value& jsonValue);
+#endif //TRADINGKLX_UTILITIES_H
 
-#include "Trade.h"
-#include <vector>
-#include <deque>
-#include "PriceData.h"
-#include "TechnicalIndicators.h"
-#include "TradingSignal.h"
-#include "SlidingWindow.h"
-#include <memory>
-
-class TradingStrategy {
-private:
-    bool insufficientDataLogged;
-    bool tenkanSenLogged = false;
-    bool kijunSenLogged = false;
-    bool senkouLogged = false;
-
-    double accountBalance;
-    double riskPerTrade;
-    double stopLossMultiplier;
-
-    int smaPeriod;
-    int bollingerBandsPeriod;
-    double bollingerBandsMultiplier;
-
-    bool inPosition;
-    bool hasLoggedInsufficientData;
-
-    SlidingWindow highsWindow;
-    SlidingWindow lowsWindow;
-    SlidingWindow closes;
-
-    SlidingWindow tenkanWindow;
-    SlidingWindow kijunWindow;
-
-    std::vector<double> lowerBB;
-    std::vector<double> upperBB;
-
-    std::vector<double> tenkanS;
-    std::vector<double> kijunS;
-    std::vector<double> senkouA;
-    std::vector<double> senkouB;
-
-    std::vector<TradingSignal> signals;
-    std::vector<double> portfolioBalanceHistory;
-
-    BollingerBandsMemo bbMemo;
-    IchimokuMemo memo;
-    TechnicalIndicators technicalIndicators;
-
-    void recordPortfolioBalance();
-    int atrPeriod;
-    double positionSize;
-
-public:
-    TradingStrategy(double initialBalance, double riskPerTrade, double stopLossMultiplier, int atrPeriod);
-
-    void setAtrPeriod(int period) {
-        atrPeriod = period;
-    }
-
-    double calculateATR(const std::vector<double>& highs, const std::vector<double>& lows, const std::vector<double>& closes, int period, int index);
-
-    void onNewData(double high, double low, double close);
-    std::vector<TradingSignal> evaluateSignals();
-
-    std::vector<Trade> getTrades() const;
-
-    // Add these new function declarations
-    double calculatePositionSize();
-    double calculateExitPrice(size_t index);
-    double calculateStandardDeviation(const SlidingWindow& data, size_t index, size_t period);
-    void updateIndicatorVector(std::vector<double>& vec, double newValue, size_t maxSize = 100);
-};
-
-#endif // TRADING_STRATEGY_H
 

@@ -1,17 +1,18 @@
 ﻿#ifdef USE_BOOST_FILESYSTEM
-    #include <boost/filesystem.hpp>
-    namespace fs = boost::filesystem;
+#include <boost/filesystem.hpp>
+namespace fs = boost::filesystem;
 #else
-    #include <filesystem>
-    namespace fs = std::filesystem;
+#include <filesystem>
+namespace fs = std::filesystem;
 #endif
+
 #ifndef TRADINGKLX_H
 #define TRADINGKLX_H
 
 #include <vector>
 #include <string>
 #include <memory>
-#include <string>
+#include <json/json.h> // Add this include for Json::Value
 
 class DataProcessor; // Forward declaration
 class ConfigManager; // Forward declaration
@@ -29,4 +30,5 @@ private:
 
     void InitializeAndProcessData(const std::string& configFilePath);
 };
+
 #endif // TRADINGKLX_H
