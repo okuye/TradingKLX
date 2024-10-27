@@ -47,7 +47,7 @@ private:
     std::vector<double> portfolioBalanceHistory;
 
     BollingerBandsMemo bbMemo;
-    IchimokuMemo memo;
+    IchimokuMemo ichimokuMemo;  // Fixed variable name
     TechnicalIndicators technicalIndicators;
 
     void recordPortfolioBalance();
@@ -61,14 +61,11 @@ public:
         atrPeriod = period;
     }
 
-    // Removed redundant calculateATR declaration
-
     void onNewData(double high, double low, double close);
     std::vector<TradingSignal> evaluateSignals();
 
     std::vector<Trade> getTrades() const;
 
-    // Add these new function declarations
     double calculatePositionSize() const;
     double calculateExitPrice(size_t index);
     double calculateStandardDeviation(const SlidingWindow& data, size_t index, size_t period) const;

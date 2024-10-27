@@ -1,7 +1,7 @@
 import os
 
 # List of files to merge
-files_to_merge = ['Trade.h','DataProcessor.cpp', 'DataProcessor.h', 'DataProcessor.h', 'PerformanceAssessor.cpp', 'PerformanceAssessor.h','PriceData.h','SlidingWindow.h','TechnicalIndicators.cpp','TechnicalIndicators.h','TradingKLX.cpp','TradingKLX.h', 'TradingSignal.h','TradingStrategy.cpp','TradingStrategy.h''Utilities.cpp','Utilities.h']
+files_to_merge = ['Trade.h','DataProcessor.cpp', 'DataProcessor.h', 'DataProcessor.h', 'PerformanceAssessor.cpp', 'PerformanceAssessor.h','PriceData.h','SlidingWindow.h','TechnicalIndicators.cpp','TechnicalIndicators.h','TradingKLX.cpp','TradingKLX.h', 'TradingSignal.h','TradingStrategy.cpp','TradingStrategy.h''Utilities.cpp','Utilities.h','Trade.h','TradeData.h']
 # files_to_merge = ['Trade.h','BacktestManager.cpp','BacktestManager.h','OandA_API.cpp','OandA_API.hpp','Dockerfile','docker-compose.yml','CMakeLists.txt', 'DataProcessor.cpp', 'DataProcessor.h', 'DataProcessor.h', 'PerformanceAssessor.cpp', 'PerformanceAssessor.h','PriceData.h','SlidingWindow.h','TechnicalIndicators.cpp','TechnicalIndicators.h','TradingKLX.cpp','TradingKLX.h', 'TradingSignal.h','TradingStrategy.cpp','TradingStrategy.h','Utilities.cpp','Utilities.h']
 
 # Output file name

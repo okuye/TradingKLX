@@ -127,7 +127,7 @@ std::pair<double, double> TechnicalIndicators::calculateBollingerBandsWithMemoiz
     double sum = std::accumulate(data.begin() + index - window + 1, data.begin() + index + 1, 0.0);
     double mean = sum / window;
 
-    // Calculate the standard deviation using calculateStdDev
+    // Calculate the standard deviation
     double variance = 0.0;
     for (int i = index - window + 1; i <= index; ++i) {
         variance += std::pow(data[i] - mean, 2);
@@ -145,6 +145,8 @@ std::pair<double, double> TechnicalIndicators::calculateBollingerBandsWithMemoiz
 
     return std::make_pair(lowerBand, upperBand);
 }
+
+
 
 // ATR calculation
 double TechnicalIndicators::calculateATR(const std::vector<double>& highs, const std::vector<double>& lows, const std::vector<double>& closes, int period, int currentIndex) const {

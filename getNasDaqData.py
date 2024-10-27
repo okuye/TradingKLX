@@ -14,7 +14,7 @@ currency_pairs = [
 ]
 
 # Define date range
-date_gte = "1995-01-01"
+date_gte = "2023-01-01"
 date_lte = "2023-12-31"
 
 # Function to run the curl command

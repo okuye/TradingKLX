@@ -43,8 +43,8 @@ void TradingKLX::InitializeAndProcessData(const std::string& configFilePath) {
     // Get dynamic ATR period from the configuration or set a default value
     int atrPeriod = config.get("atrPeriod", 14).asInt();  // Default to 14 if not provided in config
 
-    // Initialize Trading Strategy with dynamic atrPeriod
-    TradingStrategy strategy(10000.0, 0.02, 1.5, atrPeriod);  // Use atrPeriod here
+    // Initialize Trading Strategy with dynamic ATR period
+    TradingStrategy strategy(10000.0, 0.02, 1.5, atrPeriod);  // Using atrPeriod here
     SlidingWindow closingPricesWindow(14);  // Example window size for closing prices
 
     if (isLocalServer) {
@@ -58,21 +58,23 @@ void TradingKLX::InitializeAndProcessData(const std::string& configFilePath) {
         try {
             historicalData = serverAPI.fetchTrades(startDate, endDate, symbol, api_key);
         } catch (const std::exception &e) {
-            std::cerr << "Failed to parse JSON: " << e.what() << std::endl;
+            std::cerr << "Failed to fetch or parse JSON from TradingServerAPI: " << e.what() << std::endl;
             return;
         }
 
         std::vector<TradeData> trades = DataProcessor::processTradingServerData(historicalData);
 
         for (const auto& trade : trades) {
+            // Add the closing price data point to the sliding window
             closingPricesWindow.addDataPoint(trade.closeAsk);
 
             if (closingPricesWindow.size() >= closingPricesWindow.getMaxSize()) {
                 try {
                     std::vector<double> closingPrices = closingPricesWindow.toVector();
+                    // Process the new data (highAsk, lowAsk, closeAsk)
                     strategy.onNewData(trade.highAsk, trade.lowAsk, trade.closeAsk);
                 } catch (const std::runtime_error& e) {
-                    std::cerr << "Error processing sliding window: " << e.what() << std::endl;
+                    std::cerr << "Error processing sliding window data: " << e.what() << std::endl;
                 }
             }
         }
@@ -80,7 +82,14 @@ void TradingKLX::InitializeAndProcessData(const std::string& configFilePath) {
         std::cout << "Fetching real-time data from OANDA API..." << std::endl;
 
         OandA_API oandaAPI(apiKey, accountID);
-        Json::Value realTimeData = oandaAPI.getInstrumentPrices(from_symbol);
+        Json::Value realTimeData;
+
+        try {
+            realTimeData = oandaAPI.getInstrumentPrices(from_symbol);
+        } catch (const std::exception &e) {
+            std::cerr << "Failed to fetch or parse real-time data from OANDA API: " << e.what() << std::endl;
+            return;
+        }
 
         std::vector<TradeData> trades = DataProcessor::processOandAData(realTimeData);
 
@@ -106,10 +115,11 @@ void TradingKLX::InitializeAndProcessData(const std::string& configFilePath) {
     // Performance assessment
     PerformanceAssessor assessor;
 
-    // Use the new performance metrics function
+    // Use the performance metrics function to assess the executed trades
     std::cout << "\n--- Performance Metrics ---" << std::endl;
     assessor.calculatePerformanceMetrics(executedTrades);
 }
+
 
 int main() {
     TradingKLX app;
