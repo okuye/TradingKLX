@@ -374,6 +374,9 @@ data/
 
 .idea
 
+Nasdaq-Data/
+
+
 data/journal/
 *.json
 *.txt
