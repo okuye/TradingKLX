@@ -27,17 +27,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e18f0a1e-f62e-499a-9bd6-dce39a999206" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/json-data" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataProcessor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/DataProcessor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RunTradingKLX.sh" beforeDir="false" afterPath="$PROJECT_DIR$/RunTradingKLX.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TechnicalIndicators.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TechnicalIndicators.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TradingKLX.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TradingKLX.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TradingKLX.h" beforeDir="false" afterPath="$PROJECT_DIR$/TradingKLX.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TradingStrategy.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TradingStrategy.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TradingStrategy.h" beforeDir="false" afterPath="$PROJECT_DIR$/TradingStrategy.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/getNasDaqData.py" beforeDir="false" afterPath="$PROJECT_DIR$/getNasDaqData.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/llm-notes.py" beforeDir="false" afterPath="$PROJECT_DIR$/llm-notes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/merged_output.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-output.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbt-output.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,36 +76,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "C/C++ File.TradingKLX.cpp.executor": "Debug",
-    "CMake Application.TradingKLX.executor": "Run",
-    "RunOnceActivity.CodyAccountHistoryMigration": "true",
-    "RunOnceActivity.CodyAccountsIdsRefresh": "true",
-    "RunOnceActivity.CodyAssignOrphanedChatsToActiveAccount": "true",
-    "RunOnceActivity.CodyConvertUrlToCodebaseName": "true",
-    "RunOnceActivity.CodyHistoryLlmMigration": "true",
-    "RunOnceActivity.CodyMigrateChatHistory-v2": "true",
-    "RunOnceActivity.CodyProjectSettingsMigration": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.ToggleCodyToolWindowAfterMigration": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "/Users/olakunlekuye/Documents/Dev/KLX/TradingKLX",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "structure.view.defaults.are.configured": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;C/C++ File.TradingKLX.cpp.executor&quot;: &quot;Debug&quot;,
+    &quot;CMake Application.TradingKLX.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.CodyAccountHistoryMigration&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.CodyAccountsIdsRefresh&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.CodyAssignOrphanedChatsToActiveAccount&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.CodyConvertUrlToCodebaseName&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.CodyHistoryLlmMigration&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.CodyMigrateChatHistory-v2&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.CodyProjectSettingsMigration&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ToggleCodyToolWindowAfterMigration&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/olakunlekuye/Documents/Dev/KLX/TradingKLX&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Data" />
@@ -116,11 +114,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="TradingKLX.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="TradingKLX" TARGET_NAME="TradingKLX.cpp" CONFIG_NAME="TradingKLX.cpp">
       <option name="sourceFile" value="TradingKLX.cpp" />
       <method v="2">
@@ -222,7 +215,8 @@
       <workItem from="1729635951790" duration="37673000" />
       <workItem from="1729962447771" duration="12767000" />
       <workItem from="1730012376150" duration="731000" />
-      <workItem from="1730013115527" duration="2372000" />
+      <workItem from="1730013115527" duration="3555000" />
+      <workItem from="1730016980137" duration="18620000" />
     </task>
     <servers />
   </component>

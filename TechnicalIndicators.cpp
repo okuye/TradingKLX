@@ -169,6 +169,7 @@ double TechnicalIndicators::calculateATR(const std::vector<double>& highs, const
     return atr;
 }
 
+
 // SIMD-optimized standard deviation for NEON (ARM)
 double TechnicalIndicators::neon_stdDev(const std::vector<double>& data, int window, double mean) const {
 #ifdef __ARM_NEON

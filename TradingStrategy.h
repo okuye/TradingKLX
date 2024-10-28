@@ -1,75 +1,30 @@
-#ifndef TRADING_STRATEGY_H
-#define TRADING_STRATEGY_H
+#ifndef TRADINGSTRATEGY_H
+#define TRADINGSTRATEGY_H
 
-#include "Trade.h"
 #include <vector>
-#include <deque>
-#include "PriceData.h"
-#include "TechnicalIndicators.h"
-#include "TradingSignal.h"
+#include "TradingSignal.h"  // Ensure TradingSignal is included
+#include "Trade.h"          // Include Trade for executed trades
 #include "SlidingWindow.h"
-#include <memory>
 
 class TradingStrategy {
-private:
-    bool insufficientDataLogged;
-    bool tenkanSenLogged = false;
-    bool kijunSenLogged = false;
-    bool senkouLogged = false;
+public:
+    TradingStrategy(double initialBalance, double riskPerTrade, double stopLossMultiplier, int atrPeriod);
+    void onNewData(double high, double low, double close);
+    std::vector<TradingSignal> evaluateSignals();
 
+    // Method to retrieve executed trades
+    std::vector<Trade> getTrades() const;
+
+private:
     double accountBalance;
     double riskPerTrade;
     double stopLossMultiplier;
-
-    int smaPeriod;
-    int bollingerBandsPeriod;
-    double bollingerBandsMultiplier;
-
-    bool inPosition;
-    bool hasLoggedInsufficientData;
-
+    int atrPeriod;
     SlidingWindow highsWindow;
     SlidingWindow lowsWindow;
     SlidingWindow closes;
 
-    SlidingWindow tenkanWindow;
-    SlidingWindow kijunWindow;
-
-    std::vector<double> lowerBB;
-    std::vector<double> upperBB;
-
-    std::vector<double> tenkanS;
-    std::vector<double> kijunS;
-    std::vector<double> senkouA;
-    std::vector<double> senkouB;
-
-    std::vector<TradingSignal> signals;
-    std::vector<double> portfolioBalanceHistory;
-
-    BollingerBandsMemo bbMemo;
-    IchimokuMemo ichimokuMemo;  // Fixed variable name
-    TechnicalIndicators technicalIndicators;
-
-    void recordPortfolioBalance();
-    int atrPeriod;
-    double positionSize;
-
-public:
-    TradingStrategy(double initialBalance, double riskPerTrade, double stopLossMultiplier, int atrPeriod);
-
-    void setAtrPeriod(int period) {
-        atrPeriod = period;
-    }
-
-    void onNewData(double high, double low, double close);
-    std::vector<TradingSignal> evaluateSignals();
-
-    std::vector<Trade> getTrades() const;
-
-    double calculatePositionSize() const;
-    double calculateExitPrice(size_t index);
-    double calculateStandardDeviation(const SlidingWindow& data, size_t index, size_t period) const;
-    void updateIndicatorVector(std::vector<double>& vec, double newValue, size_t maxSize = 100);
+    std::vector<Trade> executedTrades;  // Store executed trades
 };
 
-#endif // TRADING_STRATEGY_H
+#endif // TRADINGSTRATEGY_H

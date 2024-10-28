@@ -15,4 +15,4 @@ fi
 # Navigate to the build directory
 cd build
 
-./TradingKLX
+./TradingKLX config.json

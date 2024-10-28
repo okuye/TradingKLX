@@ -12,23 +12,25 @@ namespace fs = std::filesystem;
 #include <vector>
 #include <string>
 #include <memory>
-#include <json/json.h> // Add this include for Json::Value
-
-class DataProcessor; // Forward declaration
-class ConfigManager; // Forward declaration
+#include <json/json.h>
+#include "TradingStrategy.h"
+#include "PerformanceAssessor.h"
+#include "DataProcessor.h"
+#include "ConfigManager.h"
 
 class TradingKLX {
 public:
-    TradingKLX();
-    ~TradingKLX();
+    TradingKLX();  // Constructor
+    ~TradingKLX(); // Destructor
 
+    void InitializeAndProcessData(const std::string& configFilePath);
     void Run(const std::string& configFilePath);
 
 private:
+    TradingStrategy strategy;
+    PerformanceAssessor assessor;
     std::shared_ptr<DataProcessor> dataProcessor;
     std::shared_ptr<ConfigManager> configManager;
-
-    void InitializeAndProcessData(const std::string& configFilePath);
 };
 
 #endif // TRADINGKLX_H
