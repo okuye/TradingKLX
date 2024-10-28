@@ -376,6 +376,5 @@ data/
 
 data/journal/
 *.json
-docker-output.txt
+*.txt
 json-data
-merged_output.txt
