@@ -3,9 +3,9 @@ version: '3.8'
 services:
   tradingklx:
     build: .
-    network_mode: "host"  # Ensure host mode is set
+    network_mode: "host"
     environment:
       - PYTHONUNBUFFERED=1
     command: bash -c "./build.sh && ./RunTradingKLX.sh"
     extra_hosts:
-      - "host.docker.internal:host-gateway"  # Ensure host.docker.internal maps to the host's IP
+      - "host.docker.internal:host-gateway"

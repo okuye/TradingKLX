@@ -5,7 +5,13 @@ api_key = "Ee-osjmRSwyXkPA3QBFe"
 base_url = "https://data.nasdaq.com/api/v3/datatables/FXCM/"
 
 # Define the timeframes and currency pairs
-timeframes = ['M1', 'M5', 'M15', 'M30', 'H1', 'H4', 'D1', 'W1', 'MN']
+# timeframes = ['M1', 'M5', 'M15', 'M30', 'H1', 'H4', 'D1', 'W1', 'MN']
+timeframes = ['H1']
+
+# currency_pairs = [
+#     ('EUR', 'USD')
+# ]
+
 currency_pairs = [
     ('EUR', 'USD'), ('USD', 'JPY'), ('GBP', 'USD'), ('USD', 'CHF'),
     ('USD', 'CAD'), ('AUD', 'USD'), ('NZD', 'USD'), ('EUR', 'GBP'),
@@ -14,8 +20,8 @@ currency_pairs = [
 ]
 
 # Define date range
-date_gte = "2023-01-01"
-date_lte = "2023-12-31"
+date_gte = "2024-01-01"
+date_lte = "2024-10-27"
 
 # Function to run the curl command
 def run_curl_command(symbol, timeframe, filename):

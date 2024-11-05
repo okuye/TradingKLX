@@ -87,6 +87,10 @@ link_directories(${JSONCPP_LIBRARY_DIRS})
 link_directories(${CURL_LIBRARY_DIRS})
 link_directories(${Python3_LIBRARY_DIRS})
 
+# Updated path to ForexConnect framework
+set(FOREXCONNECT_FRAMEWORK_PATH /workspace/libs/ForexConnect.framework)
+include_directories(${FOREXCONNECT_FRAMEWORK_PATH}/Headers)
+
 # Source files for the main executable
 set(SOURCE_FILES
         TradingKLX.cpp
@@ -108,6 +112,7 @@ set(SOURCE_FILES
 add_executable(TradingKLX ${SOURCE_FILES})
 
 target_link_libraries(TradingKLX PRIVATE
+        ForexConnect  # Link ForexConnect as a library
         curl
         jsoncpp
         Python3::Python
@@ -115,6 +120,18 @@ target_link_libraries(TradingKLX PRIVATE
         spdlog::spdlog
         OpenMP::OpenMP_CXX
 )
+
+target_link_libraries(TradingKLX PRIVATE
+        "-framework ForexConnect"  # Link ForexConnect framework
+        curl
+        jsoncpp
+        Python3::Python
+        ${BOOST_LIBS}
+        spdlog::spdlog
+        OpenMP::OpenMP_CXX
+)
+
+link_directories(${FOREXCONNECT_FRAMEWORK_PATH})
 
 # GoogleTest setup
 find_package(GTest REQUIRED)

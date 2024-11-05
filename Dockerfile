@@ -1,7 +1,7 @@
 # Base image
 FROM ubuntu:latest
 
-# Install system dependencies
+# Update and install dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
     libcurl4-openssl-dev \
@@ -12,46 +12,42 @@ RUN apt-get update && apt-get install -y \
     wget \
     python3 \
     python3-pip \
-    gdb \
-    libgtest-dev \
-    libjsoncpp-dev \
-    libspdlog-dev \
-    clang \
-    libomp-dev \
-    vim \
-    nano \
-    openssh-server \
-    curl \
     python3-venv \
-    libboost-all-dev
+    gdb \
+    libspdlog-dev \
+    openssh-server \
+    libboost-all-dev \
+    libjsoncpp-dev \
+    libgtest-dev  # Install GTest
 
-# Set up Python virtual environment
+# Compile GTest (as it doesn't come precompiled on Ubuntu)
+RUN cd /usr/src/gtest && \
+    cmake . && \
+    make && \
+    mv lib/*.a /usr/lib
+
+# Python virtual environment setup
 RUN python3 -m venv /app/venv
-
-# Install NumPy in the virtual environment
 RUN /app/venv/bin/pip install numpy
 
-# Set the working directory inside the container
+# Set up working directory
 WORKDIR /workspace
 
-# Copy the source code into the container
+# Copy the entire project to the workspace
 COPY . /workspace
 
-# Set executable permissions for the build script
+# Copy ForexConnect.framework into the container
+COPY libs/ /workspace/libs/
+
+COPY libs/ForexConnect.framework /workspace/libs/ForexConnect.framework
+
+# Set permissions for build script
 RUN chmod +x /workspace/build.sh
 
-# Expose ports
-EXPOSE 3000 
-EXPOSE 22
-
-# Add this line to install spdlog
-RUN apt-get update && apt-get install -y libspdlog-dev
-
-# Install and configure OpenSSH
-RUN apt-get install -y openssh-server
+# SSH setup
 RUN mkdir /var/run/sshd
 RUN echo 'root:root' | chpasswd
 RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
-# Start SSH service
-CMD ["/usr/sbin/sshd", "-D"]
+# Build the project and run commands
+CMD ["bash", "-c", "./build.sh && ./RunTradingKLX.sh"]

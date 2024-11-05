@@ -1,0 +1,114 @@
+#pragma once
+
+static NSString *O2G2_Commands_CreateOrder = @"CreateOrder";
+static NSString *O2G2_Commands_CreateOCO = @"CreateOCO";
+static NSString *O2G2_Commands_CreateOTO = @"CreateOTO";
+static NSString *O2G2_Commands_CreateOTOCO = @"CreateOTOCO";
+static NSString *O2G2_Commands_JoinToNewContingencyGroup = @"JoinToNewContingencyGroup";
+static NSString *O2G2_Commands_JoinToExistingContingencyGroup = @"JoinToExistingContingencyGroup";
+static NSString *O2G2_Commands_RemoveFromContingencyGroup = @"RemoveFromContingencyGroup";
+static NSString *O2G2_Commands_EditOrder = @"EditOrder";
+static NSString *O2G2_Commands_DeleteOrder = @"DeleteOrder";
+static NSString *O2G2_Commands_SetSubscriptionStatus = @"SetSubscriptionStatus";
+static NSString *O2G2_Commands_UpdateMarginRequirements = @"UpdateMarginRequirements";
+static NSString *O2G2_Commands_GetLastOrderUpdate = @"GetLastOrderUpdate";
+static NSString *O2G2_Commands_AcceptOrder = @"AcceptOrder";
+static NSString *O2G2_Commands_ChangePassword = @"ChangePassword";
+static NSString *O2G2_Commands_SendMail = @"SendMail";
+
+static NSString *O2G2_Buy = @"B";
+static NSString *O2G2_Sell = @"S";
+
+static NSString *O2G2_Orders_TrueMarketOpen = @"OM";
+static NSString *O2G2_Orders_MarketOpen = @"O";
+static NSString *O2G2_Orders_MarketOpenRange = @"OR";
+static NSString *O2G2_Orders_OpenLimit = @"OL";
+static NSString *O2G2_Orders_TrueMarketClose = @"CM";
+static NSString *O2G2_Orders_MarketClose = @"C";
+static NSString *O2G2_Orders_MarketCloseRange = @"CR"; 
+static NSString *O2G2_Orders_CloseLimit = @"CL";
+static NSString *O2G2_Orders_StopEntry = @"SE";
+static NSString *O2G2_Orders_LimitEntry = @"LE";
+static NSString *O2G2_Orders_RangeEntry = @"RE";
+static NSString *O2G2_Orders_Entry = @"E";
+static NSString *O2G2_Orders_Stop = @"S";
+static NSString *O2G2_Orders_Limit = @"L";
+static NSString *O2G2_Orders_TrailingStop = @"ST";
+static NSString *O2G2_Orders_TrailingLimit = @"LT";
+static NSString *O2G2_Orders_StopTrailingEntry = @"STE";
+static NSString *O2G2_Orders_LimitTrailingEntry = @"LTE";
+static NSString *O2G2_Orders_RangeTrailingEntry = @"RTE";
+
+static NSString *O2G2_TIF_GTC = @"GTC";
+static NSString *O2G2_TIF_IOC = @"IOC";
+static NSString *O2G2_TIF_DAY = @"DAY";
+static NSString *O2G2_TIF_FOK = @"FOK";
+static NSString *O2G2_TIF_GTD = @"GTD";
+
+static NSString *O2G2_Peg_FromOpen = @"O";
+static NSString *O2G2_Peg_FromClose = @"M";
+
+static NSString *O2G_SubscriptionStatuses_Tradable = @"T";
+static NSString *O2G_SubscriptionStatuses_Disable = @"D";
+static NSString *O2G_SubscriptionStatuses_ViewOnly = @"V";
+
+static NSString *O2G2_SystemProperties_BASE_CRNCY = @"BASE_CRNCY";
+static NSString *O2G2_SystemProperties_BASE_UNIT_SIZE = @"BASE_UNIT_SIZE";
+static NSString *O2G2_SystemProperties_BASE_CRNCY_PRECISION = @"BASE_CRNCY_PRECISION";
+static NSString *O2G2_SystemProperties_BASE_CRNCY_SYMBOL = @"BASE_CRNCY_SYMBOL";
+static NSString *O2G2_SystemProperties_BASE_TIME_ZONE = @"BASE_TIME_ZONE";
+static NSString *O2G2_SystemProperties_COND_DIST = @"COND_DIST";
+static NSString *O2G2_SystemProperties_COND_DIST_ENTRY = @"COND_DIST_ENTRY";
+static NSString *O2G2_SystemProperties_END_TRADING_DAY = @"END_TRADING_DAY";
+static NSString *O2G2_SystemProperties_FORCE_PASSWORD_CHANGE = @"FORCE_PASSWORD_CHANGE";
+static NSString *O2G2_SystemProperties_MARKET_OPEN = @"MARKET_OPEN";
+static NSString *O2G2_SystemProperties_QUERYDEPTH_0 = @"QUERYDEPTH_0";
+static NSString *O2G2_SystemProperties_QUERYDEPTH_1 = @"QUERYDEPTH_1";
+static NSString *O2G2_SystemProperties_QUERYDEPTH_2 = @"QUERYDEPTH_2";
+static NSString *O2G2_SystemProperties_QUERYDEPTH_3= @"QUERYDEPTH_3";
+static NSString *O2G2_SystemProperties_QUERYDEPTH_4 = @"QUERYDEPTH_4";
+static NSString *O2G2_SystemProperties_QUERYDEPTH_5 = @"QUERYDEPTH_5";
+static NSString *O2G2_SystemProperties_QUERYDEPTH_6 = @"QUERYDEPTH_6";
+static NSString *O2G2_SystemProperties_QUERYDEPTH_7 = @"QUERYDEPTH_7";
+static NSString *O2G2_SystemProperties_QUERYDEPTH_8 = @"QUERYDEPTH_8";
+static NSString *O2G2_SystemProperties_QUERYDEPTH_h2 = @"QUERYDEPTH_h2";
+static NSString *O2G2_SystemProperties_QUERYDEPTH_h3 = @"QUERYDEPTH_h3";
+static NSString *O2G2_SystemProperties_QUERYDEPTH_h4 = @"QUERYDEPTH_h4";
+static NSString *O2G2_SystemProperties_QUERYDEPTH_h6 = @"QUERYDEPTH_h6";
+static NSString *O2G2_SystemProperties_QUERYDEPTH_h8 = @"QUERYDEPTH_h8";
+static NSString *O2G2_SystemProperties_SERVER_TIME_UTC = @"SERVER_TIME_UTC";
+static NSString *O2G2_SystemProperties_SupportTickVolume = @"SupportTickVolume";
+static NSString *O2G2_SystemProperties_TP_170 = @"TP_170";
+static NSString *O2G2_SystemProperties_TP_171 = @"TP_171";
+static NSString *O2G2_SystemProperties_TP_172 = @"TP_172";
+static NSString *O2G2_SystemProperties_TP_86 = @"TP_86";
+static NSString *O2G2_SystemProperties_TP_88 = @"TP_88";
+static NSString *O2G2_SystemProperties_TP_89 = @"TP_89";
+static NSString *O2G2_SystemProperties_TP_94 = @"TP_94";
+static NSString *O2G2_SystemProperties_CP_170 = @"CP_170";
+static NSString *O2G2_SystemProperties_CP_171 = @"CP_171";
+static NSString *O2G2_SystemProperties_CP_172 = @"CP_172";
+static NSString *O2G2_SystemProperties_CP_86 = @"CP_86";
+static NSString *O2G2_SystemProperties_CP_88 = @"CP_88";
+static NSString *O2G2_SystemProperties_CP_89 = @"CP_89";
+static NSString *O2G2_SystemProperties_CP_94 = @"CP_94";
+static NSString *O2G2_SystemProperties_TRAILING_DYNAMIC = @"TRAILING_DYNAMIC";
+static NSString *O2G2_SystemProperties_TRAILING_FLUCTUATE = @"TRAILING_FLUCTUATE";
+static NSString *O2G2_SystemProperties_TRAILING_FLUCTUATE_PTS_MAX = @"TRAILING_FLUCTUATE_PTS_MAX";
+static NSString *O2G2_SystemProperties_TRAILING_FLUCTUATE_PTS_MIN = @"TRAILING_FLUCTUATE_PTS_MIN";
+static NSString *O2G2_SystemProperties_PEGGED_STOP_LIMIT_DISABLED = @"PEGGED_STOP_LIMIT_DISABLED";
+static NSString *O2G2_SystemProperties_FIRST_TICK_OPEN_PRICE_ENABLED = @"FIRST_TICK_OPEN_PRICE_ENABLED";
+
+static NSString *O2G2_MesssageType_Regular = @"0";
+static NSString *O2G2_MesssageType_Popup = @"1";
+static NSString *O2G2_MesssageType_Answer = @"2";
+static NSString *O2G2_MesssageType_ForcedPopup = @"3";
+
+static NSString *O2G2_MessageFuture_Plain = @"1";
+static NSString *O2G2_MessageFuture_TradingHours = @"2";
+static NSString *O2G2_MessageFuture_Question = @"3";
+static NSString *O2G2_MessageFuture_Information = @"4";
+static NSString *O2G2_MessageFuture_MarkedCondition = @"5";
+static NSString *O2G2_MessageFuture_SoftwareUpdate = @"6";
+static NSString *O2G2_MessageFuture_Emergency = @"7";
+static NSString *O2G2_MessageFuture_SystemFailure = @"8";

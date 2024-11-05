@@ -12,6 +12,7 @@
 #include <string>
 #include <vector>
 #include <json/json.h>
+#include "ForexConnect.h"
 
 // Constructor
 TradingKLX::TradingKLX()
